@@ -1,0 +1,22 @@
+{
+    "chemicals": "Chemicals",
+    "chemical": "Chemical",
+    "substances": "Substances",
+    "workplaces": "Workplaces",
+    "workers": "Workers",
+    "uses": "Uses",
+    "contributing-activities": "Contributing activities",
+    "substance": "Substance",
+    "workplace": "Workplace",
+    "worker": "Worker",
+    "use": "Use",
+    "contributing-activity": "Contributing activity",
+    
+    "enterprise": {
+        "start": {
+            "data-entry": {
+                "title": "DATA ENTRY"
+            }
+        }
+    }
+}

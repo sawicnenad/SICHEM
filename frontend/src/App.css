@@ -1,0 +1,35 @@
+.big-wrapper {
+    background: #f0f0f0;
+}
+
+.navigation {
+    background: #080808;
+    color: #cccccc;
+    height: 50px;
+    position: fixed;
+    width: 100%;
+}
+
+.wrapper {
+    background: #ffffff;
+    height: 100vh;
+    min-height: 550px;
+    padding: 15px;
+    box-shadow: 5px 5px 10px 5px silver;
+    padding-top: 50px;
+}
+
+@media screen and (min-width: 1200px) {
+    .wrapper {
+        width: 1180px;
+        margin: auto;
+    }
+    .navigation-row {
+        width: 1180px;
+        margin: auto;
+    }
+}
+
+.cursor-on-hover :hover {
+    cursor: pointer;
+}
