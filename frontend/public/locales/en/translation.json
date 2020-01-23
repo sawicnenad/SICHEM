@@ -11,11 +11,43 @@
     "worker": "Worker",
     "use": "Use",
     "contributing-activity": "Contributing activity",
+    "submit": "Submit",
+
+    "messages": {
+        "form": {
+            "too-short": "Too short",
+            "invalid-email": "Invalid email",
+            "too-long": "Too long",
+            "required": "Required",
+            "passwords-agree": "Passwords don't match"
+        },
+        "request": {
+            "success": "Request successful",
+            "failed": "Request failed"
+        }
+    },
+
+    "login": {
+        "login": "Login",
+        "username": "Username",
+        "password": "Password",
+        "or": "OR",
+        "open-account": "Open new account",
+        "new-user": "New user",
+        "msg-failed": "Username and/or password incorrect",
+        "sign-up": {
+            "first-name": "First name",
+            "last-name": "Last name",
+            "password-confirm": "Password (confirmation)",
+            "email": "E-mail address",
+            "submit": "Create account",
+            "msg-success": "Please login to your account"
+        }
+    },
     
     "enterprise": {
         "start": {
             "data-entry": {
-                "title": "DATA ENTRY"
             }
         }
     }

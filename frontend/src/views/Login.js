@@ -1,266 +1,210 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {useTranslation, composeInitialProps} from 'react-i18next';
 import Logo from '../media/logo_light.png'
-import { Form, Input, Icon, Button, Drawer } from 'antd';
-import { useTranslation } from 'react-i18next';
-
-
-
-const styling = {
-    wrapper: {
-        height: "100vh",
-        minHeight: 700
-    },
-    formWrapper: {
-        width: 350,
-        margin: "auto",
-        paddingTop: 150
-    },
-    logo: {
-        height: 75,
-        textAlign: "center"
-    },
-    form: {
-        marginTop: 15,
-        border: "1px solid #40a9ff",
-        borderRadius: 5,
-        padding: 15
-    },
-    button: {
-        width: "48%",
-        margin: "1%"
-    },
-    footer: {
-        position: "fixed",
-        bottom: 0,
-        padding: 25,
-        width: "100%",
-        textAlign: "right",
-        background: "#f5f5f5"
-    },
-    lngBtn: {
-        fontSize: 20
-    },
-    drawerButton: {
-        width: "100%"
-    }
-}
-
-
+import { Button, Form, Modal, Navbar, Nav, NavItem, NavbarBrand, Toast } from 'react-bootstrap';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import NewUser from '../components/login/NewUser';
+import axios from 'axios';
+import { ApiRequestsContext } from '../contexts/ApiRequestsContext';
 
 
 function Login(props) {
-
     const { t } = useTranslation();
-    const { getFieldDecorator } = props.form;
-    const [ state, setState ] = useState({});
+    const [state, setState] = useState({
+        msgSuccess: false,
+        msgFailed: false
+    });
+    const context = useContext(ApiRequestsContext);
 
+    const SignupSchema = Yup.object().shape({
+        username: Yup.string()
+          .min(5, 'Too Short!')
+          .max(50, 'Too Long!')
+          .required('Required'),
+        password: Yup.string()
+          .min(8, 'Too Short!')
+          .max(50, 'Too Long!')
+          .required('Required')
+      });
 
-    const handleLogin = () => {
-        props.form.validateFields(['login_username', 'login_password'],(err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-        })
-    }
-
-
-    const handleSignUp = () => {
-        props.form.validateFields(
-                [
-                    'first_name',
-                    'last_name',
-                    'email',
-                    'username',
-                    'password',
-                    'password2'
-                ], (err, values) => {
-            if (!err) {
-              
-            }
-        })
-    }
-    
     return (
-        <div style={styling.wrapper}>
+        <div style={{ height: "100vh" }}>
+            <Navbar bg="light" className="px-3">
+                <NavbarBrand>
+                    {t('login.login')}
+                </NavbarBrand>
+                <Nav className="ml-auto">
+                    <NavItem className="pt-1 mr-3">
+                        <img src={require("../media/icons/display.svg")} alt="" width="32" height="32"/>
+                    </NavItem>
+                    {['De', 'Fr', 'It', 'En'].map(item => (
+                        <Nav.Link>
+                            {item}
+                        </Nav.Link>
+                    ))}
+                </Nav>
+            </Navbar>
+            <div className="container m-auto pt-4">
 
-            <div style={styling.formWrapper}>
-                <div style={styling.logo}>
-                    <img src={Logo} alt="" style={styling.logo}/>
+                <div className="row justify-content-center h-100">
+                    <div className="col-lg-6">
+                        <div className="text-center mb-3">
+                            <img src={ Logo } alt="" className="w-50" />
+                        </div>
+                        
+                        <Formik
+                            initialValues={{
+                                firstName: '',
+                                lastName: '',
+                                email: '',
+                            }}
+                            validationSchema={SignupSchema}
+                            onSubmit={values => {
+                                axios.post(
+                                    `${context.API}/token-obtain/`,
+                                    values
+                                ).then(
+                                    res => {
+                                        localStorage.setItem('token-access', res.data.access);
+                                        localStorage.setItem('token-refresh', res.data.refresh);
+                                        props.history.push('/enterprise')
+                                    }
+                                ).catch(
+                                    () => setState({ ...state, msgFailed: true })
+                                )
+                            }}
+                        >
+                            {({
+                                handleSubmit,
+                                handleChange,
+                                values,
+                                errors,
+                            }) => (
+                                <Form className="border border-danger p-4 rounded" onSubmit={handleSubmit}>
+
+                                    <Form.Group>
+                                        <Form.Label>{t('login.username')}</Form.Label>
+                                        <Form.Control 
+                                            required
+                                            type="text" 
+                                            name="username"
+                                            value={values.username}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.username}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.username}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>{t('login.password')}</Form.Label>
+                                        <Form.Control 
+                                            required
+                                            type="password" 
+                                            name="password"
+                                            value={values.password}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.password}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.password}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                    
+
+                                    <Button type="submit" variant="primary" className="w-100 mt-3">
+                                        { t('login.login') }
+                                    </Button>
+
+                                    <div className="mt-3 text-center text-secondary">
+                                        --------- {t('login.or')} ----------
+                                    </div>
+
+                                    <Button 
+                                        variant="danger" className="w-100 mt-3"
+                                        onClick={ () => setState({...state, newUser: true}) }>
+                                        { t('login.open-account') }
+                                    </Button>
+                                </Form>
+                            )} 
+                        </Formik>
+                    </div>
                 </div>
-                
-                {/* login */}
-                <Form style={styling.form}>
-                    <h2>{t('login.login')}</h2>
-                    <br/>
-                    <Form.Item>
-                        { getFieldDecorator('login_username', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }
-                            ]
-                        })(
-                            <Input 
-                                placeholder={t('login.username')}
-                                prefix={<Icon type="user" />}
-                                size="large"
-                            />
-                        ) }
-                    </Form.Item>
-                    <Form.Item>
-                        { getFieldDecorator('login_password', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }
-                            ]
-                        })(
-                            <Input
-                                placeholder={t('login.password')}
-                                type="password"
-                                prefix={<Icon type="lock" /> }
-                                size="large"
-                            />
-                        ) }
-                    </Form.Item>
 
-                    <Button
-                        type="primary"
-                        style={styling.button}
-                        onClick={handleLogin}
-                    >
-                        { t('login.login') }
-                    </Button>
+                {/* new user registration */}
+                <Modal
+                    show={state.newUser}
+                    onHide={ () => setState({ ...state, newUser: false }) }
+                >
+                    <Modal.Header closeButton>
+                        {t('login.new-user')}
+                    </Modal.Header>
 
-                    <Button
-                        type="danger" 
-                        ghost
-                        style={styling.button}
-                        onClick={() => setState({ visible: true })}
-                    >
-                        { t('login.new-user') }
-                    </Button>
-                </Form>
+                    <Modal.Body>
+                        <NewUser 
+                            onSignedUp={() => setState({ 
+                                ...state,
+                                newUser: false,
+                                msgSuccess: true 
+                            })} />
+                    </Modal.Body>
+                </Modal>
             </div>
 
-            {/* new user */}
-            <Drawer
-                placement="right"
-                visible={state.visible}
-                title={t('login.new-user')}
-                width={400}
-                onClose={() => setState({ visible: false })}
+            {/* notifications */}
+            <Toast 
+                show={state.msgSuccess}
+                onClose={() => setState({ ...state, msgSuccess: false })}
+                autohide 
+                delay={5000}
+                style={{
+                    position: "absolute",
+                    top: "1%",
+                    right: "1%",
+                    width: 400
+                }}
             >
-                <Form>
-                    <Form.Item label={t('login.first_name')}>
-                        { getFieldDecorator('first_name', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }
-                            ]
-                        })(
-                            <Input size="large" />
-                        ) }
-                    </Form.Item>
+                <Toast.Header>
+                    <img 
+                        src={require('../media/icons/check-circle.svg')}
+                        alt="" className="mr-2" width={24}
+                        className="mr-2"
+                    />
+                    <span className="text-success mr-auto font-weight-bold">{t('messages.request.success')}</span>
+                </Toast.Header>
 
-                    <Form.Item label={t('login.last_name')}>
-                        { getFieldDecorator('last_name', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }
-                            ]
-                        })(
-                            <Input size="large" />
-                        ) }
-                    </Form.Item>
+                <Toast.Body>
+                    <span className="text-secondary">{t('login.sign-up.msg-success')}</span>
+                </Toast.Body>
+            </Toast>
 
-                    <Form.Item label={t('login.email')}>
-                        { getFieldDecorator('email', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                },
-                                {
-                                    type: "email",
-                                    message: t('messages.not-email-format')
-                                }
-                            ]
-                        })(
-                            <Input size="large" placeholder={t('login.email-placeholder')} />
-                        ) }
-                    </Form.Item>
+            <Toast 
+                show={state.msgFailed}
+                onClose={() => setState({ ...state, msgFailed: false })}
+                autohide 
+                delay={5000}
+                style={{
+                    position: "absolute",
+                    top: "1%",
+                    right: "1%",
+                    width: 400
+                }}
+            >
+                <Toast.Header>
+                    <img 
+                        src={require('../media/icons/alert-square-fill.svg')}
+                        alt="" className="mr-2" width={24}
+                        className="mr-2"
+                    />
+                    <span className="text-danger mr-auto font-weight-bold">{t('messages.request.failed')}</span>
+                </Toast.Header>
 
-                    <Form.Item label={t('login.username')}>
-                        { getFieldDecorator('username', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }
-                            ]
-                        })(
-                            <Input size="large" placeholder={t('login.username-placeholder')} />
-                        ) }
-                    </Form.Item>
-
-                    <Form.Item label={t('login.password')}>
-                        { getFieldDecorator('password', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }, {
-                                    min: 8,
-                                    message: t('messages.too-short')
-                                }
-                            ]
-                        })(
-                            <Input size="large" />
-                        ) }
-                    </Form.Item>
-
-                    <Form.Item label={t('login.password-confirm')}>
-                        { getFieldDecorator('password2', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: t('messages.field-required')
-                                }
-                            ]
-                        })(
-                            <Input size="large" />
-                        ) }
-                    </Form.Item>
-
-                    <Button
-                        type="danger"
-                        style={styling.drawerButton}
-                        onClick={handleSignUp}
-                    >
-                        { t('login.register') }
-                    </Button>
-                </Form>
-            </Drawer>
-
-            <footer style={styling.footer}>
-                {[
-                    'de', 'fr', 'it', 'en'
-                ].map( item => (
-                    <Button
-                        key={item}
-                        type="link"
-                        style={styling.lngBtn}
-                    >{item}</Button>
-                ))}
-            </footer>
+                <Toast.Body>
+                    <span className="text-secondary">{t('login.msg-failed')}</span>
+                </Toast.Body>
+            </Toast>
         </div>
     )
 }
-export default Form.create()( Login );
+export default Login;

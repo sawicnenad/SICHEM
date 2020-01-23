@@ -1,56 +1,33 @@
 import React from 'react';
 import {
-    Row,
-    Col,
-    Icon,
-    Input
-} from 'antd';
+    Navbar,
+    Nav,
+    Form,
+    FormControl,
+    Button
+} from 'react-bootstrap';
 
 
-const styling = {
-    icon: {
-        fontSize: 22,
-        display: "inline-block",
-        padding: 10,
-        background: "#262626",
-        height: "50px",
-        float: "left"
-    }, 
-    inputDiv: {
-        width: 350,
-        display: "inline-block",
-        marginLeft: 20,
-        float: "left",
-        paddingTop: 10
-    },
-    input: {
-        background: "#262626",
-        color: "white"
-    }
-}
-
-
-function Navigation() {
+export default function Navigation() {
     return (
-        <div className="navigation">
-            <Row type="flex" justify="space-between" className="navigation-row">
-                <Col>
-                    <div style={{ marginTop: 0 }}>
-                        <div style={styling.icon} className="cursor-on-hover">
-                            <Icon type="home" />
-                        </div>
-                        <div style={styling.inputDiv}>
-                            <Input style={ styling.input } />
-                        </div>
-                    </div>
-                </Col>
-                <Col>
-                    <div style={ styling.icon } className="cursor-on-hover">
-                        <Icon type="menu" />
-                    </div>
-                </Col>
-            </Row>
-        </div>
+        <Navbar bg="light" expand="lg" className="px-5">
+            <Navbar.Brand href="#home">SICHEM</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+            <Navbar.Collapse>
+                <Nav className="mr-auto w-100">
+                    <Form inline className="w-100">
+                        <FormControl type="text" placeholder="Search" className="w-50 mr-sm-2" />
+                    </Form>
+                </Nav>
+
+                <Nav className="mr-3">
+                    <Nav.Link>Profile</Nav.Link>
+                    <Nav.Link>Enterprise</Nav.Link>
+                    <Nav.Link>Security</Nav.Link>
+                </Nav>
+                <Button variant="outline-danger">Logout</Button>
+            </Navbar.Collapse>
+        </Navbar>
     )
 }
-export default Navigation;

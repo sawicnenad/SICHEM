@@ -1,8 +1,7 @@
 import React from 'react';
 import Navigation from '../components/enterprise/Navigation';
 import { Switch, Route } from 'react-router-dom';
-import Start from '../components/enterprise/Start';
-
+import Home from '../components/enterprise/Home';
 
 /*
     view specific for enterprises
@@ -13,13 +12,11 @@ import Start from '../components/enterprise/Start';
 function Enterprise() {
     
     return(
-        <div className="big-wrapper">
+        <div>
             <Navigation />
-            <div className="wrapper">
-                <Switch>
-                    <Route path="/" component={ Start } />
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path="/enterprise" component={ Home } />
+            </Switch>
         </div>
     )
 }
