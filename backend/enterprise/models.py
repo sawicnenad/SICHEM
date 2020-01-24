@@ -24,7 +24,7 @@ class Enterprise(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=25)
-    branch = models.IntegerField()                  # branch id
+    branch = models.CharField(max_length=255)                  # branch id
 
     def __str__(self):
         return '{} (UID: {})'.format(self.name, self.uid)

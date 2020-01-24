@@ -11,7 +11,22 @@ from django.contrib.auth.models import User
 class EnterpriseViewSet(viewsets.ModelViewSet):
     serializer_class = EnterpriseSerializer
     queryset = Enterprise.objects.all()
-    template = None
+
+    def list(self, request):
+        # only superuser has authorization to list all enterprises
+        # for other, we check if they are already members of enterprise
+        # if so, the corresponding enterprise data is retrieved
+        # otherwise 404
+        if request.user.is_superuser == False:
+            try:
+                ent = Enterprise.objects.get(users__id=request.user)
+                return super().retrieve(request, self, pk=ent.id)
+            except:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return super().list(request, self)
+        
+        
 
 class InvitationViewSet(viewsets.ModelViewSet):
     serializer_class = InvitationSerializer

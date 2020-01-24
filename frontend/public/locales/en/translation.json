@@ -12,6 +12,8 @@
     "use": "Use",
     "contributing-activity": "Contributing activity",
     "submit": "Submit",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
 
     "messages": {
         "form": {
@@ -46,9 +48,16 @@
     },
     
     "enterprise": {
-        "start": {
-            "data-entry": {
-            }
+        "my-enterprise": {
+            "alert-no-enterprise-header": "No enterprise identified",
+            "alert-no-enterprise-text": "Before you can use SICHEM, you must finish the registration process.",
+            "alert-info-header": "Next step!",
+            "alert-info-text": "Every user must be an employee of an enterprise. The enterprise identification data must exist in our database. To complete your profile, you should either specify these details by creating a new enterprise in SICHEM or join an existing one in our database. Important (!): for an existing enterprise, you must already have an invitation token received from the administrator (the user who registered the given enterprise to SICHEM). In case of creating a new enterprise in our system, you become its administrator and later you can invite other employees who may manage the enterprise data.",
+            "options-header": "Please specify the registration pathway:",
+            "card-new-member-title": "Join existing enterprise",
+            "card-new-member-text": "I confirm that I have received the invitation token from the administrator of my enterprise.",
+            "card-new-ent-title": "New enterprise",
+            "card-new-ent-text": "I confirm that I am authorized by my enterprise to manage sensitive data within the platform of SICHEM."
         }
     }
 }

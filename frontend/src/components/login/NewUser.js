@@ -49,11 +49,6 @@ export default function NewUser(props) {
     return (
         <div>
             <Formik
-                initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                }}
                 validationSchema={SignupSchema}
                 onSubmit={values => {
                     axios.post(

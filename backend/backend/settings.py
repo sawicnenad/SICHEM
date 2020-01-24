@@ -56,10 +56,16 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
-    )
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
@@ -68,6 +74,21 @@ SIMPLE_JWT = {
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'POST',
+    'PUT',
+]
+ 
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma'
 ]
 
 ROOT_URLCONF = 'backend.urls'

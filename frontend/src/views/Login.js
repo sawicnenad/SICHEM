@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {useTranslation, composeInitialProps} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Logo from '../media/logo_light.png'
 import { Button, Form, Modal, Navbar, Nav, NavItem, NavbarBrand, Toast } from 'react-bootstrap';
 import { Formik } from 'formik';
@@ -54,11 +54,6 @@ function Login(props) {
                         </div>
                         
                         <Formik
-                            initialValues={{
-                                firstName: '',
-                                lastName: '',
-                                email: '',
-                            }}
                             validationSchema={SignupSchema}
                             onSubmit={values => {
                                 axios.post(
@@ -169,7 +164,6 @@ function Login(props) {
                     <img 
                         src={require('../media/icons/check-circle.svg')}
                         alt="" className="mr-2" width={24}
-                        className="mr-2"
                     />
                     <span className="text-success mr-auto font-weight-bold">{t('messages.request.success')}</span>
                 </Toast.Header>
@@ -195,7 +189,6 @@ function Login(props) {
                     <img 
                         src={require('../media/icons/alert-square-fill.svg')}
                         alt="" className="mr-2" width={24}
-                        className="mr-2"
                     />
                     <span className="text-danger mr-auto font-weight-bold">{t('messages.request.failed')}</span>
                 </Toast.Header>
