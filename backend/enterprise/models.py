@@ -18,7 +18,8 @@ class Enterprise(models.Model):
         )
     users = models.ManyToManyField(                 # users who have the access to the enterprise data
         User,
-        related_name="users"
+        related_name="users",
+        blank=True
         )
     uid = models.CharField(max_length=15, verbose_name="UID")
     address = models.CharField(max_length=255)

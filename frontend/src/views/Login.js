@@ -17,7 +17,7 @@ function Login(props) {
     });
     const context = useContext(ApiRequestsContext);
 
-    const SignupSchema = Yup.object().shape({
+    const Schema = Yup.object().shape({
         username: Yup.string()
           .min(5, 'Too Short!')
           .max(50, 'Too Long!')
@@ -39,7 +39,7 @@ function Login(props) {
                         <img src={require("../media/icons/display.svg")} alt="" width="32" height="32"/>
                     </NavItem>
                     {['De', 'Fr', 'It', 'En'].map(item => (
-                        <Nav.Link>
+                        <Nav.Link key={item}>
                             {item}
                         </Nav.Link>
                     ))}
@@ -54,7 +54,8 @@ function Login(props) {
                         </div>
                         
                         <Formik
-                            validationSchema={SignupSchema}
+                            validationSchema={Schema}
+                            initialValues={{ username: "", password: "" }}
                             onSubmit={values => {
                                 axios.post(
                                     `${context.API}/token-obtain/`,
@@ -63,7 +64,7 @@ function Login(props) {
                                     res => {
                                         localStorage.setItem('token-access', res.data.access);
                                         localStorage.setItem('token-refresh', res.data.refresh);
-                                        props.history.push('/enterprise')
+                                        props.history.push('/enterprise');
                                     }
                                 ).catch(
                                     () => setState({ ...state, msgFailed: true })

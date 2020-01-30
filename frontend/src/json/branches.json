@@ -1,0 +1,36 @@
+[
+    {
+        "ekas": 1,
+        "label": "Cement & Beton (C&B)"
+    }, {
+        "ekas": 2,
+        "label": "Forstwirtschaft"
+    }, {
+        "ekas": 3,
+        "label": "Schreinerbranche (SIKO 2000)"
+    }, {
+        "ekas": 4,
+        "label": "Bauhauptgewerbe"
+    }, {
+        "ekas": 5,
+        "label": "Elektrizitätswirtschaft"
+    }, {
+        "ekas": 6,
+        "label": "Bäcker-Konditor-Confiseur-Gewerbe"
+    }, {
+        "ekas": 7,
+        "label": "Textil- und Bekleidungsindustrie"
+    }, {
+        "ekas": 8,
+        "label": "Sand-, Kies- und Betonindustrie"
+    }, {
+        "ekas": 9,
+        "label": "Aufgehoben"
+    }, {
+        "ekas": 10,
+        "label": "Metallgewerbe"
+    }, {
+        "ekas": 11,
+        "label": "Sägerei und Holzindustrie"
+    }
+]

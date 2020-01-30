@@ -13,10 +13,6 @@ export const ApiRequestsContext = createContext(
     {
         API: isProduction() ? 
             'http://api-sichem.nedisa.com'
-            : 'http://localhost:8000',
-        headers: {headers: {
-                    Pragma: "no-cache",
-                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
-                }}
+            : 'http://localhost:8000'
     }
 );

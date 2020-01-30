@@ -20,6 +20,7 @@
             "too-short": "Too short",
             "invalid-email": "Invalid email",
             "too-long": "Too long",
+            "length-32": "Token must contain 32 characters",
             "required": "Required",
             "passwords-agree": "Passwords don't match"
         },
@@ -48,6 +49,11 @@
     },
     
     "enterprise": {
+        "home": {
+            "ent-name": "My enterprise:",
+            "ent-uid": "UID:",
+            "data-entry": "Data entry"
+        },
         "my-enterprise": {
             "alert-no-enterprise-header": "No enterprise identified",
             "alert-no-enterprise-text": "Before you can use SICHEM, you must finish the registration process.",
@@ -57,7 +63,18 @@
             "card-new-member-title": "Join existing enterprise",
             "card-new-member-text": "I confirm that I have received the invitation token from the administrator of my enterprise.",
             "card-new-ent-title": "New enterprise",
-            "card-new-ent-text": "I confirm that I am authorized by my enterprise to manage sensitive data within the platform of SICHEM."
+            "card-new-ent-text": "I confirm that I am authorized by my enterprise to manage sensitive data within the platform of SICHEM.",
+            "form-new-ent": {
+                "name": "Enterprise name",
+                "uid": "UID",
+                "address": "Address",
+                "city": "City",
+                "state": "State",
+                "branch": "Activity branch(es)"
+            },
+            "form-invitation": {
+                "token": "Token"
+            }
         }
     }
 }

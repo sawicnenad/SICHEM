@@ -6,8 +6,8 @@ from .serializers import *
 
 
 class SupplierViewSet(viewsets.ModelViewSet):
-    serializer_class = SupplierSerializer
     queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
     
     def get_queryset(self):
         user = self.request.user

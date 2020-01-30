@@ -1,11 +1,14 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from .serializers import EnterpriseSerializer
-from .serializers import InvitationSerializer
-from .serializers import UserSerializer
+from .serializers import (
+    EnterpriseSerializer,
+    InvitationSerializer,
+    UserSerializer)
 from .models import Enterprise, Invitation
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
+from rest_framework.decorators import permission_classes
+from rest_framework import permissions
 
 
 class EnterpriseViewSet(viewsets.ModelViewSet):
@@ -19,12 +22,27 @@ class EnterpriseViewSet(viewsets.ModelViewSet):
         # otherwise 404
         if request.user.is_superuser == False:
             try:
-                ent = Enterprise.objects.get(users__id=request.user)
-                return super().retrieve(request, self, pk=ent.id)
+                ent = Enterprise.objects.get(users__id=request.user.id)
+                ent_ser = EnterpriseSerializer(ent)
+                return Response(ent_ser.data, status=status.HTTP_200_OK)
+
             except:
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
         return super().list(request, self)
+
+    def create(self, request):
+        data = request.data
+        data['admin'] = request.user.id
+        data['users'] = [request.user.id]
+
+        ent_ser = EnterpriseSerializer(data=data)
+        if ent_ser.is_valid():
+            ent_ser.save()
+            return Response(ent_ser.data, status=status.HTTP_201_CREATED)
+        
+        print(ent_ser.errors)
+        return Response(ent_ser.errors, status=status.HTTP_400_BAD_REQUEST)
         
         
 
@@ -35,6 +53,7 @@ class InvitationViewSet(viewsets.ModelViewSet):
 
 # user sign up
 @api_view(['POST'])
+@permission_classes([ permissions.AllowAny ])
 def user_sign_up(request):
     user_ser = UserSerializer(data=request.data)
 

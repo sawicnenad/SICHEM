@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from '../components/enterprise/Home';
 import { EnterpriseContext } from '../contexts/EnterpriseContext';
 import MyEnterprise from '../components/enterprise/MyEnterprise';
+import withAuth from '../hoc/withAuth';
 
 /*
     view specific for enterprises
@@ -35,4 +36,4 @@ function Enterprise() {
         </div>
     )
 }
-export default Enterprise;
+export default withAuth( Enterprise );

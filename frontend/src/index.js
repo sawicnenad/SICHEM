@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18next';
-
 
 ReactDOM.render(
     <Suspense fallback="loading">
