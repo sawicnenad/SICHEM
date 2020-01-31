@@ -91,21 +91,11 @@ export default function Home(props) {
 
             {/* Data entry */}
             <div className="border p-2 text-muted border-danger rounded mt-5">
-                <div className="text-center border-bottom mb-3">
+                <div className="text-center border-bottom mb-3 text-danger">
                     <h4>{ t('enterprise.home.data-entry') }</h4>
                 </div>
                 <Row>
-                    <div className="hidden-sm">
-                        <table className="h-100">
-                            <tbody>
-                                <tr><td className="align-middle pl-5">
-                                    <FontAwesomeIcon icon="database" size="5x" />
-                                </td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <Col xs={6} md={3}>
+                    <Col xs={6} md={3} className="mt-2">
                         <Statistics
                             icon="th"
                             iconColor="silver"
@@ -115,7 +105,7 @@ export default function Home(props) {
                         />
                     </Col>
 
-                    <Col xs={6} md={3}>
+                    <Col xs={6} md={3} className="mt-2">
                         <Statistics
                             icon="user"
                             iconColor="silver"
@@ -125,7 +115,7 @@ export default function Home(props) {
                         />
                     </Col>
 
-                    <Col xs={6} md={3}>
+                    <Col xs={6} md={3} className="mt-2">
                         <Statistics
                             icon="flask"
                             iconColor="silver"
@@ -136,7 +126,7 @@ export default function Home(props) {
                         />
                     </Col>
 
-                    <Col xs={6} md={3}>
+                    <Col xs={6} md={3} className="mt-2">
                         <Statistics
                             icon="fire"
                             iconColor="silver"

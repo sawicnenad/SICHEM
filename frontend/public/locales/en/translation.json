@@ -14,8 +14,16 @@
     "submit": "Submit",
     "confirm": "Confirm",
     "cancel": "Cancel",
+    "supplier": "Supplier",
+    "suppliers": "Suppliers",
+    "mixture": "Mixture",
+    "mixtures": "Mixtures",
+    "create-new": "Create new",
+    "delete": "Delete",
+    "open": "Open",
 
     "messages": {
+        "no-data-for-this-page": "No data to show.",
         "form": {
             "too-short": "Too short",
             "invalid-email": "Invalid email",

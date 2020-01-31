@@ -11,7 +11,7 @@ import {
 export default function Navigation() {
     return (
         <Navbar bg="light" expand="lg" className="px-5">
-            <Navbar.Brand href="#home">SICHEM</Navbar.Brand>
+            <Navbar.Brand href="/enterprise">SICHEM</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
             <Navbar.Collapse>

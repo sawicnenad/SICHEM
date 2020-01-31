@@ -5,6 +5,7 @@ import Home from '../components/enterprise/Home';
 import { EnterpriseContext } from '../contexts/EnterpriseContext';
 import MyEnterprise from '../components/enterprise/MyEnterprise';
 import withAuth from '../hoc/withAuth';
+import Chemicals from '../components/enterprise/Chemicals';
 
 /*
     view specific for enterprises
@@ -32,6 +33,7 @@ function Enterprise() {
             <Navigation />
             <Switch>
                 <Route exact path="/enterprise" component={ Home } />
+                <Route exact path="/enterprise/chemicals" component={ Chemicals } />
             </Switch>
         </div>
     )
