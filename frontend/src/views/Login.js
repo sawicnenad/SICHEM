@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
 import {useTranslation} from 'react-i18next';
 import Logo from '../media/logo_light.png'
-import { Button, Form, Modal, Navbar, Nav, NavItem, NavbarBrand, Toast } from 'react-bootstrap';
+import { Button, Form, Modal, Navbar, Nav, Toast } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import NewUser from '../components/login/NewUser';
 import axios from 'axios';
 import { ApiRequestsContext } from '../contexts/ApiRequestsContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function Login(props) {
@@ -30,18 +31,17 @@ function Login(props) {
 
     return (
         <div style={{ height: "100vh" }}>
-            <Navbar bg="light" className="px-3">
-                <NavbarBrand>
-                    {t('login.login')}
-                </NavbarBrand>
-                <Nav className="ml-auto">
-                    <NavItem className="pt-1 mr-3">
-                        <img src={require("../media/icons/display.svg")} alt="" width="32" height="32"/>
-                    </NavItem>
-                    {['De', 'Fr', 'It', 'En'].map(item => (
-                        <Nav.Link key={item}>
-                            {item}
-                        </Nav.Link>
+            <Navbar bg="light" className="px-5">
+                <Nav>
+                    <Nav.Item className="pt-1">
+                        <FontAwesomeIcon icon="globe" size="2x" color="silver" />
+                    </Nav.Item>
+                    {['de', 'fr', 'it', 'en'].map(item => (
+                        <Nav.Item key={item}>
+                            <Nav.Link link="#" eventKey={item}>
+                                {item}
+                            </Nav.Link>
+                        </Nav.Item>
                     ))}
                 </Nav>
             </Navbar>

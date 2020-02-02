@@ -13,7 +13,8 @@ import {
     faFlask,
     faUser,
     faFire,
-    faTh
+    faTh,
+    faGlobe
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -24,7 +25,8 @@ library.add(
     faFlask,
     faUser,
     faFire,
-    faTh
+    faTh,
+    faGlobe
 );
 
 function App() {
