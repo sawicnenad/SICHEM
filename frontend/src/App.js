@@ -14,7 +14,11 @@ import {
     faUser,
     faFire,
     faTh,
-    faGlobe
+    faGlobe,
+    faEllipsisV,
+    faSave,
+    faTrashAlt,
+    faPlus
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -26,7 +30,11 @@ library.add(
     faUser,
     faFire,
     faTh,
-    faGlobe
+    faGlobe,
+    faEllipsisV,
+    faSave,
+    faTrashAlt,
+    faPlus
 );
 
 function App() {

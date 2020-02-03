@@ -10,7 +10,7 @@ import {
 
 export default function Navigation() {
     return (
-        <Navbar bg="light" expand="lg" className="px-5">
+        <Navbar bg="light" expand="md" className="px-5">
             <Navbar.Brand href="/enterprise">SICHEM</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 

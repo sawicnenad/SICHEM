@@ -21,6 +21,8 @@
     "create-new": "Create new",
     "delete": "Delete",
     "open": "Open",
+    "menu": "Menu",
+    "save": "Save",
 
     "messages": {
         "no-data-for-this-page": "No data to show.",
@@ -83,6 +85,28 @@
             "form-invitation": {
                 "token": "Token"
             }
+        }
+    },
+    "data": {
+        "sub-menu": {
+            "id": "Substance identification",
+            "naming": "Substance name/identifiers",
+            "phys-chem": "Physical-chemical properties",
+            "molecular": "Information related to molecular and structural formula"
+        },
+        "substance": {
+            "title": "Create/edit substance form",
+            "reference": "Reference name",
+            "physical-state": "Physical form",
+            "iupac": "IUPAC",
+            "vp": "VP",
+            "cas-nr": "CAS-Nr.",
+            "molecular-formula": "Molecular formula",
+            "international-names": "International names",
+            "other-names": "Other names",
+            "cas-name": "CAS Name",
+            "ec-name": "EC Name",
+            "ec-nr": "EC-Nr."
         }
     }
 }

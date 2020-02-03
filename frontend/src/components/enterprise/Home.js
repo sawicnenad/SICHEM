@@ -44,54 +44,14 @@ export default function Home(props) {
         </div>
     )
     
+    const dataEntryButtonVariant = "danger";
+
     return (
         <div className="container-lg px-5 py-3">
 
-            {/* Company details */}
-            <div className="border p-2 text-muted border-info rounded">
-                <Row>
-                    <Col>
-                        <table className="h-100">
-                            <tbody>
-                                <tr>
-                                    <td className="align-middle pl-5">
-                                        <FontAwesomeIcon icon="building" size="3x" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </Col>
-
-                    <Col>
-                        <div>
-                            { t('enterprise.home.ent-name') }
-                        </div>
-                        <div className="font-weight-bold mt-1">
-                            { context.ent.name }
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div>
-                            { t('enterprise.home.ent-uid') }
-                        </div>
-                        <div className="font-weight-bold mt-1">
-                            { context.ent.uid }
-                        </div>
-                    </Col>
-
-                    <Col>
-                        <div>{ context.ent.address }</div>
-                        <div>{ context.ent.city }</div>
-                        <div>{ context.ent.state }</div>
-                    </Col>
-                </Row>
-            </div>
-
-
             {/* Data entry */}
-            <div className="border p-2 text-muted border-danger rounded mt-5">
-                <div className="text-center border-bottom mb-3 text-danger">
+            <div className="p-2 text-muted rounded mt-4 shadow">
+                <div className="text-center border-bottom mb-3 text-muted">
                     <h4>{ t('enterprise.home.data-entry') }</h4>
                 </div>
                 <Row>
@@ -101,7 +61,7 @@ export default function Home(props) {
                             iconColor="silver"
                             number={0}
                             buttonTitle={t('workplaces')}
-                            buttonColor="danger"
+                            buttonColor={dataEntryButtonVariant}
                         />
                     </Col>
 
@@ -111,7 +71,7 @@ export default function Home(props) {
                             iconColor="silver"
                             number={0}
                             buttonTitle={t('workers')}
-                            buttonColor="danger"
+                            buttonColor={dataEntryButtonVariant}
                         />
                     </Col>
 
@@ -121,7 +81,7 @@ export default function Home(props) {
                             iconColor="silver"
                             number={context.substances.length}
                             buttonTitle={t('chemicals')}
-                            buttonColor="danger"
+                            buttonColor={dataEntryButtonVariant}
                             link="/enterprise/chemicals"
                         />
                     </Col>
@@ -132,7 +92,7 @@ export default function Home(props) {
                             iconColor="silver"
                             number={0}
                             buttonTitle={t('uses')}
-                            buttonColor="danger"
+                            buttonColor={dataEntryButtonVariant}
                         />
                     </Col>
                 </Row>

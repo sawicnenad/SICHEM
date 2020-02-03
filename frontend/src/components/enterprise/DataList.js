@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Row, Col, Alert } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default function DataList(props) {
@@ -9,12 +10,6 @@ export default function DataList(props) {
     // containing list of elements to diplay
     // e.g. list of substances
     const data = props.data;
-
-    // title/header of each element in the list
-    const title = props.title
-
-    // labels and values that should be extracted for element body
-    const labels = props.labels;
 
     const createButton = (
         <div className="text-right mb-4">
@@ -46,15 +41,15 @@ export default function DataList(props) {
                     item => (
                         <div className="p-2 bg-light text-muted shadow-sm">
                             <div className="w-100 border-bottom pb-3" style={{ height: 35 }}>
-                                <span className="font-weight-bold float-left pt-1">
-                                    { item[title] }
+                                <span className="font-weight-bold float-left pt-1 text-danger">
+                                    { item.title }
                                 </span>
                                 <span className="float-right">
-                                    <Button variant="outline-dark" size="sm" className="mx-1">
-                                        { t('delete') }
+                                    <Button variant="outline-danger" size="sm" className="mx-1">
+                                        <FontAwesomeIcon icon="trash-alt" />
                                     </Button>
 
-                                    <Button variant="outline-danger" size="sm">
+                                    <Button variant="outline-dark" size="sm">
                                         { t('open') }
                                     </Button>
                                 </span>
@@ -62,10 +57,10 @@ export default function DataList(props) {
 
                             <Row className="mt-3">
                                 {
-                                    labels.map(
-                                        label => (
-                                            <Col key={label}>
-                                                { label }: { item[label] }
+                                    item.data.map(
+                                        (e, inx) => (
+                                            <Col key={inx} md={{ span: 4 }} className="mt-2">
+                                                { e.label }: <span className="text-danger">{e.value}</span>
                                             </Col>
                                         )
                                     )
