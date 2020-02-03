@@ -8,6 +8,7 @@ import NewUser from '../components/login/NewUser';
 import axios from 'axios';
 import { ApiRequestsContext } from '../contexts/ApiRequestsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Wallpaper from '../media/Wallpaper.png';
 
 
 function Login(props) {
@@ -30,7 +31,11 @@ function Login(props) {
       });
 
     return (
-        <div style={{ height: "100vh" }}>
+        <div style={{ 
+                height: "100vh",
+                background: "url("+Wallpaper+") center center",
+                backgroundSize: "cover"
+            }}>
             <Navbar bg="light" className="px-5">
                 <Nav>
                     <Nav.Item className="pt-1">
@@ -77,7 +82,7 @@ function Login(props) {
                                 values,
                                 errors,
                             }) => (
-                                <Form className="border border-danger p-4 rounded" onSubmit={handleSubmit}>
+                                <Form className="p-4 bg-white shadow-lg" onSubmit={handleSubmit} style={{opacity:0.98}}>
 
                                     <Form.Group>
                                         <Form.Label>{t('login.username')}</Form.Label>
