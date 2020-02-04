@@ -7,6 +7,7 @@ import MyEnterprise from '../components/enterprise/MyEnterprise';
 import withAuth from '../hoc/withAuth';
 import Chemicals from '../components/enterprise/Chemicals';
 import Substance from '../components/enterprise/data-forms/Substance';
+import DataForm from '../components/enterprise/data-forms/DataForm';
 
 /*
     view specific for enterprises
@@ -36,6 +37,7 @@ function Enterprise() {
                 <Route exact path="/enterprise" component={ Home } />
                 <Route exact path="/enterprise/chemicals" component={ Chemicals } />
                 <Route exact path="/enterprise/substance/:id" component={ Substance } />
+                <Route exact path="/enterprise/data-entry/" component={DataForm} />
             </Switch>
         </div>
     )

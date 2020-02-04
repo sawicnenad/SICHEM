@@ -1,0 +1,164 @@
+{
+    "defaultActiveKey": "id",
+    "cards": [
+        {
+            "eventKey": "id",
+            "label": "data.substance.accordion.id",
+            "defaultActiveKey": "name",
+            "children": [
+                {
+                    "eventKey": "name",
+                    "label": "data.substance.accordion.name",
+                    "fields": [
+                        "reference",
+                        "iupac",
+                        "international_names",
+                        "other_names",
+                        "cas_nr",
+                        "cas_name",
+                        "ec_nr",
+                        "ec_name",
+                        "ec_dscr",
+                        "index_nr",
+                        "eu_registration_nr",
+                        "other_identity_codes",
+                        "last_update"
+                    ]
+                }, {
+                    "eventKey": "structure",
+                    "label": "data.substance.accordion.structure",
+                    "fields": [
+                        "molecular_formula",
+                        "structural_formula"
+                    ]
+                }, {
+                    "eventKey": "composition",
+                    "label": "data.substance.accordion.composition",
+                    "fields": [
+                        
+                    ]
+                }
+            ]
+        }
+    ],
+    "fields": {
+        "reference": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "reference",
+                "maxLength": 100
+            },
+            "label": "data.substance.reference",
+            "formControlFeedback": true
+        }, 
+        "iupac": {
+            "props": {
+                "as": "textarea",
+                "type": "text",
+                "name": "iupac"
+            },
+            "label": "data.substance.iupac"
+        }, 
+        "international_names": {
+            "props": {
+                "type": "text",
+                "name": "international_names"
+            },
+            "specialOnChange": true,
+            "multi": true,
+            "label": "data.substance.international_names"
+        }, 
+        "other_names": {
+            "props": {
+                "type": "text",
+                "name": "other_names"
+            },
+            "specialOnChange": true,
+            "multi": true,
+            "label": "data.substance.other_names"
+        }, 
+        "cas_nr": {
+            "props": {
+                "type": "text",
+                "name": "cas_nr"
+            },
+            "label": "data.substance.cas_nr"
+        }, 
+        "cas_name": {
+            "props": {
+                "type": "text",
+                "name": "cas_name"
+            },
+            "label": "data.substance.cas_name"
+        }, 
+        "ec_nr": {
+            "props": {
+                "type": "text",
+                "name": "ec_nr"
+            },
+            "label": "data.substance.ec_nr"
+        }, 
+        "ec_name": {
+            "props": {
+                "type": "text",
+                "name": "ec_name"
+            },
+            "label": "data.substance.ec_name"
+        }, 
+        "ec_dscr": {
+            "props": {
+                "as": "textarea",
+                "type": "text",
+                "name": "ec_dscr"
+            },
+            "label": "data.substance.ec_dscr"
+        }, 
+        "index_nr": {
+            "props": {
+                "type": "text",
+                "name": "index_nr"
+            },
+            "label": "data.substance.index_nr"
+        }, 
+        "eu_registration_nr": {
+            "props": {
+                "type": "text",
+                "name": "eu_registration_nr"
+            },
+            "specialOnChange": true,
+            "multi": true,
+            "label": "data.substance.eu_registration_nr"
+        }, 
+        "other_identity_codes": {
+            "props": {
+                "type": "text",
+                "name": "other_identity_codes"
+            },
+            "specialOnChange": true,
+            "multi": true,
+            "label": "data.substance.other_identity_codes"
+        }, 
+        "last_update": {
+            "props": {
+                "type": "text",
+                "name": "last_update"
+            },
+            "label": "data.substance.last_update"
+        }, 
+        "molecular_formula": {
+            "props": {
+                "type": "text",
+                "name": "molecular_formula"
+            },
+            "label": "data.substance.molecular_formula"
+        }, 
+        "structural_formula": {
+            "props": {
+                "type": "file",
+                "name": "structural_formula"
+            },
+            "label": "data.substance.structural_formula"
+        }
+    }
+}

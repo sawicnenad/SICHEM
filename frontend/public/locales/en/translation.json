@@ -88,25 +88,31 @@
         }
     },
     "data": {
-        "sub-menu": {
-            "id": "Substance identification",
-            "naming": "Substance name/identifiers",
-            "phys-chem": "Physical-chemical properties",
-            "molecular": "Information related to molecular and structural formula"
-        },
         "substance": {
-            "title": "Create/edit substance form",
+            "title": "Substance form",
+            "accordion": {
+                "id": "Substance identification",
+                "name": "Substance name/identifiers",
+                "structure": "Information related to molecular and structural formula",
+                "composition": "Composition"
+            },
             "reference": "Reference name",
             "physical-state": "Physical form",
             "iupac": "IUPAC",
             "vp": "VP",
-            "cas-nr": "CAS-Nr.",
-            "molecular-formula": "Molecular formula",
-            "international-names": "International names",
-            "other-names": "Other names",
-            "cas-name": "CAS Name",
-            "ec-name": "EC Name",
-            "ec-nr": "EC-Nr."
+            "cas_nr": "CAS Number",
+            "molecular_formula": "Molecular formula",
+            "international_names": "International names",
+            "other_names": "Other names",
+            "cas_name": "CAS Name",
+            "ec_name": "EC Name",
+            "ec_nr": "EC Number",
+            "ec_dscr": "EC description",
+            "index_nr": "Index Number",
+            "eu_registration_nr": "EU-Registration Number",
+            "other_identity_codes": "Other identity code (e.g. UN number, color index number, dye number)",
+            "structural_formula": "Structural formula",
+            "last_update": "Last update"
         }
     }
 }
