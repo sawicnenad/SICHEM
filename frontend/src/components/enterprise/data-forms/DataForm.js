@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Form, Row, Col, Button, Accordion, Card } from 'react-bootstrap';
+import { Form, Row, Col, Button, Accordion, Card, FormControl } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // label field scaling
@@ -36,6 +36,9 @@ export default function DataForm(props) {
     const [multiFields, setMultiFields] = useState({
         ...props.multiFields
     })
+    const [exactOrRangeFields, setExactOrRangeFields] = useState({
+        ...props.exactOrRangeFields
+    })
 
     // plus button for multi fields
     const handlePlusMultiFieldClick = name => {
@@ -44,8 +47,22 @@ export default function DataForm(props) {
         setMultiFields(newMultiFields);
     }
 
+    // switch between exact and range value entries
+    const handleExactOrRangeChange = name => {
+        let newState = {...exactOrRangeFields};
+        newState[name] = !newState[name];
+        setExactOrRangeFields(newState);
+    }
+
     const specialOnChange = e => {
-        console.log(e.target.name)
+        let fieldName = e.target.name.split('__')[0];
+        let inx = e.target.name.split('__')[1];
+
+        if (props.multiFields[fieldName] !== undefined) {
+            let newMultiFields = {...multiFields};
+            newMultiFields[fieldName][inx] = e.target.value;
+            setMultiFields(newMultiFields);
+        }
     }
 
     // instead of using Formik component
@@ -62,68 +79,363 @@ export default function DataForm(props) {
         }
     })
 
+    // one field (only field without label or other additional elements)
+    // based on its fieldType argument
+    const myField = field => {
+        switch(field.fieldType) {
+            case "after-select-list":
+                return(
+                    field.elements.map(
+                        item => (
+                            <Row key={item.name}>
+                                <Col xs={8} md={4}>
+                                    <Form.Group as={Row}>
+                                        <Form.Label column {...scaling.label}>
+                                            { t(item.label) }:
+                                        </Form.Label>
+                                        <Form.Control 
+                                            {...scaling.field}
+                                            name={item.name}
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik.values[item.name]}
+                                            isInvalid={!!formik.errors[field.name]}
+                                        />
+                                    </Form.Group>
+                                </Col>
+
+                                <Col xs={4} md={2}>
+                                    <Form.Control
+                                        className="border-warning"
+                                        name={item.afterName}
+                                        as="select"
+                                        value={formik.values[item.afterName]}
+                                        onChange={formik.handleChange}
+                                        isInvalid={!!formik.errors[item.afterName]}
+                                    >
+                                        {
+                                            field.afterOptions[item.afterOptions].map(
+                                                option => (
+                                                    <option value={option.value} key={option.value}>
+                                                        { option.label }
+                                                    </option> 
+                                                )
+                                            )
+                                        }
+                                    </Form.Control>
+                                </Col>
+                            </Row>
+                        )
+                    )
+                )
+            case "checkbox-list":
+                return(
+                    field.elements.map(
+                        item => (
+                            <Form.Check
+                                {...field.props}
+                                name={item.name}
+                                label={t(item.label)}
+                                onChange={formik.handleChange}
+                            />)
+                    )
+                );
+            case "after-input-select": 
+                return(
+                    <Row>
+                        <Col xs={4}>
+                            <Form.Control
+                                { ...field.props }
+                                value={formik.values[field.props.name]}
+                                onChange={
+                                    field.specialOnChange ? 
+                                    specialOnChange : formik.handleChange
+                                }
+                                isInvalid={!!formik.errors[field.props.name]}
+                            />
+                        </Col>
+
+                        <Col xs={5}>
+                            <Form.Group as={Row}>
+                                <Form.Label column className="text-right">
+                                    {t(field.labelAfterInput)}:
+                                </Form.Label>
+                                <Col xs={8}>
+                                    <Form.Control
+                                        className="border-warning"
+                                        type="text"
+                                        name={field.afterInput}
+                                        placeholder={t(field.afterInputPlaceholder)}
+                                        value={formik.values[field.props.name]}
+                                        onChange={
+                                            field.specialOnChange ? 
+                                            specialOnChange : formik.handleChange
+                                        }
+                                        isInvalid={!!formik.errors[field.props.name]}
+                                    />
+                                </Col>
+                            </Form.Group>
+                        </Col>
+
+                        <Col xs={3}>
+                            <Form.Control
+                                className="border-warning"
+                                name={field.afterSelect}
+                                as="select"
+                                value={formik.values[field.after]}
+                                onChange={formik.handleChange}
+                                isInvalid={!!formik.errors[field.after]}
+                            >
+                                {
+                                    field.afterOptions.map(
+                                        item => (
+                                            <option value={item.value} key={item.value}>
+                                                { item.label }
+                                            </option> 
+                                        )
+                                )}
+                            </Form.Control>
+                        </Col>
+                    </Row>
+                )
+            case "after-select":
+                return(
+                    <Row>
+                        <Col xs={8} md={4}>
+                            <Form.Control
+                                { ...field.props }
+                                value={formik.values[field.props.name]}
+                                onChange={
+                                    field.specialOnChange ? 
+                                    specialOnChange : formik.handleChange
+                                }
+                                isInvalid={!!formik.errors[field.props.name]}
+                            />
+                        </Col>
+
+                        <Col xs={4} md={2}>
+                            <Form.Control
+                                className="border-warning"
+                                name={field.after}
+                                as="select"
+                                value={formik.values[field.after]}
+                                onChange={formik.handleChange}
+                                isInvalid={!!formik.errors[field.after]}
+                            >
+                                {
+                                    field.afterOptions.map(
+                                        item => (
+                                            <option value={item.value} key={item.value}>
+                                                { item.label }
+                                            </option> 
+                                        )
+                                    )
+                                }
+                            </Form.Control>
+                        </Col>
+                    </Row>
+                );
+            case "custom": 
+                return(
+                    <div>
+                        {props.custom[field.component]}
+                    </div>
+                )
+            case "exact-or-range":
+                return(
+                    <div>
+                        {
+                            exactOrRangeFields[field.props.name] ?
+                            <Row>
+                                <Col>
+                                    <Form.Control
+                                        { ...field.props }
+                                        name={field.props.name + "__exact"}
+                                        value={formik.values[field.props.name]}
+                                        onChange={
+                                            field.specialOnChange ? 
+                                            specialOnChange : formik.handleChange
+                                        }
+                                        isInvalid={!!formik.errors[field.props.name]}
+                                    />
+                                </Col>
+                                
+                                <Col className="text-right">
+                                    <Button
+                                        variant="light"
+                                        onClick={() => handleExactOrRangeChange(field.props.name)}
+                                    >
+                                        {
+                                            exactOrRangeFields[field.props.name] ?
+                                            t('data.buttons.range-value')
+                                            : t('data.buttons.exact-value')
+                                        }
+                                    </Button>
+                                </Col>
+                            </Row>
+                            :
+                            <Row>
+                                <Col>
+                                    <Form.Control
+                                        { ...field.props }
+                                        name={field.props.name + "__lower"}
+                                        value={formik.values[field.props.name]}
+                                        onChange={
+                                            field.specialOnChange ? 
+                                            specialOnChange : formik.handleChange
+                                        }
+                                        isInvalid={!!formik.errors[field.props.name]}
+                                    />
+                                </Col>
+                                <Col xs={1} style={{fontSize: 20}} className="pt-1 text-center">
+                                    -
+                                </Col>
+                                <Col>
+                                    <Form.Control
+                                        { ...field.props }
+                                        name={field.props.name + "__upper"}
+                                        value={formik.values[field.props.name]}
+                                        onChange={
+                                            field.specialOnChange ? 
+                                            specialOnChange : formik.handleChange
+                                        }
+                                        isInvalid={!!formik.errors[field.props.name]}
+                                    />
+                                </Col>
+                                <Col className="text-right">
+                                    <Button
+                                        variant="light"
+                                        onClick={() => handleExactOrRangeChange(field.props.name)}
+                                    >
+                                        {
+                                            exactOrRangeFields[field.props.name] ?
+                                            t('data.buttons.range-value')
+                                            : t('data.buttons.exact-value')
+                                        }
+                                    </Button>
+                                </Col>
+                            </Row>
+                        }
+                    </div>
+                );
+            case "select":
+                return(
+                    <Form.Control
+                        { ...field.props }
+                        value={formik.values[field.props.name]}
+                        onChange={
+                            field.specialOnChange ? 
+                            specialOnChange : formik.handleChange
+                        }
+                        isInvalid={!!formik.errors[field.props.name]}
+                    >
+                        {
+                            field.optgroups ?
+                            field.options.map(
+                                item => 
+                                    <optgroup label={ t(item.label) } key={item.label}>
+                                        {
+                                            item.options.map(
+                                                option => 
+                                                    <option value={option.value} key={option.value}>
+                                                        {t(option.label)}
+                                                    </option>
+                                            )
+                                        }
+                                    </optgroup>
+                            )
+                            : 
+                            field.options.map(
+                                item => 
+                                    <option value={item.value} key={item.value}>
+                                        { t(item.label) }
+                                    </option>
+                            )
+                        }
+                    </Form.Control>
+                );
+            case "multi":
+                return(
+                    <div className={
+                            multiFields[field.props.name].length > 1 ?
+                            "p-4 border border-warning" : ""
+                    }>
+                        {multiFields[field.props.name].map(
+                        (e,inx) => (
+                            <Form.Control
+                                key={inx}
+                                className={ inx !== 0 ? "mt-2": "" }
+                                { ...field.props }
+                                name={`${field.props.name}__${inx}`}
+                                value={multiFields[field.props.name][inx]}
+                                onChange={
+                                    field.specialOnChange ? 
+                                    specialOnChange : formik.handleChange
+                                }
+                                isInvalid={!!formik.errors[field.props.name]}
+                            />
+                        )
+                    )}</div>
+                );
+            default:
+                return(
+                    <Form.Control
+                        { ...field.props }
+                        value={formik.values[field.props.name]}
+                        onChange={
+                            field.specialOnChange ? 
+                            specialOnChange : formik.handleChange
+                        }
+                        isInvalid={!!formik.errors[field.props.name]}
+                    />
+                )
+
+        }
+    }
+
 
     // based on the list of field names for each item in return method
     // and those defined in json file -> create form controls
     const createFields = fields => (
         <div>
-            { fields.map(item => (
-                <Form.Group as={ Row } key={item}>
-                    <Form.Label column {...scaling.label}>
-                        { t(data.fields[item].label) }:
-                    </Form.Label>
-
-                    <Col {...scaling.field}>
-                        
+            { fields.map(item => 
+                (
+                    data.fields[item].fieldType === "title" ?
+                    <div {...data.fields[item].props } style={{ fontSize: 18 }}>
+                        <strong>{ t(data.fields[item].title) }</strong>
+                    </div>
+                    : <Form.Group as={ Row } key={item}>
                         {
-                            data.fields[item].multi ?
-                            multiFields[item].map(
-                                (e,inx) => (
-                                    <Form.Control
-                                        key={inx}
-                                        className={ inx !== 0 ? "mt-2": "" }
-                                        { ...data.fields[item].props }
-                                        name={`${item}${inx}`}
-                                        value={multiFields[item][inx]}
-                                        onChange={
-                                            data.fields[item].specialOnChange ? 
-                                            specialOnChange : formik.handleChange
-                                        }
-                                        isInvalid={!!formik.errors[item]}
-                                    />
-                                )
-                            ) :
-                            <Form.Control
-                                { ...data.fields[item].props }
-                                value={formik.values[item]}
-                                onChange={
-                                    data.fields[item].specialOnChange ? 
-                                    specialOnChange : formik.handleChange
-                                }
-                                isInvalid={!!formik.errors[item]}
-                            />
+                            data.fields[item].label ?
+                            <Form.Label column {...scaling.label}>
+                                { t(data.fields[item].label) }:
+                            </Form.Label> : <div />
                         }
 
-                        <Form.Control.Feedback type="invalid">
-                            {formik.errors[item]}
-                        </Form.Control.Feedback>
-                    </Col>
-                    {
-                        data.fields[item].multi ?
-                        <Col>
-                            <Button 
-                                size="sm"
-                                className="mt-1"
-                                variant="outline-dark"
-                                onClick={ () => handlePlusMultiFieldClick(item) }
-                            >
-                                <FontAwesomeIcon icon="plus" />
-                            </Button>
+                        <Col {...scaling.field} {...data.fields[item].scaling}>
+                            
+                            { myField(data.fields[item]) }
+
+                            <Form.Control.Feedback type="invalid">
+                                {formik.errors[item]}
+                            </Form.Control.Feedback>
                         </Col>
-                        : <div />
-                    }
-                </Form.Group>
-            ))}
+                        {
+                            data.fields[item].fieldType === "multi" ?
+                            <Col>
+                                <Button 
+                                    size="sm"
+                                    className="mt-1"
+                                    variant="light"
+                                    onClick={ () => handlePlusMultiFieldClick(item) }
+                                >
+                                    <FontAwesomeIcon icon="plus" />
+                                </Button>
+                            </Col>
+                            : <div />
+                        }
+                    </Form.Group>)
+            )}
         </div>
     )
     
@@ -175,7 +487,7 @@ export default function DataForm(props) {
     // fields are split into different cards/collapse/accordions
     // two level nested accordions are supported (should be enough)
     return (
-        <div className="container mt-3">
+        <div className="container my-3">
             <div>
                 <Row>
                     <Col>

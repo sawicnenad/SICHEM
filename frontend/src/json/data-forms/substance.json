@@ -29,15 +29,114 @@
                     "label": "data.substance.accordion.structure",
                     "fields": [
                         "molecular_formula",
-                        "structural_formula"
+                        "structural_formula",
+                        "smiles",
+                        "origin",
+                        "mw",
+                        "optical_activity_info",
+                        "isomer_info"
                     ]
                 }, {
                     "eventKey": "composition",
                     "label": "data.substance.accordion.composition",
                     "fields": [
-                        
+                        "substance_type",
+                        "purity_degree",
+                        "composition"
+                    ]
+                }, {
+                    "eventKey": "analytica_data",
+                    "label": "data.substance.accordion.analytical_data",
+                    "fields": [
+                        "uv_vis",
+                        "ir",
+                        "nmr",
+                        "ms",
+                        "xrd",
+                        "xrf",
+                        "aas",
+                        "gc",
+                        "hplc",
+                        "analytical_methods_info"
                     ]
                 }
+            ]
+        }, {
+            "eventKey": "phys-chem",
+            "label": "data.substance.accordion.phys-chem-properties",
+            "fields": [
+                "physical_state",
+                "bp",
+                "relative_density",
+                "vp",
+                "solubility",
+                "log_kow",
+                "granulometry_sm",
+                "granulometry_md",
+                "granulometry_lg",
+                "dustiness",
+                "dustiness_measured"
+            ]
+        }, {
+            "eventKey": "classification-labeling",
+            "label": "data.substance.accordion.classification-labeling",
+            "fields": [
+                "physical_hazard",
+                "health_hazard",
+                "environmental_hazard",
+                "other_hazard"
+            ]
+        }, {
+            "eventKey": "euh-statement",
+            "label": "data.substance.accordion.euh-statement",
+            "children": [
+                {
+                    "eventKey": "euh-statement-1",
+                    "label": "data.substance.accordion.euh-statement-1",
+                    "fields": [
+                        "euh_title_1",
+                        "euh1",
+                        "euh_title_2",
+                        "euh2"
+                    ]
+                }, {
+                    "eventKey": "euh-statement-2",
+                    "label": "data.substance.accordion.euh-statement-2",
+                    "fields": [
+                        "euh_title_3",
+                        "euh3",
+                        "euh_title_4",
+                        "euh4",
+                        "euh_title_5",
+                        "euh5",
+                        "euh_title_6",
+                        "euh6",
+                        "euh_title_7",
+                        "euh7",
+                        "euh_title_8",
+                        "euh8",
+                        "euh_title_9",
+                        "euh9",
+                        "euh_title_10",
+                        "euh10",
+                        "euh_title_11",
+                        "euh11",
+                        "euh_title_12",
+                        "euh12"
+                    ]
+                }
+            ]
+        }, {
+            "eventKey": "reference-values",
+            "label": "data.substance.accordion.reference-values",
+            "children": [
+               {
+                   "eventKey": "dnel",
+                   "label": "data.substance.accordion.dnel",
+                   "fields": [
+                       "reg_dnel"
+                   ]
+               }
             ]
         }
     ],
@@ -66,7 +165,7 @@
                 "name": "international_names"
             },
             "specialOnChange": true,
-            "multi": true,
+            "fieldType": "multi",
             "label": "data.substance.international_names"
         }, 
         "other_names": {
@@ -75,7 +174,7 @@
                 "name": "other_names"
             },
             "specialOnChange": true,
-            "multi": true,
+            "fieldType": "multi",
             "label": "data.substance.other_names"
         }, 
         "cas_nr": {
@@ -127,7 +226,7 @@
                 "name": "eu_registration_nr"
             },
             "specialOnChange": true,
-            "multi": true,
+            "fieldType": "multi",
             "label": "data.substance.eu_registration_nr"
         }, 
         "other_identity_codes": {
@@ -136,7 +235,7 @@
                 "name": "other_identity_codes"
             },
             "specialOnChange": true,
-            "multi": true,
+            "fieldType": "multi",
             "label": "data.substance.other_identity_codes"
         }, 
         "last_update": {
@@ -159,6 +258,707 @@
                 "name": "structural_formula"
             },
             "label": "data.substance.structural_formula"
+        }, 
+        "smiles": {
+            "props": {
+                "as": "textarea",
+                "type": "text",
+                "name": "smiles"
+            },
+            "label": "data.substance.smiles"
+        }, 
+        "origin": {
+            "props": {
+                "as": "select",
+                "type": "text",
+                "name": "origin"
+            },
+            "fieldType": "select",
+            "label": "data.substance.origin",
+            "options": [
+                {
+                    "value": "organic",
+                    "label": "data.substance.origin-option.organic"
+                }, {
+                    "value": "organometallic",
+                    "label": "data.substance.origin-option.organometallic"
+                }, {
+                    "value": "inorganic",
+                    "label": "data.substance.origin-option.inorganic"
+                }
+            ]
+        },
+        "mw": {
+            "props": {
+                "type": "text",
+                "name": "mw"
+            },
+            "fieldType": "exact-or-range",
+            "label": "data.substance.mw"
+        }, 
+        "optical_activity_info": {
+            "props": {
+                "as": "textarea",
+                "type": "text",
+                "name": "optical_activity_info",
+                "maxLength": 255
+            },
+            "label": "data.substance.optical_activity_info"
+        }, 
+        "isomer_info": {
+            "props": {
+                "as": "textarea",
+                "type": "text",
+                "name": "isomer_info",
+                "maxLength": 255
+            },
+            "label": "data.substance.isomer_info"
+        },
+        "substance_type": {
+            "props": {
+                "as": "select",
+                "type": "text",
+                "name": "substance_type"
+            },
+            "fieldType": "select",
+            "label": "data.substance.substance_type",
+            "optgroups": true,
+            "options": [
+                {
+                    "label": "data.substance.substance-type-option.well-defined",
+                    "options": [
+                        {
+                            "value": "mono-constituent",
+                            "label": "data.substance.substance-type-option.mono"
+                        }, {
+                            "value": "multi-constituent",
+                            "label": "data.substance.substance-type-option.multi"
+                        }, {
+                            "value": "defined-chem-composition",
+                            "label": "data.substance.substance-type-option.defined-chem-composition"
+                        }
+                    ]
+                }, {
+                    "label": "data.substance.substance-type-option.uvcb",
+                    "options": [
+                        {
+                            "value": "uvcb-1",
+                            "label": "data.substance.substance-type-option.uvcb-1"
+                        }, {
+                            "value": "uvcb-2",
+                            "label": "data.substance.substance-type-option.uvcb-2"
+                        }, {
+                            "value": "uvcb-3",
+                            "label": "data.substance.substance-type-option.uvcb-3"
+                        }, {
+                            "value": "uvcb-4",
+                            "label": "data.substance.substance-type-option.uvcb-4"
+                        }, {
+                            "value": "specific-uvcb",
+                            "label": "data.substance.substance-type-option.specific-uvcb"
+                        }
+                    ]
+                }, {
+                    "label": "data.substance.substance-type-option.other",
+                    "options": [
+                        {
+                            "value": "carbon-chain",
+                            "label": "data.substance.substance-type-option.carbon-chain"
+                        }, {
+                            "value": "oil",
+                            "label": "data.substance.substance-type-option.oil"
+                        }, {
+                            "value": "enzymes",
+                            "label": "data.substance.substance-type-option.enzymes"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        "purity_degree": {
+            "props": {
+                "type": "text",
+                "name": "purity_degree"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.purity_degree"
+        },
+        "composition": {
+            "fieldType": "custom",
+            "component": "composition",
+            "label": "data.substance.composition"
+        }, 
+        "uv_vis": {
+            "props": {
+                "type": "file",
+                "name": "uv_vis"
+            },
+            "label": "data.substance.uv_vis"
+        }, 
+        "ir": {
+            "props": {
+                "type": "file",
+                "name": "ir"
+            },
+            "label": "data.substance.ir"
+        }, 
+        "nmr": {
+            "props": {
+                "type": "file",
+                "name": "nmr"
+            },
+            "label": "data.substance.nmr"
+        }, 
+        "ms": {
+            "props": {
+                "type": "file",
+                "name": "ms"
+            },
+            "label": "data.substance.ms"
+        }, 
+        "xrd": {
+            "props": {
+                "type": "file",
+                "name": "xrd"
+            },
+            "label": "data.substance.xrd"
+        }, 
+        "xrf": {
+            "props": {
+                "type": "file",
+                "name": "xrf"
+            },
+            "label": "data.substance.xrf"
+        }, 
+        "aas": {
+            "props": {
+                "type": "file",
+                "name": "aas"
+            },
+            "label": "data.substance.aas"
+        }, 
+        "gc": {
+            "props": {
+                "type": "file",
+                "name": "gc"
+            },
+            "label": "data.substance.gc"
+        }, 
+        "hplc": {
+            "props": {
+                "type": "file",
+                "name": "hplc"
+            },
+            "label": "data.substance.hplc"
+        }, 
+        "analytical_methods_info": {
+            "props": {
+                "as": "textarea",
+                "type": "text",
+                "name": "analytical_method_info"
+            },
+            "label": "data.substance.analytical_methods_info"
+        }, 
+        "physical_state": {
+            "props": {
+                "as": "select",
+                "type": "text",
+                "name": "physical_state"
+            },
+            "fieldType": "select",
+            "label": "data.substance.physical_state",
+            "options": [
+                {
+                    "value": "gas",
+                    "label": "data.substance.physical-state-option.gas"
+                }, {
+                    "value": "liquified_gas",
+                    "label": "data.substance.physical-state-option.liquified-gas"
+                }, {
+                    "value": "liquid",
+                    "label": "data.substance.physical-state-option.liquid"
+                }, {
+                    "value": "molten-metal",
+                    "label": "data.substance.physical-state-option.molten-metal"
+                }, {
+                    "value": "solid",
+                    "label": "data.substance.physical-state-option.solid"
+                }
+            ]
+        },
+        "bp": {
+            "props": {
+                "type": "text",
+                "name": "bp"
+            },
+            "fieldType": "after-select",
+            "after": "bp_unit",
+            "label": "data.substance.bp",
+            "afterOptions": [
+                {
+                    "value": "°C",
+                    "label": "°C"
+                }, {
+                    "value": "K",
+                    "label": "K"
+                }
+            ]
+        }, 
+        "relative_density": {
+            "props": {
+                "type": "text",
+                "name": "relative_density"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.relative_density"
+        },
+        "vp": {
+            "props": {
+                "type": "text",
+                "name": "vp"
+            },
+            "fieldType": "after-input-select",
+            "afterInput": "vp_at_temp",
+            "afterInputPlaceholder": "data.substance.temperature",
+            "afterSelect": "vp_at_temp_unit",
+            "label": "data.substance.vp",
+            "labelAfterInput": "data.substance.vp-after-input-label",
+            "labelAfterSelect": "data.substance.vp-after-select-label",
+            "afterOptions": [
+                {
+                    "value": "°C",
+                    "label": "°C"
+                }, {
+                    "value": "K",
+                    "label": "K"
+                }
+            ]
+        }, 
+        "solubility": {
+            "props": {
+                "type": "text",
+                "name": "solubility"
+            },
+            "fieldType": "after-input-select",
+            "afterInput": "solubility_at_temp",
+            "afterInputPlaceholder": "data.substance.temperature",
+            "afterSelect": "solubility_at_temp_unit",
+            "label": "data.substance.solubility",
+            "labelAfterInput": "data.substance.vp-after-input-label",
+            "afterOptions": [
+                {
+                    "value": "°C",
+                    "label": "°C"
+                }, {
+                    "value": "K",
+                    "label": "K"
+                }
+            ]
+        }, 
+        "log_kow": {
+            "props": {
+                "type": "text",
+                "name": "log_kow"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.log_kow"
+        }, 
+        "granulometry_sm": {
+            "props": {
+                "type": "text",
+                "name": "granulometry_sm"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.granulometry_sm"
+        }, 
+        "granulometry_md": {
+            "props": {
+                "type": "text",
+                "name": "granulometry_md"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.granulometry_md"
+        }, 
+        "granulometry_lg": {
+            "props": {
+                "type": "text",
+                "name": "granulometry_lg"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.granulometry_lg"
+        },
+        "dustiness": {
+            "props": {
+                "as": "select",
+                "type": "text",
+                "name": "dustiness"
+            },
+            "fieldType": "select",
+            "label": "data.substance.dustiness",
+            "options": [
+                {
+                    "value": "very-low",
+                    "label": "data.substance.dustiness-option.very-low"
+                }, {
+                    "value": "low",
+                    "label": "data.substance.dustiness-option.low"
+                }, {
+                    "value": "medium",
+                    "label": "data.substance.dustiness-option.medium"
+                }, {
+                    "value": "high",
+                    "label": "data.substance.dustiness-option.high"
+                }, {
+                    "value": "very-high",
+                    "label": "data.substance.dustiness-option.very-high"
+                }
+            ]
+        }, 
+        "dustiness_measured": {
+            "props": {
+                "type": "text",
+                "name": "dustiness_measured"
+            },
+            "scaling": {"md" : 4},
+            "label": "data.substance.dustiness-measured"
+        },
+        "physical_hazard": {
+            "fieldType": "custom",
+            "component": "physicalHazard",
+            "label": "data.substance.physical-hazard"
+        },
+        "health_hazard": {
+            "fieldType": "custom",
+            "component": "physicalHazard",
+            "label": "data.substance.health-hazard"
+        },
+        "environmental_hazard": {
+            "fieldType": "custom",
+            "component": "physicalHazard",
+            "label": "data.substance.environmental-hazard"
+        },
+        "other_hazard": {
+            "fieldType": "custom",
+            "component": "otherHazard",
+            "label": "data.substance.other-hazard"
+        },
+        "euh_title_1": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-1",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh1": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh001",
+                    "name": "euh001"
+                }, {
+                    "label": "data.substance.euh014",
+                    "name": "euh014"
+                }, {
+                    "label": "data.substance.euh018",
+                    "name": "euh018"
+                }, {
+                    "label": "data.substance.euh019",
+                    "name": "euh019"
+                }, {
+                    "label": "data.substance.euh044",
+                    "name": "euh044"
+                }
+            ]
+        },
+        "euh_title_2": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-2",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_3": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-3",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_4": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-4",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_5": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-5",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_6": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-6",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_7": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-7",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_8": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-8",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_9": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-9",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_10": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-10",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_11": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-11",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh_title_12": {
+            "fieldType": "title",
+            "title": "data.substance.titles.euh-title-12",
+            "props": {
+                "className": "ml-5 mb-3 text-muted bg-light p-2"
+            }
+        },
+        "euh2": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh029",
+                    "name": "euh029"
+                }, {
+                    "label": "data.substance.euh031",
+                    "name": "euh031"
+                }, {
+                    "label": "data.substance.euh032",
+                    "name": "euh032"
+                }, {
+                    "label": "data.substance.euh066",
+                    "name": "euh066"
+                }, {
+                    "label": "data.substance.euh070",
+                    "name": "euh070"
+                }, {
+                    "label": "data.substance.euh071",
+                    "name": "euh071"
+                }
+            ]
+        },
+        "euh3": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh201",
+                    "name": "euh201"
+                }, {
+                    "label": "data.substance.euh201a",
+                    "name": "euh201a"
+                }
+            ]
+        }, 
+        "euh4": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh202",
+                    "name": "euh202"
+                }
+            ]
+        }, 
+        "euh5": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh203",
+                    "name": "euh203"
+                }
+            ]
+        }, 
+        "euh6": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh204",
+                    "name": "euh204"
+                }
+            ]
+        }, 
+        "euh7": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh205",
+                    "name": "euh205"
+                }
+            ]
+        }, 
+        "euh8": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh206",
+                    "name": "euh206"
+                }
+            ]
+        }, 
+        "euh9": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh207",
+                    "name": "euh207"
+                }
+            ]
+        }, 
+        "euh10": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh208",
+                    "name": "euh208"
+                }
+            ]
+        }, 
+        "euh11": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh209",
+                    "name": "euh209"
+                }, {
+                    "label": "data.substance.euh209a",
+                    "name": "euh209a"
+                }
+            ]
+        }, 
+        "euh12": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh210",
+                    "name": "euh210"
+                }
+            ]
+        }, 
+        "euh13": {
+            "props": {
+                "className": "ml-5 mb-2"
+            },
+            "fieldType": "checkbox-list",
+            "label": false,
+            "elements": [
+                {
+                    "label": "data.substance.euh401",
+                    "name": "euh401"
+                } 
+            ]
+        },
+        "reg_dnel": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "reg_dnel_lt_i_sys",
+                    "label": "data.substance.reg_dnel_lt_i_sys",
+                    "afterOptions": "unit_i",
+                    "afterName": "reg_dnel_lt_i_sys_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "",
+                        "label": ""
+                    }
+                ],
+                "unit_d": [
+                    {
+                        "value": "",
+                        "label": ""
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "",
+                        "label": ""
+                    }
+                ]
+            }
         }
     }
 }

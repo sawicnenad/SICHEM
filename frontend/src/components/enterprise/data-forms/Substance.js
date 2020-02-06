@@ -15,8 +15,12 @@ export default function Substance(props) {
         eu_registration_nr: [""],
         other_identity_codes: [""]
     }
+    const exactOrRangeFields = {
+        mw: true
+    }
 
-    const initialValues = {};
+    const initialValues = {
+    };
 
     for (let field in data.fields) {
         initialValues[field] = "";
@@ -39,10 +43,14 @@ export default function Substance(props) {
             <DataForm
                 data={data}
                 multiFields={multiFields}
+                exactOrRangeFields={exactOrRangeFields}
                 handleSubmit={handleSubmit}
                 initialValues={initialValues}
                 schema={Schema}
                 title={t('data.substance.title')}
+                custom={{
+                    composition: <div>Composition</div>
+                }}
             />
         </div>
     )
