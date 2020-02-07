@@ -86,27 +86,28 @@ export default function DataForm(props) {
             case "after-select-list":
                 return(
                     field.elements.map(
-                        item => (
-                            <Row key={item.name}>
+                        (item, inx) => (
+                            <Form.Group 
+                                key={item.name}
+                                as={Row}
+                                className={(inx+1) % 2 === 0 ? "bg-light pt-2" : "pt-2"}
+                            >
+                                <Form.Label column { ...scaling.label }>
+                                    { t(item.label) }:
+                                </Form.Label>
                                 <Col xs={8} md={4}>
-                                    <Form.Group as={Row}>
-                                        <Form.Label column {...scaling.label}>
-                                            { t(item.label) }:
-                                        </Form.Label>
-                                        <Form.Control 
-                                            {...scaling.field}
-                                            name={item.name}
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                            value={formik.values[item.name]}
-                                            isInvalid={!!formik.errors[field.name]}
-                                        />
-                                    </Form.Group>
+                                    <Form.Control 
+                                        {...scaling.field}
+                                        name={item.name}
+                                        type="text"
+                                        onChange={formik.handleChange}
+                                        value={formik.values[item.name]}
+                                        isInvalid={!!formik.errors[field.name]}
+                                    />
                                 </Col>
 
                                 <Col xs={4} md={2}>
                                     <Form.Control
-                                        className="border-warning"
                                         name={item.afterName}
                                         as="select"
                                         value={formik.values[item.afterName]}
@@ -124,7 +125,7 @@ export default function DataForm(props) {
                                         }
                                     </Form.Control>
                                 </Col>
-                            </Row>
+                            </Form.Group>
                         )
                     )
                 )
@@ -142,8 +143,11 @@ export default function DataForm(props) {
                 );
             case "after-input-select": 
                 return(
-                    <Row>
-                        <Col xs={4}>
+                    <Form.Group as={Row}>
+                        <Form.Label column {...scaling.label}>
+                            { t(field.label) }:
+                        </Form.Label>
+                        <Col xs={4} md={3}>
                             <Form.Control
                                 { ...field.props }
                                 value={formik.values[field.props.name]}
@@ -155,14 +159,13 @@ export default function DataForm(props) {
                             />
                         </Col>
 
-                        <Col xs={5}>
+                        <Col xs={5} md={3}>
                             <Form.Group as={Row}>
-                                <Form.Label column className="text-right">
+                                <Form.Label column className="text-right" xs={4}>
                                     {t(field.labelAfterInput)}:
                                 </Form.Label>
                                 <Col xs={8}>
                                     <Form.Control
-                                        className="border-warning"
                                         type="text"
                                         name={field.afterInput}
                                         placeholder={t(field.afterInputPlaceholder)}
@@ -177,9 +180,8 @@ export default function DataForm(props) {
                             </Form.Group>
                         </Col>
 
-                        <Col xs={3}>
+                        <Col xs={3} md={2}>
                             <Form.Control
-                                className="border-warning"
                                 name={field.afterSelect}
                                 as="select"
                                 value={formik.values[field.after]}
@@ -196,11 +198,14 @@ export default function DataForm(props) {
                                 )}
                             </Form.Control>
                         </Col>
-                    </Row>
+                    </Form.Group>
                 )
             case "after-select":
                 return(
-                    <Row>
+                    <Form.Group as={Row}>
+                        <Form.Label column {...scaling.label}>
+                            { t(field.label) }
+                        </Form.Label>
                         <Col xs={8} md={4}>
                             <Form.Control
                                 { ...field.props }
@@ -233,7 +238,7 @@ export default function DataForm(props) {
                                 }
                             </Form.Control>
                         </Col>
-                    </Row>
+                    </Form.Group>
                 );
             case "custom": 
                 return(
@@ -243,7 +248,11 @@ export default function DataForm(props) {
                 )
             case "exact-or-range":
                 return(
-                    <div>
+                    <Form.Group as={Row}>
+                        <Form.Label column {...scaling.label}>
+                            { t(field.label) }
+                        </Form.Label>
+                        <Col {...scaling.field}>
                         {
                             exactOrRangeFields[field.props.name] ?
                             <Row>
@@ -316,78 +325,114 @@ export default function DataForm(props) {
                                 </Col>
                             </Row>
                         }
-                    </div>
+                        </Col>
+                    </Form.Group>
                 );
             case "select":
                 return(
-                    <Form.Control
-                        { ...field.props }
-                        value={formik.values[field.props.name]}
-                        onChange={
-                            field.specialOnChange ? 
-                            specialOnChange : formik.handleChange
-                        }
-                        isInvalid={!!formik.errors[field.props.name]}
-                    >
-                        {
-                            field.optgroups ?
-                            field.options.map(
-                                item => 
-                                    <optgroup label={ t(item.label) } key={item.label}>
-                                        {
-                                            item.options.map(
-                                                option => 
-                                                    <option value={option.value} key={option.value}>
-                                                        {t(option.label)}
-                                                    </option>
-                                            )
-                                        }
-                                    </optgroup>
-                            )
-                            : 
-                            field.options.map(
-                                item => 
-                                    <option value={item.value} key={item.value}>
-                                        { t(item.label) }
-                                    </option>
-                            )
-                        }
-                    </Form.Control>
+                    <Form.Group as={Row}>
+                        <Form.Label column {...scaling.label}>
+                            { t(field.label) }
+                        </Form.Label>
+                        <Col {...scaling.field}>
+                            <Form.Control
+                                { ...field.props }
+                                value={formik.values[field.props.name]}
+                                onChange={
+                                    field.specialOnChange ? 
+                                    specialOnChange : formik.handleChange
+                                }
+                                isInvalid={!!formik.errors[field.props.name]}
+                            >
+                                {
+                                    field.optgroups ?
+                                    field.options.map(
+                                        item => 
+                                            <optgroup label={ t(item.label) } key={item.label}>
+                                                {
+                                                    item.options.map(
+                                                        option => 
+                                                            <option value={option.value} key={option.value}>
+                                                                {t(option.label)}
+                                                            </option>
+                                                    )
+                                                }
+                                            </optgroup>
+                                    )
+                                    : 
+                                    field.options.map(
+                                        item => 
+                                            <option value={item.value} key={item.value}>
+                                                { t(item.label) }
+                                            </option>
+                                    )
+                                }
+                            </Form.Control>
+                        </Col>
+                    </Form.Group>
                 );
             case "multi":
                 return(
-                    <div className={
+                    <Form.Group as={Row} 
+                        className={
                             multiFields[field.props.name].length > 1 ?
-                            "p-4 border border-warning" : ""
+                            "py-3 border" : ""
                     }>
-                        {multiFields[field.props.name].map(
-                        (e,inx) => (
+                        <Form.Label column {...scaling.label}>
+                            { t(field.label) }
+                        </Form.Label>
+                        <Col {...scaling.field}>
+                            {multiFields[field.props.name].map(
+                                (e,inx) => (
+                                    <Form.Control
+                                        key={inx}
+                                        className={ inx !== 0 ? "mt-2": "" }
+                                        { ...field.props }
+                                        name={`${field.props.name}__${inx}`}
+                                        value={multiFields[field.props.name][inx]}
+                                        onChange={
+                                            field.specialOnChange ? 
+                                            specialOnChange : formik.handleChange
+                                        }
+                                        isInvalid={!!formik.errors[field.props.name]}
+                                    />
+                                ))
+                            }
+                        </Col>
+                        <Col>
+                            <Button 
+                                size="sm"
+                                className="mt-1"
+                                variant="light"
+                                onClick={ () => handlePlusMultiFieldClick(field.props.name) }
+                            >
+                                <FontAwesomeIcon icon="plus" />
+                            </Button>
+                        </Col>
+                        
+                    </Form.Group>
+                );
+            default:
+                return(
+                    <Form.Group as={Row}>
+                        <Form.Label column {...scaling.label}>
+                            { t(field.label) }:
+                        </Form.Label>
+                        <Col {...scaling.field} {...field.scaling}>
                             <Form.Control
-                                key={inx}
-                                className={ inx !== 0 ? "mt-2": "" }
                                 { ...field.props }
-                                name={`${field.props.name}__${inx}`}
-                                value={multiFields[field.props.name][inx]}
+                                value={formik.values[field.props.name]}
                                 onChange={
                                     field.specialOnChange ? 
                                     specialOnChange : formik.handleChange
                                 }
                                 isInvalid={!!formik.errors[field.props.name]}
                             />
-                        )
-                    )}</div>
-                );
-            default:
-                return(
-                    <Form.Control
-                        { ...field.props }
-                        value={formik.values[field.props.name]}
-                        onChange={
-                            field.specialOnChange ? 
-                            specialOnChange : formik.handleChange
-                        }
-                        isInvalid={!!formik.errors[field.props.name]}
-                    />
+                            <Form.Control.Feedback type="invalid">
+                                { formik.errors[field.props.name] }
+                            </Form.Control.Feedback>
+                        </Col>
+                    </Form.Group>
                 )
 
         }
@@ -398,43 +443,20 @@ export default function DataForm(props) {
     // and those defined in json file -> create form controls
     const createFields = fields => (
         <div>
-            { fields.map(item => 
+            { fields.map((item, inx) => 
                 (
                     data.fields[item].fieldType === "title" ?
-                    <div {...data.fields[item].props } style={{ fontSize: 18 }}>
+                    <div {...data.fields[item].props } style={{ fontSize: 16 }} key={inx}>
                         <strong>{ t(data.fields[item].title) }</strong>
                     </div>
-                    : <Form.Group as={ Row } key={item}>
-                        {
-                            data.fields[item].label ?
-                            <Form.Label column {...scaling.label}>
-                                { t(data.fields[item].label) }:
-                            </Form.Label> : <div />
-                        }
-
-                        <Col {...scaling.field} {...data.fields[item].scaling}>
-                            
-                            { myField(data.fields[item]) }
-
-                            <Form.Control.Feedback type="invalid">
-                                {formik.errors[item]}
-                            </Form.Control.Feedback>
-                        </Col>
-                        {
-                            data.fields[item].fieldType === "multi" ?
-                            <Col>
-                                <Button 
-                                    size="sm"
-                                    className="mt-1"
-                                    variant="light"
-                                    onClick={ () => handlePlusMultiFieldClick(item) }
-                                >
-                                    <FontAwesomeIcon icon="plus" />
-                                </Button>
-                            </Col>
-                            : <div />
-                        }
-                    </Form.Group>)
+                    : <div 
+                        key={inx}
+                        className={
+                            inx % 2 === 0 && data.fields[item].fieldType !== "after-select-list" ?
+                            "bg-light pt-2 pb-1" : "pt-2"
+                        }>
+                        { myField( data.fields[item] ) }
+                    </div>)
             )}
         </div>
     )

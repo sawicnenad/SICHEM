@@ -106,7 +106,11 @@
                 "euh-statement-1": "4.1. Supplemental hazard information (Annex II Part 1 REACH)",
                 "euh-statement-2": "4.2. Special rules for supplemental label elements for cerain mixtures (Annex II Part 2 REACH)",
                 "reference-values": "5. Reference values",
-                "dnel": "5.1. Derived No-Effect Level (DNEL)"
+                "dnel-reg": "5.1. Derived No-Effect Level (DNEL) - Registrant",
+                "dnel-ref": "5.2. Derived No-Effect Level (DNEL) - Reference",
+                "dmel": "5.3. Derived Minimal-Effect Level (DMEL)",
+                "suva-mak": "5.4. SUVA-MAK values",
+                "other-tox": "5.5. Other reference values"
             },
             "titles": {
                 "euh-title-1": "Physical properties",
@@ -120,7 +124,11 @@
                 "euh-title-9": "Mixtures containing cadmium (alloys) and intended to be used for brazing or soldering",
                 "euh-title-10": "Mixtures containing at least one sensitising substance",
                 "euh-title-11": "Liquid mixtures containing halogenated hydrocarbons",
-                "euh-title-12": "Mixtures not intended for the general public"
+                "euh-title-12": "Mixtures not intended for the general public",
+                "reg-dnel-1-title": "Long-term / systemic",
+                "reg-dnel-2-title": "Long-term / local",
+                "reg-dnel-3-title": "Accute / systemic",
+                "reg-dnel-4-title": "Accute / local"
             },
             "reference": "Reference name",
             "physical-state": "Physical form",
@@ -230,7 +238,24 @@
             "euh209": "Can become highly flammable in use",
             "euh209a": "Can become flammable in use",
             "euh210": "Safety data sheet available on request",
-            "euh401": "To avoid risks to human health and the environment, comply with the instructions for use"
+            "euh401": "To avoid risks to human health and the environment, comply with the instructions for use",
+            "tox-inh": "Inhalation route",
+            "tox-derm": "Dermal route",
+            "tox-oral": "Oral route",
+            "suva_mak_wert": "Switzerland (SUVA - MAK-Wert)",
+            "suva_kzgw": "Switzerland (SUVA - KZGW)",
+            "notation": "Notations",
+            "critical-toxicity": "Critical toxicity",
+            "tox-file": "Relevant file",
+            "eu_ioelv": "EU (IOELV)",
+            "eu_boelv": "EU (BOELV)",
+            "ge_ags": "Germany (AGS)",
+            "ge_dfg_mak": "Germany (DFG-MAK)",
+            "usa_tlv": "USA (TLV-ACGIH)",
+            "usa_niosh": "USA (NIOSH)",
+            "other-tox-custom": "Other tox. (name)",
+            "other-tox-value": "value",
+            "other-tox-file": "Relevant file"
         }
     }
 }

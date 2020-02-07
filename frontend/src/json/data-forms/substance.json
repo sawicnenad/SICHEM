@@ -131,12 +131,61 @@
             "label": "data.substance.accordion.reference-values",
             "children": [
                {
-                   "eventKey": "dnel",
-                   "label": "data.substance.accordion.dnel",
+                   "eventKey": "dnel-reg",
+                   "label": "data.substance.accordion.dnel-reg",
                    "fields": [
-                       "reg_dnel"
+                       "reg_dnel_1_title",
+                       "reg_dnel_1",
+                       "reg_dnel_2_title",
+                       "reg_dnel_2",
+                       "reg_dnel_3_title",
+                       "reg_dnel_3",
+                       "reg_dnel_4_title",
+                       "reg_dnel_4"
                    ]
-               }
+               }, {
+                "eventKey": "dnel-ref",
+                "label": "data.substance.accordion.dnel-ref",
+                "fields": [
+                    "reg_dnel_1_title",
+                    "ref_dnel_1",
+                    "reg_dnel_2_title",
+                    "ref_dnel_2",
+                    "reg_dnel_3_title",
+                    "ref_dnel_3",
+                    "reg_dnel_4_title",
+                    "ref_dnel_4"
+                    ]
+               }, {
+                "eventKey": "dmel",
+                "label": "data.substance.accordion.dmel",
+                "fields": [
+                    "reg_dnel_1_title",
+                    "dmel_1",
+                    "reg_dnel_2_title",
+                    "dmel_2",
+                    "reg_dnel_3_title",
+                    "dmel_3",
+                    "reg_dnel_4_title",
+                    "dmel_4"
+                    ]
+               }, {
+                "eventKey": "suva-mak",
+                "label": "data.substance.accordion.suva-mak",
+                "fields": [
+                    "suva_mak",
+                    "notation",
+                    "critical_toxicity",
+                    "tox_file"
+                    ]
+                }, {
+                 "eventKey": "other-tox",
+                 "label": "data.substance.accordion.other-tox",
+                 "fields": [
+                    "other_tox",
+                    "other_tox_custom",
+                    "other_tox_file"
+                ]}
             ]
         }
     ],
@@ -928,37 +977,1121 @@
                 } 
             ]
         },
-        "reg_dnel": {
+        "reg_dnel_1_title": {
+            "fieldType": "title",
+            "title": "data.substance.titles.reg-dnel-1-title",
+            "props": {
+                "className": "mb-3 text-muted bg-light p-2"
+            }
+        },
+        "reg_dnel_2_title": {
+            "fieldType": "title",
+            "title": "data.substance.titles.reg-dnel-2-title",
+            "props": {
+                "className": "mb-3 text-muted bg-light p-2"
+            }
+        },
+        "reg_dnel_3_title": {
+            "fieldType": "title",
+            "title": "data.substance.titles.reg-dnel-3-title",
+            "props": {
+                "className": "mb-3 text-muted bg-light p-2"
+            }
+        },
+        "reg_dnel_4_title": {
+            "fieldType": "title",
+            "title": "data.substance.titles.reg-dnel-4-title",
+            "props": {
+                "className": "mb-3 text-muted bg-light p-2"
+            }
+        },
+        "reg_dnel_1": {
             "fieldType": "after-select-list",
             "label": false,
             "elements": [
                 {
                     "name": "reg_dnel_lt_i_sys",
-                    "label": "data.substance.reg_dnel_lt_i_sys",
+                    "label": "data.substance.tox-inh",
                     "afterOptions": "unit_i",
                     "afterName": "reg_dnel_lt_i_sys_unit"
+                }, {
+                    "name": "reg_dnel_lt_d_sys",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "reg_dnel_lt_d_sys_unit"
+                }, {
+                    "name": "reg_dnel_lt_o_sys",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "reg_dnel_lt_o_sys_unit"
                 }
             ],
             "afterOptions": {
                 "unit_i": [
                     {
-                        "value": "",
-                        "label": ""
-                    }
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
                 ],
                 "unit_d": [
                     {
-                        "value": "",
-                        "label": ""
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
                     }
                 ],
                 "unit_o": [
                     {
-                        "value": "",
-                        "label": ""
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
                     }
                 ]
             }
+        },
+        "reg_dnel_2": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "reg_dnel_lt_i_loc",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "reg_dnel_lt_i_loc_unit"
+                }, {
+                    "name": "reg_dnel_lt_d_loc",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "reg_dnel_lt_d_loc_unit"
+                }, {
+                    "name": "reg_dnel_lt_o_loc",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "reg_dnel_lt_o_loc_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "reg_dnel_3": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "reg_dnel_a_i_sys",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "reg_dnel_a_i_sys_unit"
+                }, {
+                    "name": "reg_dnel_a_d_sys",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "reg_dnel_a_d_sys_unit"
+                }, {
+                    "name": "reg_dnel_a_o_sys",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "reg_dnel_a_o_sys_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "reg_dnel_4": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "reg_dnel_a_i_loc",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "reg_dnel_a_i_loc_unit"
+                }, {
+                    "name": "reg_dnel_a_d_loc",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "reg_dnel_a_d_loc_unit"
+                }, {
+                    "name": "reg_dnel_a_o_loc",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "reg_dnel_a_o_loc_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "ref_dnel_1": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "ref_dnel_lt_i_sys",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "ref_dnel_lt_i_sys_unit"
+                }, {
+                    "name": "ref_dnel_lt_d_sys",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "ref_dnel_lt_d_sys_unit"
+                }, {
+                    "name": "ref_dnel_lt_o_sys",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "ref_dnel_lt_o_sys_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "ref_dnel_2": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "ref_dnel_lt_i_loc",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "ref_dnel_lt_i_loc_unit"
+                }, {
+                    "name": "ref_dnel_lt_d_loc",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "ref_dnel_lt_d_loc_unit"
+                }, {
+                    "name": "ref_dnel_lt_o_loc",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "ref_dnel_lt_o_loc_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "ref_dnel_3": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "ref_dnel_a_i_sys",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "ref_dnel_a_i_sys_unit"
+                }, {
+                    "name": "ref_dnel_a_d_sys",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "ref_dnel_a_d_sys_unit"
+                }, {
+                    "name": "ref_dnel_a_o_sys",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "ref_dnel_a_o_sys_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "ref_dnel_4": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "ref_dnel_a_i_loc",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "ref_dnel_a_i_loc_unit"
+                }, {
+                    "name": "ref_dnel_a_d_loc",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "ref_dnel_a_d_loc_unit"
+                }, {
+                    "name": "ref_dnel_a_o_loc",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "ref_dnel_a_o_loc_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "dmel_1": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "dmel_lt_i_sys",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "dmel_lt_i_sys_unit"
+                }, {
+                    "name": "dmel_lt_d_sys",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "dmel_lt_d_sys_unit"
+                }, {
+                    "name": "dmel_lt_o_sys",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "dmel_lt_o_sys_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "dmel_2": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "dmel_lt_i_loc",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "dmel_lt_i_loc_unit"
+                }, {
+                    "name": "dmel_lt_d_loc",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "dmel_lt_d_loc_unit"
+                }, {
+                    "name": "dmel_lt_o_loc",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "dmel_lt_o_loc_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "dmel_3": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "dmel_a_i_sys",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "dmel_a_i_sys_unit"
+                }, {
+                    "name": "dmel_a_d_sys",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "dmel_a_d_sys_unit"
+                }, {
+                    "name": "dmel_a_o_sys",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "dmel_a_o_sys_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "dmel_4": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "dmel_a_i_loc",
+                    "label": "data.substance.tox-inh",
+                    "afterOptions": "unit_i",
+                    "afterName": "dmel_a_i_loc_unit"
+                }, {
+                    "name": "dmel_a_d_loc",
+                    "label": "data.substance.tox-derm",
+                    "afterOptions": "unit_d",
+                    "afterName": "dmel_a_d_loc_unit"
+                }, {
+                    "name": "dmel_a_o_loc",
+                    "label": "data.substance.tox-oral",
+                    "afterOptions": "unit_o",
+                    "afterName": "dmel_a_o_loc_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit_i": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ],
+                "unit_d": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }, {
+                        "value": "mg/cm2 /d",
+                        "label": "mg/cm2 /d"
+                    }, {
+                        "value": "ug/cm2 /d",
+                        "label": "ug/cm2 /d"
+                    }, {
+                        "value": "ng/cm2 /d",
+                        "label": "ng/cm2 /d"
+                    }
+                ],
+                "unit_o": [
+                    {
+                        "value": "mg/kg bw/d",
+                        "label": "mg/kg bw/d"
+                    }, {
+                        "value": "ug/kg bw/d",
+                        "label": "ug/kg bw/d"
+                    }, {
+                        "value": "ng/kg bw/d",
+                        "label": "ng/kg bw/d"
+                    }
+                ]
+            }
+        },
+        "suva_mak": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "suva_mak_wert",
+                    "label": "data.substance.suva_mak_wert",
+                    "afterOptions": "unit",
+                    "afterName": "suva_mak_wert_unit"
+                }, {
+                    "name": "suva_kzgw",
+                    "label": "data.substance.suva_kzgw",
+                    "afterOptions": "unit",
+                    "afterName": "suva_kzgw_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ]
+            }
+        },
+        "notation": {
+            "fieldType": "select",
+            "label": "data.substance.notation",
+            "props": {
+                "as": "select",
+                "name": "notation",
+                "multiple": true
+            },
+            "options": [
+                {
+                    "value": "H",
+                    "label": "H"
+                 }, {
+                     "value": "S",
+                     "label": "S"
+                  }, {
+                     "value": "C",
+                     "label": "C"
+                  }, {
+                     "value": "M",
+                     "label": "M"
+                  }, {
+                     "value": "R0",
+                     "label": "R0"
+                  }, {
+                    "value": "Rf",
+                    "label": "Rf"
+                 }, {
+                    "value": "SS",
+                    "label": "SS"
+                 }, {
+                    "value": "Ol",
+                    "label": "Ol"
+                 }, {
+                    "value": "B",
+                    "label": "B"
+                 }, {
+                    "value": "P",
+                    "label": "P"
+                 }
+            ]
+        },
+        "critical_toxicity": {
+            "props": {
+                "name": "critical_toxicity",
+                "type": "text"
+            },
+            "label": "data.substance.critical-toxicity"
+        },
+        "tox_file": {
+            "props": {
+                "name": "tox_file",
+                "type": "file"
+            },
+            "label": "data.substance.tox-file"
+        },
+        "other_tox": {
+            "fieldType": "after-select-list",
+            "label": false,
+            "elements": [
+                {
+                    "name": "eu_ioelv",
+                    "label": "data.substance.eu_ioelv",
+                    "afterOptions": "unit",
+                    "afterName": "eu_ioelv_unit"
+                }, {
+                    "name": "eu_boelv",
+                    "label": "data.substance.eu_boelv",
+                    "afterOptions": "unit",
+                    "afterName": "eu_boelv_unit"
+                }, {
+                    "name": "ge_ags",
+                    "label": "data.substance.ge_ags",
+                    "afterOptions": "unit",
+                    "afterName": "ge_ags_unit"
+                }, {
+                    "name": "ge_dfg_mak",
+                    "label": "data.substance.ge_dfg_mak",
+                    "afterOptions": "unit",
+                    "afterName": "ge_dfg_mak_unit"
+                }, {
+                    "name": "usa_tlv",
+                    "label": "data.substance.usa_tlv",
+                    "afterOptions": "unit",
+                    "afterName": "usa_tlv_unit"
+                }, {
+                    "name": "usa_niosh",
+                    "label": "data.substance.usa_niosh",
+                    "afterOptions": "unit",
+                    "afterName": "usa_niosh_unit"
+                }
+            ],
+            "afterOptions": {
+                "unit": [
+                    {
+                        "value": "mg/m3",
+                        "label": "mg/m3"
+                     }, {
+                         "value": "ug/m3",
+                         "label": "ug/m3"
+                      }, {
+                         "value": "ng/m3",
+                         "label": "ng/m3"
+                      }, {
+                         "value": "ppm",
+                         "label": "ppm"
+                      }, {
+                         "value": "ppb",
+                         "label": "ppb"
+                      }
+                ]
+            }
+        },
+        "other_tox_custom": {
+            "props": {
+                "type": "text",
+                "name": "other_tox_name"
+            },
+            "fieldType": "after-input-select",
+            "afterInput": "other_tox_value",
+            "afterInputPlaceholder": "data.substance.other-tox-value",
+            "afterSelect": "other_tox_unit",
+            "label": "data.substance.other-tox-custom",
+            "labelAfterInput": "data.substance.other-tox-value",
+            "labelAfterSelect": "data.substance.other-tox-unit",
+            "afterOptions": [
+                {
+                   "value": "mg/m3",
+                   "label": "mg/m3"
+                }, {
+                    "value": "ug/m3",
+                    "label": "ug/m3"
+                 }, {
+                    "value": "ng/m3",
+                    "label": "ng/m3"
+                 }, {
+                    "value": "ppm",
+                    "label": "ppm"
+                 }, {
+                    "value": "ppb",
+                    "label": "ppb"
+                 }
+            ]
+        }, 
+        "other_tox_file": {
+            "props": {
+                "name": "other_tox_file",
+                "type": "file"
+            },
+            "label": "data.substance.other-tox-file"
         }
     }
 }
