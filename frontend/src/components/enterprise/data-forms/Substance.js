@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import data from '../../../json/data-forms/substance.json';
 import DataForm from './DataForm.js';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
+import RequestNotification from '../../notifications/RequestNotification';
 
 // create new substance
 // edit existing substance
 export default function Substance(props) {
+    const [state, setState] = useState({
+        failedMsg: false
+    });
     const { t } = useTranslation();
+    const APIcontext = useContext(ApiRequestsContext);
 
+    // formik configuration
     const multiFields = {
         international_names: [""],
         other_names: [""],
@@ -25,9 +33,22 @@ export default function Substance(props) {
     for (let field in data.fields) {
         initialValues[field] = "";
     }
+    //--------------------------------------------
+
 
     const handleSubmit = values => {
-
+        axios.post(
+            `${APIcontext.API}/substances/`,
+            values,
+            {headers: {
+                Pragma: "no-cache",
+                Authorization: 'Bearer ' + localStorage.getItem('token-access')
+            }}
+        ).then(
+            res => console.log(res)
+        ).catch(
+            () => setState({ failedMsg: true })
+        )
     }
 
     // Yup is used to define constraints for the fields
@@ -51,6 +72,12 @@ export default function Substance(props) {
                 custom={{
                     composition: <div>Composition</div>
                 }}
+            />
+
+            {/* notifications */}
+            <RequestNotification
+                show={state.failedMsg}
+                onClose={() => setState({ failedMsg: false })}
             />
         </div>
     )

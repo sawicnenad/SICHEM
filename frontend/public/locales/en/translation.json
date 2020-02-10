@@ -110,7 +110,8 @@
                 "dnel-ref": "5.2. Derived No-Effect Level (DNEL) - Reference",
                 "dmel": "5.3. Derived Minimal-Effect Level (DMEL)",
                 "suva-mak": "5.4. SUVA-MAK values",
-                "other-tox": "5.5. Other reference values"
+                "other-tox": "5.5. Other reference values",
+                "reg-status": "6. Regulatory status"
             },
             "titles": {
                 "euh-title-1": "Physical properties",
@@ -255,7 +256,16 @@
             "usa_niosh": "USA (NIOSH)",
             "other-tox-custom": "Other tox. (name)",
             "other-tox-value": "value",
-            "other-tox-file": "Relevant file"
+            "other-tox-file": "Relevant file",
+            "reg-status-ch": "Switzerland",
+            "reg-status-ch-other": "Description",
+            "reg-status-reach": "REACH",
+            "reg-status-reach-other": "Description",
+            "reg-status-clp": "CLP",
+            "reg-status-clp-other": "Description",
+            "reg-status-eu": "EU",
+            "reg-status-eu-other": "Description",
+            "reg-status-file": "Relevant file"
         }
     }
 }

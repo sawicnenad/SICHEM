@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import { Form, Row, Col, Button, Accordion, Card, FormControl } from 'react-bootstrap';
+import { Form, Row, Col, Button, Accordion, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // label field scaling
@@ -523,7 +523,11 @@ export default function DataForm(props) {
                             <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
                         </Button>
 
-                        <Button variant="danger" className="ml-1">
+                        <Button
+                            variant="danger"
+                            className="ml-1"
+                            onClick={formik.handleSubmit}
+                        >
                             <FontAwesomeIcon icon="save" /> { t('save') }
                         </Button>
                     </Col>
