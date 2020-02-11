@@ -10,6 +10,7 @@
                     "eventKey": "name",
                     "label": "data.substance.accordion.name",
                     "fields": [
+                        "supplier",
                         "reference",
                         "iupac",
                         "international_names",
@@ -214,6 +215,11 @@
             "label": "data.substance.reference",
             "formControlFeedback": true
         }, 
+        "supplier": {
+            "fieldType": "custom",
+            "component": "supplier",
+            "label": "data.substance.supplier"
+        },  
         "iupac": {
             "props": {
                 "as": "textarea",

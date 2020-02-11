@@ -131,6 +131,7 @@
                 "reg-dnel-3-title": "Accute / systemic",
                 "reg-dnel-4-title": "Accute / local"
             },
+            "supplier": "Substance supplier",
             "reference": "Reference name",
             "physical-state": "Physical form",
             "iupac": "IUPAC",
