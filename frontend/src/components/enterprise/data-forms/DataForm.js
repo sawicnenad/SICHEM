@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Row, Col, Button, Accordion, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
 
 
 /*
@@ -72,6 +71,7 @@ export default function DataForm(props) {
                     field.elements.map(
                         item => (
                             <Form.Check
+                                key={item.name}
                                 {...field.props}
                                 name={item.name}
                                 label={t(item.label)}
@@ -149,7 +149,6 @@ export default function DataForm(props) {
 
                         <Col xs={4} md={2}>
                             <Form.Control
-                                className="border-warning"
                                 name={field.after}
                                 as="select"
                                 value={props.formik.values[field.after]}
@@ -175,7 +174,7 @@ export default function DataForm(props) {
                         {props.custom[field.component]}
                     </div>
                 )
-            /*case "exact-or-range":
+            case "exact-or-range":
                 return(
                     <Form.Group as={Row}>
                         <Form.Label column {...props.scaling.label}>
@@ -183,25 +182,25 @@ export default function DataForm(props) {
                         </Form.Label>
                         <Col {...props.scaling.field}>
                         {
-                            exactOrRangeFields[field.props.name] ?
+                            JSON.parse(props.formik.values[field.props.name]).length < 2 ?
                             <Row>
                                 <Col>
                                     <Form.Control
                                         { ...field.props }
                                         name={field.props.name + "__exact"}
-                                        value={props.formik.values[field.props.name]}
-                                        onChange={props.handleChangeSpecial}
+                                        value={JSON.parse(props.formik.values[field.props.name])[0]}
+                                        onChange={e => props.handleChangeSpecial(field.props.name, e.target.value, 0)}
                                         isInvalid={!!props.formik.errors[field.props.name]}
                                     />
                                 </Col>
                                 
                                 <Col className="text-right">
                                     <Button
-                                        variant="light"
-                                        onClick={() => handleExactOrRangeChange(field.props.name)}
+                                        variant="outline-dark"
+                                        onClick={() => props.handleFieldButtonClicks("range", field.props.name)}
                                     >
                                         {
-                                            exactOrRangeFields[field.props.name] ?
+                                           JSON.parse(props.formik.values[field.props.name]).length < 2 ?
                                             t('data.buttons.range-value')
                                             : t('data.buttons.exact-value')
                                         }
@@ -214,8 +213,8 @@ export default function DataForm(props) {
                                     <Form.Control
                                         { ...field.props }
                                         name={field.props.name + "__lower"}
-                                        value={props.formik.values[field.props.name]}
-                                        onChange={props.handleChangeSpecial}
+                                        value={JSON.parse(props.formik.values[field.props.name])[0]}
+                                        onChange={e => props.handleChangeSpecial(field.props.name, e.target.value, 0)}
                                         isInvalid={!!props.formik.errors[field.props.name]}
                                     />
                                 </Col>
@@ -226,18 +225,18 @@ export default function DataForm(props) {
                                     <Form.Control
                                         { ...field.props }
                                         name={field.props.name + "__upper"}
-                                        value={props.formik.values[field.props.name]}
-                                        onChange={props.handleChangeSpecial}
+                                        value={JSON.parse(props.formik.values[field.props.name])[1]}
+                                        onChange={e => props.handleChangeSpecial(field.props.name, e.target.value, 1)}
                                         isInvalid={!!props.formik.errors[field.props.name]}
                                     />
                                 </Col>
                                 <Col className="text-right">
                                     <Button
-                                        variant="light"
-                                        onClick={() => handleExactOrRangeChange(field.props.name)}
+                                        variant="outline-dark"
+                                        onClick={() => props.handleFieldButtonClicks("exact", field.props.name)}
                                     >
                                         {
-                                            exactOrRangeFields[field.props.name] ?
+                                            JSON.parse(props.formik.values[field.props.name]).length < 2 ?
                                             t('data.buttons.range-value')
                                             : t('data.buttons.exact-value')
                                         }
@@ -247,7 +246,7 @@ export default function DataForm(props) {
                         }
                         </Col>
                     </Form.Group>
-                );*/
+                );
             case "select":
                 return(
                     <Form.Group as={Row}>
@@ -303,7 +302,10 @@ export default function DataForm(props) {
                                         { ...field.props }
                                         name={`${field.props.name}__${inx}`}
                                         value={ JSON.parse( props.formik.values[ field.props.name ] )[inx] }
-                                        onChange={props.handleChangeSpecial}
+                                        onChange={
+                                            e => (
+                                                props.handleChangeSpecial(field.props.name, e.target.value, inx)
+                                            )}
                                     />
                                 ))
                             }
@@ -425,7 +427,11 @@ export default function DataForm(props) {
                     </Col>
 
                     <Col className="text-right">
-                        <Button variant="dark" className="ml-1">
+                        <Button variant="outline-dark" className="ml-1">
+                            <FontAwesomeIcon icon="times" /> { t('close') }
+                        </Button>
+
+                        <Button variant="outline-danger" className="ml-1">
                             <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
                         </Button>
 

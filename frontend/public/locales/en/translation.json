@@ -23,8 +23,13 @@
     "open": "Open",
     "menu": "Menu",
     "save": "Save",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
 
     "messages": {
+        "substance-delete-msg": "This substance will be permanently deleted from the database!",
+        "are-you-sure": "Are you sure?",
         "no-data-for-this-page": "No data to show.",
         "form": {
             "too-short": "Too short",

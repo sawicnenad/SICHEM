@@ -18,7 +18,8 @@ import {
     faEllipsisV,
     faSave,
     faTrashAlt,
-    faPlus
+    faPlus,
+    faTimes
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -34,7 +35,8 @@ library.add(
     faEllipsisV,
     faSave,
     faTrashAlt,
-    faPlus
+    faPlus,
+    faTimes
 );
 
 function App() {

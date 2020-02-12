@@ -31,40 +31,43 @@ export default function Substance(props) {
 
 
 
-
     /*
-        BUTTON CLICKS | FIELD CHANGES | SUBMISSION 
+        BUTTON CLICKS | FIELD CHANGES
     */
-
     const handleFieldButtonClicks = (clickType, fieldName) => {
-        
+        let value = JSON.parse( myformik.values[fieldName] );
+
+        switch(clickType) {
+            case 'multi':
+                value.push('');
+                break;
+            case 'range':
+                value.push('');
+                break;
+            case 'exact':
+                value.pop();
+        }
+
+        value = JSON.stringify( value );
+        myformik.setFieldValue(fieldName, value, false);
     }
+
+
 
 
     /*
         For multi and range fields we need special way
-        to handle changes and record them in formik
+        to handle changes and record them in formik-
     */
-    const handleChangeSpecial = e => {
-        console.log(e.target.value)
+    const handleChangeSpecial = (name, value, inx) => {
+        let currentValue = JSON.parse(myformik.values[name]);
+        currentValue[inx] = value;
+
+        let newValue = JSON.stringify(currentValue);
+        myformik.setFieldValue(name, newValue, false);
     }
 
 
-    // Submit data to server-----------------------
-    const handleSubmit = values => {
-        axios.post(
-            `${APIcontext.API}/substances/`,
-            values,
-            {headers: {
-                Pragma: "no-cache",
-                Authorization: 'Bearer ' + localStorage.getItem('token-access')
-            }}
-        ).then(
-            res => console.log("test")
-        ).catch(
-            () => setState({ failedMsg: true })
-        )
-    }
 
 
 
@@ -83,6 +86,8 @@ export default function Substance(props) {
     });
 
 
+
+
     /*
         formik (see below) requires initial values 
         for each field...
@@ -94,13 +99,24 @@ export default function Substance(props) {
     let initialValues = {};
     for (let field in data.fields) {
 
+        if (data.fields[field].fieldType === "file") {
+            continue;
+        }
+
         // multi add fields
-        if (data.fields[field].fieldType === "multi") {
+        if ( 
+            ['multi', 'exact-or-range']
+                .indexOf(data.fields[field].fieldType) !== -1
+            ) {
             initialValues[field] = '[""]';
             continue;
         }
+
         initialValues[field] = "";
     }
+
+
+
 
     // instead of using Formik component
     // we use formik hook
@@ -111,14 +127,27 @@ export default function Substance(props) {
         initialValues: {
             ...initialValues
         },
+        validateOnChange: false,
         onSubmit: values => {
-            console.log(values)
+            axios.post(
+                `${APIcontext.API}/substances/`,
+                {...values, enterprise: entContext.ent.id},
+                {headers: {
+                    Pragma: "no-cache",
+                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }}
+            ).then(
+                res => console.log(res)
+            ).catch(
+                () => setState({ failedMsg: true })
+            )
         }
     })
 
+
     
     
-    // label field scaling
+    // SCALING
     const scaling = {
         label: {
             md: { span: 3 },
@@ -130,8 +159,9 @@ export default function Substance(props) {
 
 
 
+
     /* 
-        custom fields
+        CUSTOM FIELDS
         those not in json
     */
     const Supplier = (
@@ -173,6 +203,14 @@ export default function Substance(props) {
         </Form.Group>
     );
 
+
+
+
+    /*
+        RETURN
+        - DataForm generic component for all other
+        data related componenents (e.g. Mixtures)
+    */
     return (
         <div>
             <DataForm

@@ -326,6 +326,7 @@
                 "type": "file",
                 "name": "structural_formula"
             },
+            "fieldType": "file",
             "label": "data.substance.structural_formula"
         }, 
         "smiles": {
@@ -462,6 +463,7 @@
                 "type": "file",
                 "name": "uv_vis"
             },
+            "fieldType": "file",
             "label": "data.substance.uv_vis"
         }, 
         "ir": {
@@ -469,6 +471,7 @@
                 "type": "file",
                 "name": "ir"
             },
+            "fieldType": "file",
             "label": "data.substance.ir"
         }, 
         "nmr": {
@@ -476,6 +479,7 @@
                 "type": "file",
                 "name": "nmr"
             },
+            "fieldType": "file",
             "label": "data.substance.nmr"
         }, 
         "ms": {
@@ -483,6 +487,7 @@
                 "type": "file",
                 "name": "ms"
             },
+            "fieldType": "file",
             "label": "data.substance.ms"
         }, 
         "xrd": {
@@ -490,6 +495,7 @@
                 "type": "file",
                 "name": "xrd"
             },
+            "fieldType": "file",
             "label": "data.substance.xrd"
         }, 
         "xrf": {
@@ -497,6 +503,7 @@
                 "type": "file",
                 "name": "xrf"
             },
+            "fieldType": "file",
             "label": "data.substance.xrf"
         }, 
         "aas": {
@@ -504,6 +511,7 @@
                 "type": "file",
                 "name": "aas"
             },
+            "fieldType": "file",
             "label": "data.substance.aas"
         }, 
         "gc": {
@@ -511,6 +519,7 @@
                 "type": "file",
                 "name": "gc"
             },
+            "fieldType": "file",
             "label": "data.substance.gc"
         }, 
         "hplc": {
@@ -518,6 +527,7 @@
                 "type": "file",
                 "name": "hplc"
             },
+            "fieldType": "file",
             "label": "data.substance.hplc"
         }, 
         "analytical_methods_info": {
@@ -2016,6 +2026,7 @@
                 "name": "tox_file",
                 "type": "file"
             },
+            "fieldType": "file",
             "label": "data.substance.tox-file"
         },
         "other_tox": {
@@ -2111,6 +2122,7 @@
                 "name": "other_tox_file",
                 "type": "file"
             },
+            "fieldType": "file",
             "label": "data.substance.other-tox-file"
         }, 
         "reg_status_ch": {
@@ -2202,6 +2214,7 @@
                 "name": "reg_status_file",
                 "type": "file"
             },
+            "fieldType": "file",
             "label": "data.substance.reg-status-file"
         }
     }

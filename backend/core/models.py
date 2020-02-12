@@ -62,32 +62,21 @@ class Substance(models.Model):
 
     # 5. Physical-chemical properties
     physical_state = models.CharField(max_length=50, blank=True)
-    bp = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    bp_unit = models.CharField(max_length=1, default="C")
-    relative_density = models.DecimalField(
-        blank=True, null=True, decimal_places=4, max_digits=6)
-    vp = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=8)
-    vp_at_temp = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    vp_at_temp_unit = models.CharField(max_length=1, default="C")
-    solubility = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    solubility_at_temp = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    solubility_at_temp_unit = models.CharField(max_length=1, default="C")
-    log_kow = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    granulometry_sm = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    granulometry_md = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
-    granulometry_lg = models.DecimalField(
-        blank=True, null=True, decimal_places=2, max_digits=6)
+    bp = models.CharField(max_length=8, blank=True)
+    bp_unit = models.CharField(max_length=2, default="°C")
+    relative_density = models.CharField(max_length=8, blank=True)
+    vp = models.CharField(max_length=8, blank=True)
+    vp_at_temp = models.CharField(max_length=50, blank=True)
+    vp_at_temp_unit = models.CharField(max_length=2, default="°C")
+    solubility = models.CharField(max_length=8, blank=True)
+    solubility_at_temp = models.CharField(max_length=50, blank=True)
+    solubility_at_temp_unit = models.CharField(max_length=2, default="°C")
+    log_kow = models.CharField(max_length=8, blank=True)
+    granulometry_sm = models.CharField(max_length=8, blank=True)
+    granulometry_md = models.CharField(max_length=8, blank=True)
+    granulometry_lg = models.CharField(max_length=8, blank=True)
     dustiness = models.CharField(max_length=25, blank=True)
-    dustiness_measured = models.DecimalField(
-        blank=True, null=True, decimal_places=1, max_digits=8)
+    dustiness_measured = models.CharField(max_length=8, blank=True)
 
     # 6. Classification and labelling
     hazard_profile_same = models.BooleanField(default=False)
@@ -142,8 +131,7 @@ class Substance(models.Model):
     reg_dnel_a_i_loc_unit = models.CharField(max_length=10, blank=True)
     reg_dnel_a_d_loc_unit = models.CharField(max_length=10, blank=True)
     reg_dnel_a_o_loc_unit = models.CharField(max_length=10, blank=True)
-    ref_dose_response = models.DecimalField(
-        blank=True, null=True, max_digits=6, decimal_places=2)
+    ref_dose_response = models.CharField(max_length=8, blank=True)
 
     ref_dnel_lt_i_sys = models.CharField(max_length=50, blank=True)
     ref_dnel_lt_d_sys = models.CharField(max_length=50, blank=True)
@@ -169,8 +157,7 @@ class Substance(models.Model):
     ref_dnel_a_i_loc_unit = models.CharField(max_length=10, blank=True)
     ref_dnel_a_d_loc_unit = models.CharField(max_length=10, blank=True)
     ref_dnel_a_o_loc_unit = models.CharField(max_length=10, blank=True)
-    ref_dose_response_rac = models.DecimalField(
-        blank=True, null=True, max_digits=6, decimal_places=2)
+    ref_dose_response_rac = models.CharField(max_length=8, blank=True)
 
     # dmel
     dmel_lt_i_sys = models.CharField(max_length=50, blank=True)
