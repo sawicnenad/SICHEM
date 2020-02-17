@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Row, Col, Button, Accordion, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 
 /*
@@ -180,6 +181,7 @@ export default function DataForm(props) {
                         <Form.Label column {...props.scaling.label}>
                             { t(field.label) }
                         </Form.Label>
+
                         <Col {...props.scaling.field}>
                         {
                             JSON.parse(props.formik.values[field.props.name]).length < 2 ?
@@ -269,7 +271,10 @@ export default function DataForm(props) {
                                                     item.options.map(
                                                         option => 
                                                             <option value={option.value} key={option.value}>
-                                                                {t(option.label)}
+                                                                {
+                                                                    field.noTranslation ?
+                                                                    option.label : t(option.label)
+                                                                }
                                                             </option>
                                                     )
                                                 }
@@ -279,7 +284,10 @@ export default function DataForm(props) {
                                     field.options.map(
                                         item => 
                                             <option value={item.value} key={item.value}>
-                                                { t(item.label) }
+                                                { 
+                                                    field.noTranslation ?
+                                                    item.label : t(item.label)
+                                                }
                                             </option>
                                     )
                                 }
@@ -332,8 +340,16 @@ export default function DataForm(props) {
                         <Col {...props.scaling.field} {...field.scaling}>
                             <Form.Control
                                 { ...field.props }
-                                value={props.formik.values[field.props.name]}
-                                onChange={props.formik.handleChange}
+                                value={
+                                    field.fieldType === "file" ? 
+                                    ""
+                                    : props.formik.values[field.props.name]
+                                }
+                                onChange={e =>
+                                    field.fieldType === 'file' ?
+                                    props.handleChangeSpecial(e.target.name, e.target.files[0])
+                                    : props.formik.handleChange(e)
+                                }
                                 isInvalid={!!props.formik.errors[field.props.name]}
                             />
                             <Form.Control.Feedback type="invalid">
@@ -346,12 +362,47 @@ export default function DataForm(props) {
         }
     }
 
+    /*
+        json file contains also condition rules
+        * inter-field links
+        * if conditions are fulfilled
+        * - shown
+        * otherwise
+        * - hidden
+    */
+    const checkVisibility = field => {
+        // if no conditions defined -> field visible by default
+        if (field.conditions === undefined) {
+            return true;
+        }
+
+        // otherwise check if conditions are fulfilled
+        const conditions = field.conditions;
+        let isOK = true;
+
+        for (let i in conditions) {
+            let condField = conditions[i].field;
+            let condValue = conditions[i].value;
+
+            switch(conditions[i].type){
+                default:
+                    if (props.formik.values[condField] !== condValue) {
+                        isOK = false;
+                    }
+                    break;
+            }
+        }
+
+        return isOK;
+    }
+
 
     // based on the list of field names for each item in return method
     // and those defined in json file -> create form controls
     const createFields = fields => (
         <div>
             { fields.map((item, inx) => 
+                checkVisibility(data.fields[item]) ?
                 (
                     data.fields[item].fieldType === "title" ?
                     <div {...data.fields[item].props } style={{ fontSize: 16 }} key={inx}>
@@ -364,7 +415,7 @@ export default function DataForm(props) {
                             "bg-light pt-2 pb-1" : "pt-2"
                         }>
                         { myField( data.fields[item] ) }
-                    </div>)
+                    </div>) : <div />
             )}
         </div>
     )
@@ -427,9 +478,11 @@ export default function DataForm(props) {
                     </Col>
 
                     <Col className="text-right">
-                        <Button variant="outline-dark" className="ml-1">
-                            <FontAwesomeIcon icon="times" /> { t('close') }
-                        </Button>
+                        <Link to={props.close}>
+                            <Button variant="outline-dark" className="ml-1">
+                                <FontAwesomeIcon icon="times" /> { t('close') }
+                            </Button>
+                        </Link>
 
                         <Button variant="outline-danger" className="ml-1">
                             <FontAwesomeIcon icon="trash-alt" /> { t('delete') }

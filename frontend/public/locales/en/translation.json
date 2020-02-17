@@ -30,6 +30,8 @@
     "messages": {
         "substance-delete-msg": "This substance will be permanently deleted from the database!",
         "are-you-sure": "Are you sure?",
+        "substance-added": "New substance created",
+        "substance-updated": "Substance updated",
         "no-data-for-this-page": "No data to show.",
         "form": {
             "too-short": "Too short",
@@ -184,7 +186,8 @@
             "composition": "Compositions",
             "uv_vis": "Ultraviolet and Visible Absorption Spectroscopy (UV/Vis)",
             "ir": "Infrared Spectroscopy (IR)",
-            "nrm": "Nuclear Magnetic Resonance Spectroscopy (NMR)",
+            "nmr": "Nuclear Magnetic Resonance Spectroscopy (NMR)",
+            "hplc": "High-Performance Liquid Chromatography (HPLC)",
             "ms": "Mass Spectroscopy (MS)",
             "xrd": "X-Ray Diffraction (XRD)",
             "xrf": "X-Ray Fluorescence (XRF)",
@@ -252,6 +255,19 @@
             "suva_mak_wert": "Switzerland (SUVA - MAK-Wert)",
             "suva_kzgw": "Switzerland (SUVA - KZGW)",
             "notation": "Notations",
+            "notation-option": {
+                "h": "H",
+                "s": "S",
+                "c": "C",
+                "m": "M",
+                "r": "R",
+                "r0": "R0",
+                "rf": "Rf",
+                "ss": "Ss",
+                "ol": "Ol",
+                "b": "B",
+                "p": "P"
+            },
             "critical-toxicity": "Critical toxicity",
             "tox-file": "Relevant file",
             "eu_ioelv": "EU (IOELV)",

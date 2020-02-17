@@ -592,6 +592,12 @@
             "label": "data.substance.relative_density"
         },
         "vp": {
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "liquid"
+                }
+            ],
             "props": {
                 "type": "text",
                 "name": "vp"
@@ -643,6 +649,12 @@
             "label": "data.substance.log_kow"
         }, 
         "granulometry_sm": {
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid"
+                }
+            ],
             "props": {
                 "type": "text",
                 "name": "granulometry_sm"
@@ -651,6 +663,12 @@
             "label": "data.substance.granulometry_sm"
         }, 
         "granulometry_md": {
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid"
+                }
+            ],
             "props": {
                 "type": "text",
                 "name": "granulometry_md"
@@ -659,6 +677,12 @@
             "label": "data.substance.granulometry_md"
         }, 
         "granulometry_lg": {
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid"
+                }
+            ],
             "props": {
                 "type": "text",
                 "name": "granulometry_lg"
@@ -667,6 +691,12 @@
             "label": "data.substance.granulometry_lg"
         },
         "dustiness": {
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid"
+                }
+            ],
             "props": {
                 "as": "select",
                 "type": "text",
@@ -694,6 +724,12 @@
             ]
         }, 
         "dustiness_measured": {
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid"
+                }
+            ],
             "props": {
                 "type": "text",
                 "name": "dustiness_measured"
@@ -1975,6 +2011,7 @@
         "notation": {
             "fieldType": "select",
             "label": "data.substance.notation",
+            "noTranslation": true,
             "props": {
                 "as": "select",
                 "name": "notation",
@@ -2001,7 +2038,7 @@
                     "label": "Rf"
                  }, {
                     "value": "SS",
-                    "label": "SS"
+                    "label": "Ss"
                  }, {
                     "value": "Ol",
                     "label": "Ol"

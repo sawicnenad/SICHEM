@@ -66,7 +66,7 @@ export default function Chemicals() {
                         component: <DataList 
                                         data={ substances() }
                                         api={`${APIcontext.API}/substances/`}
-                                        createBtnLink={'/enterprise/substance/0'}
+                                        link='/enterprise/substance/'
                                         delMsg={t('messages.substance-delete-msg')}
                                     />
                     }, {

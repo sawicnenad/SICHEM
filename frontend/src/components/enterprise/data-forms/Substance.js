@@ -14,7 +14,9 @@ import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 // edit existing substance
 export default function Substance(props) {
     const [state, setState] = useState({
-        failedMsg: false
+        failedMsg: false,
+        newSubMsg: false,
+        updatedMsg: false
     });
     
     const { t } = useTranslation();
@@ -60,11 +62,18 @@ export default function Substance(props) {
         to handle changes and record them in formik-
     */
     const handleChangeSpecial = (name, value, inx) => {
-        let currentValue = JSON.parse(myformik.values[name]);
-        currentValue[inx] = value;
 
-        let newValue = JSON.stringify(currentValue);
-        myformik.setFieldValue(name, newValue, false);
+        // multi fields
+        if (inx !== undefined) {
+            let currentValue = JSON.parse(myformik.values[name]);
+            currentValue[inx] = value;
+            let newValue = JSON.stringify(currentValue);
+            myformik.setFieldValue(name, newValue, false);
+            return;
+        }
+
+        // files
+        myformik.setFieldValue(name, value);
     }
 
 
@@ -96,6 +105,12 @@ export default function Substance(props) {
         those where we add fields dynamically, we need
         json format
     */
+    let substance = "";
+    if (props.match.params.id !== '0') {
+        let id = parseInt(props.match.params.id);
+        substance = entContext.substances.find(o => o.id === id);
+    }
+
     let initialValues = {};
     for (let field in data.fields) {
 
@@ -109,10 +124,19 @@ export default function Substance(props) {
                 .indexOf(data.fields[field].fieldType) !== -1
             ) {
             initialValues[field] = '[""]';
+
+            if ( substance[field] ) {
+                initialValues[field] = substance[field];
+            }
             continue;
         }
 
         initialValues[field] = "";
+
+        // load data for an existing substance
+        if (props.match.params.id !== '0') {
+            initialValues[field] = substance[field];
+        }
     }
 
 
@@ -129,18 +153,35 @@ export default function Substance(props) {
         },
         validateOnChange: false,
         onSubmit: values => {
-            axios.post(
-                `${APIcontext.API}/substances/`,
-                {...values, enterprise: entContext.ent.id},
-                {headers: {
+            // form data
+            let data = new FormData();
+            for (let val in values) {
+                data.append(val, values[val]);
+            }
+
+            const headers = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
                     Pragma: "no-cache",
                     Authorization: 'Bearer ' + localStorage.getItem('token-access')
-                }}
-            ).then(
-                res => console.log(res)
-            ).catch(
-                () => setState({ failedMsg: true })
-            )
+                }};
+
+            // post and put request
+            const postRequest = axios.post(
+                `${APIcontext.API}/substances/`, data, headers);
+
+            const putRequest = axios.put(
+                `${APIcontext.API}/substances/${props.match.params.id}/`, data, headers);
+
+            if (props.match.params.id === '0') {
+                postRequest
+                    .then(() => setState({ ...state, newSubMsg: true }))
+                    .catch(() => setState({ ...state, failedMsg: true }))
+            } else {
+                putRequest
+                    .then(() => setState({ ...state, updatedMsg: true }))
+                    .catch(() => setState({ ...state, failedMsg: true }))
+            }
         }
     })
 
@@ -220,6 +261,7 @@ export default function Substance(props) {
                 title={t('data.substance.title')}
                 handleChangeSpecial={handleChangeSpecial}
                 handleFieldButtonClicks={handleFieldButtonClicks}
+                close='/enterprise/chemicals/'
                 custom={{
                     composition: <div>Composition</div>,
                     supplier: Supplier
@@ -229,7 +271,21 @@ export default function Substance(props) {
             {/* notifications */}
             <RequestNotification
                 show={state.failedMsg}
-                onClose={() => setState({ failedMsg: false })}
+                onClose={() => setState({ ...state, failedMsg: false })}
+            />
+
+            <RequestNotification
+                success
+                show={state.newSubMsg}
+                msgSuccess={t('messages.substance-added')}
+                onClose={() => setState({ ...state, successMsg: false })}
+            />
+
+            <RequestNotification
+                success
+                show={state.updatedMsg}
+                msgSuccess={t('messages.substance-updated')}
+                onClose={() => setState({ ...state, updatedMsg: false })}
             />
         </div>
     )

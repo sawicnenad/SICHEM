@@ -8,7 +8,6 @@ import NewUser from '../components/login/NewUser';
 import axios from 'axios';
 import { ApiRequestsContext } from '../contexts/ApiRequestsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Wallpaper from '../media/Wallpaper.png';
 
 
 function Login(props) {
@@ -32,9 +31,7 @@ function Login(props) {
 
     return (
         <div style={{ 
-                height: "100vh",
-                background: "url("+Wallpaper+") center center",
-                backgroundSize: "cover"
+                height: "100vh"
             }}>
             <Navbar bg="light" className="px-5">
                 <Nav>

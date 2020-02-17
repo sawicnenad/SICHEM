@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from .models import Substance
 from .serializers import *
+from rest_framework.parsers import MultiPartParser, JSONParser
 
 
 
@@ -17,6 +18,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
 class SubstanceViewSet(viewsets.ModelViewSet):
     queryset = Substance.objects.all()
     serializer_class = SubstanceSerializer
+    parser_classes = [MultiPartParser]
 
     def get_queryset(self):
         user = self.request.user

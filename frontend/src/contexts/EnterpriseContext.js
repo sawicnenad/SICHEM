@@ -28,7 +28,7 @@ function EnterpriseContextProvider(props) {
         Promise.all([promEnt, promSubs, promSupps])
             .then(
                 res => setState({
-                    ent: res[0].data,
+                    ent: res[0].data[0],
                     substances: res[1].data,
                     suppliers: res[2].data
                 }) )

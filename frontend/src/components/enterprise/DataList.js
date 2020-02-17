@@ -32,7 +32,7 @@ export default function DataList(props) {
         <div 
             className="text-right mb-4"
         >
-            <Link to={props.createBtnLink}>
+            <Link to={props.link + '0'}>
                 <Button variant="danger">
                     { t('create-new') }
                 </Button>
@@ -125,9 +125,15 @@ export default function DataList(props) {
                                             </Popover>
                                         </Overlay>
 
-                                        <Button variant="outline-danger" size="sm" className="border-0 font-weight-bold">
-                                            { t('open') }
-                                        </Button>
+                                        <Link to={`${props.link}${item.id}`}>
+                                            <Button
+                                                variant="outline-danger"
+                                                size="sm"
+                                                className="border-0 font-weight-bold"
+                                            >
+                                                { t('open') }
+                                            </Button>
+                                        </Link>
                                     </ButtonToolbar>
                                 </span>
                             </div>
