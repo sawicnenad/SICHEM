@@ -26,19 +26,22 @@ export default function Chemicals() {
                     data: [
                         {
                             label: t('data.substance.physical-state'),
-                            value: subs[i].physical_state
+                            value: t(`data.substance.physical-state-option.${subs[i].physical_state}`)
                         }, {
                             label: t('data.substance.iupac'),
                             value: subs[i].iupac
                         }, {
-                            label: t('data.substance.cas-nr'),
+                            label: t('data.substance.cas_nr'),
                             value: subs[i].cas_nr
                         }, {
-                            label: t('data.substance.vp'),
-                            value: subs[i].vp
-                        }, , {
-                            label: t('data.substance.molecular-formula'),
+                            label: t('data.substance.ec_nr'),
+                            value: subs[i].ec_nr
+                        }, {
+                            label: t('data.substance.molecular_formula'),
                             value: subs[i].molecular_formula
+                        }, {
+                            label: t('data.substance.last_update'),
+                            value: subs[i].last_update
                         }
                     ]
                 }
@@ -64,6 +67,7 @@ export default function Chemicals() {
                                     {t('substances')}
                                 </span>,
                         component: <DataList 
+                                        name="substances"
                                         data={ substances() }
                                         api={`${APIcontext.API}/substances/`}
                                         link='/enterprise/substance/'

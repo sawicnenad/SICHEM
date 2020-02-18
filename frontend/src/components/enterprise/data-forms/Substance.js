@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import data from '../../../json/data-forms/substance.json';
+import supplierJSON from '../../../json/data-forms/supplier.json';
 import DataForm from './DataForm.js';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -7,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
 import RequestNotification from '../../notifications/RequestNotification';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 
 // create new substance
@@ -16,7 +17,9 @@ export default function Substance(props) {
     const [state, setState] = useState({
         failedMsg: false,
         newSubMsg: false,
-        updatedMsg: false
+        updatedMsg: false,
+        supplierModal: false,
+        newSuppMsg: false
     });
     
     const { t } = useTranslation();
@@ -28,9 +31,6 @@ export default function Substance(props) {
     */
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
-
-
-
 
 
     /*
@@ -158,7 +158,6 @@ export default function Substance(props) {
             for (let val in values) {
                 data.append(val, values[val]);
             }
-
             const headers = {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -205,47 +204,141 @@ export default function Substance(props) {
         CUSTOM FIELDS
         those not in json
     */
-    const Supplier = (
-        <Form.Group as={Row}>
 
-            <Form.Label column {...scaling.label}>
-                { t(data.fields.supplier.label) }
-            </Form.Label>
+    /*
+        * Suppliers
+    */
+    const suppSchema = Yup.object().shape({
+        origin: Yup.string()
+            .required(t('messages.form.required')),
+        name: Yup.string()
+            .required(t('messages.form.required')),
+        address: Yup.string()
+            .required(t('messages.form.required'))
+    });
 
-            <Col {...scaling.field}>
-                <Form.Control
-                    as="select"
-                    name="supplier"
-                    value={myformik.values.supplier}
-                    isInvalid={!!myformik.errors.supplier}
-                    onChange={myformik.handleChange}
-                >
-                    <option value='' disabled></option>
-                    {
-                        entContext.suppliers.map(
-                            item => (
-                                <option value={item.id} key={item.id}>
-                                    {item.name} ({item.address}) 
-                                </option>
-                            )
-                        )
+    const suppFormik = useFormik({
+        validationSchema: suppSchema,
+        onSubmit: values => {
+            axios.post(
+                APIcontext.API + '/suppliers/',
+                {...values, enterprise: entContext.ent.id},
+                {
+                    headers: {
+                        Pragma: "no-cache",
+                        Authorization: 'Bearer ' + localStorage.getItem('token-access')
                     }
-                </Form.Control>
-                <Form.Control.Feedback type="invalid">
-                    { myformik.errors.supplier }
-                </Form.Control.Feedback>
-            </Col>
+                }
+            ).then(
+                res => {
+                    setState({
+                        ...state,
+                        newSuppMsg: true,
+                        supplierModal: false
+                    });
+                    let suppliers = [...entContext.suppliers];
+                    suppliers.push(res.data);
+                    entContext.refreshState('suppliers', suppliers);
+                }
+            ).catch(
+                () => setState({...state, failedMsg: true})
+            )
+        },
+        initialValues: {
+            origin: "",
+            name: "",
+            address: "",
+            info: ""
+        }
+    })
 
-            <Col>
-                <Button variant="outline-danger">
-                    { t('create-new') }
-                </Button>
-            </Col>
-        </Form.Group>
+    const Supplier = (
+        <div>
+            <Form.Group as={Row}>
+
+                <Form.Label column {...scaling.label}>
+                    { t(data.fields.supplier.label) }
+                </Form.Label>
+
+                <Col {...scaling.field}>
+                    <Form.Control
+                        as="select"
+                        name="supplier"
+                        value={myformik.values.supplier}
+                        isInvalid={!!myformik.errors.supplier}
+                        onChange={myformik.handleChange}
+                    >
+                        <option value='' disabled></option>
+                        {
+                            entContext.suppliers.map(
+                                item => (
+                                    <option value={item.id} key={item.id}>
+                                        {item.name} ({item.address}) 
+                                    </option>
+                                )
+                            )
+                        }
+                    </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                        { myformik.errors.supplier }
+                    </Form.Control.Feedback>
+                </Col>
+
+                <Col>
+                    <Button 
+                        variant="outline-danger"
+                        onClick={() => setState({...state, supplierModal: true})}
+                    >{ t('create-new') }
+                    </Button>
+                </Col>
+            </Form.Group>
+            <Modal
+                show={state.supplierModal}
+                onHide={() => setState({...state, supplierModal: false})}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>{t('data.substance.supplier-header')}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <DataForm
+                        noZebraStyle={true}
+                        data={supplierJSON}
+                        scaling={{
+                            label: { xs: 12 }, 
+                            field: { xs: 12 }
+                        }}
+                        formik={suppFormik}
+                        close='/enterprise/chemicals/'
+                    />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="dark"
+                        onClick={() => setState({...state, supplierModal: false})}
+                    >{t('cancel')}
+                    </Button>
+                    <Button variant="danger" onClick={suppFormik.handleSubmit}>
+                        {t('save')}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
     );
 
 
-
+    /*
+        * Compositions
+    */
+    const Composition = (
+        <Row>
+            <Col {...scaling.label}>
+                {t('compositions')}:
+            </Col>
+            <Col {...scaling.field}>
+                
+            </Col>
+        </Row>
+    )
 
     /*
         RETURN
@@ -263,7 +356,7 @@ export default function Substance(props) {
                 handleFieldButtonClicks={handleFieldButtonClicks}
                 close='/enterprise/chemicals/'
                 custom={{
-                    composition: <div>Composition</div>,
+                    composition: Composition,
                     supplier: Supplier
                 }}
             />
@@ -286,6 +379,14 @@ export default function Substance(props) {
                 show={state.updatedMsg}
                 msgSuccess={t('messages.substance-updated')}
                 onClose={() => setState({ ...state, updatedMsg: false })}
+            />
+
+            {/* supplier messages */}
+            <RequestNotification
+                success
+                show={state.newSuppMsg}
+                msgSuccess={t('messages.supplier-added')}
+                onClose={() => setState({ ...state, newSuppMsg: false })}
             />
         </div>
     )

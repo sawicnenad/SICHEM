@@ -18,6 +18,7 @@ def upload_path(instance, filename):
 
 class Substance(models.Model):
     # 1. Substance identification
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     reference = models.CharField(max_length=255)
     iupac = models.TextField(blank=True)
@@ -231,6 +232,7 @@ class Component(models.Model):
     """
         constituents, impurities, additives of composition
     """
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     reference = models.CharField(max_length=255)
     cas_name = models.CharField(max_length=255, blank=True)
     cas_nr = models.CharField(max_length=25, blank=True)
@@ -243,6 +245,7 @@ class Composition(models.Model):
     """
         one substance (above) may have several different compositions
     """
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     substance = models.ForeignKey(Substance, on_delete=models.CASCADE)
     constituents = models.ManyToManyField(Component, related_name="constituents")
     impurities = models.ManyToManyField(Component, related_name="impurities")
@@ -250,6 +253,7 @@ class Composition(models.Model):
 
 class Mixture(models.Model):
     """ Two or more substances mixed """
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255)
     physical_state = models.CharField(max_length=25)        # at 20°C and 101.3 kPa
@@ -263,6 +267,7 @@ class MixtureComponent(models.Model):
         for each substance/component of mixture
         an instance is created containing supplementary data
     """
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     substance = models.ForeignKey(
         Substance, null=True, on_delete=models.SET_NULL)
     conc_typical = models.DecimalField(
@@ -284,6 +289,7 @@ class HazardProfile(models.Model):
         this model uses generic foreign key as compositions, substances and 
         mixtures may be all (one at the time) used as parents of a given instance
     """
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()

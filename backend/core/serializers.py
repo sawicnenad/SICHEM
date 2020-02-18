@@ -11,3 +11,13 @@ class SubstanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Substance
         fields = '__all__'
+
+class CompositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Composition
+        fields = '__all__'
+
+class ComponentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Component
+        fields = '__all__'

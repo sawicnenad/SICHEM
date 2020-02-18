@@ -2,6 +2,8 @@
     "chemicals": "Chemicals",
     "chemical": "Chemical",
     "substances": "Substances",
+    "composition": "Composition",
+    "compositions": "Compositions",
     "workplaces": "Workplaces",
     "workers": "Workers",
     "uses": "Uses",
@@ -32,6 +34,7 @@
         "are-you-sure": "Are you sure?",
         "substance-added": "New substance created",
         "substance-updated": "Substance updated",
+        "supplier-added": "New supplier created",
         "no-data-for-this-page": "No data to show.",
         "form": {
             "too-short": "Too short",
@@ -95,12 +98,27 @@
         }
     },
     "data": {
+        "composition": {
+
+        },
+        "supplier": {
+            "origin": "Origin",
+            "name": "Supplier name",
+            "address": "Address",
+            "info": "Additional information",
+            "origin-options": {
+                "eu-eea": "EU/EEA",
+                "ch": "Switzerland",
+                "non-eea": "Non EEA-Countries"
+            }
+        },
         "buttons": {
             "exact-value": "Exact value",
             "range-value": "Enter range"
         },
         "substance": {
             "title": "Substance form",
+            "supplier-header": "New Supplier",
             "accordion": {
                 "id": "1. Substance identification",
                 "name": "1.1. Substance name/identifiers",

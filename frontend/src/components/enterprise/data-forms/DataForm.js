@@ -411,11 +411,11 @@ export default function DataForm(props) {
                     : <div 
                         key={inx}
                         className={
-                            inx % 2 === 0 && data.fields[item].fieldType !== "after-select-list" ?
-                            "bg-light pt-2 pb-1" : "pt-2"
+                            inx % 2 === 0 && !props.noZebraStyle && data.fields[item].fieldType !== "after-select-list" ?
+                            "bg-light pt-4 pb-1" : "pt-4"
                         }>
                         { myField( data.fields[item] ) }
-                    </div>) : <div />
+                    </div>) : ""
             )}
         </div>
     )
@@ -423,82 +423,87 @@ export default function DataForm(props) {
 
     const form = (
         <Form onSubmit={ props.formik.handleSubmit }>
-            <Accordion defaultActiveKey={data.defaultActiveKey}>
             {
-                data.cards.map(
-                    item => (
-                        <Card key={item.eventKey}>
-                            <Accordion.Toggle eventKey={item.eventKey} as={Card.Header}>
-                                { t( item.label ) }
-                            </Accordion.Toggle>
-                            <Accordion.Collapse eventKey={item.eventKey}>
-                                <Card.Body>
-                                    {
-                                        item.children ?
-                                            <Accordion defaultActiveKey={item.defaultActiveKey}>
-                                                {
-                                                    item.children.map(
-                                                        itemc => (
-                                                            <Card key={itemc.eventKey}>
-                                                                <Accordion.Toggle eventKey={itemc.eventKey} as={Card.Header}>
-                                                                    { t( itemc.label ) }
-                                                                </Accordion.Toggle>
-                                                                <Accordion.Collapse eventKey={itemc.eventKey}>
-                                                                    <Card.Body>
-                                                                        { createFields(itemc.fields) }
-                                                                    </Card.Body>
-                                                                </Accordion.Collapse>
-                                                            </Card>
+                data.noCards ?
+                <div>{createFields(data.fieldsOrdered)}</div>
+                :<Accordion defaultActiveKey={data.defaultActiveKey}>{
+                    data.cards.map(
+                        item => (
+                            <Card key={item.eventKey}>
+                                <Accordion.Toggle eventKey={item.eventKey} as={Card.Header}>
+                                    { t( item.label ) }
+                                </Accordion.Toggle>
+                                <Accordion.Collapse eventKey={item.eventKey}>
+                                    <Card.Body>
+                                        {
+                                            item.children ?
+                                                <Accordion defaultActiveKey={item.defaultActiveKey}>
+                                                    {
+                                                        item.children.map(
+                                                            itemc => (
+                                                                <Card key={itemc.eventKey}>
+                                                                    <Accordion.Toggle eventKey={itemc.eventKey} as={Card.Header}>
+                                                                        { t( itemc.label ) }
+                                                                    </Accordion.Toggle>
+                                                                    <Accordion.Collapse eventKey={itemc.eventKey}>
+                                                                        <Card.Body>
+                                                                            { createFields(itemc.fields) }
+                                                                        </Card.Body>
+                                                                    </Accordion.Collapse>
+                                                                </Card>
+                                                            )
                                                         )
-                                                    )
-                                                }
-                                            </Accordion>
-                                        : createFields(item.fields)
-                                    }
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    )  
-                )
-            }           
-            </Accordion>
+                                                    }
+                                                </Accordion>
+                                            : createFields(item.fields)
+                                        }
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        )  
+                    )
+                }</Accordion>
+            }
         </Form>);
 
     // return method reads json data and creates return component
     // fields are split into different cards/collapse/accordions
     // two level nested accordions are supported (should be enough)
+
+    const funButtons = (
+        data.noFunButtons ?
+        <div />
+        :<Row>
+            <Col>
+                <span className="font-weight-bold text-muted" style={{ fontSize: 30 }}>
+                    { props.title }
+                </span>
+            </Col>
+
+            <Col className="text-right">
+                <Link to={props.close}>
+                    <Button variant="outline-dark" className="ml-1">
+                        <FontAwesomeIcon icon="times" /> { t('close') }
+                    </Button>
+                </Link>
+
+                <Button variant="outline-danger" className="ml-1">
+                    <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
+                </Button>
+
+                <Button
+                    variant="danger"
+                    className="ml-1"
+                    onClick={props.formik.handleSubmit}
+                >
+                    <FontAwesomeIcon icon="save" /> { t('save') }
+                </Button>
+            </Col>
+        </Row>);
+
     return (
         <div className="container my-3">
-            <div>
-                <Row>
-                    <Col>
-                        <span className="font-weight-bold text-muted" style={{ fontSize: 30 }}>
-                            { props.title }
-                        </span>
-                    </Col>
-
-                    <Col className="text-right">
-                        <Link to={props.close}>
-                            <Button variant="outline-dark" className="ml-1">
-                                <FontAwesomeIcon icon="times" /> { t('close') }
-                            </Button>
-                        </Link>
-
-                        <Button variant="outline-danger" className="ml-1">
-                            <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
-                        </Button>
-
-                        <Button
-                            variant="danger"
-                            className="ml-1"
-                            onClick={props.formik.handleSubmit}
-                        >
-                            <FontAwesomeIcon icon="save" /> { t('save') }
-                        </Button>
-                    </Col>
-                </Row>
-            </div>
-
+            { funButtons }
             <div className="mt-3">
                 { form }
             </div>

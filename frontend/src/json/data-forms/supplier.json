@@ -1,0 +1,65 @@
+{
+    "noCards": true,
+    "noFunButtons": true,
+    "fieldsOrdered": [
+        "origin",
+        "name",
+        "address",
+        "info"
+    ],
+    "fields": {
+        "origin": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "origin",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "data.supplier.origin",
+            "formControlFeedback": true,
+            "options": [
+                {
+                    "value": "",
+                    "label": ""
+                }, {
+                    "value": "eu-eea",
+                    "label": "data.supplier.origin-options.eu-eea"
+                }, {
+                    "value": "ch",
+                    "label": "data.supplier.origin-options.ch"
+                }, {
+                    "value": "non-eea",
+                    "label": "data.supplier.origin-options.non-eea"
+                }
+            ]
+        },
+        "name": {
+            "props": {
+                "name": "name",
+                "type": "text",
+                "required": true
+            },
+            "label": "data.supplier.name",
+            "formControlFeedback": true
+        },
+        "address": {
+            "props": {
+                "name": "address",
+                "type": "text",
+                "as": "textarea",
+                "required": true
+            },
+            "label": "data.supplier.address",
+            "formControlFeedback": true
+        },
+        "info": {
+            "props": {
+                "name": "info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.supplier.info"
+        }
+    }
+}

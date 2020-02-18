@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { Button, Row, Col, Alert, Popover, ButtonToolbar, Overlay } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 
 
 export default function DataList(props) {
@@ -11,6 +12,7 @@ export default function DataList(props) {
     const [state, setState] = useState({
         deleteMsg: false
     });
+    const entContext = useContext(EnterpriseContext);
     const [target, setTarget] = useState(null);
     const ref = useRef(null);
 
@@ -69,7 +71,12 @@ export default function DataList(props) {
                 Authorization: 'Bearer ' + localStorage.getItem('token-access')
             }}
         ).then(
-            () => console.log("deleted")
+            () => {
+                let name = props.name;
+                let data = entContext[name];
+                data = data.filter(o => o.id !== id);
+                entContext.refreshState(name, data);
+            }
         ).catch(
             e => console.log(e)
         )
@@ -80,8 +87,8 @@ export default function DataList(props) {
             <div>{ createButton }</div>
             {
                 data.map(
-                    item => (
-                        <div className="p-2 bg-light text-muted shadow-sm my-2">
+                    (item, inx) => (
+                        <div className="p-2 bg-light text-muted shadow-sm my-3" key={inx}>
                             <div className="w-100 border-bottom pb-3" style={{ height: 35 }}>
                                 <span className="font-weight-bold float-left pt-1">
                                     { item.title }

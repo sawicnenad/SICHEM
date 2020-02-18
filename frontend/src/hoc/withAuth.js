@@ -49,16 +49,10 @@ function withAuth(WrappedComponent) {
         
         render() {
             // if no valid token -> login page
-            if (this.state.isAuth === false) {
-                return (
-                    <Login />
-                )
-            }
-
             return (
-                <WrappedComponent 
-                    { ...this.props }
-                />
+                this.state.isAuth ? 
+                    <WrappedComponent { ...this.props }/>
+                    : <Login />
             )
         }
     }

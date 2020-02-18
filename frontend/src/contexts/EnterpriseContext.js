@@ -37,8 +37,25 @@ function EnterpriseContextProvider(props) {
             )
     }, [context])
 
+    /*
+        Data in state refresh
+        in order to not fetch again updated data from the server
+        * after creation of a new element
+        * after an element is removed
+        * ...
+    */
+    const refreshState = (datasetName, dataset) => {
+        let newState = { ...state };
+        newState[datasetName] = dataset;
+        setState(newState);
+    }
+
     return (
-        <EnterpriseContext.Provider value={state}>
+        <EnterpriseContext.Provider
+            value={{
+                ...state,
+                refreshState: refreshState
+            }}>
             { props.children }
         </EnterpriseContext.Provider>
     )
