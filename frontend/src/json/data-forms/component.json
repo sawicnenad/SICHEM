@@ -1,0 +1,67 @@
+{
+    "noCards": true,
+    "noFunButtons": true,
+    "fieldsOrdered": [
+        "reference",
+        "cas_name",
+        "cas_nr",
+        "ec_name",
+        "ec_nr",
+        "molecular_formula",
+        "iupac"
+    ],
+    "fields": {
+        "reference": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "reference"
+            },
+            "label": "data.substance.reference",
+            "formControlFeedback": true
+        },
+        "cas_name": {
+            "props": {
+                "type": "text",
+                "name": "cas_name"
+            },
+            "label": "data.substance.cas_name"
+        },
+        "cas_nr": {
+            "props": {
+                "type": "text",
+                "name": "cas_nr"
+            },
+            "label": "data.substance.cas_nr"
+        },
+        "ec_name": {
+            "props": {
+                "type": "text",
+                "name": "ec_nr"
+            },
+            "label": "data.substance.ec_name"
+        },
+        "ec_nr": {
+            "props": {
+                "type": "text",
+                "name": "ec_nr"
+            },
+            "label": "data.substance.ec_nr"
+        },
+        "molecular_formula": {
+            "props": {
+                "type": "text",
+                "name": "molecular_formula"
+            },
+            "label": "data.substance.molecular_formula"
+        },
+        "iupac": {
+            "props": {
+                "type": "text",
+                "name": "iupac",
+                "as": "textarea"
+            },
+            "label": "data.substance.iupac"
+        }
+    }
+}

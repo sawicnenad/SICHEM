@@ -31,5 +31,5 @@ class CompositionViewSet(EntDataViewSet):
     serializer_class = CompositionSerializer
 
 class ComponentViewSet(EntDataViewSet):
-    queryset = Composition.objects.all()
-    serializer_class = CompositionSerializer
+    queryset = Component.objects.all()
+    serializer_class = ComponentSerializer

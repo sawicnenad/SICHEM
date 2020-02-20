@@ -22,6 +22,11 @@ import DataForm from '../components/enterprise/data-forms/DataForm';
 function Enterprise() {
     const context = useContext(EnterpriseContext);
 
+    if (!context.loaded){
+        return (
+            <div>loading...</div>
+        )
+    }
     if (context.ent === undefined) {
         return (
             <div className="container pt-5">
@@ -35,7 +40,7 @@ function Enterprise() {
             <Navigation />
             <Switch>
                 <Route exact path="/enterprise" component={ Home } />
-                <Route exact path="/enterprise/chemicals" component={ Chemicals } />
+                <Route exact path="/enterprise/chemicals/:view" component={ Chemicals } />
                 <Route exact path="/enterprise/substance/:id" component={ Substance } />
                 <Route exact path="/enterprise/data-entry/" component={DataForm} />
             </Switch>

@@ -4,6 +4,8 @@
     "substances": "Substances",
     "composition": "Composition",
     "compositions": "Compositions",
+    "component": "Component",
+    "components": "Components",
     "workplaces": "Workplaces",
     "workers": "Workers",
     "uses": "Uses",
@@ -28,6 +30,7 @@
     "close": "Close",
     "yes": "Yes",
     "no": "No",
+    "new": "New",
 
     "messages": {
         "substance-delete-msg": "This substance will be permanently deleted from the database!",
@@ -98,8 +101,19 @@
         }
     },
     "data": {
+        "component": {
+            "title": "Component form"
+        },
         "composition": {
-
+            "title": "Composition form",
+            "constituents": "Constituents",
+            "additives": "Additives",
+            "impurities": "Impurities",
+            "typical_conc": "Typical",
+            "lower_conc": "Lower",
+            "upper_conc": "Upper",
+            "concentration": "Concentration, %",
+            "add-new": "Add new component"
         },
         "supplier": {
             "origin": "Origin",
@@ -119,6 +133,7 @@
         "substance": {
             "title": "Substance form",
             "supplier-header": "New Supplier",
+            "no-compositions-msg": "No compositions defined yet",
             "accordion": {
                 "id": "1. Substance identification",
                 "name": "1.1. Substance name/identifiers",

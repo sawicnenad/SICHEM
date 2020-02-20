@@ -8,8 +8,14 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
 import RequestNotification from '../../notifications/RequestNotification';
-import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Form, Row, Col, Button, Modal, Alert } from 'react-bootstrap';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
+import Composition from './Composition';
+
+
+
+
+
 
 // create new substance
 // edit existing substance
@@ -31,6 +37,7 @@ export default function Substance(props) {
     */
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
+    const subID = props.match.params.id;
 
 
     /*
@@ -106,7 +113,7 @@ export default function Substance(props) {
         json format
     */
     let substance = "";
-    if (props.match.params.id !== '0') {
+    if (subID !== '0') {
         let id = parseInt(props.match.params.id);
         substance = entContext.substances.find(o => o.id === id);
     }
@@ -158,6 +165,8 @@ export default function Substance(props) {
             for (let val in values) {
                 data.append(val, values[val]);
             }
+            data.append('enterprise', entContext.ent.id);
+
             const headers = {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -286,7 +295,8 @@ export default function Substance(props) {
 
                 <Col>
                     <Button 
-                        variant="outline-danger"
+                        variant="secondary"
+                        size="sm"
                         onClick={() => setState({...state, supplierModal: true})}
                     >{ t('create-new') }
                     </Button>
@@ -303,17 +313,13 @@ export default function Substance(props) {
                     <DataForm
                         noZebraStyle={true}
                         data={supplierJSON}
-                        scaling={{
-                            label: { xs: 12 }, 
-                            field: { xs: 12 }
-                        }}
+                        scaling={{ label: { xs: 12 }, field: { xs: 12 } }}
                         formik={suppFormik}
-                        close='/enterprise/chemicals/'
                     />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="dark"
+                        variant="secondary"
                         onClick={() => setState({...state, supplierModal: false})}
                     >{t('cancel')}
                     </Button>
@@ -327,17 +333,35 @@ export default function Substance(props) {
 
 
     /*
-        * Compositions
+        * Compositions are children of Substance
     */
-    const Composition = (
-        <Row>
-            <Col {...scaling.label}>
-                {t('compositions')}:
-            </Col>
-            <Col {...scaling.field}>
-                
-            </Col>
-        </Row>
+    const compList = entContext.compositions.filter(o => o.substance === subID);
+    const CompositionField = (
+        <div>
+            <Row className="pb-2">
+                <Col {...scaling.label}>
+                    {t('compositions')}:
+                </Col>
+                <Col {...scaling.field}>
+                    <div>
+                        <Composition />
+                    </div>
+                    {
+                        compList.length > 0 ?
+                            <div>{
+                                compList.map(
+                                    item => <div>test</div>
+                                )
+                            }</div>
+                            : <div className="pt-3">
+                                <Alert variant="warning">
+                                    {t('data.substance.no-compositions-msg')}
+                                </Alert>
+                            </div>
+                    }
+                </Col>
+            </Row>
+        </div>
     )
 
     /*
@@ -354,13 +378,13 @@ export default function Substance(props) {
                 title={t('data.substance.title')}
                 handleChangeSpecial={handleChangeSpecial}
                 handleFieldButtonClicks={handleFieldButtonClicks}
-                close='/enterprise/chemicals/'
+                close='/enterprise/chemicals/substances'
                 custom={{
-                    composition: Composition,
+                    composition: CompositionField,
                     supplier: Supplier
                 }}
             />
-
+            
             {/* notifications */}
             <RequestNotification
                 show={state.failedMsg}

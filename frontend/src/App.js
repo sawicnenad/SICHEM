@@ -5,6 +5,7 @@ import Enterprise from './views/Enterprise';
 import Login from './views/Login';
 import EnterpriseContextProvider from './contexts/EnterpriseContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import './css/myStyle.css';
 import { 
     faCheckSquare,
     faCoffee,
@@ -19,7 +20,8 @@ import {
     faSave,
     faTrashAlt,
     faPlus,
-    faTimes
+    faTimes,
+    faMinus
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -36,7 +38,8 @@ library.add(
     faSave,
     faTrashAlt,
     faPlus,
-    faTimes
+    faTimes,
+    faMinus
 );
 
 function App() {

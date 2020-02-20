@@ -97,9 +97,8 @@ export default function DataList(props) {
 
                                     <ButtonToolbar ref={ref}>
                                         <Button
-                                            variant="outline-dark"
+                                            variant="light"
                                             size="sm"
-                                            className="mx-1 border-0"
                                             onClick={handleDeleteBtnClick}
                                         >
                                             <FontAwesomeIcon icon="trash-alt" />
@@ -118,7 +117,7 @@ export default function DataList(props) {
                                                 </Popover.Title>
                                                 <Popover.Content>
                                                         <p>{props.delMsg}</p>
-                                                        <Button variant="dark" size="sm" onClick={handleNoResponse}>
+                                                        <Button variant="secondary" size="sm" onClick={handleNoResponse}>
                                                             { t('no') }
                                                         </Button>
                                                         <Button
@@ -134,9 +133,8 @@ export default function DataList(props) {
 
                                         <Link to={`${props.link}${item.id}`}>
                                             <Button
-                                                variant="outline-danger"
+                                                variant="light"
                                                 size="sm"
-                                                className="border-0 font-weight-bold"
                                             >
                                                 { t('open') }
                                             </Button>

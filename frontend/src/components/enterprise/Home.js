@@ -82,7 +82,7 @@ export default function Home(props) {
                             number={context.substances.length}
                             buttonTitle={t('chemicals')}
                             buttonColor={dataEntryButtonVariant}
-                            link="/enterprise/chemicals"
+                            link="/enterprise/chemicals/substances"
                         />
                     </Col>
 

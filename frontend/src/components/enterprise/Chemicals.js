@@ -7,7 +7,7 @@ import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 
 
 
-export default function Chemicals() {
+export default function Chemicals(props) {
     const { t } = useTranslation();
     const context = useContext(EnterpriseContext);
     const APIcontext = useContext(ApiRequestsContext);
@@ -53,19 +53,15 @@ export default function Chemicals() {
     return (
         <div className="container-lg px-5 py-3">
             
-            <Tabs fill>
+            <Tabs fill defaultActiveKey={props.match.params.view} className="tabs-customized">
                 {[
                     {
                         eventKey: "suppliers",
-                        title: <span className="text-dark font-weight-bold">
-                                    {t('suppliers')}
-                                </span>,
+                        title: t('suppliers'),
                         component: "Suppliers"
                     }, {
                         eventKey: "substances",
-                        title: <span className="text-dark font-weight-bold">
-                                    {t('substances')}
-                                </span>,
+                        title: t('substances'),
                         component: <DataList 
                                         name="substances"
                                         data={ substances() }
@@ -75,9 +71,7 @@ export default function Chemicals() {
                                     />
                     }, {
                         eventKey: "mixtures",
-                        title: <span className="text-dark font-weight-bold">
-                                    {t('mixtures')}
-                                </span>,
+                        title: t('mixtures'),
                         component: "Mixtures"
                     }
                 ].map(

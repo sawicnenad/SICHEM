@@ -10,7 +10,9 @@ export const EnterpriseContext = React.createContext();
 
 function EnterpriseContextProvider(props) {
     const context = useContext(ApiRequestsContext);
-    const [state, setState] = useState({});
+    const [state, setState] = useState({
+        loaded: false
+    });
 
     useEffect(() => {
         // check if user is member of an enterprise 
@@ -24,16 +26,24 @@ function EnterpriseContextProvider(props) {
         const promEnt = axios.get(`${context.API}/enterprise/enterprises/`, headers);
         const promSubs = axios.get(`${context.API}/substances/`, headers);
         const promSupps = axios.get(`${context.API}/suppliers/`, headers);
+        const promCompositions = axios.get(`${context.API}/compositions/`, headers);
+        const promComponents = axios.get(`${context.API}/components/`, headers);
 
-        Promise.all([promEnt, promSubs, promSupps])
+        Promise.all([promEnt, promSubs, promSupps, promCompositions, promComponents])
             .then(
                 res => setState({
                     ent: res[0].data[0],
                     substances: res[1].data,
-                    suppliers: res[2].data
+                    suppliers: res[2].data,
+                    compositions: res[3].data,
+                    components: res[4].data,
+                    loaded: true
                 }) )
             .catch(
-                e => console.log(e)
+                e => {
+                    console.log(e);
+                    setState({ loaded: true })
+                }
             )
     }, [context])
 

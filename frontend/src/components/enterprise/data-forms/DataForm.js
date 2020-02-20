@@ -198,7 +198,8 @@ export default function DataForm(props) {
                                 
                                 <Col className="text-right">
                                     <Button
-                                        variant="outline-dark"
+                                        variant="secondary"
+                                        size="sm"
                                         onClick={() => props.handleFieldButtonClicks("range", field.props.name)}
                                     >
                                         {
@@ -234,7 +235,8 @@ export default function DataForm(props) {
                                 </Col>
                                 <Col className="text-right">
                                     <Button
-                                        variant="outline-dark"
+                                        variant="secondary"
+                                        size="sm"
                                         onClick={() => props.handleFieldButtonClicks("exact", field.props.name)}
                                     >
                                         {
@@ -322,7 +324,7 @@ export default function DataForm(props) {
                             <Button 
                                 size="sm"
                                 className="mt-1"
-                                variant="light"
+                                variant="secondary"
                                 onClick={ () => props.handleFieldButtonClicks(field.fieldType, field.props.name) }
                             >
                                 <FontAwesomeIcon icon="plus" />
@@ -412,7 +414,7 @@ export default function DataForm(props) {
                         key={inx}
                         className={
                             inx % 2 === 0 && !props.noZebraStyle && data.fields[item].fieldType !== "after-select-list" ?
-                            "bg-light pt-4 pb-1" : "pt-4"
+                            "bg-light pt-3 pb-1" : "pt-3"
                         }>
                         { myField( data.fields[item] ) }
                     </div>) : ""
@@ -482,12 +484,12 @@ export default function DataForm(props) {
 
             <Col className="text-right">
                 <Link to={props.close}>
-                    <Button variant="outline-dark" className="ml-1">
+                    <Button variant="light" className="ml-1 border">
                         <FontAwesomeIcon icon="times" /> { t('close') }
                     </Button>
                 </Link>
 
-                <Button variant="outline-danger" className="ml-1">
+                <Button variant="light" className="ml-1 border">
                     <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
                 </Button>
 
