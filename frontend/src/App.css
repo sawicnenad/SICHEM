@@ -1,0 +1,13 @@
+.card-header-tabs {
+    border-bottom: 1px solid #dee2e6 !important; 
+    margin: 1px !important;
+}
+
+.tabs-customized .nav-link {
+    color: grey !important;
+}
+
+.tabs-customized .nav-link.active {
+    color: #dc3545 !important;
+    font-weight: 700;
+}

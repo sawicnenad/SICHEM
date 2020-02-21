@@ -5,7 +5,6 @@ import Enterprise from './views/Enterprise';
 import Login from './views/Login';
 import EnterpriseContextProvider from './contexts/EnterpriseContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import './css/myStyle.css';
 import { 
     faCheckSquare,
     faCoffee,
