@@ -112,7 +112,11 @@
             "title": "Component form"
         },
         "composition": {
+            "reference": "Reference (short) name",
+            "name": "Full Name",
+            "info": "Additional information",
             "title": "Composition form",
+            "general": "General",
             "constituents": "Constituents",
             "additives": "Additives",
             "impurities": "Impurities",
@@ -142,6 +146,7 @@
             "title": "Substance form",
             "supplier-header": "New Supplier",
             "no-compositions-msg": "No compositions defined yet",
+            "composition-list": "List of compositions",
             "accordion": {
                 "id": "1. Substance identification",
                 "name": "1.1. Substance name/identifiers",

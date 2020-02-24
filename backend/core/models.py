@@ -248,20 +248,12 @@ class Composition(models.Model):
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     substance = models.ForeignKey(Substance, on_delete=models.CASCADE)
     reference = models.CharField(max_length=100, unique=True)
-    constituents = models.ManyToManyField(Component, related_name="constituents")
-    impurities = models.ManyToManyField(Component, related_name="impurities")
-    additives = models.ManyToManyField(Component, related_name="additives")
-
-class CompositionComponent(models.Model):
-    """
-        Stores for each component of a composition typical conc, lower and upper
-    """
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    composition = models.ForeignKey(Composition, on_delete=models.CASCADE)
-    component = models.ForeignKey(Component, on_delete=models.CASCADE)
-    typical_conc = models.CharField(max_length=25)
-    lower_conc = models.CharField(max_length=25)
-    upper_conc = models.CharField(max_length=25)
+    name = models.CharField(max_length=255)
+    info = models.CharField(max_length=255, blank=True)
+    constituents = models.ManyToManyField(Component, related_name="constituents", blank=True)
+    additives = models.ManyToManyField(Component, related_name="additives", blank=True)
+    impurities = models.ManyToManyField(Component, related_name="impurities", blank=True)
+    concentrations = models.TextField(blank=True)
 
 class Mixture(models.Model):
     """ Two or more substances mixed """

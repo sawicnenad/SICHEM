@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Component from './Component';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
@@ -6,6 +6,9 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { Modal, Button, Form, Row, Col, Tabs, Tab, Alert, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
+import RequestNotification from '../../notifications/RequestNotification';
 
 
 // styling
@@ -22,12 +25,25 @@ const styling = {
 function Composition(props) {
     const {t} = useTranslation();
     const entContext = useContext(EnterpriseContext);
+    const APIcontext = useContext(ApiRequestsContext);
 
     const [state, setState] = useState({
         activeTab: "constituents",
         showHelp: true
     });
 
+    useEffect(() => {
+        // If props.composition we are trying to edit
+        let isVisible = props.composition ? true : false;
+        setState({ ...state, visible: isVisible });
+
+        // if existing composition is under editing we set values
+        if (props.composition) {
+            const compID = parseInt(props.composition);
+            const data = entContext.compositions.find(o => o.id === compID);
+            mainFormik.setValues(data);
+        }
+    }, [props])
     /*
         data entries in componentDiv will be stored 
         temporary in composition state
@@ -42,11 +58,135 @@ function Composition(props) {
     })
 
     /*
-        component name and concentrations
-        * typical, lower and upper concentration
-        * also: add button to add the component to the list below
-        * and create new component button, if no required component
+        this is actual submit function
+        sends data from composition to the server
     */
+    const headers = {
+        headers: {
+            Pragma: "no-cache",
+            Authorization: 'Bearer ' + localStorage.getItem('token-access')
+        }
+    };
+
+
+    const MainScheme = Yup.object().shape({
+        reference: Yup.string().required(t('messages.form.required')),
+        name: Yup.string().required(t('messages.form.required'))
+    });
+
+    const mainFormik = useFormik({
+        validationSchema: MainScheme,
+        initialValues: {
+            reference: "test",
+            name: "",
+            info: ""
+        },
+        onSubmit: values => {
+            /*
+                for post request
+                * first save composition
+                * then add composition components to the saved composition
+            */
+            let concentrations = [
+                ...composition.constituents,
+                ...composition.additives,
+                ...composition.impurities
+            ];
+            concentrations = JSON.stringify(concentrations);
+
+            let constituents = composition.constituents.map(item => item.component);
+            let additives = composition.additives.map(item => item.component);
+            let impurities = composition.impurities.map(item => item.component);
+
+            axios.post(
+                `${APIcontext.API}/compositions/`, 
+                {
+                    enterprise: entContext.ent.id,
+                    substance: parseInt(props.substance),
+                    ...values,
+                    constituents: constituents,
+                    additives: additives,
+                    impurities: impurities,
+                    concentrations: concentrations
+                },
+                headers
+            ).then(
+                res => console.log(res)
+            ).catch(
+                () => setState({ ...state, failedMsg: true })
+            )
+        }
+    })
+
+    // Composition details
+    const CompositionDiv = (
+        <Form onSubmit={mainFormik.handleSubmit}>
+            <Form.Group as={Row}>
+                <Form.Label column md="4">
+                    { t('data.composition.reference') }:
+                </Form.Label>
+                <Col md="8">
+                    <Form.Control
+                        required
+                        name="reference"
+                        value={mainFormik.values.reference}
+                        onChange={mainFormik.handleChange}
+                        type="text"
+                        isInvalid={!!mainFormik.errors.reference}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {mainFormik.errors.reference}
+                    </Form.Control.Feedback>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row}>
+                <Form.Label column md="4">
+                    { t('data.composition.name') }:
+                </Form.Label>
+                <Col md="8">
+                    <Form.Control
+                        required
+                        name="name"
+                        value={mainFormik.values.name}
+                        onChange={mainFormik.handleChange}
+                        type="text"
+                        isInvalid={!!mainFormik.errors.name}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {mainFormik.errors.name}
+                    </Form.Control.Feedback>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row}>
+                <Form.Label column md="4">
+                    { t('data.composition.info') }:
+                </Form.Label>
+                <Col md="8">
+                    <Form.Control
+                        name="info"
+                        value={mainFormik.values.info}
+                        onChange={mainFormik.handleChange}
+                        type="text"
+                        as="textarea"
+                        isInvalid={!!mainFormik.errors.info}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {mainFormik.errors.info}
+                    </Form.Control.Feedback>
+                </Col>
+            </Form.Group>
+        </Form>
+    )
+
+    /*
+        Header containing list of components saved in SICHEM
+        and inputs to enter concentration details
+
+        * the same component is used for all three composition elements
+    */
+
     const Scheme = Yup.object().shape({
         component: Yup.number().min(1, t('messages.form.required')),
 
@@ -64,7 +204,7 @@ function Composition(props) {
             .moreThan(Yup.ref('lower_conc'), t('messages.form.composition.more-than-lower-conc')),
     });
 
-    const myFormik = useFormik({
+    const compFormik = useFormik({
         validationSchema: Scheme,
         initialValues: {
             component: 0,
@@ -79,14 +219,8 @@ function Composition(props) {
         }
     })
 
-    /*
-        Header containing list of components saved in SICHEM
-        and inputs to enter concentration details
-
-        * the same component is used for all three composition elements
-    */
     const ComponentDiv = (
-        <Form onSubmit={myFormik.handleSubmit}>
+        <Form onSubmit={compFormik.handleSubmit}>
             <Row>
                 <Col xs={{ span: 5 }}>
                     <Form.Group as={Row}>
@@ -99,10 +233,10 @@ function Composition(props) {
                                 type="text"
                                 as="select"
                                 size="sm"
-                                onChange={myFormik.handleChange}
-                                value={myFormik.values.component}
+                                onChange={compFormik.handleChange}
+                                value={compFormik.values.component}
                                 required
-                                isInvalid={!!myFormik.errors.component}
+                                isInvalid={!!compFormik.errors.component}
                             >
                                 <option value={0} disabled></option>
                                 {
@@ -115,7 +249,7 @@ function Composition(props) {
                                 }
                             </Form.Control>
                             <Form.Control.Feedback type="invalid">
-                                { myFormik.errors.component }
+                                { compFormik.errors.component }
                             </Form.Control.Feedback>
                         </Col>
 
@@ -137,12 +271,12 @@ function Composition(props) {
                                 type="number"
                                 placeholder={t('data.composition.typical_conc')}
                                 size="sm"
-                                value={myFormik.values.typical_conc}
-                                onChange={myFormik.handleChange}
-                                isInvalid={!!myFormik.errors.typical_conc}
+                                value={compFormik.values.typical_conc}
+                                onChange={compFormik.handleChange}
+                                isInvalid={!!compFormik.errors.typical_conc}
                             />
                             <Form.Control.Feedback type="invalid">
-                                { myFormik.errors.typical_conc }
+                                { compFormik.errors.typical_conc }
                             </Form.Control.Feedback>
                         </Col>
 
@@ -154,12 +288,12 @@ function Composition(props) {
                                         type="number"
                                         placeholder={t('data.composition.lower_conc')}
                                         size="sm"
-                                        onChange={myFormik.handleChange}
-                                        value={myFormik.values.lower_conc}
-                                        isInvalid={!!myFormik.errors.lower_conc}
+                                        onChange={compFormik.handleChange}
+                                        value={compFormik.values.lower_conc}
+                                        isInvalid={!!compFormik.errors.lower_conc}
                                     />
                                     <Form.Control.Feedback type="invalid">
-                                        { myFormik.errors.lower_conc }
+                                        { compFormik.errors.lower_conc }
                                     </Form.Control.Feedback>
                                 </Col>
                                 <Col xs={{ span: 2 }} className="text-center pt-1">
@@ -171,12 +305,12 @@ function Composition(props) {
                                         type="number"
                                         placeholder={t('data.composition.upper_conc')}
                                         size="sm"
-                                        onChange={myFormik.handleChange}
-                                        value={myFormik.values.upper_conc}
-                                        isInvalid={!!myFormik.errors.upper_conc}
+                                        onChange={compFormik.handleChange}
+                                        value={compFormik.values.upper_conc}
+                                        isInvalid={!!compFormik.errors.upper_conc}
                                     />
                                     <Form.Control.Feedback type="invalid">
-                                        { myFormik.errors.upper_conc }
+                                        { compFormik.errors.upper_conc }
                                     </Form.Control.Feedback>
                                 </Col>
                             </Row>
@@ -185,7 +319,7 @@ function Composition(props) {
                         <Col className="text-right">
                             <Button 
                                 variant="danger" size="sm"
-                                onClick={myFormik.handleSubmit}
+                                onClick={compFormik.handleSubmit}
                             >
                                 <FontAwesomeIcon icon="plus" />
                             </Button>
@@ -207,61 +341,64 @@ function Composition(props) {
 
 
     // list of components added to composition | additives | impurities
-    const componentList = (
-        <div className="border-top pt-3 mt-4" style={{ overflow: "auto", maxHeight: 400 }}>
-
-            <div className="mb-3 font-weight-bold text-secondary" style={{ fontSize: 18 }}>
-                { t('data.composition.list-of-components')}:
-            </div>
-
-            <Table striped borderless>
-                <tbody>{
-                composition[state.activeTab].map(
-                    (item, inx) => (
-                        <tr key={inx}>
-                            <td xs='1' className="align-middle">
-                                <Button variant="light" size="sm" onClick={() => handleDelete(item.component)}>
-                                    <FontAwesomeIcon icon="trash-alt" />
-                                </Button>
-                            </td>
-                            <td className="align-middle">
-                                <div className="font-weight-bold">{ 
-                                    entContext.components
-                                        .find(
-                                            o => o.id === parseInt(item.component)
-                                        ).reference 
-                                }</div>
-                            </td>
-                            <td className="align-middle">
-                                { item.typical_conc ? 
-                                    <span>{ item.typical_conc }%</span> 
-                                    : <span className="text-muted">{ t('unknown') }</span> }
-                            </td>
-                            <td className="align-middle">
-                                {
-                                    item.lower_conc ?
-                                    <span>
-                                        ({ item.lower_conc } - { item.upper_conc } %)
-                                    </span>
-                                    : ""
-                                }
-                            </td>
-                        </tr>
+    let componentList = "";
+    if (state.activeTab !== "composition") {
+        componentList = (
+            <div className="border-top pt-3 mt-4" style={{ overflow: "auto", maxHeight: 400 }}>
+    
+                <div className="mb-3 font-weight-bold text-secondary" style={{ fontSize: 18 }}>
+                    { t('data.composition.list-of-components')}:
+                </div>
+    
+                <Table striped borderless>
+                    <tbody>{
+                    composition[state.activeTab].map(
+                        (item, inx) => (
+                            <tr key={inx}>
+                                <td xs='1' className="align-middle">
+                                    <Button variant="light" size="sm" onClick={() => handleDelete(item.component)}>
+                                        <FontAwesomeIcon icon="trash-alt" />
+                                    </Button>
+                                </td>
+                                <td className="align-middle">
+                                    <div className="font-weight-bold">{ 
+                                        entContext.components
+                                            .find(
+                                                o => o.id === parseInt(item.component)
+                                            ).reference 
+                                    }</div>
+                                </td>
+                                <td className="align-middle">
+                                    { item.typical_conc ? 
+                                        <span>{ item.typical_conc }%</span> 
+                                        : <span className="text-muted">{ t('unknown') }</span> }
+                                </td>
+                                <td className="align-middle">
+                                    {
+                                        item.lower_conc ?
+                                        <span>
+                                            ({ item.lower_conc } - { item.upper_conc } %)
+                                        </span>
+                                        : ""
+                                    }
+                                </td>
+                            </tr>
+                        )
                     )
-                )
-            }</tbody>
-            </Table>
-
-            {
-                composition[state.activeTab].length === 0 ?
-                    <Alert
-                        variant="warning"
-                    >
-                        { t('messages.no-data-for-this-page')}
-                    </Alert> : ""
-            }
-        </div>
-    )
+                }</tbody>
+                </Table>
+    
+                {
+                    composition[state.activeTab].length === 0 ?
+                        <Alert
+                            variant="warning"
+                        >
+                            { t('messages.no-data-for-this-page')}
+                        </Alert> : ""
+                }
+            </div>
+        )
+    }
 
     const helpInfo = (
         <div>
@@ -299,9 +436,18 @@ function Composition(props) {
                 <Modal.Body>
                     <Tabs 
                         className="tabs-customized"
-                        defaultActiveKey="constituents"
+                        defaultActiveKey="composition"
                         onSelect={ val => setState({ ...state, activeTab: val }) }
                     >
+                        <Tab
+                            eventKey="composition"
+                            title={t('data.composition.general')}
+                        > 
+                            <div className="mt-4">
+                                { CompositionDiv }
+                            </div>
+                        </Tab>
+
                         <Tab
                             eventKey="constituents"
                             title={t('data.composition.constituents')}
@@ -338,14 +484,21 @@ function Composition(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={() => setState({ ...state, visible: false })}>
                         {t('cancel')}
                     </Button>
-                    <Button variant="danger">
+                    <Button variant="danger" onClick={mainFormik.handleSubmit}>
                         {t('save')}
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            {/* Request notifications */}
+            <RequestNotification
+                show={state.failedMsg}
+                onClose={() => setState({ ...state, failedMsg: false })}
+            />
+
         </div>
     )
 }

@@ -29,7 +29,13 @@ function EnterpriseContextProvider(props) {
         const promCompositions = axios.get(`${context.API}/compositions/`, headers);
         const promComponents = axios.get(`${context.API}/components/`, headers);
 
-        Promise.all([promEnt, promSubs, promSupps, promCompositions, promComponents])
+        Promise.all([
+                promEnt, 
+                promSubs,
+                promSupps,
+                promCompositions,
+                promComponents
+            ])
             .then(
                 res => setState({
                     ent: res[0].data[0],

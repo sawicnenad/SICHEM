@@ -11,6 +11,7 @@ import RequestNotification from '../../notifications/RequestNotification';
 import { Form, Row, Col, Button, Modal, Alert } from 'react-bootstrap';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 import Composition from './Composition';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -335,7 +336,7 @@ export default function Substance(props) {
     /*
         * Compositions are children of Substance
     */
-    const compList = entContext.compositions.filter(o => o.substance === subID);
+    const compList = entContext.compositions.filter(o => o.substance === parseInt(subID));
     const CompositionField = (
         <div>
             <Row className="pb-2">
@@ -344,13 +345,43 @@ export default function Substance(props) {
                 </Col>
                 <Col {...scaling.field}>
                     <div>
-                        <Composition />
+                        <Composition 
+                            substance={subID}
+                            composition={state.composition}
+                        />
                     </div>
                     {
                         compList.length > 0 ?
-                            <div>{
-                                compList.map(
-                                    item => <div>test</div>
+                            <div>
+                                <div className="mt-3 text-muted font-weight-bold">
+                                    {t('data.substance.composition-list')}:
+                                </div>
+
+                                {compList.map(
+                                    item => (
+                                        <Row key={item.id} className="mt-2">
+                                            <Col xs="6" md="4">
+                                                <Button size="sm" variant="outline-dark" className="border-0">
+                                                    <FontAwesomeIcon icon="trash-alt" />
+                                                </Button>
+
+                                                <Button 
+                                                    size="sm" variant="outline-danger" className="border-0"
+                                                    onClick={() => setState({ ...state, composition: item.id })}
+                                                >
+                                                    { t('open') }
+                                                </Button>
+                                            </Col>
+
+                                            <Col>
+                                                <table className="h-100">
+                                                    <tr className="align-middle">
+                                                        <td>{ item.reference }</td>
+                                                    </tr>
+                                                </table>
+                                            </Col>
+                                        </Row>
+                                    )
                                 )
                             }</div>
                             : <div className="pt-3">
@@ -361,6 +392,7 @@ export default function Substance(props) {
                     }
                 </Col>
             </Row>
+            
         </div>
     )
 
