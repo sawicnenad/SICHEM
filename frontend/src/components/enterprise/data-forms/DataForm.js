@@ -413,7 +413,10 @@ export default function DataForm(props) {
                     : <div 
                         key={inx}
                         className={
-                            inx % 2 === 0 && !props.noZebraStyle && data.fields[item].fieldType !== "after-select-list" ?
+                            inx % 2 === 0 && !props.noZebraStyle && 
+                            data.fields[item].fieldType !== "after-select-list" &&
+                            data.fields[item].noBackground !== true
+                            ?
                             "bg-light pt-3 pb-1" : "pt-3"
                         }>
                         { myField( data.fields[item] ) }

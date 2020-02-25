@@ -3,7 +3,8 @@ from .views import (
     SupplierViewSet,
     SubstanceViewSet,
     CompositionViewSet,
-    ComponentViewSet
+    ComponentViewSet,
+    HazardProfileViewSet
 )
 
 
@@ -15,5 +16,6 @@ router.register(r'suppliers', SupplierViewSet)
 router.register(r'substances', SubstanceViewSet)
 router.register(r'compositions', CompositionViewSet)
 router.register(r'components', ComponentViewSet)
+router.register(r'hazard-profiles', HazardProfileViewSet)
 
 urlpatterns = [] + router.urls

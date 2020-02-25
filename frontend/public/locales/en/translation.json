@@ -40,6 +40,7 @@
         "substance-updated": "Substance updated",
         "supplier-added": "New supplier created",
         "no-data-for-this-page": "No data to show.",
+        "deleted": "Deleted successfully",
         "composition-help": "Add component by component with details on their concentrations to the composition using the plus button. To define a completely new component, which later can be used as constituent, additive or impurity, apply 'New' button placed next to the component field.",
         "form": {
             "too-short": "Too short",
@@ -267,10 +268,10 @@
                 "high": "Solid (high dusty material)",
                 "very-high": "Solid (very high dusty material)"
             },
-            "physical_hazard": "Physical hazard",
-            "health_hazard": "Health hazard",
-            "environmental_hazard": "Environmental hazard",
-            "other_hazard": "Additional hazard",
+            "physical-hazard": "Physical hazard",
+            "health-hazard": "Health hazard",
+            "environmental-hazard": "Environmental hazard",
+            "other-hazard": "Additional hazard",
             "euh001": "Explosive when dry",
             "euh014": "Reacts violently with water",
             "euh018": "In use, may form flammable/explosive vapour-air mixture",

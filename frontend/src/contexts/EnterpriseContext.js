@@ -23,18 +23,22 @@ function EnterpriseContextProvider(props) {
                 Pragma: "no-cache",
                 Authorization: 'Bearer ' + localStorage.getItem('token-access')
             }};
+        
         const promEnt = axios.get(`${context.API}/enterprise/enterprises/`, headers);
         const promSubs = axios.get(`${context.API}/substances/`, headers);
         const promSupps = axios.get(`${context.API}/suppliers/`, headers);
         const promCompositions = axios.get(`${context.API}/compositions/`, headers);
         const promComponents = axios.get(`${context.API}/components/`, headers);
+        const promHazards = axios.get(`${context.API}/hazard-profiles/`, headers);
 
-        Promise.all([
+        Promise
+            .all([
                 promEnt, 
                 promSubs,
                 promSupps,
                 promCompositions,
-                promComponents
+                promComponents,
+                promHazards
             ])
             .then(
                 res => setState({
@@ -43,6 +47,7 @@ function EnterpriseContextProvider(props) {
                     suppliers: res[2].data,
                     compositions: res[3].data,
                     components: res[4].data,
+                    hazardProfiles: res[5].data,
                     loaded: true
                 }) )
             .catch(

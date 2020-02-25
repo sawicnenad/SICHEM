@@ -12,6 +12,7 @@ import { Form, Row, Col, Button, Modal, Alert } from 'react-bootstrap';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 import Composition from './Composition';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HazardProfile from './HazardProfile.js';
 
 
 
@@ -22,6 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // edit existing substance
 export default function Substance(props) {
     const [state, setState] = useState({
+        deleteMsg: false,
         failedMsg: false,
         newSubMsg: false,
         updatedMsg: false,
@@ -39,6 +41,13 @@ export default function Substance(props) {
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
     const subID = props.match.params.id;
+
+    const headers = {
+        headers: {
+            Pragma: "no-cache",
+            Authorization: 'Bearer ' + localStorage.getItem('token-access')
+        }
+    }
 
 
     /*
@@ -233,12 +242,7 @@ export default function Substance(props) {
             axios.post(
                 APIcontext.API + '/suppliers/',
                 {...values, enterprise: entContext.ent.id},
-                {
-                    headers: {
-                        Pragma: "no-cache",
-                        Authorization: 'Bearer ' + localStorage.getItem('token-access')
-                    }
-                }
+                headers
             ).then(
                 res => {
                     setState({
@@ -336,6 +340,17 @@ export default function Substance(props) {
     /*
         * Compositions are children of Substance
     */
+    const handleCompositionDelete = id => {
+        axios.delete(
+            `${APIcontext.API}/compositions/${id}/`,
+            headers
+        ).then(
+            () => setState({ ...state, deleteMsg: true })
+        ).catch(
+            () => setState({ ...state, failedMsg: true })
+        )
+    }
+
     const compList = entContext.compositions.filter(o => o.substance === parseInt(subID));
     const CompositionField = (
         <div>
@@ -360,25 +375,23 @@ export default function Substance(props) {
                                 {compList.map(
                                     item => (
                                         <Row key={item.id} className="mt-2">
-                                            <Col xs="6" md="4">
-                                                <Button size="sm" variant="outline-dark" className="border-0">
+                                            <Col xs="2">
+                                                <Button 
+                                                    onClick={ () => handleCompositionDelete(item.id) }
+                                                    size="sm" variant="outline-dark" className="border-0"
+                                                >
                                                     <FontAwesomeIcon icon="trash-alt" />
                                                 </Button>
 
+                                                
+                                            </Col>
+                                            <Col xs="10">
                                                 <Button 
                                                     size="sm" variant="outline-danger" className="border-0"
                                                     onClick={() => setState({ ...state, composition: item.id })}
                                                 >
-                                                    { t('open') }
+                                                    { item.reference }
                                                 </Button>
-                                            </Col>
-
-                                            <Col>
-                                                <table className="h-100">
-                                                    <tr className="align-middle">
-                                                        <td>{ item.reference }</td>
-                                                    </tr>
-                                                </table>
                                             </Col>
                                         </Row>
                                     )
@@ -393,6 +406,15 @@ export default function Substance(props) {
                 </Col>
             </Row>
             
+        </div>
+    )
+
+    /*
+        Hazard Profile component
+    */
+    const hazardProfile = (
+        <div>
+            <HazardProfile />
         </div>
     )
 
@@ -413,7 +435,8 @@ export default function Substance(props) {
                 close='/enterprise/chemicals/substances'
                 custom={{
                     composition: CompositionField,
-                    supplier: Supplier
+                    supplier: Supplier,
+                    hazard: hazardProfile
                 }}
             />
             
@@ -443,6 +466,14 @@ export default function Substance(props) {
                 show={state.newSuppMsg}
                 msgSuccess={t('messages.supplier-added')}
                 onClose={() => setState({ ...state, newSuppMsg: false })}
+            />
+
+            {/* composition delete messages */}
+            <RequestNotification
+                success
+                show={state.deleteMsg}
+                msgSuccess={t('messages.deleted')}
+                onClose={() => setState({ ...state, deleteMsg: false })}
             />
         </div>
     )

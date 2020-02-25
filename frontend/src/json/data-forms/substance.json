@@ -82,10 +82,7 @@
             "eventKey": "classification-labeling",
             "label": "data.substance.accordion.classification-labeling",
             "fields": [
-                "physical_hazard",
-                "health_hazard",
-                "environmental_hazard",
-                "other_hazard"
+                "hazard"
             ]
         }, {
             "eventKey": "euh-statement",
@@ -737,25 +734,10 @@
             "scaling": {"md" : 4},
             "label": "data.substance.dustiness-measured"
         },
-        "physical_hazard": {
+        "hazard": {
             "fieldType": "custom",
-            "component": "physicalHazard",
-            "label": "data.substance.physical-hazard"
-        },
-        "health_hazard": {
-            "fieldType": "custom",
-            "component": "physicalHazard",
-            "label": "data.substance.health-hazard"
-        },
-        "environmental_hazard": {
-            "fieldType": "custom",
-            "component": "physicalHazard",
-            "label": "data.substance.environmental-hazard"
-        },
-        "other_hazard": {
-            "fieldType": "custom",
-            "component": "otherHazard",
-            "label": "data.substance.other-hazard"
+            "component": "hazard",
+            "noBackground": true
         },
         "euh_title_1": {
             "fieldType": "title",

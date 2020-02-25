@@ -32,18 +32,6 @@ function Composition(props) {
         showHelp: true
     });
 
-    useEffect(() => {
-        // If props.composition we are trying to edit
-        let isVisible = props.composition ? true : false;
-        setState({ ...state, visible: isVisible });
-
-        // if existing composition is under editing we set values
-        if (props.composition) {
-            const compID = parseInt(props.composition);
-            const data = entContext.compositions.find(o => o.id === compID);
-            mainFormik.setValues(data);
-        }
-    }, [props])
     /*
         data entries in componentDiv will be stored 
         temporary in composition state
@@ -56,6 +44,32 @@ function Composition(props) {
         additives: [],
         impurities: []
     })
+
+    useEffect(() => {
+        // If props.composition we are trying to edit
+        let isVisible = props.composition ? true : false;
+        setState({ ...state, visible: isVisible });
+
+        // if existing composition is under editing we set values
+        if (props.composition) {
+            const compID = parseInt(props.composition);
+            const data = entContext.compositions.find(o => o.id === compID);
+            mainFormik.setValues(data);
+
+            /*
+                the lines above were used to set values to the fields
+                corresponding to the Composition model on server side
+
+                **however ! components are a separate model and are used
+                as manyToMany relation with compositions
+
+                here we thus must set initial values for composition state
+            */
+            let conc = JSON.parse(data.concentrations);
+            setComposition(conc);
+        }
+    }, [props.composition])
+    
 
     /*
         this is actual submit function
@@ -87,20 +101,25 @@ function Composition(props) {
                 * first save composition
                 * then add composition components to the saved composition
             */
-            let concentrations = [
-                ...composition.constituents,
-                ...composition.additives,
-                ...composition.impurities
-            ];
-            concentrations = JSON.stringify(concentrations);
+            let concentrations = JSON.stringify(composition);
 
             let constituents = composition.constituents.map(item => item.component);
             let additives = composition.additives.map(item => item.component);
             let impurities = composition.impurities.map(item => item.component);
 
-            axios.post(
-                `${APIcontext.API}/compositions/`, 
-                {
+            let url = `${APIcontext.API}/compositions/`;
+            let method = 'post';
+
+            // if we update an existing composition we modify request parameters
+            if (props.composition) {
+                url = url + props.composition + '/';
+                method = 'put';
+            }
+
+            axios({
+                method: method,
+                url: url, 
+                data: {
                     enterprise: entContext.ent.id,
                     substance: parseInt(props.substance),
                     ...values,
@@ -109,8 +128,8 @@ function Composition(props) {
                     impurities: impurities,
                     concentrations: concentrations
                 },
-                headers
-            ).then(
+                ...headers
+            }).then(
                 res => console.log(res)
             ).catch(
                 () => setState({ ...state, failedMsg: true })
