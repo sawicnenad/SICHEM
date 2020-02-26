@@ -28,25 +28,12 @@ export default function DataList(props) {
 
     // containing list of elements to diplay
     // e.g. list of substances
-    const data = props.data;
-
-    const createButton = (
-        <div 
-            className="text-right mb-4"
-        >
-            <Link to={props.link + '0'}>
-                <Button variant="danger">
-                    { t('create-new') }
-                </Button>
-            </Link>
-        </div>
-    )
-    
+    const data = props.data;    
 
     if (data.length === 0) {
         return (
             <div>
-                <div>{ createButton }</div>
+                <div>{ props.createButton }</div>
                 <Alert
                     variant="warning"
                 >
@@ -84,7 +71,7 @@ export default function DataList(props) {
 
     return (
         <div>
-            <div>{ createButton }</div>
+            <div>{ props.createButton }</div>
             {
                 data.map(
                     (item, inx) => (
@@ -147,8 +134,13 @@ export default function DataList(props) {
                                 {
                                     item.data.map(
                                         (e, inx) => (
-                                            <Col key={inx} md={{ span: 4 }} className="mt-2">
-                                                { e.label }: <span className="text-dark">{e.value}</span>
+                                            <Col key={inx} md={{ span: 6 }} className="mt-2">
+                                                <span className="text-dark">
+                                                    { e.label }
+                                                </span>: <span 
+                                                    className="text-muted">
+                                                        {e.value}
+                                                    </span>
                                             </Col>
                                         )
                                     )

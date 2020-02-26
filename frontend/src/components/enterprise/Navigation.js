@@ -8,7 +8,14 @@ import {
 } from 'react-bootstrap';
 
 
-export default function Navigation() {
+export default function Navigation(props) {
+
+    const handleLogout = () => {
+        // deletes localstorage and redirects to login page
+        localStorage.clear();
+        window.location.replace("/login");
+    }
+
     return (
         <Navbar bg="light" expand="md" className="px-5">
             <Navbar.Brand href="/enterprise">SICHEM</Navbar.Brand>
@@ -26,7 +33,9 @@ export default function Navigation() {
                     <Nav.Link>Enterprise</Nav.Link>
                     <Nav.Link>Security</Nav.Link>
                 </Nav>
-                <Button variant="outline-danger">Logout</Button>
+                <Button variant="outline-danger" onClick={handleLogout}>
+                    Logout
+                </Button>
             </Navbar.Collapse>
         </Navbar>
     )

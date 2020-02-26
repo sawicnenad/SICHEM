@@ -144,10 +144,21 @@
             "range-value": "Enter range"
         },
         "substance": {
+            "create-new-modal-title": "New substance",
             "title": "Substance form",
             "supplier-header": "New Supplier",
             "no-compositions-msg": "No compositions defined yet",
             "composition-list": "List of compositions",
+            "hazard-class-cat": "Hazard class/category",
+            "hazards": {
+                "help-text": "Hold Ctrl key to select multiple hazard categories",
+                "hazard-code": "Hazard code",
+                "hazard-statement": "Hazard statement",
+                "disposal": "Disposal",
+                "reaction": "Reaction",
+                "storage": "Storage",
+                "prevention": "Prevention"
+            },
             "accordion": {
                 "id": "1. Substance identification",
                 "name": "1.1. Substance name/identifiers",

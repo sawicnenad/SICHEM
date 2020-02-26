@@ -1,0 +1,474 @@
+{
+    "physicalHazard": [
+        {
+            "label": "Explosives",
+            "value": "expl",
+            "children": [
+                {
+                    "label": "Unst.Expl.",
+                    "value": "unst_expl"
+                }, {
+                    "label": "Expl.1.1",
+                    "value": "expl_1_1"
+                }, {
+                    "label": "Expl.1.2",
+                    "value": "expl_1_2"
+                }, {
+                    "label": "Expl.1.3",
+                    "value": "expl_1_3"
+                }, {
+                    "label": "Expl.1.4",
+                    "value": "expl_1_4"
+                }, {
+                    "label": "Expl.1.5",
+                    "value": "expl_1_5"
+                }, {
+                    "label": "Expl.1.6",
+                    "value": "expl_1_6"
+                }
+            ]
+        }, {
+            "label" : "Flammable gas",
+            "value": "flam_gas",
+            "children": [
+                {
+                    "label": "Flam.Gas 1",
+                    "value": "flam_gas_1"
+                }, {
+                    "label": "Flam.Gas 2",
+                    "value": "flam_gas_2"
+                }, {
+                    "label": "Chem.Unst.Gas A",
+                    "value": "chem_unst_gas_a"
+                }, {
+                    "label": "Chem.Unst.Gas B",
+                    "value": "chem_unst_gas_b"
+                }
+            ]
+        }, {
+            "label" : "Flammable aerosols and aerosols",
+            "value": "aerosols",
+            "children": [
+                {
+                    "label": "Aerosol 1",
+                    "value": "aerosol_1"
+                }, {
+                    "label": "Aerosol 2",
+                    "value": "aerosol_2"
+                }, {
+                    "label": "Aerosol 3",
+                    "value": "aerosol_3"
+                }
+            ]
+        }, {
+            "label" : "Oxidising gases",
+            "value": "ox_gas",
+            "children": [
+                {
+                    "label": "Ox.Gas 1",
+                    "value": "ox_gas_1"
+                }
+            ]
+        }, {
+            "label" : "Gases under pressure",
+            "value": "press_gas",
+            "children": [
+                {
+                    "label": "Press.Gas (Comp.)",
+                    "value": "press_gas_comp"
+                }, {
+                    "label": "Press.Gas (Liq.)",
+                    "value": "press_gas_liq"
+                }, {
+                    "label": "Press.Gas (Ref.Liq.)",
+                    "value": "press_gas_ref_liq"
+                }, {
+                    "label": "Press.Gas (Diss.)",
+                    "value": "press_gas_ref_diss"
+                }
+            ]
+        }, {
+            "label" : "Flammable liquids",
+            "value": "flam_liq",
+            "children": [
+                {
+                    "label": "Flam.Liq 1",
+                    "value": "flam_liq_1"
+                }, {
+                    "label": "Flam.Liq 2",
+                    "value": "flam_liq_2"
+                }, {
+                    "label": "Flam.Liq 3",
+                    "value": "flam_liq_3"
+                }
+            ]
+        }, {
+            "label" : "Flammable solids",
+            "value": "flam_sol",
+            "children": [
+                {
+                    "label": "Flam.Sol 1",
+                    "value": "flam_sol_1"
+                }, {
+                    "label": "Flam.Sol 2",
+                    "value": "flam_sol_2"
+                }
+            ]
+        }, {
+            "label" : "Self-reactive substance/mixture",
+            "value": "self_react",
+            "children": [
+                {
+                    "label": "Self-react. A",
+                    "value": "self_react_a"
+                }, {
+                    "label": "Self-react. B",
+                    "value": "self_react_b"
+                }, {
+                    "label": "Self-react. CD",
+                    "value": "self_react_cd"
+                }, {
+                    "label": "Self-react. EF",
+                    "value": "self_react_ef"
+                }, {
+                    "label": "Self-react. G",
+                    "value": "self_react_g"
+                }
+            ]
+        }, {
+            "label" : "Pyrolitic liquids",
+            "value": "pyr_liq",
+            "children": [
+                {
+                    "label": "Pyr.Liq. 1",
+                    "value": "pyr_liq_1"
+                }
+            ]
+        }, {
+            "label" : "Pyrolitic solids",
+            "value": "pyr_sol",
+            "children": [
+                {
+                    "label": "Pyr.Sol. 1",
+                    "value": "pyr_sol_1"
+                }
+            ]
+        }, {
+            "label" : "Self-heating substance/mixture",
+            "value": "self-heat",
+            "children": [
+                {
+                    "label": "Self-heat. 1",
+                    "value": "self_heat_1"
+                },
+                {
+                    "label": "Self-heat. 2",
+                    "value": "self_heat_2"
+                }
+            ]
+        }, {
+            "label" : "Water-reactive - emits flammable gases",
+            "value": "water_react",
+            "children": [
+                {
+                    "label": "Water-react 1",
+                    "value": "water_react_1"
+                }, {
+                    "label": "Water-react 2",
+                    "value": "water_react_2"
+                }, {
+                    "label": "Water-react 3",
+                    "value": "water_react_3"
+                }
+            ]
+        }, {
+            "label" : "Oxidising liquids",
+            "value": "ox_liq",
+            "children": [
+                {
+                    "label": "Ox.Liq.1",
+                    "value": "ox_liq_1"
+                }, {
+                    "label": "Ox.Liq.2",
+                    "value": "ox_liq_2"
+                }, {
+                    "label": "Ox.Liq.3",
+                    "value": "ox_liq_3"
+                }
+            ]
+        }, {
+            "label" : "Oxidising solids",
+            "value": "ox_sol",
+            "children": [
+                {
+                    "label": "Ox.Sol.1",
+                    "value": "ox_sol_1"
+                }, {
+                    "label": "Ox.Sol.2",
+                    "value": "ox_sol_2"
+                }, {
+                    "label": "Ox.Sol.3",
+                    "value": "ox_sol_3"
+                }
+            ]
+        }, {
+            "label" : "Organic peroxides",
+            "value": "org_perox",
+            "children": [
+                {
+                    "label": "Org.Perox.A",
+                    "value": "org_perox_a"
+                }, {
+                    "label": "Org.Perox.B",
+                    "value": "org_perox_B"
+                }, {
+                    "label": "Org.Perox.CD",
+                    "value": "org_perox_cd"
+                }, {
+                    "label": "Org.Perox.EF",
+                    "value": "org_perox_ef"
+                }, {
+                    "label": "Org.Perox.G",
+                    "value": "org_perox_g"
+                }
+            ]
+        }, {
+            "label" : "Corrosive to metals",
+            "value": "met_corr",
+            "children": [
+                {
+                    "label": "Met.Corr.1",
+                    "value": "met_corr_1"
+                }
+            ]
+        }
+    ],
+    "healthHazard": [
+        {
+            "value": "acute_tox",
+            "label": "Acute toxicity",
+            "children": [
+                {
+                    "value": "acute_tox_1_oral",
+                    "label": "Acute Tox.1 (oral)"
+                },{
+                    "value": "acute_tox_1_dermal",
+                    "label": "Acute Tox.1 (dermal)"
+                },{
+                    "value": "acute_tox_1_inhalation",
+                    "label": "Acute Tox.1 (inhalation)"
+                },{
+                    "value": "acute_tox_2_oral",
+                    "label": "Acute Tox.2 (oral)"
+                },{
+                    "value": "acute_tox_2_dermal",
+                    "label": "Acute Tox.2 (dermal)"
+                },{
+                    "value": "acute_tox_2_inhalation",
+                    "label": "Acute Tox.2 (inhalation)"
+                },{
+                    "value": "acute_tox_3_oral",
+                    "label": "Acute Tox.3 (oral)"
+                },{
+                    "value": "acute_tox_3_dermal",
+                    "label": "Acute Tox.3 (dermal)"
+                },{
+                    "value": "acute_tox_3_inhalation",
+                    "label": "Acute Tox.3 (inhalation)"
+                },{
+                    "value": "acute_tox_4_oral",
+                    "label": "Acute Tox.4 (oral)"
+                },{
+                    "value": "acute_tox_4_dermal",
+                    "label": "Acute Tox.4 (dermal)"
+                },{
+                    "value": "acute_tox_4_inhalation",
+                    "label": "Acute Tox.4 (inhalation)"
+                }
+            ]
+        },{
+            "value": "skin_corr_irrit",
+            "label": "Skin corrosion/irritation",
+            "children": [
+                {
+                    "value": "skin_corr_1",
+                    "label": "Skin Corr.1"
+                },{
+                    "value": "skin_corr_1a",
+                    "label": "Skin Corr.1A"
+                },{
+                    "value": "skin_corr_1b",
+                    "label": "Skin Corr.1B"
+                },{
+                    "value": "skin_corr_1c",
+                    "label": "Skin Corr.1C"
+                },{
+                    "value": "skin_irrit_2",
+                    "label": "Skin Irrit.2"
+                }
+            ]
+        },{
+            "value": "eye_damage_irrit",
+            "label": "Eye damage/irritation",
+            "children": [
+                {
+                    "value": "eye_dam_1",
+                    "label": "Eye Dam.1"
+                },{
+                    "value": "eye_irrit_2",
+                    "label": "Eye Irrit.2"
+                }
+            ]
+        },{
+            "value": "resp_skin_sens",
+            "label": "Respiratory/Skin sensitisation",
+            "children": [
+                {
+                    "value": "resp_sens_1",
+                    "label": "Resp.Sens.1"
+                },{
+                    "value": "resp_sens_1a",
+                    "label": "Resp.Sens.1A"
+                },{
+                    "value": "resp_sens_1b",
+                    "label": "Resp.Sens.1B"
+                },{
+                    "value": "skin_sens_1",
+                    "label": "Skin.Sens.1"
+                },{
+                    "value": "skin_sens_1a",
+                    "label": "Skin.Sens.1A"
+                },{
+                    "value": "skin_sens_1b",
+                    "label": "Skin.Sens.1B"
+                }
+            ]
+        }, {
+            "value": "muta",
+            "label": "Mutagenecity",
+            "children": [
+                {
+                    "value": "muta_1a",
+                    "label": "Muta.1A"
+                },{
+                    "value": "muta_1b",
+                    "label": "Muta.1B"
+                },{
+                    "value": "muta_2",
+                    "label": "Muta.2"
+                }
+            ]
+        }, {
+            "value": "carc",
+            "label": "Carcinogecity",
+            "children": [
+                {
+                    "value": "carc_1a",
+                    "label": "Carc.1A"
+                },{
+                    "value": "carc_1b",
+                    "label": "Carc.1B"
+                },{
+                    "value": "carc_2",
+                    "label": "Carc.2"
+                }
+            ]
+        }, {
+            "value": "repr",
+            "label": "Toxic for reproduction",
+            "children": [
+                {
+                    "value": "repr_1a",
+                    "label": "Repr.1A"
+                },{
+                    "value": "repr_1b",
+                    "label": "Repr.1B"
+                },{
+                    "value": "recr_2",
+                    "label": "Recr.2"
+                },{
+                    "value": "lact",
+                    "label": "Lact."
+                }
+            ]
+        }, {
+            "value": "stot_se",
+            "label": "Specific target organ toxicity (single exposure)",
+            "children": [
+                {
+                    "value": "stot_se_1",
+                    "label": "STOT SE 1"
+                },{
+                    "value": "stot_se_2",
+                    "label": "STOT SE 2"
+                },{
+                    "value": "stot_se_3",
+                    "label": "STOT SE 3"
+                }
+            ]
+        }, {
+            "value": "stot_re",
+            "label": "Specific target organ toxicity (repeated exposure)",
+            "children": [
+                {
+                    "value": "stot_re_1",
+                    "label": "STOT RE 1"
+                },{
+                    "value": "stot_re_2",
+                    "label": "STOT RE 2"
+                }
+            ]
+        }, {
+            "value": "asp_tox",
+            "label": "Aspiration hazard",
+            "children": [
+                {
+                    "value": "asp_tox_1",
+                    "label": "Asp.Tox.1"
+                }
+            ]
+        }
+    ],
+    "environHazard": [
+        {
+            "value": "aquatic_acute",
+            "label": "Aquatic Acute",
+            "children": [
+                {
+                    "value": "aquatic_a_1",
+                    "label": "Aquatic Acute 1"
+                }
+            ]
+        }, {
+            "value": "aquatic_chronic",
+            "label": "Aquatic Chronic",
+            "children": [
+                {
+                    "value": "aquatic_chronic_1",
+                    "label": "Aquatic Chronic 1"
+                }, {
+                    "value": "aquatic_chronic_2",
+                    "label": "Aquatic Chronic 2"
+                }, {
+                    "value": "aquatic_chronic_3",
+                    "label": "Aquatic Chronic 3"
+                }, {
+                    "value": "aquatic_chronic_4",
+                    "label": "Aquatic Chronic 4"
+                }
+            ]
+        }
+    ],
+    "otherHazard": [
+        {
+            "value": "ozone",
+            "label": "Harmful to the ozone layer",
+            "children": [
+                {
+                    "value": "ozone_1",
+                    "label": "Ozone 1"
+                }
+            ]
+        }
+    ]
+}

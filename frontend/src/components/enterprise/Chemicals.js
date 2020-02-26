@@ -1,18 +1,24 @@
-import React, { useContext } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
+import React, { useState, useContext } from 'react';
+import { Tabs, Tab, Button, Modal, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import DataList from './DataList';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 
 export default function Chemicals(props) {
     const { t } = useTranslation();
     const context = useContext(EnterpriseContext);
     const APIcontext = useContext(ApiRequestsContext);
+    const [ state, setState ] = useState({});
 
 
+
+
+
+    // SUBSTANCES ...............................................
     // create label value pairs and element titles
     const substances = () => {
         let data = [];
@@ -50,6 +56,91 @@ export default function Chemicals(props) {
         return data;
     }
 
+    /*
+        every create button in data list component has different event on click
+        e.g. for substances, it opens a modal to create new substance instance
+        where user must state a reference name before the corresponding page opens
+    */
+    const SubstanceSchema = Yup.object().shape({
+        reference: Yup
+                    .string()
+                    .required(t('messages.form.required'))
+                    .min(2, t('messages.form.too-short'))
+                    .max(50, t('messages.form.too-long'))
+    });
+
+    const substanceFormik = useFormik({
+        validationSchema: SubstanceSchema,
+        initialValues: {
+            reference: ""
+        },
+        onSubmit: values => {
+            console.log(values)
+        }
+    })
+
+    const SubstanceCreateButton = (
+        <div className="text-right">
+            <Button 
+                variant="danger"
+                onClick={() => setState({...state, newSubstanceModal: true })}
+            >
+                {t('create-new')}
+            </Button>
+
+            <Modal
+                show={state.newSubstanceModal}
+                onHide={() => setState({ ...state, newSubstanceModal: false })}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        {t('data.substance.create-new-modal-title')}
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form.Group>
+                        <Form.Label>
+                            {t('data.substance.reference')}:
+                        </Form.Label>
+
+                        <Form.Control
+                           required
+                           name="reference"
+                           type="text"
+                           isInvalid={substanceFormik.errors.reference}
+                           value={substanceFormik.values.reference}
+                           onChange={substanceFormik.handleChange}
+                        />
+
+                        <Form.Control.Feedback type="invalid">
+                            { substanceFormik.errors.reference }
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button 
+                        variant="secondary"
+                        onClick={() => setState({...state, newSubstanceModal: false })}
+                    >
+                        { t('cancel') }
+                    </Button>
+                    <Button variant="danger" onClick={substanceFormik.handleSubmit}>
+                        { t('save') }
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
+
+
+
+
+
+
+
+
     return (
         <div className="container-lg px-5 py-3">
             
@@ -68,6 +159,7 @@ export default function Chemicals(props) {
                                         api={`${APIcontext.API}/substances/`}
                                         link='/enterprise/substance/'
                                         delMsg={t('messages.substance-delete-msg')}
+                                        createButton={SubstanceCreateButton}
                                     />
                     }, {
                         eventKey: "mixtures",
