@@ -16,7 +16,6 @@ export default function DataForm(props) {
     const { t } = useTranslation();
     const data = props.data;
 
-
     // one field (only field without label or other additional elements)
     // based on its fieldType argument
     const myField = field => {
@@ -342,11 +341,7 @@ export default function DataForm(props) {
                         <Col {...props.scaling.field} {...field.scaling}>
                             <Form.Control
                                 { ...field.props }
-                                value={
-                                    field.fieldType === "file" ? 
-                                    ""
-                                    : props.formik.values[field.props.name]
-                                }
+                                value={props.formik.values[field.props.name] ? props.formik.values[field.props.name].filename : ""}
                                 onChange={e =>
                                     field.fieldType === 'file' ?
                                     props.handleChangeSpecial(e.target.name, e.target.files[0])
@@ -357,6 +352,39 @@ export default function DataForm(props) {
                             <Form.Control.Feedback type="invalid">
                                 { props.formik.errors[field.props.name] }
                             </Form.Control.Feedback>
+
+                            {
+                                // IMG FILES
+                                field.fieldType === 'file' && 
+                                field.fileType === 'img' &&  
+                                typeof(props.formik.values[field.props.name]) !== 'object' &&
+                                props.formik.values[field.props.name] 
+                                ? 
+                                <div className="mt-4 p-2 border rounded text-center">
+                                    <img 
+                                        src={props.formik.values[field.props.name]}
+                                        alt="" 
+                                        height={100} 
+                                    />
+                                </div>
+                                : <div />
+                            }
+
+                            {
+                                // PDF FILES
+                                field.fieldType === 'file' && 
+                                field.fileType !== 'img' &&  
+                                typeof(props.formik.values[field.props.name]) !== 'object' &&
+                                props.formik.values[field.props.name] 
+                                ? 
+                                <div className="mt-2">
+                                    <a target="_blank" href={ props.formik.values[field.props.name] }>
+                                        <FontAwesomeIcon icon='file-pdf' className="mr-2" color="#dc3545" />
+                                        { t('data.uploaded-file') }
+                                    </a>
+                                </div>
+                                : <div />
+                            }
                         </Col>
                     </Form.Group>
                 )
@@ -492,7 +520,7 @@ export default function DataForm(props) {
                     </Button>
                 </Link>
 
-                <Button variant="light" className="ml-1 border">
+                <Button variant="light" className="ml-1 border" onClick={props.handleDelete}>
                     <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
                 </Button>
 

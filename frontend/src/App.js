@@ -20,7 +20,8 @@ import {
     faTrashAlt,
     faPlus,
     faTimes,
-    faMinus
+    faMinus,
+    faFilePdf
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -38,7 +39,8 @@ library.add(
     faTrashAlt,
     faPlus,
     faTimes,
-    faMinus
+    faMinus,
+    faFilePdf
 );
 
 function App() {

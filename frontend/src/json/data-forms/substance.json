@@ -35,7 +35,7 @@
                         "origin",
                         "mw",
                         "optical_activity_info",
-                        "isomer_info"
+                        "isomers_info"
                     ]
                 }, {
                     "eventKey": "composition",
@@ -324,6 +324,7 @@
                 "name": "structural_formula"
             },
             "fieldType": "file",
+            "fileType": "img",
             "label": "data.substance.structural_formula"
         }, 
         "smiles": {
@@ -372,11 +373,11 @@
             },
             "label": "data.substance.optical_activity_info"
         }, 
-        "isomer_info": {
+        "isomers_info": {
             "props": {
                 "as": "textarea",
                 "type": "text",
-                "name": "isomer_info",
+                "name": "isomers_info",
                 "maxLength": 255
             },
             "label": "data.substance.isomer_info"

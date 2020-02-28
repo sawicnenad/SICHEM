@@ -109,6 +109,7 @@
         }
     },
     "data": {
+        "uploaded-file": "Open uploaded file (.pdf)",
         "component": {
             "title": "Component form"
         },

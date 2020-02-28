@@ -35,6 +35,7 @@ export default function DataList(props) {
             <div>
                 <div>{ props.createButton }</div>
                 <Alert
+                    className="mt-3"
                     variant="warning"
                 >
                     {t('messages.no-data-for-this-page')}

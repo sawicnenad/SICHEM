@@ -49,6 +49,32 @@ export default function Substance(props) {
         }
     }
 
+    /*
+        Handle delete of substance
+        * button in DataForm.js
+    */
+    const handleDelete = () => {
+        axios.delete(
+            `${APIcontext.API}/substances/${subID}/`,
+            headers
+        ).then(
+            () => {
+                /*
+                    first remove substance from enterprise context data
+                    then show notification and redirect to url showing all substances
+                */
+                let substances = [...entContext.substances];
+                substances = substances.filter(o => o.id !== subID);
+                entContext.refreshState('substances', substances);
+
+                setState({ ...state, deleteMsg: true });
+                props.history.push('/enterprise/chemicals/substances');
+            }
+        ).catch(
+            () => setState({ ...state, failedMsg: true })
+        )
+    }
+
 
     /*
         BUTTON CLICKS | FIELD CHANGES
@@ -131,8 +157,12 @@ export default function Substance(props) {
     let initialValues = {};
     for (let field in data.fields) {
 
-        if (data.fields[field].fieldType === "file") {
-            continue;
+        if (data.fields[field].fieldType === 'file') {
+            if (substance[field]) {
+                initialValues[field] = substance[field];
+            } else {
+                continue;
+            }
         }
 
         // multi add fields
@@ -177,29 +207,16 @@ export default function Substance(props) {
             }
             data.append('enterprise', entContext.ent.id);
 
-            const headers = {
-                headers: {
+            axios.put(
+                `${APIcontext.API}/substances/${props.match.params.id}/`,
+                data,
+                {headers: {
                     "Content-Type": "multipart/form-data",
                     Pragma: "no-cache",
                     Authorization: 'Bearer ' + localStorage.getItem('token-access')
-                }};
-
-            // post and put request
-            const postRequest = axios.post(
-                `${APIcontext.API}/substances/`, data, headers);
-
-            const putRequest = axios.put(
-                `${APIcontext.API}/substances/${props.match.params.id}/`, data, headers);
-
-            if (props.match.params.id === '0') {
-                postRequest
-                    .then(() => setState({ ...state, newSubMsg: true }))
-                    .catch(() => setState({ ...state, failedMsg: true }))
-            } else {
-                putRequest
-                    .then(() => setState({ ...state, updatedMsg: true }))
-                    .catch(() => setState({ ...state, failedMsg: true }))
-            }
+                }}
+            ).then(() => setState({ ...state, updatedMsg: true })
+            ).catch(() => setState({ ...state, failedMsg: true }))
         }
     })
 
@@ -433,6 +450,7 @@ export default function Substance(props) {
                 handleChangeSpecial={handleChangeSpecial}
                 handleFieldButtonClicks={handleFieldButtonClicks}
                 close='/enterprise/chemicals/substances'
+                handleDelete={handleDelete}
                 custom={{
                     composition: CompositionField,
                     supplier: Supplier,

@@ -6,6 +6,7 @@ import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 
 export default function Chemicals(props) {
@@ -66,16 +67,39 @@ export default function Chemicals(props) {
                     .string()
                     .required(t('messages.form.required'))
                     .min(2, t('messages.form.too-short'))
-                    .max(50, t('messages.form.too-long'))
+                    .max(50, t('messages.form.too-long')),
+        supplier: Yup
+                    .number()
+                    .min(1, t('messages.form.required'))
     });
 
     const substanceFormik = useFormik({
         validationSchema: SubstanceSchema,
         initialValues: {
-            reference: ""
+            reference: "",
+            supplier: 0
         },
         onSubmit: values => {
-            console.log(values)
+            const data = {...values, enterprise: context.ent.id};
+            axios.post(
+                `${APIcontext.API}/substances/`,
+                data,
+                {headers: {
+                    Pragma: "no-cache",
+                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }}
+            ).then(
+                res => {
+                    // refresh context data in state
+                    let substances = [...context.substances];
+                    substances.push(res.data);
+                    context.refreshState('substances', substances);
+
+                    props.history.push(`/enterprise/substance/${res.data.id}`);
+                }
+            ).catch(
+                e => console.log(e)
+            )
         }
     })
 
@@ -115,6 +139,35 @@ export default function Chemicals(props) {
 
                         <Form.Control.Feedback type="invalid">
                             { substanceFormik.errors.reference }
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label>
+                            {t('data.substance.supplier')}:
+                        </Form.Label>
+
+                        <Form.Control
+                           required
+                           name="supplier"
+                           as="select"
+                           isInvalid={substanceFormik.errors.supplier}
+                           value={substanceFormik.values.supplier}
+                           onChange={substanceFormik.handleChange}
+                        >
+                            <option value={0}></option>
+                            {
+                                context.suppliers.map(
+                                    item => (
+                                        <option value={item.id} key={item.id}>
+                                            { item.name }
+                                        </option>
+                                    )
+                                )
+                            }
+                        </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            { substanceFormik.errors.supplier }
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Modal.Body>

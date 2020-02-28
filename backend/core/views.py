@@ -37,7 +37,7 @@ class SupplierViewSet(EntDataViewSet):
 class SubstanceViewSet(EntDataViewSet):
     queryset = Substance.objects.all()
     serializer_class = SubstanceSerializer
-    parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser, JSONParser]
 
 class CompositionViewSet(EntDataViewSet):
     queryset = Composition.objects.all()

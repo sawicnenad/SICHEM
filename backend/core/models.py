@@ -14,7 +14,7 @@ class Supplier(models.Model):
 # for file/img upload
 def upload_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'supplier_{}/{}'.format(instance.supplier.id, filename)
+    return 'ent_{}/{}'.format(instance.enterprise.id, filename)
 
 class Substance(models.Model):
     # 1. Substance identification
