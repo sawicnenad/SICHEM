@@ -428,7 +428,10 @@ export default function Substance(props) {
     */
     const hazardProfile = (
         <div>
-            <HazardProfile scaling={scaling}/>
+            <HazardProfile
+                scaling={scaling}
+                subID={parseInt(subID)}
+            />
         </div>
     )
 

@@ -1,10 +1,11 @@
-import React, { Children } from 'react';
+import React, { Children, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Accordion, Card, Form, Row, Col, Alert } from 'react-bootstrap';
 import hazardsJSON from '../../../json/hazards.json';
 import hazardClassesJSON from '../../../json/hazardClasses.json';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 
 
 /*
@@ -13,6 +14,7 @@ import * as Yup from 'yup';
 */
 export default function HazardProfile(props) {
     const { t } = useTranslation();
+    const entContext = useContext(EnterpriseContext);
 
     /*
         Form is a simple one field form containing

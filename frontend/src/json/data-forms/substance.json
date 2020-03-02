@@ -248,6 +248,7 @@
                 "type": "text",
                 "name": "cas_nr"
             },
+            "scaling": {"md" : 3},
             "label": "data.substance.cas_nr"
         }, 
         "cas_name": {
@@ -262,6 +263,7 @@
                 "type": "text",
                 "name": "ec_nr"
             },
+            "scaling": {"md" : 3},
             "label": "data.substance.ec_nr"
         }, 
         "ec_name": {
@@ -284,6 +286,7 @@
                 "type": "text",
                 "name": "index_nr"
             },
+            "scaling": {"md" : 3},
             "label": "data.substance.index_nr"
         }, 
         "eu_registration_nr": {
@@ -291,6 +294,7 @@
                 "type": "text",
                 "name": "eu_registration_nr"
             },
+            "scaling": {"md" : 3},
             "specialOnChange": true,
             "fieldType": "multi",
             "label": "data.substance.eu_registration_nr"
@@ -309,6 +313,7 @@
                 "type": "text",
                 "name": "last_update"
             },
+            "scaling": {"md" : 3},
             "label": "data.substance.last_update"
         }, 
         "molecular_formula": {
@@ -448,7 +453,7 @@
                 "type": "text",
                 "name": "purity_degree"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.purity_degree"
         },
         "composition": {
@@ -586,7 +591,7 @@
                 "type": "text",
                 "name": "relative_density"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.relative_density"
         },
         "vp": {
@@ -643,7 +648,7 @@
                 "type": "text",
                 "name": "log_kow"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.log_kow"
         }, 
         "granulometry_sm": {
@@ -657,7 +662,7 @@
                 "type": "text",
                 "name": "granulometry_sm"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.granulometry_sm"
         }, 
         "granulometry_md": {
@@ -671,7 +676,7 @@
                 "type": "text",
                 "name": "granulometry_md"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.granulometry_md"
         }, 
         "granulometry_lg": {
@@ -685,7 +690,7 @@
                 "type": "text",
                 "name": "granulometry_lg"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.granulometry_lg"
         },
         "dustiness": {
@@ -732,7 +737,7 @@
                 "type": "text",
                 "name": "dustiness_measured"
             },
-            "scaling": {"md" : 4},
+            "scaling": {"md" : 3},
             "label": "data.substance.dustiness-measured"
         },
         "hazard": {

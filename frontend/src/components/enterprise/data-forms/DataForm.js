@@ -104,7 +104,7 @@ export default function DataForm(props) {
                                         type="text"
                                         name={field.afterInput}
                                         placeholder={t(field.afterInputPlaceholder)}
-                                        value={props.formik.values[field.props.name]}
+                                        value={props.formik.values[field.afterInput]}
                                         onChange={props.formik.handleChange}
                                         isInvalid={!!props.formik.errors[field.props.name]}
                                     />
@@ -138,7 +138,7 @@ export default function DataForm(props) {
                         <Form.Label column {...props.scaling.label}>
                             { t(field.label) }
                         </Form.Label>
-                        <Col xs={8} md={4}>
+                        <Col xs={8} md={3}>
                             <Form.Control
                                 { ...field.props }
                                 value={props.formik.values[field.props.name]}
@@ -185,7 +185,7 @@ export default function DataForm(props) {
                         {
                             JSON.parse(props.formik.values[field.props.name]).length < 2 ?
                             <Row>
-                                <Col>
+                                <Col md="4">
                                     <Form.Control
                                         { ...field.props }
                                         name={field.props.name + "__exact"}
@@ -195,17 +195,17 @@ export default function DataForm(props) {
                                     />
                                 </Col>
                                 
-                                <Col className="text-right">
+                                <Col className="text-left">
                                     <Button
-                                        variant="secondary"
-                                        size="sm"
+                                        variant="light"
                                         onClick={() => props.handleFieldButtonClicks("range", field.props.name)}
                                     >
+                                        <FontAwesomeIcon icon="exchange-alt" /> <span>
                                         {
                                            JSON.parse(props.formik.values[field.props.name]).length < 2 ?
                                             t('data.buttons.range-value')
                                             : t('data.buttons.exact-value')
-                                        }
+                                        }</span>
                                     </Button>
                                 </Col>
                             </Row>
@@ -232,17 +232,17 @@ export default function DataForm(props) {
                                         isInvalid={!!props.formik.errors[field.props.name]}
                                     />
                                 </Col>
-                                <Col className="text-right">
+                                <Col className="text-left">
                                     <Button
-                                        variant="secondary"
-                                        size="sm"
+                                        variant="light"
                                         onClick={() => props.handleFieldButtonClicks("exact", field.props.name)}
                                     >
+                                        <FontAwesomeIcon icon="exchange-alt" /> <span>
                                         {
                                             JSON.parse(props.formik.values[field.props.name]).length < 2 ?
                                             t('data.buttons.range-value')
                                             : t('data.buttons.exact-value')
-                                        }
+                                        }</span>
                                     </Button>
                                 </Col>
                             </Row>
@@ -263,6 +263,7 @@ export default function DataForm(props) {
                                 onChange={props.formik.handleChange}
                                 isInvalid={!!props.formik.errors[field.props.name]}
                             >
+                                <option value="" disabled></option>
                                 {
                                     field.optgroups ?
                                     field.options.map(

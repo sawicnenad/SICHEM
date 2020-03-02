@@ -141,8 +141,8 @@
             }
         },
         "buttons": {
-            "exact-value": "Exact value",
-            "range-value": "Enter range"
+            "exact-value": "Single value",
+            "range-value": "Range"
         },
         "substance": {
             "create-new-modal-title": "New substance",
@@ -221,7 +221,7 @@
                 "organometallic": "Organometallic",
                 "inorganic": "Inorganic"
             },
-            "mw": "Molecular weight (g/mol)",
+            "mw": "Molecular weight, g/mol",
             "optical_activity_info": "Information on optical activity",
             "isomer_info": "Information on typical ratio of (stereo-)isomers",
             "substance_type": "Type of substance",
@@ -241,7 +241,7 @@
                 "oil": "Substances obtained from oil or oil like sources",
                 "enzymes": "Enzymes"
             },
-            "purity_degree": "Degree of purity",
+            "purity_degree": "Degree of purity, %",
             "composition": "Compositions",
             "uv_vis": "Ultraviolet and Visible Absorption Spectroscopy (UV/Vis)",
             "ir": "Infrared Spectroscopy (IR)",
@@ -280,10 +280,10 @@
                 "high": "Solid (high dusty material)",
                 "very-high": "Solid (very high dusty material)"
             },
-            "physical-hazard": "Physical hazard",
-            "health-hazard": "Health hazard",
-            "environmental-hazard": "Environmental hazard",
-            "other-hazard": "Additional hazard",
+            "physical-hazard": "3.1. Physical hazard",
+            "health-hazard": "3.2. Health hazard",
+            "environmental-hazard": "3.3. Environmental hazard",
+            "other-hazard": "3.4. Additional hazard",
             "euh001": "Explosive when dry",
             "euh014": "Reacts violently with water",
             "euh018": "In use, may form flammable/explosive vapour-air mixture",
