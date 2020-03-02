@@ -109,7 +109,7 @@ export default function Chemicals(props) {
                 variant="danger"
                 onClick={() => setState({...state, newSubstanceModal: true })}
             >
-                {t('create-new')}
+                { t('create-new') }
             </Button>
 
             <Modal

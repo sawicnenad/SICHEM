@@ -332,7 +332,7 @@ export default function DataForm(props) {
                         
                     </Form.Group>
                 );
-            default:
+            case "file":
                 return(
                     <Form.Group as={Row}>
                         <Form.Label column {...props.scaling.label}>
@@ -349,13 +349,9 @@ export default function DataForm(props) {
                                 }
                                 isInvalid={!!props.formik.errors[field.props.name]}
                             />
-                            <Form.Control.Feedback type="invalid">
-                                { props.formik.errors[field.props.name] }
-                            </Form.Control.Feedback>
 
                             {
                                 // IMG FILES
-                                field.fieldType === 'file' && 
                                 field.fileType === 'img' &&  
                                 typeof(props.formik.values[field.props.name]) !== 'object' &&
                                 props.formik.values[field.props.name] 
@@ -372,7 +368,6 @@ export default function DataForm(props) {
 
                             {
                                 // PDF FILES
-                                field.fieldType === 'file' && 
                                 field.fileType !== 'img' &&  
                                 typeof(props.formik.values[field.props.name]) !== 'object' &&
                                 props.formik.values[field.props.name] 
@@ -385,6 +380,25 @@ export default function DataForm(props) {
                                 </div>
                                 : <div />
                             }
+                        </Col>
+                    </Form.Group>
+                )
+            default:
+                return (
+                    <Form.Group as={Row}>
+                        <Form.Label column {...props.scaling.label}>
+                            { t(field.label) }:
+                        </Form.Label>
+                        <Col {...props.scaling.field} {...field.scaling}>
+                            <Form.Control
+                                { ...field.props }
+                                value={props.formik.values[field.props.name]}
+                                onChange={props.formik.handleChange}
+                                isInvalid={!!props.formik.errors[field.props.name]}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                { props.formik.errors[field.props.name] }
+                            </Form.Control.Feedback>
                         </Col>
                     </Form.Group>
                 )

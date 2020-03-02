@@ -65,6 +65,7 @@ function EnterpriseContextProvider(props) {
         * after an element is removed
         * ...
     */
+    console.log(state)
     const refreshState = (datasetName, dataset) => {
         let newState = { ...state };
         newState[datasetName] = dataset;
