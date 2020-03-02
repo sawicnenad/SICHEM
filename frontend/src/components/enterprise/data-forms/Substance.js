@@ -22,6 +22,7 @@ import HazardProfile from './HazardProfile.js';
 // create new substance
 // edit existing substance
 export default function Substance(props) {
+
     const [state, setState] = useState({
         deleteMsg: false,
         failedMsg: false,
@@ -40,7 +41,7 @@ export default function Substance(props) {
     */
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
-    const subID = props.match.params.id;
+    const subID = props.match.params.id ;
 
     const headers = {
         headers: {
@@ -63,12 +64,10 @@ export default function Substance(props) {
                     first remove substance from enterprise context data
                     then show notification and redirect to url showing all substances
                 */
-                let substances = [...entContext.substances];
-                substances = substances.filter(o => o.id !== subID);
-                entContext.refreshState('substances', substances);
-
-                setState({ ...state, deleteMsg: true });
                 props.history.push('/enterprise/chemicals/substances');
+                let substances = [...entContext.substances];
+                substances = substances.filter(o => o.id !== parseInt(subID)); 
+                entContext.refreshState('substances', substances);
             }
         ).catch(
             () => setState({ ...state, failedMsg: true })
@@ -152,6 +151,7 @@ export default function Substance(props) {
     if (subID !== '0') {
         let id = parseInt(props.match.params.id);
         substance = entContext.substances.find(o => o.id === id);
+        console.log(substance)
     }
 
     let initialValues = {};
@@ -219,9 +219,6 @@ export default function Substance(props) {
             ).catch(() => setState({ ...state, failedMsg: true }))
         }
     })
-
-
-    
     
     // SCALING
     const scaling = {
