@@ -749,7 +749,7 @@
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-1",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh1": {
@@ -781,77 +781,77 @@
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-2",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_3": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-3",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_4": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-4",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_5": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-5",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_6": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-6",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_7": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-7",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_8": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-8",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_9": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-9",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_10": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-10",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_11": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-11",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh_title_12": {
             "fieldType": "title",
             "title": "data.substance.titles.euh-title-12",
             "props": {
-                "className": "ml-5 mb-3 text-muted bg-light p-2"
+                "className": "ml-3 mt-3 text-muted bg-light p-2"
             }
         },
         "euh2": {
@@ -1035,28 +1035,28 @@
             "fieldType": "title",
             "title": "data.substance.titles.reg-dnel-1-title",
             "props": {
-                "className": "mb-3 text-muted bg-light p-2"
+                "className": "mt-3 text-muted bg-light p-2"
             }
         },
         "reg_dnel_2_title": {
             "fieldType": "title",
             "title": "data.substance.titles.reg-dnel-2-title",
             "props": {
-                "className": "mb-3 text-muted bg-light p-2"
+                "className": "mt-3 text-muted bg-light p-2"
             }
         },
         "reg_dnel_3_title": {
             "fieldType": "title",
             "title": "data.substance.titles.reg-dnel-3-title",
             "props": {
-                "className": "mb-3 text-muted bg-light p-2"
+                "className": "mt-3 text-muted bg-light p-2"
             }
         },
         "reg_dnel_4_title": {
             "fieldType": "title",
             "title": "data.substance.titles.reg-dnel-4-title",
             "props": {
-                "className": "mb-3 text-muted bg-light p-2"
+                "className": "mt-3 text-muted bg-light p-2"
             }
         },
         "reg_dnel_1": {
@@ -1999,7 +1999,6 @@
         "notation": {
             "fieldType": "select",
             "label": "data.substance.notation",
-            "noTranslation": true,
             "props": {
                 "as": "select",
                 "name": "notation",
@@ -2022,14 +2021,14 @@
                      "value": "R0",
                      "label": "R0"
                   }, {
-                    "value": "Rf",
-                    "label": "Rf"
+                    "value": "RF",
+                    "label": "RF"
                  }, {
                     "value": "SS",
-                    "label": "Ss"
+                    "label": "SS"
                  }, {
-                    "value": "Ol",
-                    "label": "Ol"
+                    "value": "OL",
+                    "label": "OL"
                  }, {
                     "value": "B",
                     "label": "B"

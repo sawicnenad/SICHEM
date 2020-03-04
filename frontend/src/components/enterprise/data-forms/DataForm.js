@@ -4,7 +4,6 @@ import { Form, Row, Col, Button, Accordion, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
-
 /*
     component for all data entries by enterprise
     substances, mixtures, uses, contributing activities
@@ -25,14 +24,13 @@ export default function DataForm(props) {
                     field.elements.map(
                         (item, inx) => (
                             <Form.Group 
-                                key={item.name}
+                                key={inx}
                                 as={Row}
-                                className={(inx+1) % 2 === 0 ? "bg-light pt-2" : "pt-2"}
                             >
                                 <Form.Label column { ...props.scaling.label }>
                                     { t(item.label) }:
                                 </Form.Label>
-                                <Col xs={8} md={4}>
+                                <Col xs={8} md={3}>
                                     <Form.Control 
                                         {...props.scaling.field}
                                         name={item.name}
@@ -43,7 +41,7 @@ export default function DataForm(props) {
                                     />
                                 </Col>
 
-                                <Col xs={4} md={2}>
+                                <Col xs={4} md={3}>
                                     <Form.Control
                                         name={item.afterName}
                                         as="select"
@@ -75,6 +73,7 @@ export default function DataForm(props) {
                                 {...field.props}
                                 name={item.name}
                                 label={t(item.label)}
+                                checked={props.formik.values[item.name]}
                                 onChange={props.formik.handleChange}
                             />)
                     )
@@ -273,10 +272,7 @@ export default function DataForm(props) {
                                                     item.options.map(
                                                         option => 
                                                             <option value={option.value} key={option.value}>
-                                                                {
-                                                                    field.noTranslation ?
-                                                                    option.label : t(option.label)
-                                                                }
+                                                                { t(option.label) }
                                                             </option>
                                                     )
                                                 }
@@ -286,10 +282,7 @@ export default function DataForm(props) {
                                     field.options.map(
                                         item => 
                                             <option value={item.value} key={item.value}>
-                                                { 
-                                                    field.noTranslation ?
-                                                    item.label : t(item.label)
-                                                }
+                                                { t(item.label) }
                                             </option>
                                     )
                                 }

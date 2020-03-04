@@ -44,10 +44,16 @@ class Substance(models.Model):
     optical_activity_info = models.CharField(max_length=255, blank=True)
     isomers_info = models.CharField(max_length=255, blank=True)
 
-    # 3. Composition
+    # Composition
     substance_type = models.CharField(max_length=50, blank=True)
     purity_degree = models.CharField(max_length=50, blank=True)
     # compositions of this substanced determined by fk in composition table
+
+    # 3. Hazard profile
+    physical_hazard = models.TextField(blank=True) # json form -> hazard class: hazard category
+    health_hazard = models.TextField(blank=True)
+    environmental_hazard = models.TextField(blank=True)
+    additional_hazard = models.TextField(blank=True)
 
     # 4. Analytical data + info
     uv_vis = models.FileField(upload_to=upload_path, blank=True, null=True)
@@ -212,8 +218,7 @@ class Substance(models.Model):
     other_tox_name = models.CharField(max_length=50, blank=True)
     other_tox_value = models.CharField(max_length=50, blank=True)
     other_tox_unit = models.CharField(max_length=10, blank=True)
-    tox_other_file = models.FileField(
-        upload_to=upload_path, blank=True, null=True)
+    tox_other_file = models.FileField(upload_to=upload_path, blank=True, null=True)
 
     # 9. Regulatory statuses
     reg_status_ch = models.CharField(max_length=255, blank=True)
@@ -224,8 +229,7 @@ class Substance(models.Model):
     reg_status_clp_other = models.CharField(max_length=255, blank=True)
     reg_status_eu = models.CharField(max_length=255, blank=True)
     reg_status_eu_other = models.CharField(max_length=255, blank=True)
-    reg_status_file = models.FileField(
-        upload_to=upload_path, blank=True, null=True)
+    reg_status_file = models.FileField(upload_to=upload_path, blank=True, null=True)
 
 
 class Component(models.Model):
@@ -284,21 +288,3 @@ class MixtureComponent(models.Model):
         blank=True, null=True, decimal_places=4, max_digits=6)
     info = models.CharField(max_length=255, blank=True)
     function = models.CharField(max_length=255, blank=True)         # technical function - stringified list
-
-class HazardProfile(models.Model):
-    """
-        every composition/substance (if same for all compositions)/Mixture
-        should have a single hazard profile object
-
-        this model uses generic foreign key as compositions, substances and 
-        mixtures may be all (one at the time) used as parents of a given instance
-    """
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey()
-
-    physical = models.TextField(blank=True) # json form -> hazard class: hazard category
-    health = models.TextField(blank=True)
-    environmental = models.TextField(blank=True)
-    additional = models.TextField(blank=True)

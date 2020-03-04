@@ -5,7 +5,6 @@ import hazardsJSON from '../../../json/hazards.json';
 import hazardClassesJSON from '../../../json/hazardClasses.json';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 
 
 /*
@@ -14,7 +13,6 @@ import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 */
 export default function HazardProfile(props) {
     const { t } = useTranslation();
-    const entContext = useContext(EnterpriseContext);
 
     /*
         Form is a simple one field form containing
@@ -24,21 +22,7 @@ export default function HazardProfile(props) {
         and the corresponding data for signal word, 
         pictograms, disposal, reaction etc appear below
     */
-    const Schema = Yup.object().shape({})
-
-    const myFormik = useFormik({
-        validationSchema: Schema,
-        initialValues: {
-            physical: [],
-            health: [],
-            environmental: [],
-            additional: []
-        },
-        onSubmit: values => {
-            console.log(values)
-        }
-    })
-
+    
     const form = (options, height, name) => {
         return(
             <Form.Group as={Row}>
@@ -51,8 +35,9 @@ export default function HazardProfile(props) {
                         as="select"
                         multiple
                         name={name}
+                        value={props.formik.values[name]}
                         style={{ height: height }}
-                        onChange={myFormik.handleChange}
+                        onChange={props.formik.handleChange}
                     >
                         {
                             options.map(
@@ -92,7 +77,7 @@ export default function HazardProfile(props) {
     */
 
     const hazard = htype => {
-        const selected = myFormik.values[htype];
+        const selected = props.formik.values[htype];
         let signalword = "warning";
 
         let data = {
@@ -260,22 +245,22 @@ export default function HazardProfile(props) {
 
             {[
                 {
-                    eventKey: "physical",
+                    eventKey: "physical_hazard",
                     hazard: "physicalHazard",
                     height: 300,
                     label: t('data.substance.physical-hazard')
                 }, {
-                    eventKey: "health",
+                    eventKey: "health_hazard",
                     hazard: "healthHazard",
                     height: 300,
                     label: t('data.substance.health-hazard')
                 }, {
-                    eventKey: "environmental",
+                    eventKey: "environmental_hazard",
                     hazard: "environHazard",
                     height: 175,
                     label: t('data.substance.environmental-hazard')
                 }, {
-                    eventKey: "additional",
+                    eventKey: "additional_hazard",
                     hazard: "otherHazard",
                     height: 75,
                     label: t('data.substance.other-hazard')

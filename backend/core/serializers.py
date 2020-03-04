@@ -3,8 +3,7 @@ from .models import (
     Supplier,
     Substance,
     Composition,
-    Component,
-    HazardProfile
+    Component
 )
 
 
@@ -26,9 +25,4 @@ class CompositionSerializer(serializers.ModelSerializer):
 class ComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Component
-        fields = '__all__'
-
-class HazardProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = HazardProfile
         fields = '__all__'

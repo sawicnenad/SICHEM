@@ -151,7 +151,6 @@ export default function Substance(props) {
     if (subID !== '0') {
         let id = parseInt(props.match.params.id);
         substance = entContext.substances.find(o => o.id === id);
-        console.log(substance)
     }
 
     let initialValues = {};
@@ -178,6 +177,41 @@ export default function Substance(props) {
             continue;
         }
 
+        // checkbox list
+        if (data.fields[field].fieldType === 'checkbox-list') {
+            let elements = data.fields[field].elements;
+            for (let e in elements) {
+                initialValues[ elements[e].name ] = substance[ elements[e].name ];
+            }
+            continue;
+        }
+
+        // after select list (e.g. DNEL values)
+        if (data.fields[field].fieldType === 'after-select-list') {
+            let elements = data.fields[field].elements;
+            for (let e in elements) {
+                initialValues[ elements[e].name ] = substance[ elements[e].name ];
+                initialValues[ elements[e].afterName ] = substance[ elements[e].afterName ];
+            }
+            continue;
+        }
+
+        if (data.fields[field].fieldType === 'custom') {
+            if (field === 'hazard') {
+                initialValues.physical_hazard = substance.physical_hazard === "" ? 
+                                                    [] : JSON.parse(substance.physical_hazard);
+                initialValues.health_hazard = substance.health_hazard === "" ? 
+                                                    [] : JSON.parse(substance.health_hazard);
+                initialValues.environmental_hazard = substance.environmental_hazard === "" ? 
+                                                    [] : JSON.parse(substance.environmental_hazard);
+                initialValues.additional_hazard = substance.additional_hazard === "" ? 
+                                                    [] : JSON.parse(substance.additional_hazard);
+            }
+            continue;
+        }
+
+        // REMAINING FIELDS
+
         initialValues[field] = "";
 
         // load data for an existing substance
@@ -187,7 +221,7 @@ export default function Substance(props) {
     }
 
 
-
+    
 
     // instead of using Formik component
     // we use formik hook
@@ -203,6 +237,15 @@ export default function Substance(props) {
             // form data
             let data = new FormData();
             for (let val in values) {
+                if ([
+                        'physical_hazard',
+                        'health_hazard',
+                        'environmental_hazard',
+                        'additional_hazard'
+                    ].indexOf(val) !== -1) {
+                        data.append(val, JSON.stringify(values[val]));
+                        continue;
+                    }
                 data.append(val, values[val]);
             }
             data.append('enterprise', entContext.ent.id);
@@ -219,7 +262,7 @@ export default function Substance(props) {
             ).catch(() => setState({ ...state, failedMsg: true }))
         }
     })
-    
+
     // SCALING
     const scaling = {
         label: {
@@ -229,7 +272,7 @@ export default function Substance(props) {
         field: { md: 7 },
         fieldSm: { md: 4 }
     }
-
+    console.log(myformik.values)
 
 
 
@@ -359,7 +402,12 @@ export default function Substance(props) {
             `${APIcontext.API}/compositions/${id}/`,
             headers
         ).then(
-            () => setState({ ...state, deleteMsg: true })
+            () => {
+                setState({ ...state, deleteMsg: true });
+                let compositions = [ ...entContext.compositions ];
+                compositions = compositions.filter(o => o.id !== id);
+                entContext.refreshState('compositions', compositions);
+            }
         ).catch(
             () => setState({ ...state, failedMsg: true })
         )
@@ -388,26 +436,23 @@ export default function Substance(props) {
 
                                 {compList.map(
                                     item => (
-                                        <Row key={item.id} className="mt-2">
-                                            <Col xs="2">
-                                                <Button 
-                                                    onClick={ () => handleCompositionDelete(item.id) }
-                                                    size="sm" variant="outline-dark" className="border-0"
-                                                >
-                                                    <FontAwesomeIcon icon="trash-alt" />
-                                                </Button>
-
-                                                
-                                            </Col>
-                                            <Col xs="10">
-                                                <Button 
-                                                    size="sm" variant="outline-danger" className="border-0"
-                                                    onClick={() => setState({ ...state, composition: item.id })}
-                                                >
-                                                    { item.reference }
-                                                </Button>
-                                            </Col>
-                                        </Row>
+                                        <div key={item.id} className="mt-2">
+                                            <Button 
+                                                onClick={ () => handleCompositionDelete(item.id) }
+                                                size="sm" variant="outline-dark" className="border-0"
+                                            >
+                                                <FontAwesomeIcon icon="trash-alt" />
+                                            </Button>
+                                            <Button 
+                                                size="sm" variant="outline-danger" className="ml-2"
+                                                onClick={() => setState({ ...state, composition: item.id })}
+                                            >
+                                                { t('open') }
+                                            </Button>
+                                            <span className="text-muted ml-3 align-middle">
+                                                { item.reference }
+                                            </span>
+                                        </div>
                                     )
                                 )
                             }</div>
@@ -430,7 +475,7 @@ export default function Substance(props) {
         <div>
             <HazardProfile
                 scaling={scaling}
-                subID={parseInt(subID)}
+                formik={myformik}
             />
         </div>
     )

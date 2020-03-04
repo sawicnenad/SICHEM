@@ -5,15 +5,13 @@ from .models import (
     Supplier,
     Composition, 
     Component,
-    Mixture,
-    HazardProfile
+    Mixture
 )
 from .serializers import (
     SupplierSerializer,
     SubstanceSerializer,
     CompositionSerializer,
-    ComponentSerializer,
-    HazardProfileSerializer
+    ComponentSerializer
 )
 from rest_framework.parsers import MultiPartParser, JSONParser
 
@@ -46,7 +44,3 @@ class CompositionViewSet(EntDataViewSet):
 class ComponentViewSet(EntDataViewSet):
     queryset = Component.objects.all()
     serializer_class = ComponentSerializer
-
-class HazardProfileViewSet(EntDataViewSet):
-    queryset = HazardProfile.objects.all()
-    serializer_class = HazardProfileSerializer

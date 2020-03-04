@@ -29,7 +29,9 @@ function Composition(props) {
 
     const [state, setState] = useState({
         activeTab: "constituents",
-        showHelp: true
+        showHelp: true,
+        failedMsg: false,
+        successMsg: false
     });
 
     /*
@@ -91,7 +93,7 @@ function Composition(props) {
     const mainFormik = useFormik({
         validationSchema: MainScheme,
         initialValues: {
-            reference: "test",
+            reference: "",
             name: "",
             info: ""
         },
@@ -130,7 +132,13 @@ function Composition(props) {
                 },
                 ...headers
             }).then(
-                res => console.log(res)
+                res => {
+                    setState({ ...state, visible: false, successMsg: true });
+                    let compositions = [ ...entContext.compositions ];
+                    compositions = compositions.filter(o => o.id !== res.data.id);
+                    compositions.push(res.data);
+                    entContext.refreshState('compositions', compositions);
+                }
             ).catch(
                 () => setState({ ...state, failedMsg: true })
             )
@@ -141,9 +149,11 @@ function Composition(props) {
     const CompositionDiv = (
         <Form onSubmit={mainFormik.handleSubmit}>
             <Form.Group as={Row}>
+
                 <Form.Label column md="4">
                     { t('data.composition.reference') }:
                 </Form.Label>
+
                 <Col md="8">
                     <Form.Control
                         required
@@ -157,6 +167,7 @@ function Composition(props) {
                         {mainFormik.errors.reference}
                     </Form.Control.Feedback>
                 </Col>
+
             </Form.Group>
 
             <Form.Group as={Row}>
@@ -516,6 +527,12 @@ function Composition(props) {
             <RequestNotification
                 show={state.failedMsg}
                 onClose={() => setState({ ...state, failedMsg: false })}
+            />
+
+            <RequestNotification
+                success
+                show={state.successMsg}
+                onClose={() => setState({ ...state, successMsg: false })}
             />
 
         </div>
