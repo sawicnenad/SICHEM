@@ -19,7 +19,7 @@ def upload_path(instance, filename):
 class Substance(models.Model):
     # 1. Substance identification
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, blank=True, null=True)
     reference = models.CharField(max_length=255)
     iupac = models.TextField(blank=True)
     international_names = models.TextField(blank=True)
@@ -221,14 +221,8 @@ class Substance(models.Model):
     tox_other_file = models.FileField(upload_to=upload_path, blank=True, null=True)
 
     # 9. Regulatory statuses
-    reg_status_ch = models.CharField(max_length=255, blank=True)
-    reg_status_ch_other = models.CharField(max_length=255, blank=True)
-    reg_status_reach = models.CharField(max_length=255, blank=True)
-    reg_status_reach_other = models.CharField(max_length=255, blank=True)
-    reg_status_clp = models.CharField(max_length=255, blank=True)
-    reg_status_clp_other = models.CharField(max_length=255, blank=True)
-    reg_status_eu = models.CharField(max_length=255, blank=True)
-    reg_status_eu_other = models.CharField(max_length=255, blank=True)
+    reg_status_ch = models.TextField(blank=True)
+    reg_status_eu = models.TextField(blank=True)
     reg_status_file = models.FileField(upload_to=upload_path, blank=True, null=True)
 
 

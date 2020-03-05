@@ -24,6 +24,7 @@
     "mixtures": "Mixtures",
     "create-new": "Create new",
     "delete": "Delete",
+    "edit": "Edit",
     "open": "Open",
     "menu": "Menu",
     "save": "Save",
@@ -33,7 +34,8 @@
     "new": "New",
     "unknown": "Unknown",
 
-    "messages": {
+    "messages": {    
+        "not-configured": "Not configured",
         "substance-delete-msg": "This substance will be permanently deleted from the database!",
         "are-you-sure": "Are you sure?",
         "substance-added": "New substance created",
@@ -195,7 +197,9 @@
                 "reg-dnel-1-title": "Long-term / systemic",
                 "reg-dnel-2-title": "Long-term / local",
                 "reg-dnel-3-title": "Accute / systemic",
-                "reg-dnel-4-title": "Accute / local"
+                "reg-dnel-4-title": "Accute / local",
+                "reg-status-ch": "Regulatory status in Switzerland",
+                "reg-status-eu": "Regulatory status in EU"
             },
             "supplier": "Substance supplier",
             "reference": "Reference name",
@@ -338,14 +342,27 @@
             "other-tox-custom": "Other tox. (name)",
             "other-tox-value": "value",
             "other-tox-file": "Relevant file",
-            "reg-status-ch": "Switzerland",
-            "reg-status-ch-other": "Description",
-            "reg-status-reach": "REACH",
-            "reg-status-reach-other": "Description",
-            "reg-status-clp": "CLP",
-            "reg-status-clp-other": "Description",
-            "reg-status-eu": "EU",
-            "reg-status-eu-other": "Description",
+            "reg-status-ch":{
+                "label": "Regulatory status - Switzerland",
+                "type-of-substance": "Type of substance",
+                "existing-substance": "Existing substance",
+                "new-substance": "New substance",
+                "is-substance-notified": "The new substance is notified",
+                "status": "Regulatory status",
+                "authorization": "Authorization",
+                "auth-1": "Substance of Very High Concern (SVHC) - Listed in Annex 3 ChemO",
+                "auth-2": "Substance of Very High Concern (SVHC) - Listed in Annex 1.17 ORRChem",
+                "restriction": "Restriction",
+                "restriction-1": "Substance is listed in ORRChem",
+                "harmonized-classification": "Hazrmonized classification - Annex VI CLP",
+                "harmonized-classification-1": "The substance in listed in Annex VI CLP",
+                "protection-young-people": "Protection of young people at work",
+                "protection-young-people-1": "The substance is of concern for protection of young people at work",
+                "maternety-protection": "Maternety protection",
+                "maternety-protection-1": "The substance is of concern for maternety protection",
+                "other-processes": "Other processes",
+                "other-processes-dscr": "Other processes - description"
+            },
             "reg-status-file": "Relevant file"
         }
     }

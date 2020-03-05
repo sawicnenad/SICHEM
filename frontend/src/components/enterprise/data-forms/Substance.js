@@ -29,7 +29,9 @@ export default function Substance(props) {
         newSubMsg: false,
         updatedMsg: false,
         supplierModal: false,
-        newSuppMsg: false
+        newSuppMsg: false,
+        regStatusCH: false,
+        regStatusEU: false
     });
     
     const { t } = useTranslation();
@@ -207,6 +209,10 @@ export default function Substance(props) {
                 initialValues.additional_hazard = substance.additional_hazard === "" ? 
                                                     [] : JSON.parse(substance.additional_hazard);
             }
+            // because supplier is also custom field
+            if (['supplier', 'enterprise'].indexOf(field) !== -1) {
+                initialValues[field] = substance[field]
+            }
             continue;
         }
 
@@ -227,6 +233,11 @@ export default function Substance(props) {
     // we use formik hook
     // this allows us to access values
     // outside return method
+    const validURL = str => {
+        let pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        return !!pattern.test(str);
+      }
+
     const myformik = useFormik({
         validationSchema: Schema,
         initialValues: {
@@ -235,24 +246,32 @@ export default function Substance(props) {
         validateOnChange: false,
         onSubmit: values => {
             // form data
-            let data = new FormData();
+            let dataForm = new FormData();
             for (let val in values) {
+
+                // for hazards, must be stringified before appended
                 if ([
                         'physical_hazard',
                         'health_hazard',
                         'environmental_hazard',
                         'additional_hazard'
                     ].indexOf(val) !== -1) {
-                        data.append(val, JSON.stringify(values[val]));
+                        dataForm.append(val, JSON.stringify(values[val]));
                         continue;
                     }
-                data.append(val, values[val]);
+                
+                // for files | images
+                if (validURL( values[val] ) && data.fields[val].fieldType === 'file') {
+                    continue;
+                }
+
+                dataForm.append(val, values[val]);
             }
-            data.append('enterprise', entContext.ent.id);
+            dataForm.append('enterprise', entContext.ent.id);
 
             axios.put(
                 `${APIcontext.API}/substances/${props.match.params.id}/`,
-                data,
+                dataForm,
                 {headers: {
                     "Content-Type": "multipart/form-data",
                     Pragma: "no-cache",
@@ -272,7 +291,6 @@ export default function Substance(props) {
         field: { md: 7 },
         fieldSm: { md: 4 }
     }
-    console.log(myformik.values)
 
 
 
@@ -480,6 +498,152 @@ export default function Substance(props) {
         </div>
     )
 
+
+
+    /*
+        Regulatory status CH and EU
+        only two corresponding model fields in django
+
+        we open for each a modal in order to configure
+        the regulatory statuses for both CH and EU
+    */
+    const regStatusCH = (
+        <div className="pb-2">
+            <Row>
+                <Col {...scaling.label}>
+                    { t('data.substance.reg-status-ch.label') }:
+                </Col>
+
+                <Col {...scaling.field}>
+                    <Button 
+                        onClick={() => setState({ ...state, regStatusCH: true })}
+                        variant="outline-danger" size="sm"
+                    >                                       { t('edit') }
+                    </Button>
+
+                    <Alert
+                        className="my-2"
+                        variant="warning"
+                    >{t('messages.not-configured')}</Alert>
+                </Col>
+            </Row>
+
+            <Modal
+                show={state.regStatusCH}
+                onHide={() => setState({ ...state, regStatusCH: false })}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        { t('data.substance.reg-status-ch.label') }
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-ch.type-of-substance') }
+                            </Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                name="sub_type"
+                            >
+                                <option value="" disabled selected></option>
+                                <option value="existing-substance">
+                                    {t('data.substance.reg-status-ch.existing-substance')}
+                                </option>
+                                <option value="new-substance">
+                                    {t('data.substance.reg-status-ch.new-substance')}
+                                </option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Check
+                                name="is_notified"
+                                label={ t('data.substance.reg-status-ch.is-substance-notified') }
+                            />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-ch.status') }
+                            </Form.Label>
+
+                            <Form.Control
+                                name="status"
+                                as="select"
+                            >
+                                <option value="" disabled selected></option>
+                                <optgroup label={t('data.substance.reg-status-ch.authorization')}>
+                                    <option value="auth-1">
+                                        { t('data.substance.reg-status-ch.auth-1') }
+                                    </option>
+                                    <option value="auth-2">
+                                        { t('data.substance.reg-status-ch.auth-2') }
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label={t('data.substance.reg-status-ch.restriction')}>
+                                    <option value="auth-svhc-annex-3">
+                                        { t('data.substance.reg-status-ch.restriction-1') }
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label={t('data.substance.reg-status-ch.harmonized-classification')}>
+                                    <option value="auth-svhc-annex-3">
+                                        { t('data.substance.reg-status-ch.harmonized-classification-1') }
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label={t('data.substance.reg-status-ch.protection-young-people')}>
+                                    <option value="auth-svhc-annex-3">
+                                        { t('data.substance.reg-status-ch.protection-young-people-1') }
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label={t('data.substance.reg-status-ch.maternety-protection')}>
+                                    <option value="auth-svhc-annex-3">
+                                        { t('data.substance.reg-status-ch.maternety-protection-1') }
+                                    </option>
+                                </optgroup>
+
+                                <option value="other-processes">
+                                    { t('data.substance.reg-status-ch.other-processes') }
+                                </option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-ch.other-processes-dscr') }
+                            </Form.Label>
+                            <Form.Control 
+                                name="other_processes_dscr"
+                                as="textarea"
+                                type="text"
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button 
+                        variant="secondary"
+                        onClick={() => setState({...state, regStatusCH: false})}
+                    >{t('close')}</Button>
+                    <Button variant="danger">
+                        {t('save')}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
+
+
+
+
     /*
         RETURN
         - DataForm generic component for all other
@@ -499,7 +663,8 @@ export default function Substance(props) {
                 custom={{
                     composition: CompositionField,
                     supplier: Supplier,
-                    hazard: hazardProfile
+                    hazard: hazardProfile,
+                    regStatusCH: regStatusCH
                 }}
             />
             

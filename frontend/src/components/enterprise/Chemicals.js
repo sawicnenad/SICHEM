@@ -76,8 +76,7 @@ export default function Chemicals(props) {
     const substanceFormik = useFormik({
         validationSchema: SubstanceSchema,
         initialValues: {
-            reference: "",
-            supplier: 0
+            reference: ""
         },
         onSubmit: values => {
             const data = {...values, enterprise: context.ent.id};
@@ -139,35 +138,6 @@ export default function Chemicals(props) {
 
                         <Form.Control.Feedback type="invalid">
                             { substanceFormik.errors.reference }
-                        </Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Label>
-                            {t('data.substance.supplier')}:
-                        </Form.Label>
-
-                        <Form.Control
-                           required
-                           name="supplier"
-                           as="select"
-                           isInvalid={substanceFormik.errors.supplier}
-                           value={substanceFormik.values.supplier}
-                           onChange={substanceFormik.handleChange}
-                        >
-                            <option value={0}></option>
-                            {
-                                context.suppliers.map(
-                                    item => (
-                                        <option value={item.id} key={item.id}>
-                                            { item.name }
-                                        </option>
-                                    )
-                                )
-                            }
-                        </Form.Control>
-                        <Form.Control.Feedback type="invalid">
-                            { substanceFormik.errors.supplier }
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Modal.Body>

@@ -31,6 +31,7 @@ export default function Component() {
     const myScheme = Yup.object().shape({
         reference: Yup.string().required(t('messages.form.required'))
     })
+    
     const myFormik = useFormik({
         validationSchema: myScheme,
         initialValues: {

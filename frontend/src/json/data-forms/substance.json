@@ -190,13 +190,7 @@
             "label": "data.substance.accordion.reg-status",
             "fields": [
                 "reg_status_ch",
-                "reg_status_ch_other",
-                "reg_status_reach",
-                "reg_status_reach_other",
-                "reg_status_clp",
-                "reg_status_clp_other",
                 "reg_status_eu",
-                "reg_status_eu_other",
                 "reg_status_file"
             ]
         }
@@ -2148,90 +2142,16 @@
             },
             "fieldType": "file",
             "label": "data.substance.other-tox-file"
-        }, 
+        },
         "reg_status_ch": {
-            "props": {
-                "as": "select",
-                "type": "text",
-                "name": "reg_status_ch"
-            },
-            "fieldType": "select",
-            "label": "data.substance.reg-status-ch",
-            "options": [
-                
-            ]
-        },
-        "reg_status_ch_other": {
-            "props": {
-                "name": "reg_status_ch_other",
-                "type": "text",
-                "as": "textarea",
-                "maxLength": 255
-            },
-            "label": "data.substance.reg-status-ch-other"
-        }, 
-        "reg_status_reach": {
-            "props": {
-                "as": "select",
-                "type": "text",
-                "name": "reg_status_reach"
-            },
-            "fieldType": "select",
-            "label": "data.substance.reg-status-reach",
-            "options": [
-                
-            ]
-        },
-        "reg_status_reach_other": {
-            "props": {
-                "name": "reg_status_reach_other",
-                "type": "text",
-                "as": "textarea",
-                "maxLength": 255
-            },
-            "label": "data.substance.reg-status-reach-other"
-        }, 
-        "reg_status_clp": {
-            "props": {
-                "as": "select",
-                "type": "text",
-                "name": "reg_status_clp"
-            },
-            "fieldType": "select",
-            "label": "data.substance.reg-status-clp",
-            "options": [
-                
-            ]
-        },
-        "reg_status_clp_other": {
-            "props": {
-                "name": "reg_status_clp_other",
-                "type": "text",
-                "as": "textarea",
-                "maxLength": 255
-            },
-            "label": "data.substance.reg-status-clp-other"
+            "component": "regStatusCH",
+            "fieldType": "custom",
+            "label": "data.substance.reg-status-ch"
         }, 
         "reg_status_eu": {
-            "props": {
-                "as": "select",
-                "type": "text",
-                "name": "reg_status_eu"
-            },
-            "fieldType": "select",
-            "label": "data.substance.reg-status-eu",
-            "options": [
-                
-            ]
-        },
-        "reg_status_eu_other": {
-            "props": {
-                "name": "reg_status_eu_other",
-                "type": "text",
-                "as": "textarea",
-                "maxLength": 255
-            },
-            "label": "data.substance.reg-status-eu-other"
+            "component": "regStatusEU",
+            "fieldType": "custom",
+            "label": "data.substance.reg-status-reach"
         }, 
         "reg_status_file": {
             "props": {
