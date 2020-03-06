@@ -22,7 +22,8 @@ import {
     faTimes,
     faMinus,
     faFilePdf,
-    faExchangeAlt
+    faExchangeAlt,
+    faWindowClose
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -42,7 +43,8 @@ library.add(
     faTimes,
     faMinus,
     faFilePdf,
-    faExchangeAlt
+    faExchangeAlt,
+    faWindowClose
 );
 
 function App() {

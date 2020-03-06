@@ -210,8 +210,13 @@ export default function Substance(props) {
                                                     [] : JSON.parse(substance.additional_hazard);
             }
             // because supplier is also custom field
-            if (['supplier', 'enterprise'].indexOf(field) !== -1) {
-                initialValues[field] = substance[field]
+            if ([
+                    'supplier',
+                    'enterprise',
+                    'reg_status_ch',
+                    'reg_status_eu'
+                ].indexOf(field) !== -1) {
+                    initialValues[field] = substance[field]
             }
             continue;
         }
@@ -507,6 +512,33 @@ export default function Substance(props) {
         we open for each a modal in order to configure
         the regulatory statuses for both CH and EU
     */
+    const reg1Schema = Yup.object().shape({
+        sub_type: Yup.string().required( t('messages.form.required') ),
+        status: Yup.string().required( t('messages.form.required') )
+    })
+    
+    // regCHformik uses values from myformik
+    // so we have parse it
+    let reg_status_ch = {
+        sub_type: "",
+        is_notified: false,
+        status: "",
+        other_processes_dscr: ""
+    };
+
+    if (myformik.values.reg_status_ch) {
+        reg_status_ch = JSON.parse(myformik.values.reg_status_ch);
+    }
+
+    const regCHformik = useFormik({
+        validationSchema: reg1Schema,
+        initialValues: reg_status_ch,
+        onSubmit: values => {
+            myformik.setFieldValue('reg_status_ch', JSON.stringify(values));
+            setState({ ...state, regStatusCH: false })
+        }
+    })
+
     const regStatusCH = (
         <div className="pb-2">
             <Row>
@@ -518,13 +550,68 @@ export default function Substance(props) {
                     <Button 
                         onClick={() => setState({ ...state, regStatusCH: true })}
                         variant="outline-danger" size="sm"
-                    >                                       { t('edit') }
+                    > { t('edit') }
                     </Button>
 
                     <Alert
+                        hidden={myformik.values.reg_status_ch !== ""}
                         className="my-2"
                         variant="warning"
-                    >{t('messages.not-configured')}</Alert>
+                    >       { t('messages.not-configured') }
+                    </Alert>
+
+                    <div 
+                        hidden={myformik.values.reg_status_ch === ""}
+                        className="mt-2 font-weight-bold"
+                    >
+                        {
+                            reg_status_ch.sub_type === "new-substance"
+                            ?
+                            <div>
+                                <FontAwesomeIcon icon="check-square" color="#5cb85c" />
+                                <span className="ml-2">
+                                    { t('data.substance.reg-status-ch.new-substance') }
+                                </span>
+                            </div>
+                            : <div>
+                                { t('data.substance.reg-status-ch.existing-substance') }
+                            </div>
+                        }
+
+                        {
+                            reg_status_ch.sub_type === "new-substance" &&
+                            reg_status_ch.is_notified ?
+                                <div>
+                                    <FontAwesomeIcon icon="check-square" color="#5cb85c" />
+                                    <span className="ml-2">
+                                        { t('data.substance.reg-status-ch.is-notified') }
+                                    </span>
+                                </div>
+                                : <div />
+                        }
+
+                        {
+                            reg_status_ch.sub_type === "new-substance" &&
+                            !reg_status_ch.is_notified ?
+                                <div>
+                                    <FontAwesomeIcon icon="window-close" color="#d9534f" />
+                                    <span className="ml-2">
+                                        { t('data.substance.reg-status-ch.is-notified') }
+                                    </span>
+                                </div>
+                                : <div />
+                        }
+
+                        {
+                            reg_status_ch.status !== 'other-processes' ?
+                            <div>
+                                {t(`data.substance.reg-status-ch.${reg_status_ch.status}`)}
+                            </div>
+                            : <div className="font-weight-normal mt-3">
+                                { reg_status_ch.other_processes_dscr }
+                            </div>
+                        }
+                    </div>
                 </Col>
             </Row>
 
@@ -546,8 +633,12 @@ export default function Substance(props) {
                             </Form.Label>
 
                             <Form.Control
+                                required
                                 as="select"
                                 name="sub_type"
+                                value={regCHformik.values.sub_type}
+                                onChange={regCHformik.handleChange}
+                                isInvalid={regCHformik.errors.sub_type}
                             >
                                 <option value="" disabled selected></option>
                                 <option value="existing-substance">
@@ -557,12 +648,18 @@ export default function Substance(props) {
                                     {t('data.substance.reg-status-ch.new-substance')}
                                 </option>
                             </Form.Control>
+
+                            <Form.Control.Feedback type="invalid">
+                                {regCHformik.errors.sub_type}
+                            </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group>
+                        <Form.Group hidden={regCHformik.values.sub_type !== "new-substance"}>
                             <Form.Check
                                 name="is_notified"
                                 label={ t('data.substance.reg-status-ch.is-substance-notified') }
+                                checked={regCHformik.values.is_notified}
+                                onChange={regCHformik.handleChange}
                             />
                         </Form.Group>
 
@@ -572,8 +669,12 @@ export default function Substance(props) {
                             </Form.Label>
 
                             <Form.Control
+                                required
                                 name="status"
                                 as="select"
+                                value={regCHformik.values.status}
+                                onChange={regCHformik.handleChange}
+                                isInvalid={!!regCHformik.errors.status}
                             >
                                 <option value="" disabled selected></option>
                                 <optgroup label={t('data.substance.reg-status-ch.authorization')}>
@@ -613,9 +714,13 @@ export default function Substance(props) {
                                     { t('data.substance.reg-status-ch.other-processes') }
                                 </option>
                             </Form.Control>
+
+                            <Form.Control.Feedback type="invalid">
+                                {regCHformik.errors.status}
+                            </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group>
+                        <Form.Group hidden={regCHformik.values.status !== 'other-processes'}>
                             <Form.Label>
                                 { t('data.substance.reg-status-ch.other-processes-dscr') }
                             </Form.Label>
@@ -623,6 +728,8 @@ export default function Substance(props) {
                                 name="other_processes_dscr"
                                 as="textarea"
                                 type="text"
+                                value={regCHformik.values.other_processes_dscr}
+                                onChange={regCHformik.handleChange}
                             />
                         </Form.Group>
                     </Form>
@@ -633,7 +740,10 @@ export default function Substance(props) {
                         variant="secondary"
                         onClick={() => setState({...state, regStatusCH: false})}
                     >{t('close')}</Button>
-                    <Button variant="danger">
+                    <Button
+                        variant="danger"
+                        onClick={regCHformik.handleSubmit}
+                    >
                         {t('save')}
                     </Button>
                 </Modal.Footer>
@@ -642,6 +752,145 @@ export default function Substance(props) {
     )
 
 
+    // EU regulatory status
+    const reg2Schema = Yup.object().shape({
+
+    })
+
+    const regEUformik = useFormik({
+        validationSchema: reg2Schema,
+        initialValues: {},
+        onSubmit: values => {
+            console.log(values);
+        }
+    })
+
+    const regStatusEU = (
+        <div>
+           <Row>
+                <Col {...scaling.label}>
+                    { t('data.substance.reg-status-eu.label') }:
+                </Col>
+
+                <Col {...scaling.field}>
+                    <Button 
+                        onClick={() => setState({ ...state, regStatusEU: true })}
+                        variant="outline-danger" size="sm"
+                    > { t('edit') }
+                    </Button>
+                </Col>
+            </Row>
+
+            <Modal
+                show={state.regStatusEU}
+                onHide={ () => setState({...state, regStatusEU: false}) }
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        { t('data.substance.reg-status-eu.label') }
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form>
+
+                        <div className="my-2">
+                            <strong>{ t('data.substance.reg-status-eu.reach') }</strong>
+                        </div>
+
+                        <Form.Group>
+                            <Form.Check
+                                label={ t('data.substance.reg-status-eu.is-registered') }
+                                name="is_registered"
+                                checked={regEUformik.values.is_registered}
+                                onChange={regEUformik.handleChange}
+                            />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Check
+                                label={ t('data.substance.reg-status-eu.full-registered') }
+                                type="radio"
+                                name="full_registered"
+                                checked={regEUformik.values.full_registered}
+                                onChange={() => regEUformik.setFieldValue('full_registered', true)}
+                            />
+                            <Form.Check
+                                label={ t('data.substance.reg-status-eu.intermediate-registered') }
+                                type="radio"
+                                name="full_registered"
+                                checked={regEUformik.values.full_registered === false}
+                                onChange={() => regEUformik.setFieldValue('full_registered', false)}
+                            />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-eu.status') }:
+                            </Form.Label>
+
+                            <Form.Control
+                                name="status"
+                                as="select"
+                            >
+                                <optgroup label={ t('data.substance.reg-status-eu.evaluation') }>
+                                    <option value="eval-1">
+                                        {t('data.substance.reg-status-eu.eval-1')}
+                                    </option>
+                                    <option value="eval-2">
+                                        {t('data.substance.reg-status-eu.eval-2')}
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label={ t('data.substance.reg-status-eu.auth') }>
+                                    <option value="auth-1">
+                                        {t('data.substance.reg-status-eu.auth-1')}
+                                    </option>
+                                    <option value="auth-2">
+                                        {t('data.substance.reg-status-eu.auth-2')}
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label={ t('data.substance.reg-status-eu.restriction') }>
+                                    <option value="restriction">
+                                        {t('data.substance.reg-status-eu.restriction-1')}
+                                    </option>
+                                </optgroup>
+
+                                <option value="other">
+                                    {t('data.substance.reg-status.eu.other-processes')}
+                                </option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-eu.other-processes-dscr') }:
+                            </Form.Label>
+                            <Form.Control
+                                name="other_processes_dscr"
+                                type="text"
+                                as="textarea"
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button 
+                        variant="secondary"
+                        onClick={() => setState({...state, regStatusEU: false})}
+                    >{t('close')}</Button>
+                    <Button
+                        variant="danger"
+                        onClick={regEUformik.handleSubmit}
+                    >
+                        {t('save')}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
 
 
     /*
@@ -664,7 +913,8 @@ export default function Substance(props) {
                     composition: CompositionField,
                     supplier: Supplier,
                     hazard: hazardProfile,
-                    regStatusCH: regStatusCH
+                    regStatusCH: regStatusCH,
+                    regStatusEU: regStatusEU
                 }}
             />
             

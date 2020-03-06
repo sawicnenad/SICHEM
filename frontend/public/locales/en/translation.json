@@ -361,6 +361,25 @@
                 "maternety-protection": "Maternety protection",
                 "maternety-protection-1": "The substance is of concern for maternety protection",
                 "other-processes": "Other processes",
+                "other-processes-dscr": "Other processes - description",
+                "is-notified": "Notified"
+            },
+            "reg-status-eu": {
+                "label": "Regulatory status - EU",
+                "reach": "REACH",
+                "is-registered": "Substance is registered under REACH",
+                "full-registered": "Registered (Full)",
+                "intermediate-registered": "Registered (Intermediate)",
+                "status": "Regulatory status",
+                "evaluation": "Evaluation",
+                "eval-1": "Dossier evaluation",
+                "eval-2": "Substance evaluation",
+                "auth": "Authorization",
+                "auth-1": "Substance of Very High Concern (SVHC) - Candidate List REACH",
+                "auth-2": "Substance of Very High Concern (SVHC) - Annex XIV REACH",
+                "restriction": "Restriction",
+                "restriction-1": "Annex XVII REACH",
+                "other-processes": "Other REACH processes",
                 "other-processes-dscr": "Other processes - description"
             },
             "reg-status-file": "Relevant file"
