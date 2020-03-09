@@ -37,10 +37,12 @@
     "messages": {    
         "not-configured": "Not configured",
         "substance-delete-msg": "This substance will be permanently deleted from the database!",
+        "supplier-delete-msg": "The supplier will be permanently deleted from the database!",
         "are-you-sure": "Are you sure?",
         "substance-added": "New substance created",
         "substance-updated": "Substance updated",
         "supplier-added": "New supplier created",
+        "supplier-updated": "Supplier updated",
         "no-data-for-this-page": "No data to show.",
         "deleted": "Deleted successfully",
         "composition-help": "Add component by component with details on their concentrations to the composition using the plus button. To define a completely new component, which later can be used as constituent, additive or impurity, apply 'New' button placed next to the component field.",
@@ -132,6 +134,7 @@
             "list-of-components": "List of included components"
         },
         "supplier": {
+            "title": "Supplier form",
             "origin": "Origin",
             "name": "Supplier name",
             "address": "Address",
@@ -380,7 +383,14 @@
                 "restriction": "Restriction",
                 "restriction-1": "Annex XVII REACH",
                 "other-processes": "Other REACH processes",
-                "other-processes-dscr": "Other processes - description"
+                "other-processes-clp": "Other processes",
+                "other-processes-dscr": "Other processes - description",
+                "clp-title": "CLP process",
+                "clp-1": "The substance is listed in Annex VI CLP",
+                "other-processes-title": "Other processes / EU legislation",
+                "other-directive": "Other processes",
+                "directive-1": "Substance falls under the Directive 2004/37/EC (Carcinogens and Mutagens Directive CMD)",
+                "directive-2": "Substance falls under the Directive 98/24/EC (Chemical Agents Directive CAD)"
             },
             "reg-status-file": "Relevant file"
         }

@@ -44,7 +44,7 @@ export default function Home(props) {
         </div>
     )
     
-    const dataEntryButtonVariant = "danger";
+    const dataEntryButtonVariant = "outline-danger";
 
     return (
         <div className="container-lg px-5 py-3">

@@ -20,9 +20,6 @@
             "formControlFeedback": true,
             "options": [
                 {
-                    "value": "",
-                    "label": ""
-                }, {
                     "value": "eu-eea",
                     "label": "data.supplier.origin-options.eu-eea"
                 }, {

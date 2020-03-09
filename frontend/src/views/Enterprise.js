@@ -8,6 +8,7 @@ import withAuth from '../hoc/withAuth';
 import Chemicals from '../components/enterprise/Chemicals';
 import Substance from '../components/enterprise/data-forms/Substance';
 import DataForm from '../components/enterprise/data-forms/DataForm';
+import Supplier from '../components/enterprise/data-forms/Supplier';
 
 /*
     view specific for enterprises
@@ -42,7 +43,8 @@ function Enterprise() {
                 <Route exact path="/enterprise" component={ Home } />
                 <Route exact path="/enterprise/chemicals/:view" component={ Chemicals } />
                 <Route exact path="/enterprise/substance/:id" component={ Substance } />
-                <Route exact path="/enterprise/data-entry/" component={DataForm} />
+                <Route exact path="/enterprise/supplier/:id" component={ Supplier } />
+                <Route exact path="/enterprise/data-entry/" component={ DataForm } />
             </Switch>
         </div>
     )

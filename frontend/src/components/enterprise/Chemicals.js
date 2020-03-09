@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Tabs, Tab, Button, Modal, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import DataList from './DataList';
+import DataForm from './data-forms/DataForm';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import { useFormik } from 'formik';
@@ -15,7 +16,47 @@ export default function Chemicals(props) {
     const APIcontext = useContext(ApiRequestsContext);
     const [ state, setState ] = useState({});
 
+    
 
+    // SUPPLIERS
+    const suppliers = () => {
+        let data = [];
+        let suppliers = context.suppliers;
+
+        for (let i in suppliers) {
+            data.push(
+                {
+                    id: suppliers[i].id,
+                    title: suppliers[i].name,
+                    data: [
+                        {
+                            label: t('data.supplier.origin'),
+                            value: t(`data.supplier.origin-options.${suppliers[i].origin}`)
+                        }, {
+                            label: t('data.supplier.address'),
+                            value: suppliers[i].address
+                        }, {
+                            label: t('data.supplier.info'),
+                            value: suppliers[i].info
+                        }
+                    ]
+                }
+            )
+        }
+        return data;
+    }
+
+    const SupplierCreateButton = (
+        <div className="text-right">
+            <Button
+                variant="danger"
+                onClick={() => props.history.push('/enterprise/supplier/0')}
+            >
+                { t('create-new') }
+            </Button>
+
+        </div>
+    )
 
 
 
@@ -33,7 +74,7 @@ export default function Chemicals(props) {
                     data: [
                         {
                             label: t('data.substance.physical-state'),
-                            value: t(`data.substance.physical-state-option.${subs[i].physical_state}`)
+                            value: subs[i].physical_state ? t(`data.substance.physical-state-option.${subs[i].physical_state}`) : ""
                         }, {
                             label: t('data.substance.iupac'),
                             value: subs[i].iupac
@@ -172,7 +213,14 @@ export default function Chemicals(props) {
                     {
                         eventKey: "suppliers",
                         title: t('suppliers'),
-                        component: "Suppliers"
+                        component: <DataList 
+                                        name="suppliers"
+                                        data={ suppliers() }
+                                        api={`${APIcontext.API}/suppliers/`}
+                                        link='/enterprise/supplier/'
+                                        delMsg={t('messages.supplier-delete-msg')}
+                                        createButton={SupplierCreateButton}
+                                    />
                     }, {
                         eventKey: "substances",
                         title: t('substances'),

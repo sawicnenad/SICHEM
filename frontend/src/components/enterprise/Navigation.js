@@ -17,14 +17,18 @@ export default function Navigation(props) {
     }
 
     return (
-        <Navbar bg="light" expand="md" className="px-5">
+        <Navbar bg="dark" expand="md" className="px-5" variant="dark">
             <Navbar.Brand href="/enterprise">SICHEM</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
             <Navbar.Collapse>
                 <Nav className="mr-auto w-100">
                     <Form inline className="w-100">
-                        <FormControl type="text" placeholder="Search" className="w-50 mr-sm-2" />
+                        <FormControl 
+                            type="text"
+                            placeholder="Search"
+                            className="w-50 mr-sm-2 bg-dark text-light" 
+                        />
                     </Form>
                 </Nav>
 

@@ -545,7 +545,7 @@ export default function DataForm(props) {
     return (
         <div className="container my-3">
             { funButtons }
-            <div className="mt-3">
+            <div className={props.formClassName ? props.formClassName : "mt-3"}>
                 { form }
             </div>
         </div>

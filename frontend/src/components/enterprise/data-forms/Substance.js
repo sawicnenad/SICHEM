@@ -732,6 +732,8 @@ export default function Substance(props) {
                                 onChange={regCHformik.handleChange}
                             />
                         </Form.Group>
+
+                        
                     </Form>
                 </Modal.Body>
 
@@ -753,15 +755,29 @@ export default function Substance(props) {
 
 
     // EU regulatory status
-    const reg2Schema = Yup.object().shape({
+    const reg2Schema = Yup.object().shape({})
 
-    })
+    let reg_status_eu = {
+        is_registered: false,
+        full_registered: null,
+        status: "",
+        other_processes_dscr: "",
+        clp: "",
+        clp_other_processes_dscr: "",
+        other_directive: "",
+        other_directive_dscr: ""
+    }
+
+    if (myformik.values.reg_status_eu) {
+        reg_status_eu = JSON.parse(myformik.values.reg_status_eu);
+    }
 
     const regEUformik = useFormik({
         validationSchema: reg2Schema,
-        initialValues: {},
+        initialValues: reg_status_eu,
         onSubmit: values => {
-            console.log(values);
+            myformik.setFieldValue('reg_status_eu', JSON.stringify(values));
+            setState({ ...state, regStatusEU: false })
         }
     })
 
@@ -778,6 +794,79 @@ export default function Substance(props) {
                         variant="outline-danger" size="sm"
                     > { t('edit') }
                     </Button>
+
+                    <Alert
+                        hidden={myformik.values.reg_status_eu !== ""}
+                        className="my-2"
+                        variant="warning"
+                    >       { t('messages.not-configured') }
+                    </Alert>
+
+                    <div 
+                        hidden={myformik.values.reg_status_eu === ""} 
+                        className="font-weight-bold"
+                    >
+                        <div className="mb-2 mt-4 text-muted">
+                            { t('data.substance.reg-status-eu.reach') }:
+                        </div>
+                        {
+                            reg_status_eu.is_registered
+                            ?
+                            <div>
+                                <FontAwesomeIcon icon="check-square" color="#5cb85c" />
+                                <span className="ml-2">
+                                    { t('data.substance.reg-status-eu.is-registered') }
+                                </span>
+                            </div>
+                            : <div />
+                        }
+
+
+                        {
+                            reg_status_eu.full_registered
+                            ?
+                            t('data.substance.reg-status-eu.full-registered')
+                            : t('data.substance.reg-status-eu.intermediate-registered')
+                        }
+
+                        <div>
+                            {t(`data.substance.reg-status-eu.${reg_status_eu.status}`)}
+                        </div>
+
+                        <div>
+                            <i>
+                                { reg_status_eu.other_processes_dscr }
+                            </i>
+                        </div>
+
+                        <div className="mb-2 mt-4 text-muted">
+                            { t('data.substance.reg-status-eu.clp-title') }:
+                        </div>
+
+                        {
+                            reg_status_eu.clp === 'clp-1' ?
+                            <div>
+                                { t('data.substance.reg-status-eu.clp-1') }
+                            </div>
+                            : <div>
+                                { reg_status_eu.clp_other_processes_dscr }
+                            </div>
+                        }
+
+                        <div className="mb-2 mt-4 text-muted">
+                            { t('data.substance.reg-status-eu.other-processes-title') }:
+                        </div>
+
+                        {
+                            reg_status_eu.other_directive !== 'other' ?
+                            <div>
+                                { t(`data.substance.reg-status-eu.${reg_status_eu.other_directive}`) }
+                            </div>
+                            : <div>
+                                { reg_status_eu.other_directive_dscr }
+                            </div>
+                        }
+                    </div>
                 </Col>
             </Row>
 
@@ -807,7 +896,7 @@ export default function Substance(props) {
                             />
                         </Form.Group>
 
-                        <Form.Group>
+                        <Form.Group hidden={regEUformik.values.is_registered === false}>
                             <Form.Check
                                 label={ t('data.substance.reg-status-eu.full-registered') }
                                 type="radio"
@@ -832,6 +921,8 @@ export default function Substance(props) {
                             <Form.Control
                                 name="status"
                                 as="select"
+                                value={regEUformik.values.status}
+                                onChange={regEUformik.handleChange}
                             >
                                 <optgroup label={ t('data.substance.reg-status-eu.evaluation') }>
                                     <option value="eval-1">
@@ -858,12 +949,12 @@ export default function Substance(props) {
                                 </optgroup>
 
                                 <option value="other">
-                                    {t('data.substance.reg-status.eu.other-processes')}
+                                    {t('data.substance.reg-status-eu.other-processes')}
                                 </option>
                             </Form.Control>
                         </Form.Group>
 
-                        <Form.Group>
+                        <Form.Group hidden={regEUformik.values.status !== 'other'}>
                             <Form.Label>
                                 { t('data.substance.reg-status-eu.other-processes-dscr') }:
                             </Form.Label>
@@ -871,6 +962,85 @@ export default function Substance(props) {
                                 name="other_processes_dscr"
                                 type="text"
                                 as="textarea"
+                                value={regEUformik.values.other_processes_dscr}
+                                onChange={regEUformik.handleChange}
+                            />
+                        </Form.Group>
+
+                        <div className="my-2">
+                            <strong>{t('data.substance.reg-status-eu.clp-title')}</strong>
+                        </div>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-eu.clp-title') }
+                            </Form.Label>
+
+                            <Form.Control
+                                as="select"
+                                name="clp"
+                                value={regEUformik.values.clp}
+                                onChange={regEUformik.handleChange}
+                            >
+                                <option value="clp-1">
+                                    { t('data.substance.reg-status-eu.clp-1') }
+                                </option>
+                                <option value="other">
+                                    { t('data.substance.reg-status-eu.other-processes-clp') }
+                                </option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group hidden={regEUformik.values.clp !== 'other'}>
+                            <Form.Label>
+                                { t('data.substance.reg-status-ch.other-processes-dscr') }
+                            </Form.Label>
+                            <Form.Control 
+                                name="clp_other_processes_dscr"
+                                as="textarea"
+                                type="text"
+                                value={regEUformik.values.clp_other_processes_dscr}
+                                onChange={regEUformik.handleChange}
+                            />
+                        </Form.Group>
+
+                        <div className="my-2">
+                            <strong>{t('data.substance.reg-status-eu.other-processes-title')}</strong>
+                        </div>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.substance.reg-status-eu.other-directive') }:
+                            </Form.Label>
+
+                            <Form.Control
+                                name="other_directive"
+                                as="select"
+                                value={regEUformik.values.other_directive}
+                                onChange={regEUformik.handleChange}
+                            >   
+                                <option value="directive-1">
+                                    { t('data.substance.reg-status-eu.directive-1') }
+                                </option>
+                                <option value="directive-1">
+                                    { t('data.substance.reg-status-eu.directive-2') }
+                                </option>
+                                <option value="other">
+                                    { t('data.substance.reg-status-eu.other-processes') }
+                                </option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group hidden={regEUformik.values.other_directive !== 'other'}>
+                            <Form.Label>
+                                { t('data.substance.reg-status-eu.other-processes-dscr') }
+                            </Form.Label>
+
+                            <Form.Control
+                                type="text"
+                                as="textarea"
+                                name="other_directive_dscr"
+                                onChange={regEUformik.handleChange}
                             />
                         </Form.Group>
                     </Form>
