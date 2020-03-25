@@ -256,29 +256,31 @@ class Composition(models.Model):
 class Mixture(models.Model):
     """ Two or more substances mixed """
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    designation = models.CharField(max_length=255)
-    physical_state = models.CharField(max_length=25)        # at 20°C and 101.3 kPa
-    dustiness = models.CharField(max_length=50)
-    dustiness_measured = models.DecimalField(
-        blank=True, null=True, decimal_places=1, max_digits=8)
-    pc = models.CharField(max_length=255)                   # product categories - stringified list
+    reference = models.CharField(max_length=50)
+    name = models.CharField(max_length=255, blank=True)
+    designation = models.CharField(max_length=255, blank=True)
+    physical_state = models.CharField(max_length=25, blank=True)        # at 20°C and 101.3 kPa
+    dustiness = models.CharField(max_length=50, blank=True)
+    dustiness_measured = models.CharField(max_length=50, blank=True)
+    pc = models.CharField(max_length=255, blank=True)                   # product categories - stringified list
+    components = models.TextField(blank=True)
 
-class MixtureComponent(models.Model):
+    # 3. Hazard profile
+    physical_hazard = models.TextField(blank=True) # json form -> hazard class: hazard category
+    health_hazard = models.TextField(blank=True)
+    environmental_hazard = models.TextField(blank=True)
+    additional_hazard = models.TextField(blank=True)
+
+
     """
-        for each substance/component of mixture
-        an instance is created containing supplementary data
+        components: list of objects ->
+            {
+                id (substance): x,
+                conc_typical: x,
+                conc_lower: x,
+                conc_higher: x,
+                ac: x,
+                info: xxx,
+                function: x
+            }
     """
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    substance = models.ForeignKey(
-        Substance, null=True, on_delete=models.SET_NULL)
-    conc_typical = models.DecimalField(
-        blank=True, null=True, decimal_places=4, max_digits=6)
-    conc_lower = models.DecimalField(
-        blank=True, null=True, decimal_places=4, max_digits=6)
-    conc_upper = models.DecimalField(
-        blank=True, null=True, decimal_places=4, max_digits=6)
-    ac = models.DecimalField(                                       # activity coefficient
-        blank=True, null=True, decimal_places=4, max_digits=6)
-    info = models.CharField(max_length=255, blank=True)
-    function = models.CharField(max_length=255, blank=True)         # technical function - stringified list

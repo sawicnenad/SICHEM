@@ -210,8 +210,7 @@ export default function Substance(props) {
                                                     [] : JSON.parse(substance.additional_hazard);
             }
             // because supplier is also custom field
-            if ([
-                    'supplier',
+            if ([   'supplier',
                     'enterprise',
                     'reg_status_ch',
                     'reg_status_eu'
@@ -230,9 +229,6 @@ export default function Substance(props) {
             initialValues[field] = substance[field];
         }
     }
-
-
-    
 
     // instead of using Formik component
     // we use formik hook
@@ -333,6 +329,7 @@ export default function Substance(props) {
                     let suppliers = [...entContext.suppliers];
                     suppliers.push(res.data);
                     entContext.refreshState('suppliers', suppliers);
+                    myformik.setFieldValue("supplier", res.data.id);
                 }
             ).catch(
                 () => setState({...state, failedMsg: true})

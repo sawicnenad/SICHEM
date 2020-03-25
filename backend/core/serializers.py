@@ -3,7 +3,8 @@ from .models import (
     Supplier,
     Substance,
     Composition,
-    Component
+    Component,
+    Mixture
 )
 
 
@@ -25,4 +26,9 @@ class CompositionSerializer(serializers.ModelSerializer):
 class ComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Component
+        fields = '__all__'
+
+class MixtureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mixture 
         fields = '__all__'

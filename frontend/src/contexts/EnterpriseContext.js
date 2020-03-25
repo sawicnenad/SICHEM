@@ -29,6 +29,7 @@ function EnterpriseContextProvider(props) {
         const promSupps = axios.get(`${context.API}/suppliers/`, headers);
         const promCompositions = axios.get(`${context.API}/compositions/`, headers);
         const promComponents = axios.get(`${context.API}/components/`, headers);
+        const promMix = axios.get(`${context.API}/mixtures/`, headers)
 
         Promise
             .all([
@@ -36,7 +37,8 @@ function EnterpriseContextProvider(props) {
                 promSubs,
                 promSupps,
                 promCompositions,
-                promComponents
+                promComponents,
+                promMix
             ])
             .then(
                 res => setState({
@@ -45,6 +47,7 @@ function EnterpriseContextProvider(props) {
                     suppliers: res[2].data,
                     compositions: res[3].data,
                     components: res[4].data,
+                    mixtures: res[5].data,
                     loaded: true
                 }) )
             .catch(
@@ -62,7 +65,6 @@ function EnterpriseContextProvider(props) {
         * after an element is removed
         * ...
     */
-    console.log(state)
     const refreshState = (datasetName, dataset) => {
         let newState = { ...state };
         newState[datasetName] = dataset;

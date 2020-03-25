@@ -262,11 +262,15 @@ export default function DataForm(props) {
                                 onChange={props.formik.handleChange}
                                 isInvalid={!!props.formik.errors[field.props.name]}
                             >
-                                <option value="" disabled></option>
+                                {
+                                    field.props.multiple ?
+                                    "" : <option value="" disabled></option>
+                                }
                                 {
                                     field.optgroups ?
                                     field.options.map(
                                         item => 
+                                            item.options ? 
                                             <optgroup label={ t(item.label) } key={item.label}>
                                                 {
                                                     item.options.map(
@@ -277,6 +281,9 @@ export default function DataForm(props) {
                                                     )
                                                 }
                                             </optgroup>
+                                            : <option value={item.value} key={item.value}>
+                                                { t(item.label) }
+                                            </option>
                                     )
                                     : 
                                     field.options.map(

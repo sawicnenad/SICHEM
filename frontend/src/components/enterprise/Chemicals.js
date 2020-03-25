@@ -201,9 +201,128 @@ export default function Chemicals(props) {
 
 
 
+    // MIXTURES
+    // create list of mixtures that is representative for all mixtures
+    // and is shown in DataList component
+    const mixtures = () => {
+        let data = [];
+        let mixtures = context.mixtures;
+
+        for (let i in mixtures) {
+            data.push(
+                {
+                    id: mixtures[i].id,
+                    title: mixtures[i].reference,
+                    data: [
+                        {
+                            label: t('data.mixtures.reference'),
+                            value: mixtures[i].reference
+                        }
+                    ]
+                }
+            )
+        }
+        return data;
+    }
+
+    const mixYup = Yup.object().shape({
+        reference: Yup.string()
+            .required(t('messages.form.required'))
+            .max(50, t('messages.form.too-long'))
+    })
+
+    const mixFormik = useFormik({
+        validationSchema: mixYup,
+        initialValues: {
+            reference: ""
+        },
+        onSubmit: values => {
+            const data = {...values, enterprise: context.ent.id};
+            axios.post(
+                `${APIcontext.API}/mixtures/`,
+                data,
+                {headers: {
+                    Pragma: "no-cache",
+                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }}
+            ).then(
+                res => {
+                    // refresh context data in state
+                    let mixtures = [...context.mixtures];
+                    mixtures.push(res.data);
+                    context.refreshState('mixtures', mixtures);
+                    props.history.push(`/enterprise/mixture/${res.data.id}`);
+                }
+            ).catch(
+                e => console.log(e)
+            )
+        }
+    })
+
+    // this one opens modal where we need to enter mixture reference name
+    const MixtureCreateButton = (
+        <div className="text-right">
+            <Button 
+                variant="danger"
+                onClick={() => setState({...state, newMixtureModal: true })}
+            >
+                { t('create-new') }
+            </Button>
+
+            <Modal
+                show={state.newMixtureModal}
+                onHide={() => setState({ ...state, newMixtureModal: false })}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        { t('data.mixture.new-mixture') }
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>
+                                {t('data.mixture.reference')}:
+                            </Form.Label>
+
+                            <Form.Control
+                                name="reference"
+                                type="text"
+                                required
+                                value={mixFormik.values.reference}
+                                onChange={mixFormik.handleChange}
+                                isInvalid={!!mixFormik.errors.reference}
+                            />
+
+                            <Form.Control.Feedback type="invalid">
+                                {mixFormik.errors.reference}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button 
+                        variant="secondary"
+                        onClick={() => setState({...state, newMixtureModal: false })}
+                    >
+                        { t('cancel') }
+                    </Button>
+                    <Button variant="danger" onClick={mixFormik.handleSubmit}>
+                        { t('save') }
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
 
 
 
+
+
+
+    // -------------------------- RETURN ---------------------------------------------------
 
     return (
         <div className="container-lg px-5 py-3">
@@ -235,7 +354,14 @@ export default function Chemicals(props) {
                     }, {
                         eventKey: "mixtures",
                         title: t('mixtures'),
-                        component: "Mixtures"
+                        component: <DataList
+                                        name="mixtures"
+                                        data={ mixtures() }
+                                        api={`${APIcontext.API}/mixtures/`}
+                                        link='/enterprise/mixture/'
+                                        delMsg={t('messages.mixture-delete-msg')}
+                                        createButton={MixtureCreateButton}
+                                    />
                     }
                 ].map(
                     item => (

@@ -11,7 +11,8 @@ from .serializers import (
     SupplierSerializer,
     SubstanceSerializer,
     CompositionSerializer,
-    ComponentSerializer
+    ComponentSerializer,
+    MixtureSerializer
 )
 from rest_framework.parsers import MultiPartParser, JSONParser
 
@@ -44,3 +45,7 @@ class CompositionViewSet(EntDataViewSet):
 class ComponentViewSet(EntDataViewSet):
     queryset = Component.objects.all()
     serializer_class = ComponentSerializer
+
+class MixtureViewSet(EntDataViewSet):
+    queryset = Mixture.objects.all()
+    serializer_class = MixtureSerializer

@@ -1,0 +1,259 @@
+{
+    "defaultActiveKey": "id",
+    "cards": [
+        {
+            "eventKey": "id",
+            "label": "data.mixture.accordion.id",
+            "fields": [
+                "reference",
+                "name",
+                "designation",
+                "physical_state",
+                "dustiness",
+                "dustiness_measured",
+                "pc"
+            ]
+        }, {
+            "eventKey": "hazard",
+            "label": "data.mixture.accordion.hazard",
+            "fields": [
+                "hazard"
+            ]
+        }, {
+            "eventKey": "components",
+            "label": "data.mixture.accordion.components",
+            "fields": [
+            ]
+        }
+    ],
+    "fields": {
+        "reference": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "reference",
+                "maxLength": 50
+            },
+            "label": "data.mixture.reference",
+            "formControlFeedback": true
+        }, 
+        "name": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "name"
+            },
+            "label": "data.mixture.name",
+            "formControlFeedback": true
+        }, 
+        "designation": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "designation"
+            },
+            "label": "data.mixture.designation",
+            "formControlFeedback": true
+        }, 
+        "physical_state": {
+            "props": {
+                "as": "select",
+                "name": "physical_state"
+            },
+            "fieldType": "select",
+            "label": "data.mixture.physical_state",
+            "options": [
+                {
+                    "label": "data.mixture.physical-state.gas",
+                    "value": "gas"
+                }, {
+                    "label": "data.mixture.physical-state.liquified-gas",
+                    "value": "liquified-gas"
+                }, {
+                    "label": "data.mixture.physical-state.liquid",
+                    "value": "liquid"
+                }, {
+                    "label": "data.mixture.physical-state.molten-metal",
+                    "value": "molten-metal"
+                }, {
+                    "label": "data.mixture.physical-state.solid-object",
+                    "value": "solid-object"
+                }
+            ]
+        },
+        "dustiness": {
+            "props": {
+                "as": "select",
+                "name": "dustiness"
+            },
+            "fieldType": "select",
+            "label": "data.mixture.dustiness",
+            "options": [
+                {
+                    "label": "data.mixture.dustiness-options.very-low",
+                    "value": "very-low"
+                }, {
+                    "label": "data.mixture.dustiness-options.low",
+                    "value": "low"
+                }, {
+                    "label": "data.mixture.dustiness-options.medium",
+                    "value": "medium"
+                }, {
+                    "label": "data.mixture.dustiness-options.high",
+                    "value": "high"
+                }, {
+                    "label": "data.mixture.dustiness-options.very-high",
+                    "value": "very-high"
+                }
+            ]
+        },
+        "dustiness_measured": {
+            "props": {
+                "type": "text",
+                "name": "dustiness_measured"
+            },
+            "scaling": {"md": 3},
+            "label": "data.mixture.dustiness-measured"
+        },
+        "pc": {
+            "props": {
+                "as": "select",
+                "name": "pc",
+                "multiple": true
+            },
+            "fieldType": "select",
+            "label": "data.mixture.product-category",
+            "options": [
+                {
+                    "label": "data.mixture.pc.pc1",
+                    "value": "pc1"
+                }, {
+                    "label": "data.mixture.pc.pc2",
+                    "value": "pc2"
+                }, {
+                    "label": "data.mixture.pc.pc3",
+                    "value": "pc3"
+                }, {
+                    "label": "data.mixture.pc.pc4",
+                    "value": "pc4"
+                }, {
+                    "label": "data.mixture.pc.pc7",
+                    "value": "pc7"
+                }, {
+                    "label": "data.mixture.pc.pc8",
+                    "value": "pc8"
+                }, {
+                    "label": "data.mixture.pc.pc9a",
+                    "value": "pc9a"
+                }, {
+                    "label": "data.mixture.pc.pc9b",
+                    "value": "pc9b"
+                }, {
+                    "label": "data.mixture.pc.pc9c",
+                    "value": "pc9c"
+                }, {
+                    "label": "data.mixture.pc.pc11",
+                    "value": "pc11"
+                }, {
+                    "label": "data.mixture.pc.pc12",
+                    "value": "pc12"
+                }, {
+                    "label": "data.mixture.pc.pc13",
+                    "value": "pc13"
+                }, {
+                    "label": "data.mixture.pc.pc14",
+                    "value": "pc14"
+                }, {
+                    "label": "data.mixture.pc.pc15",
+                    "value": "pc15"
+                }, {
+                    "label": "data.mixture.pc.pc16",
+                    "value": "pc16"
+                }, {
+                    "label": "data.mixture.pc.pc17",
+                    "value": "pc17"
+                }, {
+                    "label": "data.mixture.pc.pc18",
+                    "value": "pc18"
+                }, {
+                    "label": "data.mixture.pc.pc19",
+                    "value": "pc19"
+                }, {
+                    "label": "data.mixture.pc.pc20",
+                    "value": "pc20"
+                }, {
+                    "label": "data.mixture.pc.pc21",
+                    "value": "pc21"
+                }, {
+                    "label": "data.mixture.pc.pc23",
+                    "value": "pc23"
+                }, {
+                    "label": "data.mixture.pc.pc24",
+                    "value": "pc24"
+                }, {
+                    "label": "data.mixture.pc.pc25",
+                    "value": "pc25"
+                }, {
+                    "label": "data.mixture.pc.pc26",
+                    "value": "pc26"
+                }, {
+                    "label": "data.mixture.pc.pc27",
+                    "value": "pc27"
+                }, {
+                    "label": "data.mixture.pc.pc28",
+                    "value": "pc28"
+                }, {
+                    "label": "data.mixture.pc.pc29",
+                    "value": "pc29"
+                }, {
+                    "label": "data.mixture.pc.pc30",
+                    "value": "pc30"
+                }, {
+                    "label": "data.mixture.pc.pc31",
+                    "value": "pc31"
+                }, {
+                    "label": "data.mixture.pc.pc32",
+                    "value": "pc32"
+                }, {
+                    "label": "data.mixture.pc.pc33",
+                    "value": "pc33"
+                }, {
+                    "label": "data.mixture.pc.pc34",
+                    "value": "pc34"
+                }, {
+                    "label": "data.mixture.pc.pc35",
+                    "value": "pc35"
+                }, {
+                    "label": "data.mixture.pc.pc36",
+                    "value": "pc36"
+                }, {
+                    "label": "data.mixture.pc.pc37",
+                    "value": "pc37"
+                }, {
+                    "label": "data.mixture.pc.pc38",
+                    "value": "pc38"
+                }, {
+                    "label": "data.mixture.pc.pc39",
+                    "value": "pc39"
+                }, {
+                    "label": "data.mixture.pc.pc40",
+                    "value": "pc40"
+                }, {
+                    "label": "data.mixture.pc.pc41",
+                    "value": "pc41"
+                }, {
+                    "label": "data.mixture.pc.pc42",
+                    "value": "pc42"
+                }, {
+                    "label": "data.mixture.pc.pc0",
+                    "value": "pc0"
+                }
+            ]
+        },
+        "hazard": {
+            "name": "hazard",
+            "fieldType": "custom",
+            "component": "hazard"
+        }
+    }
+}
