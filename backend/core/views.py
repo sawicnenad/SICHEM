@@ -5,14 +5,21 @@ from .models import (
     Supplier,
     Composition, 
     Component,
-    Mixture
+    Mixture,
+    Workplace,
+    Worker,
+    Use
 )
 from .serializers import (
     SupplierSerializer,
     SubstanceSerializer,
     CompositionSerializer,
     ComponentSerializer,
-    MixtureSerializer
+    MixtureSerializer,
+    WorkerSerializer,
+    WorkplaceSerializer,
+    UseSerializer,
+    CASerializer
 )
 from rest_framework.parsers import MultiPartParser, JSONParser
 
@@ -49,3 +56,15 @@ class ComponentViewSet(EntDataViewSet):
 class MixtureViewSet(EntDataViewSet):
     queryset = Mixture.objects.all()
     serializer_class = MixtureSerializer
+
+class WorkplaceViewSet(EntDataViewSet):
+    queryset = Workplace.objects.all()
+    serializer_class = WorkplaceSerializer
+
+class WorkerViewSet(EntDataViewSet):
+    queryset = Worker.objects.all()
+    serializer_class = WorkerSerializer
+
+class UseViewSet(EntDataViewSet):
+    queryset = Use.objects.all()
+    serializer_class = UseSerializer

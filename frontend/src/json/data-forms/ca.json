@@ -1,0 +1,114 @@
+{
+    "noCards": true,
+    "noFunButtons": true,
+    "fieldsOrdered": [
+        "proc"
+    ],
+    "fields": {
+        "proc": {
+            "props": {
+                "name": "proc",
+                "type": "text",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "data.use.proc",
+            "options": [
+                {
+                    "value": "proc-1", 
+                    "label": "data.use.proc-options.proc-1"
+                }, {
+                    "value": "proc-2", 
+                    "label": "data.use.proc-options.proc-2"
+                }, {
+                    "value": "proc-3", 
+                    "label": "data.use.proc-options.proc-3"
+                }, {
+                    "value": "proc-4", 
+                    "label": "data.use.proc-options.proc-4"
+                }, {
+                    "value": "proc-5", 
+                    "label": "data.use.proc-options.proc-5"
+                }, {
+                    "value": "proc-6", 
+                    "label": "data.use.proc-options.proc-6"
+                }, {
+                    "value": "proc-7", 
+                    "label": "data.use.proc-options.proc-7"
+                }, {
+                    "value": "proc-8a", 
+                    "label": "data.use.proc-options.proc-8a"
+                }, {
+                    "value": "proc-8b", 
+                    "label": "data.use.proc-options.proc-8b"
+                }, {
+                    "value": "proc-9", 
+                    "label": "data.use.proc-options.proc-9"
+                }, {
+                    "value": "proc-10", 
+                    "label": "data.use.proc-options.proc-10"
+                }, {
+                    "value": "proc-11", 
+                    "label": "data.use.proc-options.proc-11"
+                }, {
+                    "value": "proc-12", 
+                    "label": "data.use.proc-options.proc-12"
+                }, {
+                    "value": "proc-13", 
+                    "label": "data.use.proc-options.proc-13"
+                }, {
+                    "value": "proc-14", 
+                    "label": "data.use.proc-options.proc-14"
+                }, {
+                    "value": "proc-15", 
+                    "label": "data.use.proc-options.proc-15"
+                }, {
+                    "value": "proc-16", 
+                    "label": "data.use.proc-options.proc-16"
+                }, {
+                    "value": "proc-17", 
+                    "label": "data.use.proc-options.proc-17"
+                }, {
+                    "value": "proc-18", 
+                    "label": "data.use.proc-options.proc-18"
+                }, {
+                    "value": "proc-19", 
+                    "label": "data.use.proc-options.proc-19"
+                }, {
+                    "value": "proc-20", 
+                    "label": "data.use.proc-options.proc-20"
+                }, {
+                    "value": "proc-21", 
+                    "label": "data.use.proc-options.proc-21"
+                }, {
+                    "value": "proc-22", 
+                    "label": "data.use.proc-options.proc-22"
+                }, {
+                    "value": "proc-23", 
+                    "label": "data.use.proc-options.proc-23"
+                }, {
+                    "value": "proc-24", 
+                    "label": "data.use.proc-options.proc-24"
+                }, {
+                    "value": "proc-25", 
+                    "label": "data.use.proc-options.proc-25"
+                }, {
+                    "value": "proc-26", 
+                    "label": "data.use.proc-options.proc-26"
+                }, {
+                    "value": "proc-27a", 
+                    "label": "data.use.proc-options.proc-27a"
+                }, {
+                    "value": "proc-27b", 
+                    "label": "data.use.proc-options.proc-27b"
+                }, {
+                    "value": "proc-28", 
+                    "label": "data.use.proc-options.proc-28"
+                }, {
+                    "value": "proc-0", 
+                    "label": "data.use.proc-options.proc-0"
+                }
+            ]
+        }
+    }
+}

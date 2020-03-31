@@ -215,8 +215,17 @@ export default function Chemicals(props) {
                     title: mixtures[i].reference,
                     data: [
                         {
-                            label: t('data.mixtures.reference'),
+                            label: t('data.mixture.reference'),
                             value: mixtures[i].reference
+                        }, {
+                            label: t('data.mixture.name'),
+                            value: mixtures[i].name
+                        }, {
+                            label: t('data.mixture.designation'),
+                            value: mixtures[i].designation
+                        }, {
+                            label: t('data.mixture.physical_state'),
+                            value: t(`data.mixture.physical-state.${mixtures[i].physical_state}`)
                         }
                     ]
                 }

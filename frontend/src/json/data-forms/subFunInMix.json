@@ -1,0 +1,487 @@
+[
+    {
+        "value": "ablative",
+        "label": "data.mixture.function.ablative",
+        "info": "data.mixture.function-info.ablative"
+    },{
+        "value": "abrasive",
+        "label": "data.mixture.function.abrasive",
+        "info": "data.mixture.function-info.abrasive"
+    },{
+        "value": "absorbent",
+        "label": "data.mixture.function.absorbent",
+        "info": "data.mixture.function-info.absorbent"
+    },{
+        "value": "adhesion_promotor",
+        "label": "data.mixture.function.adhesion_promotor",
+        "info": "data.mixture.function-info.adhesion_promotor"
+    },{
+        "value": "adsorbent",
+        "label": "data.mixture.function.adsorbent",
+        "info": "data.mixture.function-info.adsorbent"
+        },{
+        "value": "aerating_and_dearating_agents",
+        "label": "data.mixture.function.aerating_and_dearating_agents",
+        "info": "data.mixture.function-info.aerating_and_dearating_agents"
+        },{
+        "value": "antiadhesive",
+        "label": "data.mixture.function.antiadhesive",
+        "info": "data.mixture.function-info.antiadhesive"
+        },{
+        "value": "alloying_element",
+        "label": "data.mixture.function.alloying_element",
+        "info": "data.mixture.function-info.alloying_element"
+        },{
+        "value": "anticaking_agent",
+        "label": "data.mixture.function.anticaking_agent",
+        "info": "data.mixture.function-info.anticaking_agent"
+        },{
+        "value": "anticondensation_agent",
+        "label": "data.mixture.function.anticondensation_agent",
+        "info": "data.mixture.function-info.anticondensation_agent"
+        },{
+        "value": "antifreeze_agent",
+        "label": "data.mixture.function.antifreeze_agent",
+        "info": "data.mixture.function-info.antifreeze_agent"
+        },{
+        "value": "antioxidant",
+        "label": "data.mixture.function.antioxidant",
+        "info": "data.mixture.function-info.antioxidant"
+        },{
+        "value": "antiredeposition_agent",
+        "label": "data.mixture.function.antiredeposition_agent",
+        "info": "data.mixture.function-info.antiredeposition_agent"
+        },{
+        "value": "antiscaling_agent",
+        "label": "data.mixture.function.antiscaling_agent",
+        "info": "data.mixture.function-info.antiscaling_agent"
+        },{
+        "value": "antistain_agent",
+        "label": "data.mixture.function.antistain_agent",
+        "info": "data.mixture.function-info.antistain_agent"
+        },{
+        "value": "antistatic_agent",
+        "label": "data.mixture.function.antistatic_agent",
+        "info": "data.mixture.function-info.antistatic_agent"
+        },{
+        "value": "antistreaking_agent",
+        "label": "data.mixture.function.antistreaking_agent",
+        "info": "data.mixture.function-info.antistreaking_agent"
+        },{
+        "value": "barrier_sealant",
+        "label": "data.mixture.function.barrier_sealant",
+        "info": "data.mixture.function-info.barrier_sealant"
+        },{
+        "value": "binder",
+        "label": "data.mixture.function.binder",
+        "info": "data.mixture.function-info.binder"
+        },{
+        "value": "biocide",
+        "label": "data.mixture.function.biocide",
+        "info": "data.mixture.function-info.biocide"
+        },{
+        "value": "bleaching_agent",
+        "label": "data.mixture.function.bleaching_agent",
+        "info": "data.mixture.function-info.bleaching_agent"
+        },{
+        "value": "brightener",
+        "label": "data.mixture.function.brightener",
+        "info": "data.mixture.function-info.brightener"
+        },{
+        "value": "catalyst",
+        "label": "data.mixture.function.catalyst",
+        "info": "data.mixture.function-info.catalyst"
+        },{
+        "value": "chain_transfer_agent",
+        "label": "data.mixture.function.chain_transfer_agent",
+        "info": "data.mixture.function-info.chain_transfer_agent"
+        },{
+        "value": "chelating_agent",
+        "label": "data.mixture.function.chelating_agent",
+        "info": "data.mixture.function-info.chelating_agent"
+        },{
+        "value": "cleaning_agent",
+        "label": "data.mixture.function.cleaning_agent",
+        "info": "data.mixture.function-info.cleaning_agent"
+        },{
+        "value": "cloud-point_depressant",
+        "label": "data.mixture.function.cloud-point_depressant",
+        "info": "data.mixture.function-info.cloud-point_depressant"
+        },{
+        "value": "coalescing_agent",
+        "label": "data.mixture.function.coalescing_agent",
+        "info": "data.mixture.function-info.coalescing_agent"
+        },{
+        "value": "compatibilizer",
+        "label": "data.mixture.function.compatibilizer",
+        "info": "data.mixture.function-info.compatibilizer"
+        },{
+        "value": "conductive_agent",
+        "label": "data.mixture.function.conductive_agent",
+        "info": "data.mixture.function-info.conductive_agent"
+        },{
+        "value": "corrosion_inhibitor",
+        "label": "data.mixture.function.corrosion_inhibitor",
+        "info": "data.mixture.function-info.corrosion_inhibitor"
+        },{
+        "value": "crystal_growth_modifiers_nucleating_agents",
+        "label": "data.mixture.function.crystal_growth_modifiers_nucleating_agents",
+        "info": "data.mixture.function-info.crystal_growth_modifiers_nucleating_agents"
+        },{
+        "value": "deflocculant",
+        "label": "data.mixture.function.deflocculant",
+        "info": "data.mixture.function-info.deflocculant"
+        },{
+        "value": "defoamer",
+        "label": "data.mixture.function.defoamer",
+        "info": "data.mixture.function-info.defoamer"
+        },{
+        "value": "demulsifier",
+        "label": "data.mixture.function.demulsifier",
+        "info": "data.mixture.function-info.demulsifier"
+        },{
+        "value": "density_modifier",
+        "label": "data.mixture.function.density_modifier",
+        "info": "data.mixture.function-info.density_modifier"
+        },{
+        "value": "deodorizer",
+        "label": "data.mixture.function.deodorizer",
+        "info": "data.mixture.function-info.deodorizer"
+        },{
+        "value": "diluent",
+        "label": "data.mixture.function.diluent",
+        "info": "data.mixture.function-info.diluent"
+        },{
+        "value": "dispersing_agent",
+        "label": "data.mixture.function.dispersing_agent",
+        "info": "data.mixture.function-info.dispersing_agent"
+        },{
+        "value": "drier",
+        "label": "data.mixture.function.drier",
+        "info": "data.mixture.function-info.drier"
+        },{
+        "value": "durability_agent",
+        "label": "data.mixture.function.durability_agent",
+        "info": "data.mixture.function-info.durability_agent"
+        },{
+        "value": "dust_suppressant",
+        "label": "data.mixture.function.dust_suppressant",
+        "info": "data.mixture.function-info.dust_suppressant"
+        },{
+        "value": "dusting_agent",
+        "label": "data.mixture.function.dusting_agent",
+        "info": "data.mixture.function-info.dusting_agent"
+        },{
+        "value": "dye",
+        "label": "data.mixture.function.dye",
+        "info": "data.mixture.function-info.dye"
+        },{
+        "value": "elasticizer",
+        "label": "data.mixture.function.elasticizer",
+        "info": "data.mixture.function-info.elasticizer"
+        },{
+        "value": "embalming_agent",
+        "label": "data.mixture.function.embalming_agent",
+        "info": "data.mixture.function-info.embalming_agent"
+        },{
+        "value": "energy_releasers_explosives,_motive_propellant",
+        "label": "data.mixture.function.energy_releasers_explosives,_motive_propellant",
+        "info": "data.mixture.function-info.energy_releasers_explosives,_motive_propellant"
+        },{
+        "value": "etching_agent",
+        "label": "data.mixture.function.etching_agent",
+        "info": "data.mixture.function-info.etching_agent"
+        },{
+        "value": "explosion_inhibitor",
+        "label": "data.mixture.function.explosion_inhibitor",
+        "info": "data.mixture.function-info.explosion_inhibitor"
+        },{
+        "value": "fertilizers_soil_amendments",
+        "label": "data.mixture.function.fertilizers_soil_amendments",
+        "info": "data.mixture.function-info.fertilizers_soil_amendments"
+        },{
+        "value": "filler",
+        "label": "data.mixture.function.filler",
+        "info": "data.mixture.function-info.filler"
+        },{
+        "value": "film_former",
+        "label": "data.mixture.function.film_former",
+        "info": "data.mixture.function-info.film_former"
+        },{
+        "value": "finishing_agents",
+        "label": "data.mixture.function.finishing_agents",
+        "info": "data.mixture.function-info.finishing_agents"
+        },{
+        "value": "fire_extinguishing_agent",
+        "label": "data.mixture.function.fire_extinguishing_agent",
+        "info": "data.mixture.function-info.fire_extinguishing_agent"
+        },{
+        "value": "fixing_agent_mordant",
+        "label": "data.mixture.function.fixing_agent_mordant",
+        "info": "data.mixture.function-info.fixing_agent_mordant"
+        },{
+        "value": "flame_retardant",
+        "label": "data.mixture.function.flame_retardant",
+        "info": "data.mixture.function-info.flame_retardant"
+        },{
+        "value": "flocculating_agent",
+        "label": "data.mixture.function.flocculating_agent",
+        "info": "data.mixture.function-info.flocculating_agent"
+        },{
+        "value": "flotation_agent",
+        "label": "data.mixture.function.flotation_agent",
+        "info": "data.mixture.function-info.flotation_agent"
+        },{
+        "value": "flow_promoter",
+        "label": "data.mixture.function.flow_promoter",
+        "info": "data.mixture.function-info.flow_promoter"
+        },{
+        "value": "flux_agent",
+        "label": "data.mixture.function.flux_agent",
+        "info": "data.mixture.function-info.flux_agent"
+        },{
+        "value": "foamant",
+        "label": "data.mixture.function.foamant",
+        "info": "data.mixture.function-info.foamant"
+        },{
+        "value": "food_flavouring_and_nutrient",
+        "label": "data.mixture.function.food_flavouring_and_nutrient",
+        "info": "data.mixture.function-info.food_flavouring_and_nutrient"
+        },{
+        "value": "fragrance",
+        "label": "data.mixture.function.fragrance",
+        "info": "data.mixture.function-info.fragrance"
+        },{
+        "value": "freeze-thaw_additive",
+        "label": "data.mixture.function.freeze-thaw_additive",
+        "info": "data.mixture.function-info.freeze-thaw_additive"
+        },{
+        "value": "friction_agent",
+        "label": "data.mixture.function.friction_agent",
+        "info": "data.mixture.function-info.friction_agent"
+        },{
+        "value": "fuel",
+        "label": "data.mixture.function.fuel",
+        "info": "data.mixture.function-info.fuel"
+        },{
+        "value": "fuel_additive",
+        "label": "data.mixture.function.fuel_additive",
+        "info": "data.mixture.function-info.fuel_additive"
+        },{
+        "value": "gelling_modifier",
+        "label": "data.mixture.function.gelling_modifier",
+        "info": "data.mixture.function-info.gelling_modifier"
+        },{
+        "value": "hardener",
+        "label": "data.mixture.function.hardener",
+        "info": "data.mixture.function-info.hardener"
+        },{
+        "value": "heat_stabilizer",
+        "label": "data.mixture.function.heat_stabilizer",
+        "info": "data.mixture.function-info.heat_stabilizer"
+        },{
+        "value": "heat_transferring_agent",
+        "label": "data.mixture.function.heat_transferring_agent",
+        "info": "data.mixture.function-info.heat_transferring_agent"
+        },{
+        "value": "humectant",
+        "label": "data.mixture.function.humectant",
+        "info": "data.mixture.function-info.humectant"
+        },{
+        "value": "hydraulic_functional_fluids",
+        "label": "data.mixture.function.hydraulic_functional_fluids",
+        "info": "data.mixture.function-info.hydraulic_functional_fluids"
+        },{
+        "value": "impregnation_agent",
+        "label": "data.mixture.function.impregnation_agent",
+        "info": "data.mixture.function-info.impregnation_agent"
+        },{
+        "value": "incandescent_agent",
+        "label": "data.mixture.function.incandescent_agent",
+        "info": "data.mixture.function-info.incandescent_agent"
+        },{
+        "value": "insulators",
+        "label": "data.mixture.function.insulators",
+        "info": "data.mixture.function-info.insulators"
+        },{
+        "value": "intermediate_precursor",
+        "label": "data.mixture.function.intermediate_precursor",
+        "info": "data.mixture.function-info.intermediate_precursor"
+        },{
+        "value": "ion_exchange_agent",
+        "label": "data.mixture.function.ion_exchange_agent",
+        "info": "data.mixture.function-info.ion_exchange_agent"
+        },{
+        "value": "leaching_agent",
+        "label": "data.mixture.function.leaching_agent",
+        "info": "data.mixture.function-info.leaching_agent"
+        },{
+        "value": "lubricating_agent",
+        "label": "data.mixture.function.lubricating_agent",
+        "info": "data.mixture.function-info.lubricating_agent"
+        },{
+        "value": "luminescent_agent",
+        "label": "data.mixture.function.luminescent_agent",
+        "info": "data.mixture.function-info.luminescent_agent"
+        },{
+        "value": "magnetic_element",
+        "label": "data.mixture.function.magnetic_element",
+        "info": "data.mixture.function-info.magnetic_element"
+        },{
+        "value": "monomers",
+        "label": "data.mixture.function.monomers",
+        "info": "data.mixture.function-info.monomers"
+        },{
+        "value": "no_technical_function",
+        "label": "data.mixture.function.no_technical_function",
+        "info": "data.mixture.function-info.no_technical_function"
+        },{
+        "value": "opacifier",
+        "label": "data.mixture.function.opacifier",
+        "info": "data.mixture.function-info.opacifier"
+        },{
+        "value": "oxidizing_agent",
+        "label": "data.mixture.function.oxidizing_agent",
+        "info": "data.mixture.function-info.oxidizing_agent"
+        },{
+        "value": "ph_regulating_agent",
+        "label": "data.mixture.function.ph_regulating_agent",
+        "info": "data.mixture.function-info.ph_regulating_agent"
+        },{
+        "value": "photochemical",
+        "label": "data.mixture.function.photochemical",
+        "info": "data.mixture.function-info.photochemical"
+        },{
+        "value": "pigment",
+        "label": "data.mixture.function.pigment",
+        "info": "data.mixture.function-info.pigment"
+        },{
+        "value": "plasticizer",
+        "label": "data.mixture.function.plasticizer",
+        "info": "data.mixture.function-info.plasticizer"
+        },{
+        "value": "plating_agent",
+        "label": "data.mixture.function.plating_agent",
+        "info": "data.mixture.function-info.plating_agent"
+        },{
+        "value": "pressure_transfer_agent",
+        "label": "data.mixture.function.pressure_transfer_agent",
+        "info": "data.mixture.function-info.pressure_transfer_agent"
+        },{
+        "value": "process_regulator",
+        "label": "data.mixture.function.process_regulator",
+        "info": "data.mixture.function-info.process_regulator"
+        },{
+        "value": "processing_aid",
+        "label": "data.mixture.function.processing_aid",
+        "info": "data.mixture.function-info.processing_aid"
+        },{
+        "value": "propellants,_non-motive_blowing_agents",
+        "label": "data.mixture.function.propellants,_non-motive_blowing_agents",
+        "info": "data.mixture.function-info.propellants,_non-motive_blowing_agents"
+        },{
+        "value": "reactive_cleaning/removal_agent",
+        "label": "data.mixture.function.reactive_cleaning/removal_agent",
+        "info": "data.mixture.function-info.reactive_cleaning/removal_agent"
+        },{
+        "value": "reducing_agent",
+        "label": "data.mixture.function.reducing_agent",
+        "info": "data.mixture.function-info.reducing_agent"
+        },{
+        "value": "refrigerants",
+        "label": "data.mixture.function.refrigerants",
+        "info": "data.mixture.function-info.refrigerants"
+        },{
+        "value": "resins_prepolymers",
+        "label": "data.mixture.function.resins_prepolymers",
+        "info": "data.mixture.function-info.resins_prepolymers"
+        },{
+        "value": "semiconductor_and_photovoltaic_agent",
+        "label": "data.mixture.function.semiconductor_and_photovoltaic_agent",
+        "info": "data.mixture.function-info.semiconductor_and_photovoltaic_agent"
+        },{
+        "value": "sizing_agent",
+        "label": "data.mixture.function.sizing_agent",
+        "info": "data.mixture.function-info.sizing_agent"
+        },{
+        "value": "softener",
+        "label": "data.mixture.function.softener",
+        "info": "data.mixture.function-info.softener"
+        },{
+        "value": "solids_separation_precipitating_agent",
+        "label": "data.mixture.function.solids_separation_precipitating_agent",
+        "info": "data.mixture.function-info.solids_separation_precipitating_agent"
+        },{
+        "value": "solubility_enhancer",
+        "label": "data.mixture.function.solubility_enhancer",
+        "info": "data.mixture.function-info.solubility_enhancer"
+        },{
+        "value": "solvent",
+        "label": "data.mixture.function.solvent",
+        "info": "data.mixture.function-info.solvent"
+        },{
+        "value": "stabilizing_agent",
+        "label": "data.mixture.function.stabilizing_agent",
+        "info": "data.mixture.function-info.stabilizing_agent"
+        },{
+        "value": "surface_modifier",
+        "label": "data.mixture.function.surface_modifier",
+        "info": "data.mixture.function-info.surface_modifier"
+        },{
+        "value": "surfactant",
+        "label": "data.mixture.function.surfactant",
+        "info": "data.mixture.function-info.surfactant"
+        },{
+        "value": "swelling_agent",
+        "label": "data.mixture.function.swelling_agent",
+        "info": "data.mixture.function-info.swelling_agent"
+        },{
+        "value": "tackifier",
+        "label": "data.mixture.function.tackifier",
+        "info": "data.mixture.function-info.tackifier"
+        },{
+        "value": "tanning_agent",
+        "label": "data.mixture.function.tanning_agent",
+        "info": "data.mixture.function-info.tanning_agent"
+        },{
+        "value": "terminator/blocker",
+        "label": "data.mixture.function.terminator/blocker",
+        "info": "data.mixture.function-info.terminator/blocker"
+        },{
+        "value": "thickener/thickening_agent",
+        "label": "data.mixture.function.thickener/thickening_agent",
+        "info": "data.mixture.function-info.thickener/thickening_agent"
+        },{
+        "value": "tracer",
+        "label": "data.mixture.function.tracer",
+        "info": "data.mixture.function-info.tracer"
+        },{
+        "value": "uv_stabilizer",
+        "label": "data.mixture.function.uv_stabilizer",
+        "info": "data.mixture.function-info.uv_stabilizer"
+        },{
+        "value": "vapour_pressure_modifiers",
+        "label": "data.mixture.function.vapour_pressure_modifiers",
+        "info": "data.mixture.function-info.vapour_pressure_modifiers"
+        },{
+        "value": "vehicle_carrier",
+        "label": "data.mixture.function.vehicle_carrier",
+        "info": "data.mixture.function-info.vehicle_carrier"
+        },{
+        "value": "viscosity_modifier",
+        "label": "data.mixture.function.viscosity_modifier",
+        "info": "data.mixture.function-info.viscosity_modifier"
+        },{
+        "value": "waterproofing_agent",
+        "label": "data.mixture.function.waterproofing_agent",
+        "info": "data.mixture.function-info.waterproofing_agent"
+        },{
+        "value": "x-ray_absorber",
+        "label": "data.mixture.function.x-ray_absorber",
+        "info": "data.mixture.function-info.x-ray_absorber"
+        },{
+        "value": "other",
+        "label": "data.mixture.function.other",
+        "info": "data.mixture.function-info.other"
+        }
+]

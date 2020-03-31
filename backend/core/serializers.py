@@ -4,7 +4,11 @@ from .models import (
     Substance,
     Composition,
     Component,
-    Mixture
+    Mixture,
+    Workplace,
+    Worker,
+    Use,
+    CA
 )
 
 
@@ -32,3 +36,34 @@ class MixtureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mixture 
         fields = '__all__'
+
+class WorkplaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Workplace 
+        fields = '__all__'
+
+class WorkerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Worker
+        fields = '__all__'
+    
+class CASerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CA
+        fields = '__all__'
+
+class UseSerializer(serializers.ModelSerializer):
+    cas = CASerializer(many=True)
+
+    class Meta:
+        model = Use
+        fields = '__all__'
+
+    def create(self, validated_data):
+        cas = validated_data.pop('ca_data')
+        use = Use.objects.create(**validated_data)
+
+        for ca in cas:
+            CA.objects.create(use=use, **ca)
+
+        return use

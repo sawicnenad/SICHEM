@@ -29,7 +29,9 @@ function EnterpriseContextProvider(props) {
         const promSupps = axios.get(`${context.API}/suppliers/`, headers);
         const promCompositions = axios.get(`${context.API}/compositions/`, headers);
         const promComponents = axios.get(`${context.API}/components/`, headers);
-        const promMix = axios.get(`${context.API}/mixtures/`, headers)
+        const promMix = axios.get(`${context.API}/mixtures/`, headers);
+        const promWorkplaces = axios.get(`${context.API}/workplaces/`, headers);
+        const promUses = axios.get(`${context.API}/uses/`, headers);
 
         Promise
             .all([
@@ -38,7 +40,9 @@ function EnterpriseContextProvider(props) {
                 promSupps,
                 promCompositions,
                 promComponents,
-                promMix
+                promMix,
+                promWorkplaces,
+                promUses
             ])
             .then(
                 res => setState({
@@ -48,6 +52,8 @@ function EnterpriseContextProvider(props) {
                     compositions: res[3].data,
                     components: res[4].data,
                     mixtures: res[5].data,
+                    workplaces: res[6].data,
+                    uses: res[7].data,
                     loaded: true
                 }) )
             .catch(

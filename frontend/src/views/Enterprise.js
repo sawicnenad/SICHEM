@@ -10,6 +10,10 @@ import Substance from '../components/enterprise/data-forms/Substance';
 import DataForm from '../components/enterprise/data-forms/DataForm';
 import Supplier from '../components/enterprise/data-forms/Supplier';
 import Mixture from '../components/enterprise/data-forms/Mixture';
+import Workplaces from '../components/enterprise/Workplaces';
+import Uses from '../components/enterprise/Uses';
+import Use from '../components/enterprise/data-forms/Use';
+
 
 /*
     view specific for enterprises
@@ -42,6 +46,10 @@ function Enterprise() {
             <Navigation />
             <Switch>
                 <Route exact path="/enterprise" component={ Home } />
+                <Route exact path="/enterprise/workplaces" component={ Workplaces } />
+                <Route exact path="/enterprise/workplaces/:id" component={ Workplaces } />
+                <Route exact path="/enterprise/uses" component={ Uses } />
+                <Route exact path="/enterprise/uses/:id" component={ Use } />
                 <Route exact path="/enterprise/chemicals/:view" component={ Chemicals } />
                 <Route exact path="/enterprise/substance/:id" component={ Substance } />
                 <Route exact path="/enterprise/supplier/:id" component={ Supplier } />

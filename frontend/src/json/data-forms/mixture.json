@@ -23,6 +23,7 @@
             "eventKey": "components",
             "label": "data.mixture.accordion.components",
             "fields": [
+                "components"
             ]
         }
     ],
@@ -254,6 +255,12 @@
             "name": "hazard",
             "fieldType": "custom",
             "component": "hazard"
+        },
+        "components": {
+            "name": "components",
+            "component": "components",
+            "fieldType": "custom",
+            "noBackground": true
         }
     }
 }

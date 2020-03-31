@@ -62,6 +62,7 @@ export default function Home(props) {
                             number={0}
                             buttonTitle={t('workplaces')}
                             buttonColor={dataEntryButtonVariant}
+                            link="/enterprise/workplaces"
                         />
                     </Col>
 
@@ -93,6 +94,7 @@ export default function Home(props) {
                             number={0}
                             buttonTitle={t('uses')}
                             buttonColor={dataEntryButtonVariant}
+                            link="/enterprise/uses"
                         />
                     </Col>
                 </Row>

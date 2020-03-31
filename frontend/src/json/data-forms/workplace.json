@@ -1,0 +1,58 @@
+{
+    "noCards": true,
+    "fieldsOrdered": [
+        "reference",
+        "sector",
+        "volume",
+        "info"
+    ],
+    "fields": {
+        "reference": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "reference"
+            },
+            "label": "data.workplace.reference",
+            "formControlFeedback": true
+        },
+        "sector": {
+            "props": {
+                "type": "text",
+                "name": "sector"
+            },
+            "label": "data.workplace.sector",
+            "formControlFeedback": true
+        },
+        "volume": {
+            "props": {
+                "type": "text",
+                "name": "volume",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "data.workplace.volume",
+            "options": [
+                {
+                    "value": "30"
+                }, {
+                    "value": "100"
+                }, {
+                    "value": "300"
+                }, {
+                    "value": "1000"
+                }, {
+                    "value": "3000"
+                }
+            ]
+        },
+        "info": {
+            "props": {
+                "name": "info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.supplier.info"
+        }
+    }
+}

@@ -276,7 +276,7 @@ export default function DataForm(props) {
                                                     item.options.map(
                                                         option => 
                                                             <option value={option.value} key={option.value}>
-                                                                { t(option.label) }
+                                                                { option.label ? t(option.label): option.value }
                                                             </option>
                                                     )
                                                 }
@@ -289,7 +289,7 @@ export default function DataForm(props) {
                                     field.options.map(
                                         item => 
                                             <option value={item.value} key={item.value}>
-                                                { t(item.label) }
+                                                { item.label ? t(item.label): item.value }
                                             </option>
                                     )
                                 }

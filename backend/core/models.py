@@ -263,7 +263,7 @@ class Mixture(models.Model):
     dustiness = models.CharField(max_length=50, blank=True)
     dustiness_measured = models.CharField(max_length=50, blank=True)
     pc = models.CharField(max_length=255, blank=True)                   # product categories - stringified list
-    components = models.TextField(blank=True)
+    components = models.TextField(default="[]")
 
     # 3. Hazard profile
     physical_hazard = models.TextField(blank=True) # json form -> hazard class: hazard category
@@ -284,3 +284,60 @@ class Mixture(models.Model):
                 function: x
             }
     """
+
+class Workplace(models.Model):
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    reference = models.CharField(max_length=50)
+    sector = models.CharField(max_length=50, blank=True)
+    volume = models.CharField(max_length=10, blank=True)
+    info = models.CharField(max_length=255, blank=True)
+
+class Worker(models.Model):
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    reference = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True)
+    workplace = models.ForeignKey(Workplace, on_delete=models.SET_NULL, null=True, blank=True)
+    timing = models.TextField(default="{}")
+
+# Use maps with contributing activities and corresponding SWED
+class Use(models.Model):
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    reference = models.CharField(max_length=50)
+    use_code = models.CharField(max_length=150, blank=True)
+    previous_use_map = models.CharField(max_length=255, blank=True)
+    lcs = models.CharField(max_length=2, blank=True)
+    su = models.CharField(max_length=255, default="[]")
+    pc = models.CharField(max_length=255, default="[]")
+    ac = models.CharField(max_length=255, default="[]")
+    es_short_title = models.CharField(max_length=255, blank=True)
+
+class CA(models.Model):
+    use = models.ForeignKey(Use, on_delete=models.CASCADE, related_name="cas")
+    reference = models.CharField(max_length=50)
+    ca_type = models.CharField(max_length=25, blank=True)
+    escom = models.CharField(max_length=255, blank=True)
+    proc = models.CharField(max_length=10, blank=True)
+    art = models.CharField(max_length=255, default="{}")
+    ea_input_code = models.CharField(max_length=255, blank=True)
+
+    # swed
+    info_process = models.CharField(max_length=255, blank=True)
+    standard_phrase = models.CharField(max_length=255, blank=True)
+    info_applicability = models.CharField(max_length=255, blank=True)
+    sumi = models.CharField(max_length=255, blank=True)
+    ot = models.CharField(max_length=5, blank=True)
+    info = models.CharField(max_length=255, blank=True)
+    lc = models.CharField(max_length=25, blank=True)
+    lc_e = models.CharField(max_length=5, blank=True)
+    rpe = models.BooleanField(default=False)
+    rpe_e = models.CharField(max_length=5, blank=True)
+    rpe_info = models.CharField(max_length=255, blank=True)
+    dermal = models.BooleanField(default=False)
+    dermal_e = models.CharField(max_length=5, blank=True)
+    dermal_info = models.CharField(max_length=255, blank=True)
+    eye = models.BooleanField(default=False)
+    eye_info = models.CharField(max_length=255, blank=True)
+    ohs = models.BooleanField(default=False)
+    ohs_info = models.CharField(max_length=255, blank=True)
+
+    
