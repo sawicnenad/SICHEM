@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import useJSON from '../../../json/data-forms/use.json';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import { useFormik, setNestedObjectValues } from 'formik';
 import DataForm from './DataForm';
 import { useTranslation } from 'react-i18next';
 import ContributingActivity from './ContributingActivity';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
+import RequestNotification from '../../notifications/RequestNotification';
+import { Alert, Row, Col } from 'react-bootstrap'; 
+import SWED from './SWED';
 
 
 const scaling = {
@@ -28,6 +31,7 @@ export default function Use(props) {
     const entContext = useContext(EnterpriseContext);
     const useID = parseInt(props.match.params.id);
     const useValues = entContext.uses.find(o => o.id === useID);
+    const [ state, setState ] = useState({ sameCAnameMsg : false });
 
     // YUP and formik --------------------------------------------
     const Schema = Yup.object().shape({
@@ -50,17 +54,55 @@ export default function Use(props) {
 
     // CUSTOM FIELDS 
     // Contributing activities and SWEDs
+
+    // handles addition of new contributing activity to use
+    // passed to <ContributingActivity /> below
+    const addContAct = (values, doUpdate, prevRef) => {
+        let cas = [...myformik.values.cas];
+
+        // update existing ca
+        if (doUpdate === true) {
+            cas = cas.filter(o => o.reference !== prevRef);
+            cas.push(values);
+            myformik.setFieldValue('cas', cas);
+            return;
+        }
+
+        // checks if a CA with the same reference name exists
+        try{
+            cas.find(o => o.reference === values.reference);
+            setState({ ...state, sameCAnameMsg : true });
+        } catch(e) {
+            // only if unique CA reference name
+            cas.push(values);
+            myformik.setFieldValue('cas', cas);
+        }
+    }
+
+    // removes contributing activity
+    // as no id is assigned yet -> because the given CA is not saved on server
+    // we remove it based on the position in the list .cas
+    const deleteContAct = reference => {
+        let cas = [...myformik.values.cas];
+        cas = cas.filter(o => o.reference !== reference);
+        myformik.setFieldValue('cas', cas);
+    }
+
+    // Contributing activity custom field
     const ca = (
         <ContributingActivity 
-            cas={useValues.cas}
+            cas={myformik.values.cas}
             scaling={scaling}
+            addContAct={addContAct}
+            deleteContAct={deleteContAct}
         />
     );
 
     const swed = (
-        <div>
-            swed
-        </div>
+        <SWED
+            cas={myformik.values.cas}
+            scaling={scaling}
+        />
     )
 
     return(
@@ -74,8 +116,26 @@ export default function Use(props) {
                 handleDelete={handleDelete}
                 custom={{
                     ca: ca,
-                    swed: swed
+                    swed: swed,
+                    help: (
+                        <Row>
+                            <Col {...scaling.label}></Col>
+                            <Col {...scaling.field}>
+                                <Alert
+                                variant="info"
+                            >
+                                {t('messages.hold-ctrl')} 
+                            </Alert>
+                            </Col>
+                        </Row>)
                 }}
+            />
+
+            {/* Notifications */}
+            <RequestNotification
+                show={state.sameCAnameMsg}
+                msgFailed={t('messages.same-reference-name')}
+                onClose={() => setState({ ...state, sameCAnameMsg : false })}
             />
         </div>
     )

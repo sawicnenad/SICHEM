@@ -317,8 +317,13 @@ class CA(models.Model):
     ca_type = models.CharField(max_length=25, blank=True)
     escom = models.CharField(max_length=255, blank=True)
     proc = models.CharField(max_length=10, blank=True)
-    art = models.CharField(max_length=255, default="{}")
     ea_input_code = models.CharField(max_length=255, blank=True)
+    
+    # ART parameters:
+    activity = models.CharField(max_length=50, blank=True)
+    d1 = models.CharField(max_length=50, blank=True)
+    d2 = models.CharField(max_length=50, blank=True)
+    d3 = models.CharField(max_length=50, blank=True)
 
     # swed
     info_process = models.CharField(max_length=255, blank=True)

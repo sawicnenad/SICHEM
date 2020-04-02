@@ -15,6 +15,21 @@ export default function DataForm(props) {
     const { t } = useTranslation();
     const data = props.data;
 
+    // sometimes list of options available for select in a field
+    // depends on a values selected for another field
+    // e.g. activity sub-class detemines which options
+    // are available for underlying determinants 1, 2, 3...
+    const getOptionsForDependentSelect = name => {
+        let field = data.fields[name];
+        let value = props.formik.values[field.depends_on];
+        if (!value) return [];
+
+        let options = field.options[value];
+        if (!options) return [];
+
+        return options;
+    }
+
     // one field (only field without label or other additional elements)
     // based on its fieldType argument
     const myField = field => {
@@ -253,7 +268,7 @@ export default function DataForm(props) {
                 return(
                     <Form.Group as={Row}>
                         <Form.Label column {...props.scaling.label}>
-                            { t(field.label) }
+                            { t(field.label) }:
                         </Form.Label>
                         <Col {...props.scaling.field}>
                             <Form.Control
@@ -264,7 +279,7 @@ export default function DataForm(props) {
                             >
                                 {
                                     field.props.multiple ?
-                                    "" : <option value="" disabled></option>
+                                    "" : <option value="" selected></option>
                                 }
                                 {
                                     field.optgroups ?
@@ -297,6 +312,31 @@ export default function DataForm(props) {
                         </Col>
                     </Form.Group>
                 );
+            case "select-dependent":
+                return (
+                    <Form.Group as={Row}>
+                        <Form.Label column {...props.scaling.label}>
+                            { t(field.label) }:
+                        </Form.Label>
+                        <Col {...props.scaling.field}>
+                            <Form.Control
+                                { ...field.props }
+                                value={props.formik.values[field.props.name]}
+                                onChange={props.formik.handleChange}
+                                isInvalid={!!props.formik.errors[field.props.name]}
+                            >
+                                {
+                                    getOptionsForDependentSelect(field.props.name).map(
+                                        option => 
+                                            <option value={option.value} key={option.value}>
+                                                { option.label ? t(option.label): option.value }
+                                            </option>
+                                    )
+                                }
+                            </Form.Control>
+                        </Col>
+                    </Form.Group>
+                )
             case "multi":
                 return(
                     <Form.Group as={Row}>

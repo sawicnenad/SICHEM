@@ -8,6 +8,7 @@
                 "use_code",
                 "previous_use_map",
                 "lcs",
+                "help",
                 "su",
                 "pc",
                 "ac",
@@ -163,6 +164,10 @@
                 }
             ]
         }, 
+        "help": {
+            "component": "help",
+            "fieldType": "custom"
+        },
         "ac": {
             "props": {
                 "name": "ac",
