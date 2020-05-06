@@ -79,6 +79,19 @@ export default function DataForm(props) {
                         )
                     )
                 )
+            case "checkbox":
+                return(
+                    <Form.Group as={Row}>
+                        <Col {...field.scaling}>
+                            <Form.Check
+                                {...field.props}
+                                label={t(field.label)}
+                                checked={props.formik[field.name]}
+                                onChange={props.formik.handleChange}
+                            />
+                        </Col>
+                    </Form.Group>
+                );
             case "checkbox-list":
                 return(
                     field.elements.map(

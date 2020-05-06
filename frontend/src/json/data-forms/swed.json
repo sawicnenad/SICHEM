@@ -1,0 +1,200 @@
+{
+    "noFunButtons": true,
+    "cards": [
+        {
+            "eventKey": "general",
+            "label": "data.use.swed.accordion.general",
+            "fields": [
+               "info_process",
+               "standard_phrase",
+               "info_applicability",
+               "sumi",
+               "ot",
+               "info"
+            ]
+        }, {
+            "eventKey": "lc",
+            "label": "data.use.swed.accordion.lc",
+            "fields": [
+                "lc", "lc_e"
+            ]
+        }, {
+            "eventKey": "rpe",
+            "label": "data.use.swed.accordion.rpe",
+            "fields": [
+                "rpe", "rpe_e", "rpe_info"
+            ]
+        }, {
+            "eventKey": "dermal",
+            "label": "data.use.swed.accordion.dermal",
+            "fields": [
+                "dermal", "dermal_e", "dermal_info"
+            ]
+        }, {
+            "eventKey": "eye",
+            "label": "data.use.swed.accordion.eye",
+            "fields": [
+                "eye", "eye_info"
+            ]
+        }, {
+            "eventKey": "ohs",
+            "label": "data.use.swed.accordion.ohs",
+            "fields": [
+                "ohs", "ohs_info"
+            ]
+        }
+    ],
+    "fields": {
+        "info_process": {
+            "props": {
+                "name": "info_process",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.info-process"
+        },
+        "standard_phrase": {
+            "props": {
+                "name": "standard_phrase",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.standard-phrase"
+        },
+        "info_applicability": {
+            "props": {
+                "name": "info_applicability",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.info-applicability"
+        },
+        "sumi": {
+            "props": {
+                "name": "sumi",
+                "type": "text"
+            },
+            "label": "data.use.swed.sumi"
+        },
+        "ot": {
+            "props": {
+                "name": "ot",
+                "type": "text"
+            },
+            "scaling": { "md" : 3 },
+            "label": "data.use.swed.ot"
+        },
+        "info": {
+            "props": {
+                "name": "info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.info"
+        },
+        "lc": {
+            "props": {
+                "name": "lc",
+                "type": "text",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "data.use.swed.lc",
+            "options": [
+
+            ]
+        },
+        "lc_e": {
+            "props": {
+                "name": "lc_e",
+                "type": "text"
+            },
+            "scaling": { "md" : 3 },
+            "label": "data.use.swed.lc_e"
+        },
+        "rpe": {
+            "props": {
+                "name": "rpe"
+            },
+            "scaling": { "md" : {"offset" : 4} },
+            "fieldType": "checkbox",
+            "label": "data.use.swed.rpe"
+        },
+        "rpe_e": {
+            "props": {
+                "name": "rpe_e",
+                "type": "text"
+            },
+            "scaling": { "md" : 3 },
+            "label": "data.use.swed.rpe_e"
+        },
+        "rpe_info": {
+            "props": {
+                "name": "rpe_info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.rpe_info"
+        },
+        "dermal": {
+            "props": {
+                "name": "dermal"
+            },
+            "scaling": { "md" : {"offset" : 4} },
+            "fieldType": "checkbox",
+            "label": "data.use.swed.dermal",
+            "options": [
+
+            ]
+        },
+        "dermal_e": {
+            "props": {
+                "name": "dermal_e",
+                "type": "text"
+            },
+            "scaling": { "md" : 3 },
+            "label": "data.use.swed.dermal_e"
+        },
+        "dermal_info": {
+            "props": {
+                "name": "dermal_info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.dermal_info"
+        },
+        "eye": {
+            "props": {
+                "name": "eye"
+            },
+            "scaling": { "md" : {"offset" : 4} },
+            "fieldType": "checkbox",
+            "label": "data.use.swed.eye"
+        },
+        "eye_info": {
+            "props": {
+                "name": "eye_info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.eye_info"
+        },
+        "ohs": {
+            "props": {
+                "name": "ohs"
+            },
+            "scaling": { "md" : {"offset" : 4} },
+            "fieldType": "checkbox",
+            "label": "data.use.swed.ohs"
+        },
+        "ohs_info": {
+            "props": {
+                "name": "ohs_info",
+                "type": "text",
+                "as": "textarea"
+            },
+            "label": "data.use.swed.ohs_info"
+        }
+    }
+}
+

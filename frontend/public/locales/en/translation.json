@@ -288,7 +288,16 @@
         },
         "uploaded-file": "Open uploaded file (.pdf)",
         "use": {
+            "modal-title": "New use map",
             "swed": {
+                "accordion": {
+                    "general": "General information",
+                    "rpe": "Respiratory protective equipment (RPE)",
+                    "lc": "Local controls (LC)",
+                    "eye": "Eye protection",
+                    "dermal":"Dermal protection",
+                    "ohs": "Occupational Health and Safety (OHS)"
+                },
                 "modal-title": "Exposure conditions",
                 "label": "Exposure conditions per CA",
                 "info-process-table": "Short description",
@@ -328,7 +337,7 @@
                 "list-of-cas": "List of CA(s)"
             },
             "title": "Use map / Contributing activities / Exposure conditions",
-            "reference": "Reference (short) name",
+            "reference": "Reference (short) name of the use map",
             "lcs": "Life cycle stage",
             "previous-use-map": "Link to previous use map",
             "use-code": "Use code",

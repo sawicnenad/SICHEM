@@ -68,7 +68,7 @@ export default function Uses(props) {
         },
         onSubmit: values => {
             axios.post(
-                `${APIcontext.API}/uses`,
+                `${APIcontext.API}/uses/`,
                 {...values, enterprise: entContext.ent.id},
                 {headers: {
                     Pragma: "no-cache",
@@ -134,7 +134,7 @@ export default function Uses(props) {
                     >
                         {t('close')}
                     </Button>
-                    <Button variant="danger">
+                    <Button variant="danger" onClick={myformik.handleSubmit}>
                         {t('save')}
                     </Button>
                 </Modal.Footer>

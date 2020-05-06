@@ -3,6 +3,8 @@ import { Row, Col, Alert, Table, Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import SWEDJSON from '../../../json/data-forms/swed.json';
+import DataForm from './DataForm.js';
 
 /*
     *Basically SWED 
@@ -17,6 +19,17 @@ import { useFormik } from 'formik';
 export default function SWED(props) {
     const { t } = useTranslation();
     const [ state, setState ] = useState({ modal : false });
+
+    const Schema = Yup.object().shape({
+        reference: Yup.string().required(t('messages.form.required'))
+    })
+    const myformik = useFormik({
+        validationSchema: Schema,
+        initialValues: {},
+        onSubmit: values => {
+            console.log(values)
+        }
+    })
 
     return (
         <Row>
@@ -75,13 +88,19 @@ export default function SWED(props) {
             <Modal
                 show={state.modal}
                 onHide={() => setState({ modal : false })}
+                size="lg"
             >
                 <Modal.Header closeButton>
                     <Modal.Title> {t('data.use.swed.modal-title')} </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-
+                    <DataForm 
+                        data={SWEDJSON}
+                        formik={myformik}
+                        noZebraStyle={true}
+                        scaling={{ label: { md: 4 }, field: { md: 8 } }}
+                    />
                 </Modal.Body>
 
                 <Modal.Footer>
