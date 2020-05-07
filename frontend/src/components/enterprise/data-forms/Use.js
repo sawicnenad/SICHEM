@@ -33,7 +33,10 @@ export default function Use(props) {
     const entContext = useContext(EnterpriseContext);
     const useID = parseInt(props.match.params.id);
     const useValues = entContext.uses.find(o => o.id === useID);
-    const [ state, setState ] = useState({ sameCAnameMsg : false });
+    const [ state, setState ] = useState({ 
+        sameCAnameMsg : false,
+        updatedMsg: false
+    });
 
     // const headers used later for all axios requests
     const headers = {
@@ -61,8 +64,8 @@ export default function Use(props) {
                     let uses = [...entContext.uses];
                     uses = uses.filter(o => o.id !== useID);
                     uses.push(res.data);
-                    entContext.refreshState('uses', uses);
                     setState({...state, updatedMsg: true});
+                    entContext.refreshState('uses', uses);
                 }
             ).catch(
                 e => console.log(e)
@@ -86,12 +89,8 @@ export default function Use(props) {
 
         // update existing ca
         if (doUpdate === true) {
-            let ca = {...cas.find(o => o.reference === prevRef)};
-            let inx = cas.indexOf(ca);
-            for (let val in values) {
-                ca[val] = values[val];
-            }
-            cas[inx] = ca;
+            cas = cas.filter(o => o.reference !== prevRef);
+            cas.push(values);
             myformik.setFieldValue('cas', cas);
             return;
         }
@@ -127,10 +126,27 @@ export default function Use(props) {
         />
     );
 
+    // SWED ----------------------------------
+
+    // Function updating the SWED related data of CA
+    const updateSWED = (values, reference) => {
+        let cas = [...myformik.values.cas];
+        let ca = cas.find(o => o.reference === reference);
+        cas = cas.filter(o => o.reference !== reference);
+        
+        // update values of ca selected based on the reference name
+        for (let key in values) {
+            ca[key] = values[key];
+        }
+        cas.unshift(ca);
+        myformik.setFieldValue('cas', cas);
+    }
+
     const swed = (
         <SWED
             cas={myformik.values.cas}
             scaling={scaling}
+            updateSWED={updateSWED}
         />
     )
 
@@ -165,6 +181,13 @@ export default function Use(props) {
                 show={state.sameCAnameMsg}
                 msgFailed={t('messages.same-reference-name')}
                 onClose={() => setState({ ...state, sameCAnameMsg : false })}
+            />
+
+            <RequestNotification
+                success
+                show={state.updatedMsg}
+                msgSuccess={t('messages.use-updated')}
+                onClose={() => setState({ ...state, updatedMsg : false })}
             />
         </div>
     )

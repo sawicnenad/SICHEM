@@ -13,7 +13,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function ContributingActivity(props) {
     const { t } = useTranslation();
     const [ state, setState ] = useState({
+
+        // edit modal visible or not (i.e. false)
         modal: false,
+
+        // prevRef is the reference name of CA before it is modified
+        // this parameter is used to know which CA is being modified
+        // because if we maybe modify unsaved one, it does not have id
         prevRef: false
     })
 

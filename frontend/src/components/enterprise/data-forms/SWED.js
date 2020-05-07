@@ -18,7 +18,7 @@ import DataForm from './DataForm.js';
 */
 export default function SWED(props) {
     const { t } = useTranslation();
-    const [ state, setState ] = useState({ modal : false });
+    const [ state, setState ] = useState({ modal : false, reference: false });
 
     const Schema = Yup.object().shape({
         reference: Yup.string().required(t('messages.form.required'))
@@ -27,9 +27,17 @@ export default function SWED(props) {
         validationSchema: Schema,
         initialValues: {},
         onSubmit: values => {
-            console.log(values)
+            props.updateSWED(values, state.reference);
+            setState({ ...state, modal : false, reference : false });
         }
     })
+
+    // when edit button is clicked it returns CA reference for editing
+    const handleEdit = reference => {
+        let ca = { ...props.cas.find(o => o.reference === reference) };
+        myformik.setValues(ca);
+        setState({ ...state, modal : true, reference: ca.reference });
+    }
 
     return (
         <Row>
@@ -63,7 +71,7 @@ export default function SWED(props) {
                                                 size="sm"
                                                 variant="outline-danger"
                                                 className="border-0"
-                                                onClick={() => setState({...state, modal: true, refName: ca.reference })}
+                                                onClick={() => handleEdit(ca.reference)}
                                             >
                                                 { t('edit') }
                                             </Button> 
@@ -112,6 +120,7 @@ export default function SWED(props) {
                     </Button>
                     <Button
                         variant="danger"
+                        onClick={myformik.handleSubmit}
                     >
                         {t('save')}
                     </Button>

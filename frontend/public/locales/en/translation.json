@@ -36,9 +36,11 @@
     "unknown": "Unknown",
 
     "messages": {    
+        "use-updated": "Use map data updated!",
         "hold-ctrl": "Hold Ctrl key to select multiple options",
         "same-reference-name": "Names/reference names should be unique",
         "not-configured": "Not configured",
+        "use-delete-msg": "This use map will be permanently deleted from the database!",
         "substance-delete-msg": "This substance will be permanently deleted from the database!",
         "mixture-delete-msg": "This mixture will be permanently deleted from the database!",
         "supplier-delete-msg": "The supplier will be permanently deleted from the database!",
@@ -291,12 +293,12 @@
             "modal-title": "New use map",
             "swed": {
                 "accordion": {
-                    "general": "General information",
-                    "rpe": "Respiratory protective equipment (RPE)",
-                    "lc": "Local controls (LC)",
-                    "eye": "Eye protection",
-                    "dermal":"Dermal protection",
-                    "ohs": "Occupational Health and Safety (OHS)"
+                    "general": "1. General information",
+                    "rpe": "2. Respiratory protective equipment (RPE)",
+                    "lc": "3. Local controls (LC)",
+                    "eye": "4. Eye protection",
+                    "dermal":"5. Dermal protection",
+                    "ohs": "6. Occupational Health and Safety (OHS)"
                 },
                 "modal-title": "Exposure conditions",
                 "label": "Exposure conditions per CA",

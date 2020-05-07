@@ -72,7 +72,9 @@ export default function DataList(props) {
 
     return (
         <div>
-            <div>{ props.createButton }</div>
+            <div>
+                { props.createButton }
+            </div>
             {
                 data.map(
                     (item, inx) => (

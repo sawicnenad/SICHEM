@@ -72,6 +72,7 @@ export default function Home(props) {
                             iconColor="silver"
                             number={0}
                             buttonTitle={t('workers')}
+                            link="/enterprise/workers"
                             buttonColor={dataEntryButtonVariant}
                         />
                     </Col>

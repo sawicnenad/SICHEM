@@ -1,0 +1,205 @@
+import React, { useContext, useState, useEffect } from 'react';
+import DataList from './DataList';
+import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
+import { useTranslation } from 'react-i18next';
+import workerJson from '../../json/data-forms/worker.json';
+import {
+    Button, Modal, Form
+} from 'react-bootstrap';
+import { EnterpriseContext } from '../../contexts/EnterpriseContext';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import DataForm from './data-forms/DataForm';
+import RequestNotification from '../notifications/RequestNotification';
+
+
+export default function Workers(props) {
+
+    const [ state, setState ] = useState({
+        modal: false,
+        updatedMsg: false,
+        failedMsg: false,
+        successMsg: false
+    });
+    const APIcontext = useContext(ApiRequestsContext);
+    const entContext = useContext(EnterpriseContext);
+    const { t } = useTranslation();
+
+    const workersList = () => {
+        let data = [];
+        let workers = entContext.workers;
+
+        for (let i in workers) {
+            data.push(
+                {
+                    id: workers[i].id,
+                    title: workers[i].reference,
+                    data: [
+                        {
+                            label: t('data.worker.reference'),
+                            value: workers[i].reference
+                        }
+                    ]
+                }
+            )
+        }
+        return data;
+    }
+
+    // we need formik for reference field below in modal
+    const workerID = props.match.params.id;
+    const values = (
+        workerID !== undefined ? 
+        entContext.workers.find(o => o.id === parseInt(workerID))
+        : {reference: ""}
+    );
+
+    const Schema = Yup.object().shape({
+        reference: Yup.string().required(t('messages.form.required'))
+                                .max(50, t('messages.form.too-long'))
+    })
+    const myformik = useFormik({
+        validationSchema: Schema,
+        initialValues: values,
+        onSubmit: values => {
+            let method = "post";
+            let url = `${APIcontext.API}/workers/`;
+
+            if (workerID !== undefined) {
+                method = "put";
+                url = url + workerID + "/";
+            }
+
+            axios({
+                method: method,
+                url: url,
+                data: {...values, enterprise: entContext.ent.id},
+                headers: {
+                    Pragma: "no-cache",
+                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }}
+
+            ).then(
+                res => {
+                    setState({...state, modal: false, successMsg: true});
+                    let wp = [...entContext.workers];
+
+                    if (workerID !== undefined) {
+                        wp = wp.filter(o => o.id !== parseInt(workerID));
+                        setState({ ...state, updatedMsg: true });
+                    } else {
+                        setState({ ...state, successMsg: true, modal: false });
+                    }
+
+                    wp.push(res.data);
+                    entContext.refreshState('workers', wp);
+                }
+            ).catch(
+                e => {
+                    console.log(e);
+                    setState({...state, modal: false, failedMsg: true})
+                }
+            )
+        }
+    })
+
+    useEffect(() => {
+        if (workerID !== undefined) myformik.setValues(values);
+    }, [props])
+
+    const createButton = (
+        <div className="text-right">
+            <Button variant="danger"
+                onClick={() => setState({...state, modal : true })}
+            >
+                { t('create-new') }
+            </Button>
+
+            <Modal
+                show={state.modal}
+                onHide={() => setState({...state, modal : false })}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>{ t('data.worker.modal-title') }</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>
+                                {t('data.worker.reference')}:
+                            </Form.Label>
+                            <Form.Control
+                                required
+                                name="reference"
+                                value={myformik.values.reference}
+                                onChange={myformik.handleChange}
+                                isInvalid={!!myformik.errors.reference}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                { myformik.errors.reference }
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setState({...state, modal : false })}>
+                        { t('close') }
+                    </Button>
+                    <Button variant="danger" onClick={myformik.handleSubmit}>
+                        { t('save') }
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
+    return (
+        <div className="container-lg px-5 py-3">
+            {
+                props.match.params.id ?
+                <DataForm
+                    formClassName="p-5 mt-2 bg-light"
+                    noZebraStyle={true}
+                    data={workerJson}
+                    scaling={{ label: { xs: 3 }, field: { xs: 7 } }}
+                    formik={myformik}
+                    title={t('data.mixture.modal-title')}
+                    close='/enterprise/workers'
+                    handleDelete={() => console.log("delete")}
+                />
+                :<DataList
+                    name="workers"
+                    data={ workersList() }
+                    api={`${APIcontext.API}/workers/`}
+                    link='/enterprise/workers/'
+                    delMsg={t('messages.worker-delete-msg')}
+                    createButton={createButton}
+                />
+            }
+
+
+            {/* Notifications */}
+            {/* notifications */}
+            <RequestNotification
+                show={state.failedMsg}
+                onClose={() => setState({ ...state, failedMsg: false })}
+            />
+
+            <RequestNotification
+                success
+                show={state.successMsg}
+                msgSuccess={t('messages.workplace-added')}
+                onClose={() => setState({ ...state, successMsg: false })}
+            />
+
+            <RequestNotification
+                success
+                show={state.updatedMsg}
+                msgSuccess={t('messages.workplace-updated')}
+                onClose={() => setState({ ...state, updatedMsg: false })}
+            />
+        </div>
+    )
+}

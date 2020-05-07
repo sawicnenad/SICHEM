@@ -13,6 +13,7 @@ import Mixture from '../components/enterprise/data-forms/Mixture';
 import Workplaces from '../components/enterprise/Workplaces';
 import Uses from '../components/enterprise/Uses';
 import Use from '../components/enterprise/data-forms/Use';
+import Workers from '../components/enterprise/Workers';
 
 
 /*
@@ -46,6 +47,8 @@ function Enterprise() {
             <Navigation />
             <Switch>
                 <Route exact path="/enterprise" component={ Home } />
+                <Route exact path="/enterprise/workers" component={ Workers } />
+                <Route exact path="/enterprise/workers/:id" component={ Workers } />
                 <Route exact path="/enterprise/workplaces" component={ Workplaces } />
                 <Route exact path="/enterprise/workplaces/:id" component={ Workplaces } />
                 <Route exact path="/enterprise/uses" component={ Uses } />

@@ -1,0 +1,17 @@
+{
+    "noCards": true,
+    "fieldsOrdered": [
+        "reference"
+    ],
+    "fields": {
+        "reference": {
+            "props": {
+                "required": true,
+                "type": "text",
+                "name": "reference"
+            },
+            "label": "data.workplace.reference",
+            "formControlFeedback": true
+        }
+    }
+}
