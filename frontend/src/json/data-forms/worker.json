@@ -1,7 +1,10 @@
 {
     "noCards": true,
     "fieldsOrdered": [
-        "reference"
+        "reference",
+        "name",
+        "workplace",
+        "timing"
     ],
     "fields": {
         "reference": {
@@ -12,6 +15,30 @@
             },
             "label": "data.workplace.reference",
             "formControlFeedback": true
+        },
+        "name": {
+            "props": {
+                "type": "text",
+                "name": "name"
+            },
+            "label": "data.worker.full-name"
+        },
+        "workplace": {
+            "props": {
+                "name": "workplace",
+                "as": "select",
+                "required": true
+            },
+            "fieldType": "select",
+            "noTrans": true,
+            "label": "data.worker.workplace",
+            "formControlFeedback": true,
+            "options": []
+        },
+        "timing": {
+            "name": "timing",
+            "fieldType": "custom",
+            "component": "timing"
         }
     }
 }

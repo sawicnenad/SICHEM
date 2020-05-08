@@ -123,6 +123,14 @@
         }
     },
     "data": {
+        "worker": {
+            "form-title": "Worker form",
+            "modal-title": "New worker",
+            "reference": "Reference (e.g. Worker-1)",
+            "full-name": "Full name",
+            "workplace": "Workplace",
+            "timing": "Work week schedule"
+        },
         "art": {
             "modal-title": "ART activity task",
             "activity": "ART: Activity class / subclass",

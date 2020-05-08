@@ -2,16 +2,20 @@ import React, { useContext, useState, useEffect } from 'react';
 import DataList from './DataList';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import { useTranslation } from 'react-i18next';
-import workerJson from '../../json/data-forms/worker.json';
-import {
-    Button, Modal, Form
-} from 'react-bootstrap';
+import workerJSON from '../../json/data-forms/worker.json';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import DataForm from './data-forms/DataForm';
 import RequestNotification from '../notifications/RequestNotification';
+import {
+    Button, Modal, Form, Row, Col
+} from 'react-bootstrap';
+
+
+const scaling = { label: { md: 3 }, field: { md: 7 } }
+
 
 
 export default function Workers(props) {
@@ -39,6 +43,12 @@ export default function Workers(props) {
                         {
                             label: t('data.worker.reference'),
                             value: workers[i].reference
+                        }, {
+                            label: t('data.worker.name'),
+                            value: workers[i].name
+                        }, {
+                            label: t('data.worker.workplace'),
+                            value: workers[i].workplace
                         }
                     ]
                 }
@@ -83,17 +93,17 @@ export default function Workers(props) {
             ).then(
                 res => {
                     setState({...state, modal: false, successMsg: true});
-                    let wp = [...entContext.workers];
+                    let workers = [...entContext.workers];
 
                     if (workerID !== undefined) {
-                        wp = wp.filter(o => o.id !== parseInt(workerID));
+                        workers = workers.filter(o => o.id !== parseInt(workerID));
                         setState({ ...state, updatedMsg: true });
                     } else {
                         setState({ ...state, successMsg: true, modal: false });
                     }
 
-                    wp.push(res.data);
-                    entContext.refreshState('workers', wp);
+                    workers.push(res.data);
+                    entContext.refreshState('workers', workers);
                 }
             ).catch(
                 e => {
@@ -155,6 +165,34 @@ export default function Workers(props) {
             </Modal>
         </div>
     )
+
+    // timing is custom component
+    // used to get workers schedule over week
+    const timing = (
+        <Row>
+            <Col {...scaling.label}>
+                {t('data.worker.timing')}:
+            </Col>
+            <Col {...scaling.field}>
+                <Button variant="outline-danger" size="sm">
+                    {t('edit')}
+                </Button>
+            </Col>
+        </Row>
+    )
+    
+
+    // set workplace list for the workplace field in json
+    let workplaces = [...entContext.workplaces];
+    let wpOptions = [];
+    for (let wp in workplaces) {
+        wpOptions.push({ 
+            value: workplaces[wp].id, 
+            label: workplaces[wp].reference
+        });
+    }
+    workerJSON.fields.workplace.options = wpOptions;
+
     return (
         <div className="container-lg px-5 py-3">
             {
@@ -162,12 +200,15 @@ export default function Workers(props) {
                 <DataForm
                     formClassName="p-5 mt-2 bg-light"
                     noZebraStyle={true}
-                    data={workerJson}
-                    scaling={{ label: { xs: 3 }, field: { xs: 7 } }}
+                    data={workerJSON}
+                    scaling={scaling}
                     formik={myformik}
-                    title={t('data.mixture.modal-title')}
+                    title={t('data.worker.form-title')}
                     close='/enterprise/workers'
                     handleDelete={() => console.log("delete")}
+                    custom={{
+                        timing: timing
+                    }}
                 />
                 :<DataList
                     name="workers"

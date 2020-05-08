@@ -315,10 +315,15 @@ export default function DataForm(props) {
                                     )
                                     : 
                                     field.options.map(
-                                        item => 
-                                            <option value={item.value} key={item.value}>
-                                                { item.label ? t(item.label): item.value }
-                                            </option>
+                                        item => (
+                                            field.noTrans ?
+                                                <option value={item.value} key={item.value}>
+                                                    {item.label}
+                                                </option>
+                                                : <option value={item.value} key={item.value}>
+                                                    { item.label ? t(item.label): item.value }
+                                                </option>
+                                        )     
                                     )
                                 }
                             </Form.Control>
