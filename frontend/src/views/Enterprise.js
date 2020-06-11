@@ -20,8 +20,8 @@ import Workers from '../components/enterprise/Workers';
     view specific for enterprises
     only for paths /enterprise
 
-    first it checks if the current user is member of an 
-    enterpirse -> if not, the page redirects to the 
+    first it checks if the current user is member of an
+    enterpirse -> if not, the page redirects to the
     corresponding one to finish registration process
 */
 
@@ -34,6 +34,7 @@ function Enterprise() {
             <div>loading...</div>
         )
     }
+
     if (context.ent === undefined) {
         return (
             <div className="container pt-5">
@@ -41,7 +42,10 @@ function Enterprise() {
             </div>
         )
     }
-    
+
+
+    // only if context.ent defined ->
+
     return(
         <div>
             <Navigation />

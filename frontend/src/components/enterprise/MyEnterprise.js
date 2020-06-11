@@ -60,7 +60,7 @@ function MyEnterprise() {
                     {cards.map( (item, inx) => (
                         <Col xs={6} lg={4} key={inx}>
                             <Card border={item.border}>
-                                <Card.Img 
+                                <Card.Img
                                     style={{ height: 125 }}
                                     src={item.icon}
                                     variant="top"
@@ -71,12 +71,18 @@ function MyEnterprise() {
                                         { item.title }
                                     </Card.Title>
 
-                                    <Card.Text className="text-muted text-justify" style={{ height: 80 }}>
+                                    <Card.Text
+                                        className="text-muted text-justify"
+                                        style={{ height: 80 }}
+                                    >
                                         { item.text }
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button variant={item.border} onClick={item.action}>
+                                <Button
+                                    variant={item.border}
+                                    onClick={item.action}
+                                >
                                     { t('confirm') }
                                 </Button>
                             </Card>
@@ -97,7 +103,8 @@ function MyEnterprise() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <NewEntForm onClose={() => setState({...state, modalNewEnt: false }) }/>
+                    <NewEntForm
+                        onClose={() => setState({ ...state, modalNewEnt: false }) }/>
                 </Modal.Body>
             </Modal>
 
@@ -114,13 +121,32 @@ function MyEnterprise() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <InvitationForm onClose={() => setState({...state, invitationForm: false }) }/>
+                    <InvitationForm
+                        onClose={() => setState({...state, invitationForm: false }) }
+                    />
                 </Modal.Body>
             </Modal>
         </div>
     )
 }
 export default MyEnterprise;
+
+
+
+
+/*
+    the component above requires forms
+    * invitation form
+    * new enterprise forms
+
+    defined below ->
+*/
+
+
+
+
+
+
 
 
 function InvitationForm(props) {
@@ -175,9 +201,9 @@ function InvitationForm(props) {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.uid')}</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="uid"
                                 value={values.uid}
                                 onChange={handleChange}
@@ -190,9 +216,9 @@ function InvitationForm(props) {
 
                         <Form.Group>
                             <Form.Label>{t('enterprise.my-enterprise.form-invitation.token')}</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="token"
                                 value={values.token}
                                 onChange={handleChange}
@@ -205,7 +231,7 @@ function InvitationForm(props) {
 
                         <hr />
                         <div className="text-right">
-                            <Button variant="secondary" className="mr-2" onClick={props.onClose}>  
+                            <Button variant="secondary" className="mr-2" onClick={props.onClose}>
                                 { t('cancel') }
                             </Button>
                             <Button variant="danger" type="submit">
@@ -213,11 +239,11 @@ function InvitationForm(props) {
                             </Button>
                         </div>
                     </Form>
-                )} 
+                )}
 
-                
+
             </Formik>
-            
+
             <RequestNotification
                 show={ state.notification }
                 onClose={ () => setState({ notification: false }) }
@@ -226,6 +252,8 @@ function InvitationForm(props) {
       );
 }
 
+
+// if new enterprise must be open - no invitation token
 
 function NewEntForm(props) {
     const { t } = useTranslation();
@@ -283,7 +311,11 @@ function NewEntForm(props) {
                             }
                         }
                     ).then(
-                        res => console.log(res)
+                        res => {
+                            console.log(res);
+                            props.onClose();
+                            setState({ ...state, notification: true });
+                        }
                     ).catch(
                         e => setState({ notification: true })
                     )
@@ -300,7 +332,7 @@ function NewEntForm(props) {
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.name')}</Form.Label>
                             <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="name"
                                 value={values.name}
                                 onChange={handleChange}
@@ -313,9 +345,9 @@ function NewEntForm(props) {
 
                         <Form.Group>
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.uid')}</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="uid"
                                 value={values.uid}
                                 onChange={handleChange}
@@ -328,9 +360,9 @@ function NewEntForm(props) {
 
                         <Form.Group>
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.address')}</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="address"
                                 value={values.address}
                                 onChange={handleChange}
@@ -345,7 +377,7 @@ function NewEntForm(props) {
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.city')}</Form.Label>
                             <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="city"
                                 value={values.city}
                                 onChange={handleChange}
@@ -358,9 +390,9 @@ function NewEntForm(props) {
 
                         <Form.Group>
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.state')}</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 required
-                                type="text" 
+                                type="text"
                                 name="state"
                                 value={values.state}
                                 onChange={handleChange}
@@ -373,11 +405,11 @@ function NewEntForm(props) {
 
                         <Form.Group>
                             <Form.Label>{t('enterprise.my-enterprise.form-new-ent.branch')}</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 as="select"
                                 multiple
                                 required
-                                type="text" 
+                                type="text"
                                 name="branch"
                                 value={values.branch}
                                 onChange={handleChange}
@@ -400,7 +432,7 @@ function NewEntForm(props) {
 
                         <hr />
                         <div className="text-right">
-                            <Button variant="secondary" className="mr-2" onClick={props.onClose}>  
+                            <Button variant="secondary" className="mr-2" onClick={props.onClose}>
                                 { t('cancel') }
                             </Button>
                             <Button variant="danger" type="submit">
@@ -408,13 +440,14 @@ function NewEntForm(props) {
                             </Button>
                         </div>
                     </Form>
-                )} 
+                )}
 
-                
+
             </Formik>
-            
+
             <RequestNotification
                 show={ state.notification }
+                msgSuccess={ t('messages.new-ent-created') }
                 onClose={ () => setState({ notification: false }) }
             />
         </div>

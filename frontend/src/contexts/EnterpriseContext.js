@@ -15,7 +15,7 @@ function EnterpriseContextProvider(props) {
     });
 
     useEffect(() => {
-        // check if user is member of an enterprise 
+        // check if user is member of an enterprise
         // if not this information will not be part of context
         // and the browser will redirect page to one to assing enterprise
         const headers = {
@@ -23,7 +23,7 @@ function EnterpriseContextProvider(props) {
                 Pragma: "no-cache",
                 Authorization: 'Bearer ' + localStorage.getItem('token-access')
             }};
-        
+
         const promEnt = axios.get(`${context.API}/enterprise/enterprises/`, headers);
         const promSubs = axios.get(`${context.API}/substances/`, headers);
         const promSupps = axios.get(`${context.API}/suppliers/`, headers);
@@ -36,7 +36,7 @@ function EnterpriseContextProvider(props) {
 
         Promise
             .all([
-                promEnt, 
+                promEnt,
                 promSubs,
                 promSupps,
                 promCompositions,
@@ -48,7 +48,7 @@ function EnterpriseContextProvider(props) {
             ])
             .then(
                 res => setState({
-                    ent: res[0].data[0],
+                    ent: res[0].data,
                     substances: res[1].data,
                     suppliers: res[2].data,
                     compositions: res[3].data,
@@ -66,7 +66,7 @@ function EnterpriseContextProvider(props) {
                 }
             )
     }, [context])
-
+    console.log(state)
     /*
         Data in state refresh
         in order to not fetch again updated data from the server

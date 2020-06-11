@@ -30,7 +30,7 @@ function Login(props) {
       });
 
     return (
-        <div style={{ 
+        <div style={{
                 height: "100vh"
             }}>
             <Navbar bg="light" className="px-5">
@@ -50,11 +50,11 @@ function Login(props) {
             <div className="container m-auto pt-4">
 
                 <div className="row justify-content-center h-100">
-                    <div className="col-lg-6">
+                    <div className="col-lg-5">
                         <div className="text-center mb-3">
                             <img src={ Logo } alt="" className="w-50" />
                         </div>
-                        
+
                         <Formik
                             validationSchema={Schema}
                             initialValues={{ username: "", password: "" }}
@@ -79,13 +79,16 @@ function Login(props) {
                                 values,
                                 errors,
                             }) => (
-                                <Form className="p-4 bg-white shadow-lg" onSubmit={handleSubmit} style={{opacity:0.98}}>
-
+                                <Form
+                                    className="p-4 bg-white shadow-lg"
+                                    onSubmit={ handleSubmit }
+                                    style={{ opacity:0.98 }}
+                                >
                                     <Form.Group>
                                         <Form.Label>{t('login.username')}</Form.Label>
-                                        <Form.Control 
+                                        <Form.Control
                                             required
-                                            type="text" 
+                                            type="text"
                                             name="username"
                                             value={values.username}
                                             onChange={handleChange}
@@ -97,9 +100,9 @@ function Login(props) {
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>{t('login.password')}</Form.Label>
-                                        <Form.Control 
+                                        <Form.Control
                                             required
-                                            type="password" 
+                                            type="password"
                                             name="password"
                                             value={values.password}
                                             onChange={handleChange}
@@ -109,7 +112,7 @@ function Login(props) {
                                             {errors.password}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-                                    
+
 
                                     <Button type="submit" variant="primary" className="w-100 mt-3">
                                         { t('login.login') }
@@ -119,13 +122,13 @@ function Login(props) {
                                         --------- {t('login.or')} ----------
                                     </div>
 
-                                    <Button 
+                                    <Button
                                         variant="danger" className="w-100 mt-3"
                                         onClick={ () => setState({...state, newUser: true}) }>
                                         { t('login.open-account') }
                                     </Button>
                                 </Form>
-                            )} 
+                            )}
                         </Formik>
                     </div>
                 </div>
@@ -140,21 +143,21 @@ function Login(props) {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <NewUser 
-                            onSignedUp={() => setState({ 
+                        <NewUser
+                            onSignedUp={() => setState({
                                 ...state,
                                 newUser: false,
-                                msgSuccess: true 
+                                msgSuccess: true
                             })} />
                     </Modal.Body>
                 </Modal>
             </div>
 
             {/* notifications */}
-            <Toast 
+            <Toast
                 show={state.msgSuccess}
                 onClose={() => setState({ ...state, msgSuccess: false })}
-                autohide 
+                autohide
                 delay={5000}
                 style={{
                     position: "absolute",
@@ -164,7 +167,7 @@ function Login(props) {
                 }}
             >
                 <Toast.Header>
-                    <img 
+                    <img
                         src={require('../media/icons/check-circle.svg')}
                         alt="" className="mr-2" width={24}
                     />
@@ -176,10 +179,10 @@ function Login(props) {
                 </Toast.Body>
             </Toast>
 
-            <Toast 
+            <Toast
                 show={state.msgFailed}
                 onClose={() => setState({ ...state, msgFailed: false })}
-                autohide 
+                autohide
                 delay={5000}
                 style={{
                     position: "absolute",
@@ -189,7 +192,7 @@ function Login(props) {
                 }}
             >
                 <Toast.Header>
-                    <img 
+                    <img
                         src={require('../media/icons/alert-square-fill.svg')}
                         alt="" className="mr-2" width={24}
                     />
