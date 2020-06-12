@@ -51,6 +51,8 @@
         "substance-updated": "Substance updated",
         "workplace-added": "New workplace created",
         "workplace-updated": "Workplace updated",
+        "worker-updated": "Worker updated",
+        "worker-added": "New worker added",
         "mixture-updated": "Mixture updated",
         "supplier-added": "New supplier created",
         "supplier-updated": "Supplier updated",
@@ -125,6 +127,7 @@
     },
     "data": {
         "worker": {
+            "name": "Name",
             "form-title": "Worker form",
             "modal-title": "New worker",
             "reference": "Reference (e.g. Worker-1)",

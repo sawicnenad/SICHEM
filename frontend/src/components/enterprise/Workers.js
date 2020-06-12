@@ -24,7 +24,8 @@ export default function Workers(props) {
         modal: false,
         updatedMsg: false,
         failedMsg: false,
-        successMsg: false
+        successMsg: false,
+        timing: false
     });
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
@@ -44,7 +45,7 @@ export default function Workers(props) {
                             label: t('data.worker.reference'),
                             value: workers[i].reference
                         }, {
-                            label: t('data.worker.name'),
+                            label: t('data.worker.full-name'),
                             value: workers[i].name
                         }, {
                             label: t('data.worker.workplace'),
@@ -155,7 +156,10 @@ export default function Workers(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setState({...state, modal : false })}>
+                    <Button 
+                        variant="secondary"
+                        onClick={() => setState({...state, modal : false })}
+                    >
                         { t('close') }
                     </Button>
                     <Button variant="danger" onClick={myformik.handleSubmit}>
@@ -174,9 +178,43 @@ export default function Workers(props) {
                 {t('data.worker.timing')}:
             </Col>
             <Col {...scaling.field}>
-                <Button variant="outline-danger" size="sm">
-                    {t('edit')}
+                <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => setState({ ...state, timing: true })}
+                >
+                    { t('edit') }
                 </Button>
+
+                <Modal
+                    show={state.timing}
+                    onHide={() => setState({ ...state, timing: false })}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            { t('data.worker.timing') }
+                        </Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        test
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                    <Button 
+                        variant="secondary"
+                        onClick={() => setState({...state, timing: false })}
+                    >
+                        { t('close') }
+                    </Button>
+                    <Button
+                        variant="danger"
+                        onClick={() => console.log("save clicked")}
+                    >
+                        { t('save') }
+                    </Button>
+                </Modal.Footer>
+                </Modal>
             </Col>
         </Row>
     )
@@ -231,14 +269,14 @@ export default function Workers(props) {
             <RequestNotification
                 success
                 show={state.successMsg}
-                msgSuccess={t('messages.workplace-added')}
+                msgSuccess={t('messages.worker-added')}
                 onClose={() => setState({ ...state, successMsg: false })}
             />
 
             <RequestNotification
                 success
                 show={state.updatedMsg}
-                msgSuccess={t('messages.workplace-updated')}
+                msgSuccess={t('messages.worker-updated')}
                 onClose={() => setState({ ...state, updatedMsg: false })}
             />
         </div>
