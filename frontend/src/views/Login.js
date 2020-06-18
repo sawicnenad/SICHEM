@@ -10,6 +10,7 @@ import { ApiRequestsContext } from '../contexts/ApiRequestsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
+
 function Login(props) {
     const { t } = useTranslation();
     const [state, setState] = useState({
@@ -31,7 +32,9 @@ function Login(props) {
 
     return (
         <div style={{
-                height: "100vh"
+                height: "100vh",
+                background: `url(${require("../media/background.jpg")})`,
+                backgroundSize: 'cover'
             }}>
             <Navbar bg="light" className="px-5">
                 <Nav>
@@ -82,7 +85,10 @@ function Login(props) {
                                 <Form
                                     className="p-4 bg-white shadow-lg"
                                     onSubmit={ handleSubmit }
-                                    style={{ opacity:0.98 }}
+                                    style={{ 
+                                        borderRadius: 5,
+                                        marginTop: "10vh"
+                                    }}
                                 >
                                     <Form.Group>
                                         <Form.Label>{t('login.username')}</Form.Label>
@@ -137,6 +143,7 @@ function Login(props) {
                 <Modal
                     show={state.newUser}
                     onHide={ () => setState({ ...state, newUser: false }) }
+                    style={{ marginTop: 50 }}
                 >
                     <Modal.Header closeButton>
                         {t('login.new-user')}

@@ -6,6 +6,7 @@ import {
     FormControl,
     Button
 } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default function Navigation(props) {
@@ -18,7 +19,10 @@ export default function Navigation(props) {
 
     return (
         <Navbar bg="dark" expand="md" className="px-5" variant="dark">
-            <Navbar.Brand href="/enterprise">SICHEM</Navbar.Brand>
+            <Navbar.Brand href="/enterprise">
+                <FontAwesomeIcon icon="home" />
+            </Navbar.Brand>
+            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
             <Navbar.Collapse>
@@ -41,6 +45,7 @@ export default function Navigation(props) {
                     Logout
                 </Button>
             </Navbar.Collapse>
+            
         </Navbar>
     )
 }

@@ -23,7 +23,8 @@ import {
     faMinus,
     faFilePdf,
     faExchangeAlt,
-    faWindowClose
+    faWindowClose,
+    faHome
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -44,7 +45,8 @@ library.add(
     faMinus,
     faFilePdf,
     faExchangeAlt,
-    faWindowClose
+    faWindowClose,
+    faHome
 );
 
 function App() {

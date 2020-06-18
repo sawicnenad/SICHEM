@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Tabs, Tab, Button, Modal, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import DataList from './DataList';
-import DataForm from './data-forms/DataForm';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import { useFormik } from 'formik';

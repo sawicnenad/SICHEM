@@ -59,7 +59,7 @@ export default function Home(props) {
                         <Statistics
                             icon="th"
                             iconColor="silver"
-                            number={0}
+                            number={context.workplaces.length}
                             buttonTitle={t('workplaces')}
                             buttonColor={dataEntryButtonVariant}
                             link="/enterprise/workplaces"
@@ -70,7 +70,7 @@ export default function Home(props) {
                         <Statistics
                             icon="user"
                             iconColor="silver"
-                            number={0}
+                            number={context.workers.length}
                             buttonTitle={t('workers')}
                             link="/enterprise/workers"
                             buttonColor={dataEntryButtonVariant}
@@ -84,7 +84,7 @@ export default function Home(props) {
                             number={context.substances.length}
                             buttonTitle={t('chemicals')}
                             buttonColor={dataEntryButtonVariant}
-                            link="/enterprise/chemicals/substances"
+                            link="/enterprise/chemicals/suppliers"
                         />
                     </Col>
 
@@ -92,7 +92,7 @@ export default function Home(props) {
                         <Statistics
                             icon="fire"
                             iconColor="silver"
-                            number={0}
+                            number={context.uses.length}
                             buttonTitle={t('uses')}
                             buttonColor={dataEntryButtonVariant}
                             link="/enterprise/uses"

@@ -1,10 +1,9 @@
-{
+{   
     "noCards": true,
     "fieldsOrdered": [
         "reference",
         "name",
-        "workplace",
-        "timing"
+        "info"
     ],
     "fields": {
         "reference": {
@@ -23,22 +22,13 @@
             },
             "label": "data.worker.full-name"
         },
-        "workplace": {
+        "info": {
             "props": {
-                "name": "workplace",
-                "as": "select",
-                "required": true
+                "name": "info",
+                "type": "text",
+                "as": "textarea"
             },
-            "fieldType": "select",
-            "noTrans": true,
-            "label": "data.worker.workplace",
-            "formControlFeedback": true,
-            "options": []
-        },
-        "timing": {
-            "name": "timing",
-            "fieldType": "custom",
-            "component": "timing"
+            "label": "data.worker.info"
         }
     }
 }

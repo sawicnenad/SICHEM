@@ -24,8 +24,7 @@ export default function Workers(props) {
         modal: false,
         updatedMsg: false,
         failedMsg: false,
-        successMsg: false,
-        timing: false
+        successMsg: false
     });
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
@@ -40,16 +39,12 @@ export default function Workers(props) {
                 {
                     id: workers[i].id,
                     title: workers[i].reference,
-                    data: [
-                        {
-                            label: t('data.worker.reference'),
-                            value: workers[i].reference
-                        }, {
+                    data: [ {
                             label: t('data.worker.full-name'),
                             value: workers[i].name
                         }, {
-                            label: t('data.worker.workplace'),
-                            value: workers[i].workplace
+                            label: t('data.worker.info'),
+                            value: workers[i].info
                         }
                     ]
                 }
@@ -67,8 +62,11 @@ export default function Workers(props) {
     );
 
     const Schema = Yup.object().shape({
-        reference: Yup.string().required(t('messages.form.required'))
-                                .max(50, t('messages.form.too-long'))
+        reference: Yup
+                    .string()
+                    .required(t('messages.form.required'))
+                    .max(50, t('messages.form.too-long'))
+                    
     })
     const myformik = useFormik({
         validationSchema: Schema,
@@ -170,66 +168,6 @@ export default function Workers(props) {
         </div>
     )
 
-    // timing is custom component
-    // used to get workers schedule over week
-    const timing = (
-        <Row>
-            <Col {...scaling.label}>
-                {t('data.worker.timing')}:
-            </Col>
-            <Col {...scaling.field}>
-                <Button
-                    variant="outline-danger"
-                    size="sm"
-                    onClick={() => setState({ ...state, timing: true })}
-                >
-                    { t('edit') }
-                </Button>
-
-                <Modal
-                    show={state.timing}
-                    onHide={() => setState({ ...state, timing: false })}
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            { t('data.worker.timing') }
-                        </Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        test
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                    <Button 
-                        variant="secondary"
-                        onClick={() => setState({...state, timing: false })}
-                    >
-                        { t('close') }
-                    </Button>
-                    <Button
-                        variant="danger"
-                        onClick={() => console.log("save clicked")}
-                    >
-                        { t('save') }
-                    </Button>
-                </Modal.Footer>
-                </Modal>
-            </Col>
-        </Row>
-    )
-    
-
-    // set workplace list for the workplace field in json
-    let workplaces = [...entContext.workplaces];
-    let wpOptions = [];
-    for (let wp in workplaces) {
-        wpOptions.push({ 
-            value: workplaces[wp].id, 
-            label: workplaces[wp].reference
-        });
-    }
-    workerJSON.fields.workplace.options = wpOptions;
 
     return (
         <div className="container-lg px-5 py-3">
@@ -244,9 +182,6 @@ export default function Workers(props) {
                     title={t('data.worker.form-title')}
                     close='/enterprise/workers'
                     handleDelete={() => console.log("delete")}
-                    custom={{
-                        timing: timing
-                    }}
                 />
                 :<DataList
                     name="workers"

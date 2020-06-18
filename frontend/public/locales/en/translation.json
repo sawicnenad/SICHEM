@@ -46,6 +46,7 @@
         "mixture-delete-msg": "This mixture will be permanently deleted from the database!",
         "supplier-delete-msg": "The supplier will be permanently deleted from the database!",
         "workplace-delete-msg": "This workplace will be permanently deleted from the database!",
+        "worker-delete-msg": "The worker will be permanently deleted from the database!",
         "are-you-sure": "Are you sure?",
         "substance-added": "New substance created",
         "substance-updated": "Substance updated",
@@ -127,13 +128,16 @@
     },
     "data": {
         "worker": {
+            "accordion": {
+                "general": "Worker ID",
+                "timing": "Work week schedule"
+            },
             "name": "Name",
             "form-title": "Worker form",
             "modal-title": "New worker",
             "reference": "Reference (e.g. Worker-1)",
             "full-name": "Full name",
-            "workplace": "Workplace",
-            "timing": "Work week schedule"
+            "info": "Additional information"
         },
         "art": {
             "modal-title": "ART activity task",

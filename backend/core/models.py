@@ -296,8 +296,7 @@ class Worker(models.Model):
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     reference = models.CharField(max_length=50)
     name = models.CharField(max_length=50, blank=True)
-    workplace = models.ForeignKey(Workplace, on_delete=models.SET_NULL, null=True, blank=True)
-    timing = models.TextField(default="{}") # mon: {m1:08:00, m2:1200, a1:12:30, a2:16:30}
+    info = models.CharField(max_length=255, blank=True)
 
 # Use maps with contributing activities and corresponding SWED
 class Use(models.Model):
