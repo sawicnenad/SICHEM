@@ -18,34 +18,33 @@ export default function Navigation(props) {
     }
 
     return (
-        <Navbar bg="dark" expand="md" className="px-5" variant="dark">
-            <Navbar.Brand href="/enterprise">
-                <FontAwesomeIcon icon="home" />
-            </Navbar.Brand>
-            
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar expand="md" className="px-5" bg="light">
+            <div className="container-lg">
+                <Navbar.Brand href="/enterprise">
+                    SICHEM
+                </Navbar.Brand>
+                
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-            <Navbar.Collapse>
-                <Nav className="mr-auto w-100">
-                    <Form inline className="w-100">
-                        <FormControl 
-                            type="text"
-                            placeholder="Search"
-                            className="w-50 mr-sm-2 bg-dark text-light" 
-                        />
-                    </Form>
-                </Nav>
-
-                <Nav className="mr-3">
-                    <Nav.Link>Profile</Nav.Link>
-                    <Nav.Link>Enterprise</Nav.Link>
-                    <Nav.Link>Security</Nav.Link>
-                </Nav>
-                <Button variant="outline-danger" onClick={handleLogout}>
-                    Logout
-                </Button>
-            </Navbar.Collapse>
             
+                <Nav className="mr-3 ml-auto">
+                    <Nav.Link className="ml-3">
+                        <FontAwesomeIcon icon="user" />
+                    </Nav.Link>
+
+                    <Nav.Link className="ml-3">
+                        <FontAwesomeIcon icon="building" />
+                    </Nav.Link>
+
+                    <Nav.Link className="ml-3">
+                        <FontAwesomeIcon icon="lock" />
+                    </Nav.Link>
+
+                    <Nav.Link className="ml-3">
+                        <FontAwesomeIcon icon="sign-out-alt" />
+                    </Nav.Link>
+                </Nav>
+            </div>
         </Navbar>
     )
 }

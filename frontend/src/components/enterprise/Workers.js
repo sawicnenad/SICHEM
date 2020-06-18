@@ -170,7 +170,7 @@ export default function Workers(props) {
 
 
     return (
-        <div className="container-lg px-5 py-3">
+        <div>
             {
                 props.match.params.id ?
                 <DataForm

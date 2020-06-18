@@ -47,7 +47,7 @@ export default function Home(props) {
     const dataEntryButtonVariant = "outline-danger";
 
     return (
-        <div className="container-lg px-5 py-3">
+        <div>
 
             {/* Data entry */}
             <div className="p-2 text-muted rounded mt-4 shadow">

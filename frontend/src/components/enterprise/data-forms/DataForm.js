@@ -608,7 +608,7 @@ export default function DataForm(props) {
         </Row>);
 
     return (
-        <div className="container my-3">
+        <div>
             { funButtons }
             <div className={props.formClassName ? props.formClassName : "mt-3"}>
                 { form }

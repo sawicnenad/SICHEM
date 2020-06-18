@@ -144,7 +144,7 @@ export default function Uses(props) {
 
 
     return (
-        <div className="container-lg px-5 py-3">
+        <div>
             <DataList 
                 name="uses"
                 data={ listOfUses() }

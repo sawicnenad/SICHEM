@@ -333,7 +333,7 @@ export default function Chemicals(props) {
     // -------------------------- RETURN ---------------------------------------------------
 
     return (
-        <div className="container-lg px-5 py-3">
+        <div>
             
             <Tabs fill defaultActiveKey={props.match.params.view} className="tabs-customized">
                 {[

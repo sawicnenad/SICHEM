@@ -151,7 +151,7 @@ export default function Use(props) {
     )
 
     return(
-        <div className="container-lg px-5 py-3">
+        <div>
             <DataForm
                 data={useJSON}
                 scaling={scaling}

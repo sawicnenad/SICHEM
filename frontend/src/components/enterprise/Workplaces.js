@@ -162,7 +162,7 @@ export default function Workplaces(props) {
         </div>
     )
     return (
-        <div className="container-lg px-5 py-3">
+        <div>
             {
                 props.match.params.id ?
                 <DataForm
