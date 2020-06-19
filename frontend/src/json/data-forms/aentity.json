@@ -1,0 +1,19 @@
+{
+    "cards": [
+        {
+            "eventKey": "workplace",
+            "label": "data.aentity.workplace",
+            "fields": []
+        }, {
+            "eventKey": "workers",
+            "label": "data.aentity.workers",
+            "fields": []
+        }
+    ],
+
+
+
+    "fields": [
+
+    ]
+}

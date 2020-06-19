@@ -344,4 +344,12 @@ class CA(models.Model):
     ohs = models.BooleanField(default=False)
     ohs_info = models.CharField(max_length=255, blank=True)
 
-    
+# assessment entity is the starting point of exposure assessment
+# it combines instances of the models above
+# for each workplace an assessment entity is created
+class AssessmentEntity(models.Model):
+    workplace = models.ForeignKey(Workplace, on_delete=models.CASCADE)
+    workers = models.ManyToManyField(Worker)
+    substances = models.ManyToManyField(Substance)
+    mixtures = models.ManyToManyField(Mixture)
+    cas = models.ManyToManyField(CA)

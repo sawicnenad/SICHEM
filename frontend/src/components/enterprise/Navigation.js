@@ -23,11 +23,8 @@ export default function Navigation(props) {
                 <Navbar.Brand href="/enterprise">
                     SICHEM
                 </Navbar.Brand>
-                
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
             
-                <Nav className="mr-3 ml-auto">
+                <Nav className="ml-auto">
                     <Nav.Link className="ml-3">
                         <FontAwesomeIcon icon="user" />
                     </Nav.Link>
@@ -40,7 +37,7 @@ export default function Navigation(props) {
                         <FontAwesomeIcon icon="lock" />
                     </Nav.Link>
 
-                    <Nav.Link className="ml-3">
+                    <Nav.Link className="ml-3" onClick={() => handleLogout()}>
                         <FontAwesomeIcon icon="sign-out-alt" />
                     </Nav.Link>
                 </Nav>

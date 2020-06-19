@@ -63,8 +63,8 @@ function Enterprise() {
                     <Route exact path="/enterprise/substance/:id" component={ Substance } />
                     <Route exact path="/enterprise/supplier/:id" component={ Supplier } />
                     <Route exact path="/enterprise/mixture/:id" component={ Mixture } />
-                    <Route exact path="/enterprise/data-entry/" component={ DataForm } />
                     <Route exact path="/enterprise/a-entities/" component={ AEntities } />
+                    <Route exact path="/enterprise/a-entities/:id" component={ AEntities } />
                 </Switch>
             </div>
         </div>

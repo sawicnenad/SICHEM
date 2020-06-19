@@ -72,9 +72,11 @@ export default function Workers(props) {
         validationSchema: Schema,
         initialValues: values,
         onSubmit: values => {
+            // when creating new worker from modal in this component
             let method = "post";
             let url = `${APIcontext.API}/workers/`;
 
+            // update existing worker from DataForm
             if (workerID !== undefined) {
                 method = "put";
                 url = url + workerID + "/";
