@@ -24,28 +24,26 @@ function EnterpriseContextProvider(props) {
                 Authorization: 'Bearer ' + localStorage.getItem('token-access')
             }};
 
-        const promEnt = axios.get(`${context.API}/enterprise/enterprises/`, headers);
-        const promSubs = axios.get(`${context.API}/substances/`, headers);
-        const promSupps = axios.get(`${context.API}/suppliers/`, headers);
-        const promCompositions = axios.get(`${context.API}/compositions/`, headers);
-        const promComponents = axios.get(`${context.API}/components/`, headers);
-        const promMix = axios.get(`${context.API}/mixtures/`, headers);
-        const promWorkplaces = axios.get(`${context.API}/workplaces/`, headers);
-        const promUses = axios.get(`${context.API}/uses/`, headers);
-        const promWorkers = axios.get(`${context.API}/workers/`, headers);
+        const Ent = axios.get(`${context.API}/enterprise/enterprises/`, headers);
+        const Subs = axios.get(`${context.API}/substances/`, headers);
+        const Supps = axios.get(`${context.API}/suppliers/`, headers);
+        const Compositions = axios.get(`${context.API}/compositions/`, headers);
+        const Components = axios.get(`${context.API}/components/`, headers);
+        const Mix = axios.get(`${context.API}/mixtures/`, headers);
+        const Workplaces = axios.get(`${context.API}/workplaces/`, headers);
+        const Uses = axios.get(`${context.API}/uses/`, headers);
+        const Workers = axios.get(`${context.API}/workers/`, headers);
 
-        Promise
-            .all([
-                promEnt,
-                promSubs,
-                promSupps,
-                promCompositions,
-                promComponents,
-                promMix,
-                promWorkplaces,
-                promWorkers,
-                promUses
-            ])
+        Promise.all([
+                    Ent,
+                    Subs,
+                    Supps,
+                    Compositions,
+                    Components,
+                    Mix,
+                    Workplaces,
+                    Workers,
+                    Uses])
             .then(
                 res => setState({
                     ent: res[0].data,
