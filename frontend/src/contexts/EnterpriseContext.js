@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { ApiRequestsContext } from './ApiRequestsContext';
 import axios from 'axios';
 
-
 // holds enterprise data only
 // suppliers, substances, mixtures ...
 export const EnterpriseContext = React.createContext();
@@ -33,6 +32,8 @@ function EnterpriseContextProvider(props) {
         const Workplaces = axios.get(`${context.API}/workplaces/`, headers);
         const Uses = axios.get(`${context.API}/uses/`, headers);
         const Workers = axios.get(`${context.API}/workers/`, headers);
+        const AEntity = axios.get(`${context.API}/a-entities/`, headers);
+        const WorkerSchedules = axios.get(`${context.API}/worker-schedules/`, headers);
 
         Promise.all([
                     Ent,
@@ -43,7 +44,9 @@ function EnterpriseContextProvider(props) {
                     Mix,
                     Workplaces,
                     Workers,
-                    Uses])
+                    Uses,
+                    AEntity,
+                    WorkerSchedules])
             .then(
                 res => setState({
                     ent: res[0].data,
@@ -55,6 +58,8 @@ function EnterpriseContextProvider(props) {
                     workplaces: res[6].data,
                     workers: res[7].data,
                     uses: res[8].data,
+                    aentities: res[9].data,
+                    workerSchedules: res[10].data,
                     loaded: true
                 }) )
             .catch(

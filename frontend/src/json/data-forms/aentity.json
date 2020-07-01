@@ -1,19 +1,24 @@
 {
     "cards": [
         {
-            "eventKey": "workplace",
-            "label": "data.aentity.workplace",
-            "fields": []
-        }, {
             "eventKey": "workers",
-            "label": "data.aentity.workers",
+            "label": "data.aentity.accordion.workers",
+            "fields": [
+                "workers"
+            ]
+        }, {
+            "eventKey": "cas",
+            "label": "data.aentity.accordion.cas",
             "fields": []
         }
     ],
 
 
 
-    "fields": [
-
-    ]
+    "fields": {
+        "workers": {
+            "component": "workers",
+            "fieldType": "custom"
+        }
+    }
 }

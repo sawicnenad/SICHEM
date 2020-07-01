@@ -35,6 +35,7 @@
     "new": "New",
     "unknown": "Unknown",
     "search": "Search",
+    "set": "Set",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -128,6 +129,28 @@
         }
     },
     "data": {
+        "aentity": {
+            "accordion": {
+                "cas": "Contributing activities",
+                "workers": "Workers"
+            },
+            "form-title": "Assessment entities",
+            "worker": "Worker",
+            "schedule": "Schedule",
+            "worker-active": "Active",
+            "day": {
+                "mon": "Mon",
+                "tue": "Tue",
+                "wed": "Wed",
+                "thu": "Thu",
+                "fri": "Fri",
+                "sat": "Sat",
+                "sun": "Sun"
+            },
+            "morning": "Morning",
+            "afternoon": "Afternoon",
+            "schedule-placeholder": "HH:MM"
+        },
         "worker": {
             "accordion": {
                 "general": "Worker ID",

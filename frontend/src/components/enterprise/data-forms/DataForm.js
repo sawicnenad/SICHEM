@@ -588,12 +588,12 @@ export default function DataForm(props) {
 
             <Col className="text-right">
                 <Link to={props.close}>
-                    <Button variant="light" className="ml-1 border">
+                    <Button variant="secondary" className="ml-1">
                         <FontAwesomeIcon icon="times" /> { t('close') }
                     </Button>
                 </Link>
 
-                <Button variant="light" className="ml-1 border" onClick={props.handleDelete}>
+                <Button variant="secondary" className="ml-1" onClick={props.handleDelete}>
                     <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
                 </Button>
 

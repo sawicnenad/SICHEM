@@ -18,7 +18,7 @@ export default function Navigation(props) {
     }
 
     return (
-        <Navbar expand="md" className="px-5" bg="light">
+        <Navbar expand="md" className="px-5" bg="dark" variant="dark">
             <div className="container-lg">
                 <Navbar.Brand href="/enterprise">
                     SICHEM
