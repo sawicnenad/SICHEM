@@ -11,3 +11,7 @@
     color: #dc3545 !important;
     font-weight: 700;
 }
+
+.pointer-on-hover-div:hover {
+    cursor: pointer;
+}

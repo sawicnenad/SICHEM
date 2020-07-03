@@ -1,4 +1,5 @@
 {
+    "defaultActiveKey": "workers",
     "cards": [
         {
             "eventKey": "workers",
@@ -9,7 +10,9 @@
         }, {
             "eventKey": "cas",
             "label": "data.aentity.accordion.cas",
-            "fields": []
+            "fields": [
+                "cas"
+            ]
         }
     ],
 
@@ -18,6 +21,10 @@
     "fields": {
         "workers": {
             "component": "workers",
+            "fieldType": "custom"
+        },
+        "cas": {
+            "component": "cas",
             "fieldType": "custom"
         }
     }

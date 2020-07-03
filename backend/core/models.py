@@ -348,18 +348,16 @@ class CA(models.Model):
 # it combines instances of the models above
 # for each workplace an assessment entity is created
 class AssessmentEntity(models.Model):
+    # this table includes WorkerSchedule and CASchedule as its children
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     workplace = models.OneToOneField(Workplace, on_delete=models.CASCADE)
-    workers = models.ManyToManyField(Worker)
-    substances = models.ManyToManyField(Substance)
-    mixtures = models.ManyToManyField(Mixture)
-    cas = models.ManyToManyField(CA)
 
-class WorkerSchedule(models.Model):
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    aentity = models.ForeignKey(AssessmentEntity, on_delete=models.CASCADE)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
 
+# because it will be needed for worker's and cont. activity schedule
+class Schedule(models.Model):
+    class Meta:
+        abstract = True
+    
     mon1 = models.TimeField(blank=True, null=True)
     mon2 = models.TimeField(blank=True, null=True)
     mon3 = models.TimeField(blank=True, null=True)
@@ -388,3 +386,19 @@ class WorkerSchedule(models.Model):
     sun2 = models.TimeField(blank=True, null=True)
     sun3 = models.TimeField(blank=True, null=True)
     sun4 = models.TimeField(blank=True, null=True)
+
+
+class WorkerSchedule(Schedule):
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    aentity = models.ForeignKey(AssessmentEntity, on_delete=models.CASCADE)
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+
+
+class CASchedule(Schedule):
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    aentity = models.ForeignKey(AssessmentEntity, on_delete=models.CASCADE)
+    ca = models.ForeignKey(CA, on_delete=models.CASCADE)
+    substance = models.ForeignKey(Substance, on_delete=models.CASCADE, null=True, blank=True)
+    compostion = models.ForeignKey(Composition, on_delete=models.CASCADE, null=True, blank=True)
+    mixture = models.ForeignKey(Mixture, on_delete=models.CASCADE, null=True, blank=True)
+    

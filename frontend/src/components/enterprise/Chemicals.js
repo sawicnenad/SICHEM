@@ -335,7 +335,11 @@ export default function Chemicals(props) {
     return (
         <div>
             
-            <Tabs fill defaultActiveKey={props.match.params.view} className="tabs-customized">
+            <Tabs
+                fill 
+                defaultActiveKey={props.match.params.view} 
+                className="tabs-customized"
+            >
                 {[
                     {
                         eventKey: "suppliers",

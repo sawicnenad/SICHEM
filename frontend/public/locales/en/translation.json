@@ -36,6 +36,7 @@
     "unknown": "Unknown",
     "search": "Search",
     "set": "Set",
+    "select": "Select",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -128,28 +129,25 @@
             }
         }
     },
+    "days": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+    },
     "data": {
         "aentity": {
             "accordion": {
-                "cas": "Contributing activities",
+                "cas": "Contributing activities / Substances / Mixtures",
                 "workers": "Workers"
             },
             "form-title": "Assessment entities",
-            "worker": "Worker",
-            "schedule": "Schedule",
-            "worker-active": "Active",
-            "day": {
-                "mon": "Mon",
-                "tue": "Tue",
-                "wed": "Wed",
-                "thu": "Thu",
-                "fri": "Fri",
-                "sat": "Sat",
-                "sun": "Sun"
-            },
-            "morning": "Morning",
-            "afternoon": "Afternoon",
-            "schedule-placeholder": "HH:MM"
+            "schedule": {
+                "title": "Week schedule"
+            }
         },
         "worker": {
             "accordion": {
