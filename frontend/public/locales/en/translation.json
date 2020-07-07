@@ -37,6 +37,7 @@
     "search": "Search",
     "set": "Set",
     "select": "Select",
+    "add": "Add",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -63,6 +64,7 @@
         "no-data-for-this-page": "No data to show.",
         "deleted": "Deleted successfully",
         "composition-help": "Add component by component with details on their concentrations to the composition using the plus button. To define a completely new component, which later can be used as constituent, additive or impurity, apply 'New' button placed next to the component field.",
+        "no-worker-schedule": "No week schedule set",
         "form": {
             "too-short": "Too short",
             "invalid-email": "Invalid email",
@@ -146,8 +148,10 @@
             },
             "form-title": "Assessment entities",
             "schedule": {
-                "title": "Week schedule"
-            }
+                "title": "Week schedule",
+                "warning": "Warning"
+            },
+            "select-workers": "Select workers"
         },
         "worker": {
             "accordion": {

@@ -29,8 +29,12 @@ export default function Schedule(props) {
         }
     })
 
-    const handleTimingSelection = (day, n) => {
-        if (state.selection) {
+    const handleTimingSelection = (day, n, click) => {
+
+        // when selecting multiple by keeping mouse button clicked
+        // timing selected when mouse pointer leaves a given cell
+        // when clicked -> selects a single timing
+        if (state.selection || click) {
 
             let timingUpdated = {...state.timing};
             timingUpdated[day][n] = !timingUpdated[day][n];
@@ -39,7 +43,6 @@ export default function Schedule(props) {
                 ...state,
                 timing: timingUpdated
             })
-
         }
     }
 
@@ -90,12 +93,13 @@ export default function Schedule(props) {
                                         key={ inx } 
                                         style={styling.timing}
                                         className={
-                                            `pointer-on-hover-div ${state.timing[day][inx] ?
+                                            `pointer-on-hover-div timing ${state.timing[day][inx] ?
                                                 "bg-secondary border-0" : ""}`
                                             }
                                         onMouseDown={() => setState({...state, selection: true})}
                                         onMouseLeave={() => handleTimingSelection(day, inx)}
                                         onMouseUp={() => setState({...state, selection: false})}
+                                        onClick={() => handleTimingSelection(day, inx, true)}
                                     ></div>
                                 )
                             )
@@ -141,6 +145,7 @@ export default function Schedule(props) {
                 </Button>
                 <Button
                     variant="danger"
+                    onClick={() => props.recordTiming(state.timing)}
                 >
                     {t('save')}
                 </Button>

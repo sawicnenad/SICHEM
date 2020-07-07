@@ -15,3 +15,7 @@
 .pointer-on-hover-div:hover {
     cursor: pointer;
 }
+
+.timing:hover {
+    border-color: #dc3545 !important;
+}
