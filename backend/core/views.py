@@ -9,8 +9,7 @@ from .models import (
     Workplace,
     Worker,
     Use,
-    AssessmentEntity,
-    WorkerSchedule
+    AssessmentEntity
 )
 from .serializers import (
     SupplierSerializer,
@@ -22,8 +21,7 @@ from .serializers import (
     WorkplaceSerializer,
     UseSerializer,
     CASerializer,
-    AssessmentEntitySerialiizer,
-    WorkerScheduleSerializer
+    AssessmentEntitySerialiizer
 )
 from rest_framework.parsers import MultiPartParser, JSONParser
 
@@ -76,7 +74,3 @@ class UseViewSet(EntDataViewSet):
 class AssessmentEntityViewSet(EntDataViewSet):
     queryset = AssessmentEntity.objects.all()
     serializer_class = AssessmentEntitySerialiizer
-
-class WorkerScheduleViewSet(EntDataViewSet):
-    queryset = WorkerSchedule.objects.all()
-    serializer_class = WorkerScheduleSerializer

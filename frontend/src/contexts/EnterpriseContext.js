@@ -33,7 +33,6 @@ function EnterpriseContextProvider(props) {
         const Uses = axios.get(`${context.API}/uses/`, headers);
         const Workers = axios.get(`${context.API}/workers/`, headers);
         const AEntity = axios.get(`${context.API}/a-entities/`, headers);
-        const WorkerSchedules = axios.get(`${context.API}/worker-schedules/`, headers);
 
         Promise.all([
                     Ent,
@@ -45,8 +44,7 @@ function EnterpriseContextProvider(props) {
                     Workplaces,
                     Workers,
                     Uses,
-                    AEntity,
-                    WorkerSchedules])
+                    AEntity])
             .then(
                 res => setState({
                     ent: res[0].data,
@@ -59,7 +57,6 @@ function EnterpriseContextProvider(props) {
                     workers: res[7].data,
                     uses: res[8].data,
                     aentities: res[9].data,
-                    workerSchedules: res[10].data,
                     loaded: true
                 }) )
             .catch(

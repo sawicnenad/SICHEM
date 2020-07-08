@@ -10,8 +10,7 @@ from .models import (
     Worker,
     Use,
     CA,
-    AssessmentEntity,
-    WorkerSchedule
+    AssessmentEntity
 )
 
 
@@ -102,36 +101,3 @@ class AssessmentEntitySerialiizer(serializers.ModelSerializer):
         model = AssessmentEntity
         fields = '__all__'
 
-class WorkerScheduleSerializer(serializers.ModelSerializer):
-    mon1 = serializers.TimeField(format=TIME_FORMAT)
-    mon2 = serializers.TimeField(format=TIME_FORMAT)
-    mon3 = serializers.TimeField(format=TIME_FORMAT)
-    mon4 = serializers.TimeField(format=TIME_FORMAT)
-    tue1 = serializers.TimeField(format=TIME_FORMAT)
-    tue2 = serializers.TimeField(format=TIME_FORMAT)
-    tue3 = serializers.TimeField(format=TIME_FORMAT)
-    tue4 = serializers.TimeField(format=TIME_FORMAT)
-    wed1 = serializers.TimeField(format=TIME_FORMAT)
-    wed2 = serializers.TimeField(format=TIME_FORMAT)
-    wed3 = serializers.TimeField(format=TIME_FORMAT)
-    wed4 = serializers.TimeField(format=TIME_FORMAT)
-    thu1 = serializers.TimeField(format=TIME_FORMAT)
-    thu2 = serializers.TimeField(format=TIME_FORMAT)
-    thu3 = serializers.TimeField(format=TIME_FORMAT)
-    thu4 = serializers.TimeField(format=TIME_FORMAT)
-    fri1 = serializers.TimeField(format=TIME_FORMAT)
-    fri2 = serializers.TimeField(format=TIME_FORMAT)
-    fri3 = serializers.TimeField(format=TIME_FORMAT)
-    fri4 = serializers.TimeField(format=TIME_FORMAT)
-    sat1 = serializers.TimeField(format=TIME_FORMAT)
-    sat2 = serializers.TimeField(format=TIME_FORMAT)
-    sat3 = serializers.TimeField(format=TIME_FORMAT)
-    sat4 = serializers.TimeField(format=TIME_FORMAT)
-    sun1 = serializers.TimeField(format=TIME_FORMAT)
-    sun2 = serializers.TimeField(format=TIME_FORMAT)
-    sun3 = serializers.TimeField(format=TIME_FORMAT)
-    sun4 = serializers.TimeField(format=TIME_FORMAT)
-
-    class Meta:
-        model = WorkerSchedule
-        fields = '__all__'

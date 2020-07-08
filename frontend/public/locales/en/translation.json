@@ -151,7 +151,24 @@
                 "title": "Week schedule",
                 "warning": "Warning"
             },
-            "select-workers": "Select workers"
+            "select-workers": "Select workers",
+            "ca-modal": {
+                "title": "Set new CA",
+                "use-map": "Use map",
+                "ca": "Contributing activity",
+                "substance": "Substance",
+                "composition": "Composition",
+                "mixture": "Mixture",
+                "no-use-selected-alert": "No use map selected",
+                "is-mixture": "This CA uses a mixture"
+            },
+            "ca-table": {
+                "use": "Use map",
+                "ca": "Contributing activity",
+                "substance": "Substance/Mixture",
+                "schedule": "Week schedule",
+                "warning": "Warning"
+            }
         },
         "worker": {
             "accordion": {

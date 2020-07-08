@@ -28,7 +28,9 @@ export default function AEntities(props){
         workers: [],                        // sent to server
         workersTemp: [],                    // workersTemp saved to workers on Ok button on modal
         timings: {},                        // timing for each worker in form id:timing
-        activeWorkerTiming: false           // timing modal open for worker id
+        activeWorkerTiming: false,          // timing modal open for worker id
+        cas: [],                            // list of CAs added as assessment entities
+        activeCATiming: false,              // timing modal open for CA
     })
 
     const {t} = useTranslation();
@@ -44,6 +46,10 @@ export default function AEntities(props){
         validationSchema: Schema,
         initialValues: {
             workplace: ''
+        },
+        onSubmit: values => {
+            console.log(values);
+            console.log("submitted");
         }
     })
 
@@ -78,11 +84,27 @@ export default function AEntities(props){
     // is used to define schedule for each worker
     // props.recordSchedule returns schedule that is stored in state
     const handleTiming = values => {
+        
+        // if ca timing
+        if (state.activeCATiming !== false) {
+            let cas = [...state.cas];
+            cas[state.activeCATiming].schedule = values;
+            
+            setState({
+                ...state,
+                cas: cas,
+                schedule: false,
+                activeCATiming: false
+            })
+            return;
+        }
+
         let timings = {...state.timings};
         timings[state.activeWorkerTiming] = values;
         setState({
             ...state,
             timings: timings,
+            activeWorkerTiming: false,
             schedule: false
         });
     }
@@ -144,27 +166,30 @@ export default function AEntities(props){
         }
 
         if (!state.timings[id][day]) {
-            return <Badge variant="info">
+            return (
+                <span className="text-secondary" style={{ fontSize: 13 }}>
                     {t(`days.${day}`)}
-                </Badge>
+                </span>
+            )
         }
 
         let duration = Object.keys(state.timings[id][day]).length / 2;
         let durationIllustrated = Object.keys(state.timings[id][day]).map(
             item => (
                 <span style={{
-                    color: "red"
+                    color: "red",
+                    fontSize: 12
                 }}> | </span>
             )
         );
         return(
             <Row>
-                <Col md="2">
-                    <Badge variant="info">
+                <Col md="4" lg="3">
+                    <span className="text-secondary" style={{ fontSize: 13 }}>
                         {t(`days.${day}`)}
-                    </Badge>
+                    </span>
                 </Col>
-                <Col md="4">{durationIllustrated}</Col>
+                <Col md="6" lg="5">{durationIllustrated}</Col>
                 <Col>{duration > 0 ? <span>{duration}h</span> : ""}</Col>
             </Row>
         )
@@ -208,13 +233,13 @@ export default function AEntities(props){
                                         })}
                                     >{t('set')} <FontAwesomeIcon icon="user-clock" />
                                     </Button></div>
-                                <div>
-                                    {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(
-                                        day => (
-                                            <div key={day}>
-                                                    {workerTimingInTable(workerID, day)}
-                                                </div>
-                                            )
+                                    <div>
+                                        {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(
+                                            day => (
+                                                <div key={day}>
+                                                        {workerTimingInTable(workerID, day)}
+                                                    </div>
+                                                )
                                         )}
                                     </div>
                                 </td>
@@ -315,17 +340,321 @@ export default function AEntities(props){
     
 
     // Contributing activities ---------------------------------------------------------------------
+    
+    /* 
+        formik and yup scheme required for form used to 
+        set new CA for the given assessment entities
+    */
+    const caSchema = Yup.object().shape({})
+    const caformik = useFormik({
+        validationSchema: caSchema,
+        initialValues: {},
+        onSubmit: values => {
+            console.log(values)
+            let cas = [...state.cas];
+            cas.push(values);
+            setState({
+                ...state,
+                caModal: false,
+                cas: cas
+            })
+        }
+    })
+
+    // removes a set CA from table
+    const handleDeleteCAFromTable = inx => {
+        console.log(inx);
+    }
+
+
+    // creates a timing representation for table below based on schedule
+    const caTimingInTable = (inx, day) => {
+        console.log(state.cas[inx])
+        if (!state.cas[inx].schedule) {
+            return <div></div>
+        }
+
+        if (!state.cas[inx].schedule[day]) {
+            return (
+                <span className="text-secondary" style={{ fontSize: 13 }}>
+                    {t(`days.${day}`)}
+                </span>
+            )
+        }
+
+        let duration = Object.keys(state.cas[inx].schedule[day]).length / 2;
+        let durationIllustrated = Object.keys(state.cas[inx].schedule[day]).map(
+            (item, inx) => (
+                inx > 20 ?
+                "" :<span style={{
+                        color: "red",
+                        fontSize: 12
+                    }}> | </span>
+            )
+        );
+        return(
+            <Row>
+                <Col md="4">
+                    <span className="text-secondary" style={{ fontSize: 13 }}>
+                        {t(`days.${day}`)}
+                    </span>
+                </Col>
+                <Col md="6">{durationIllustrated}</Col>
+                <Col style={{ fontSize: 13 }}>
+                    {duration > 0 ? <span>{duration}h</span> : ""}
+                </Col>
+            </Row>
+        )
+    }
+
+    const caTable = (
+        <Table>
+            <thead>
+                <tr>
+                    <th>.</th>
+                    <th>{t('data.aentity.ca-table.use')}</th>
+                    <th>{t('data.aentity.ca-table.ca')}</th>
+                    <th>{t('data.aentity.ca-table.substance')}</th>
+                    <th>{t('data.aentity.ca-table.schedule')}</th>
+                    <th>{t('data.aentity.ca-table.warning')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    state.cas.map(
+                        (ca, inx) => (
+                            <tr key={inx}>
+                                <td>
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        className="border-0"
+                                        onClick={() => handleDeleteCAFromTable(inx)}
+                                    ><FontAwesomeIcon icon="trash-alt" />
+                                    </Button>
+                                </td>
+                                <td>{
+                                    entContext.uses
+                                    .find(o => o.id === parseInt(ca.use))
+                                    .reference
+                                }</td>
+                                <td>{
+                                    entContext.uses
+                                    .find(o => o.id === parseInt(ca.use))
+                                    .cas
+                                    .find(o => o.id === parseInt(ca.ca))
+                                    .reference
+                                }</td>
+                                <td>{
+                                    entContext.substances
+                                    .find(o => o.id === parseInt(ca.substance))
+                                    .reference
+                                }</td>
+                                <td>
+                                    <div><Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        className="mb-3"
+                                        onClick={() => setState({
+                                            ...state,
+                                            schedule: true,
+                                            activeCATiming: inx
+                                        })}
+                                    >{t('set')} <FontAwesomeIcon icon="business-time" />
+                                    </Button></div>
+
+                                    <div>
+                                        {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(
+                                            day => (
+                                                <div key={day}>
+                                                    {caTimingInTable(inx, day)}
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        )
+                    )
+                }
+            </tbody>
+        </Table>
+    )
+    
     const cas = (
         <div>
-            CAS
+            <Button
+                variant="danger"
+                onClick={() => setState({...state, caModal: true})}
+            >{ t('add-new') }
+            </Button>
+
+            {/* Table listing already added CA-SUBSTANCE-MIXTURE */}
+            <div className="mt-4">
+            {
+                state.cas.length > 0 ?
+                 caTable
+                 :<Alert variant="warning">
+                    {t('messages.no-data-for-this-page')}
+                </Alert>
+            }
+            </div>
+
+            {/* Modal to add new CA-SUBSTANCE-MIXTURE */}
+            <Modal
+                show={state.caModal}
+                onHide={() => setState({...state, caModal: false})}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>{ t('data.aentity.ca-modal.title') }</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.aentity.ca-modal.use-map') }
+                            </Form.Label>
+
+                            <Form.Control
+                                name="use"
+                                as="select"
+                                required={true}
+                                value={caformik.values.use}
+                                onChange={caformik.handleChange}
+                            >
+                                 <option value=""></option>
+                                {
+                                    entContext.uses.map(
+                                        use => (
+                                            <option key={use.id} value={use.id}>
+                                                {use.reference}
+                                            </option>
+                                        )
+                                    )
+                                }
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>
+                                { t('data.aentity.ca-modal.ca') }
+                            </Form.Label>
+
+                            {
+                                caformik.values.use ?
+                                    <Form.Control
+                                        name="ca"
+                                        as="select"
+                                        required={true}
+                                        value={caformik.values.ca}
+                                        onChange={caformik.handleChange}
+                                    >
+                                        <option value=""></option>
+                                        {
+                                            entContext
+                                            .uses
+                                            .find(o => o.id === parseInt(caformik.values.use))
+                                            .cas.map(
+                                                ca => (
+                                                    <option key={ca.id} value={ca.id}>
+                                                        {ca.reference}
+                                                    </option>
+                                                )
+                                        )
+                                        }
+                                    </Form.Control>
+                                    : <Alert variant="danger">
+                                        { t('data.aentity.ca-modal.no-use-selected-alert') }
+                                      </Alert>
+                            }
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Check
+                                name="isMixture"
+                                label={ t('data.aentity.ca-modal.is-mixture') }
+                                value={caformik.values.isMixture}
+                                onChange={caformik.handleChange}
+                            />
+                        </Form.Group>
+
+                        {
+                            caformik.values.isMixture ?
+                            <Form.Group>
+                                <Form.Label>
+                                    { t('data.aentity.ca-modal.mixture') }
+                                </Form.Label>
+
+                                <Form.Control
+                                    name="mixture"
+                                    as="select"
+                                    required={true}
+                                    value={caformik.values.mixture}
+                                    onChange={caformik.handleChange}
+                                >
+                                    <option value=""></option>
+                                    {
+                                        entContext.mixtures.map(
+                                            mix => (
+                                                <option key={mix.id} value={mix.id}>
+                                                    {mix.reference}
+                                                </option>
+                                            )
+                                        )
+                                    }
+                                </Form.Control>
+                            </Form.Group>
+                            :<Form.Group>
+                                <Form.Label>
+                                    { t('data.aentity.ca-modal.substance') }
+                                </Form.Label>
+
+                                <Form.Control
+                                    name="substance"
+                                    as="select"
+                                    required={true}
+                                    value={caformik.values.substance}
+                                    onChange={caformik.handleChange}
+                                >
+                                    <option value=""></option>
+                                    {
+                                        entContext.substances.map(
+                                            sub => (
+                                                <option key={sub.id} value={sub.id}>
+                                                    {sub.reference}
+                                                </option>
+                                            )
+                                        )
+                                    }
+                                </Form.Control>
+                            </Form.Group>
+                        }
+                    </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => setState({...state, caModal: false})}
+                    >
+                        {t('cancel')}
+                    </Button>
+                    <Button
+                        variant="danger"
+                        onClick={caformik.handleSubmit}
+                    >
+                        {t('save')}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 
 
 
 
-
-    console.log(state.timings)
 
 
     return(
