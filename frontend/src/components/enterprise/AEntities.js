@@ -10,7 +10,7 @@ import { Table, Badge, Modal, Button, Form, Row, Col, Alert } from 'react-bootst
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Schedule from './aentity/Schedule';
-
+import axios from 'axios';
 
 
 
@@ -38,7 +38,6 @@ export default function AEntities(props){
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
 
-
     const Schema = Yup.object().shape({workplace: Yup.string()})
 
     // used here for modal and also for dataform
@@ -47,9 +46,45 @@ export default function AEntities(props){
         initialValues: {
             workplace: ''
         },
-        onSubmit: values => {
-            console.log(values);
-            console.log("submitted");
+        onSubmit: () => {
+            /*
+                before submitting PUT request
+                data must be packed
+                to include both CAs and workers data
+                which are used as children instances
+                of assessment entity on the backend
+            */
+           
+            const aentityID = props.match.params.id;
+            const enterprise = entContext.ent[0].id;
+            
+            let data = entContext.aentities.find(o => o.id === parseInt(aentityID));       
+            let cas = [...state.cas];
+            let workers = [...state.workers];
+            
+            workers = workers.map(
+                worker => ({
+                    aentity: aentityID,
+                    worker: worker,
+                    schedule: {...state.timings[worker]}
+                })
+            )
+
+            data.cas = cas;
+            data.workers = workers;
+
+            axios.put(
+                `${APIcontext.API}/a-entities/${aentityID}/`,
+                data,
+                {headers: {
+                        Pragma: "no-cache",
+                        Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }}
+            ).then(
+                res => console.log(res)
+            ).catch(
+                e => console.log(e)
+            )
         }
     })
 
@@ -99,6 +134,7 @@ export default function AEntities(props){
             return;
         }
 
+        // for workers ->
         let timings = {...state.timings};
         timings[state.activeWorkerTiming] = values;
         setState({
@@ -179,7 +215,7 @@ export default function AEntities(props){
                 <span style={{
                     color: "red",
                     fontSize: 12
-                }}> | </span>
+                }} key={item}> | </span>
             )
         );
         return(

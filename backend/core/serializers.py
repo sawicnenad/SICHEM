@@ -10,7 +10,9 @@ from .models import (
     Worker,
     Use,
     CA,
-    AssessmentEntity
+    AssessmentEntity,
+    WorkerOfAEntity,
+    CaOfAEntity
 )
 
 
@@ -96,8 +98,51 @@ class UseSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
+class WorkerOfAEntitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkerOfAEntity 
+        fields = '__all__'
+
+class CaOfAEntitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CaOfAEntity 
+        fields = '__all__'
+
+
 class AssessmentEntitySerialiizer(serializers.ModelSerializer):
+
+    workers_of_aentity = WorkerOfAEntitySerializer(many=True, required=False)
+    cas_of_aentity = CaOfAEntitySerializer(many=True, required=False)
+
     class Meta:
         model = AssessmentEntity
         fields = '__all__'
+
+    
+    def update(self, instance, validated_data):
+        worker_data = validated_data.pop('workers')
+        ca_data = validated_data.pop('cas')
+
+        if len(worker_data) > 0:
+            for worker in worker_data:
+                try:
+                    test = WorkerOfAEntity.objects.get(id=worker['id'])
+                    updated_wrk = WorkerOfAEntity(**worker)
+                    updated_wrk.id = test.id
+                    updated_wrk.save()
+                except:
+                    WorkerOfAEntity.objects.create(**worker)
+
+        if len(ca_data) > 0:
+            for ca in ca_data:
+                try:
+                    test = CaOfAEntity.objects.get(id=ca['id'])
+                    updated_ca = CaOfAEntity(**ca)
+                    updated_ca.id = test.id
+                    updated_ca.save()
+                except:
+                    CaOfAEntity.objects.create(**ca)
+    
+        # update assessment entity
+        return super().update(instance, validated_data)
 

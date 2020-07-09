@@ -66,7 +66,7 @@ function EnterpriseContextProvider(props) {
                 }
             )
     }, [context])
-    console.log(state)
+    console.log(state.aentities)
     /*
         Data in state refresh
         in order to not fetch again updated data from the server

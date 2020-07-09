@@ -352,3 +352,24 @@ class AssessmentEntity(models.Model):
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     workplace = models.OneToOneField(Workplace, on_delete=models.CASCADE)
 
+class WorkerOfAEntity(models.Model):
+    aentity = models.ForeignKey(
+        AssessmentEntity,
+        on_delete=models.CASCADE,
+        related_name="workers_of_aentity")
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+    schedule = models.TextField(default="{}")
+
+class CaOfAEntity(models.Model):
+    aentity = models.ForeignKey(
+        AssessmentEntity,
+        on_delete=models.CASCADE,
+        related_name="cas_of_aentity")
+    ca = models.ForeignKey(CA, on_delete=models.CASCADE)
+    substance = models.ForeignKey(
+        Substance, on_delete=models.CASCADE, null=True, blank=True)
+    mixture = models.ForeignKey(
+        Mixture, on_delete=models.CASCADE, null=True, blank=True)
+    composition = models.ForeignKey(
+        Composition, on_delete=models.CASCADE, null=True, blank=True)
+    schedule = models.TextField(default="{}")
