@@ -90,7 +90,7 @@ export default function AEntities(props){
             cas: cas
         })
         
-    }, [])
+    }, [props])
 
 
 
@@ -449,7 +449,6 @@ export default function AEntities(props){
         validationSchema: caSchema,
         initialValues: {},
         onSubmit: values => {
-            console.log(values)
             let cas = [...state.cas];
             cas.push(values);
             setState({
@@ -468,7 +467,6 @@ export default function AEntities(props){
 
     // creates a timing representation for table below based on schedule
     const caTimingInTable = (inx, day) => {
-        console.log(state.cas[inx])
         if (!state.cas[inx].schedule) {
             return <div></div>
         }
@@ -756,6 +754,21 @@ export default function AEntities(props){
 
 
 
+
+    // based on whether CA or Worker is active for timing
+    // get corresponding values and pass them to Schedule
+    const getTimingForSchedule = () => {
+        let timing = null;
+        if (state.activeCATiming) {
+            timing = [...state.cas][state.activeCATiming].schedule;
+        }
+        if (state.activeWorkerTiming) {
+            timing = {...state.timings}[state.activeWorkerTiming];
+        }
+        return timing;
+    }
+
+
     return(
         <div>
 
@@ -763,6 +776,7 @@ export default function AEntities(props){
                 visible={state.schedule}
                 onHide={() => setState({...state, schedule: false})}
                 recordTiming={handleTiming}
+                timing={getTimingForSchedule()}
             />
 
             {

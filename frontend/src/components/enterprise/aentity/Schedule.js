@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Col, Row, Badge } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -22,12 +22,21 @@ export default function Schedule(props) {
     const [state, setState] = useState({
         selection: false,
         timing: {
-            'mon': {}, 'tue': {},
-            'wed': {}, 'thu': {},
-            'fri': {}, 'sat': {},
-            'sun': {}
+            mon: {}, tue: {},
+            wed: {}, thu: {},
+            fri: {}, sat: {},
+            sun: {}
         }
     })
+    useEffect(() => {
+        console.log(props.timing)
+        if (props.timing) {
+            setState({
+                ...state,
+                timing: props.timing
+            })
+        }
+    }, [props])
 
     const handleTimingSelection = (day, n, click) => {
 
