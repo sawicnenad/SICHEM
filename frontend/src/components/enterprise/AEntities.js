@@ -37,10 +37,73 @@ export default function AEntities(props){
     const scaling = { label: { md: 3 }, field: { md: 7 } }
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
+    const aentityID = parseInt(props.match.params.id);
 
-    const Schema = Yup.object().shape({workplace: Yup.string()})
+    
+
+
+
+
+
+
+
+
+
+    // on load populate state data for the given assessment entity
+    useEffect( () => {
+
+        if (!aentityID) {
+            return;
+        }
+
+        let ae = entContext
+                    .aentities
+                    .find( o => o.id === aentityID );
+
+        let workersOfAEntity = ae['workers_of_aentity'];
+        let cas = ae['cas_of_aentity'];
+        let workers = [...state.workers];
+        let timings = {...state.timings};
+
+        for (let i = 0; i < workersOfAEntity.length; i++) {
+
+            let id = workersOfAEntity[i].worker;
+            workers.push(id);
+
+            let schedule = workersOfAEntity[i].schedule.replace(/'/g, '\"');
+            schedule = schedule.replace(/True/g, true);
+
+            timings[id] = JSON.parse(schedule);
+        }
+
+        for (let i = 0; i < cas.length; i++) {
+            let schedule = cas[i].schedule.replace(/'/g, '\"');
+            schedule = schedule.replace(/True/g, true);
+
+            cas[i].schedule = JSON.parse(schedule);
+        }
+
+        setState({
+            ...state,
+            workers: workers,
+            timings: timings,
+            cas: cas
+        })
+        
+    }, [])
+
+
+
+
+
+
+
+
+
+
 
     // used here for modal and also for dataform
+    const Schema = Yup.object().shape({workplace: Yup.string()})
     const myformik = useFormik({
         validationSchema: Schema,
         initialValues: {
@@ -54,14 +117,14 @@ export default function AEntities(props){
                 which are used as children instances
                 of assessment entity on the backend
             */
-           
-            const aentityID = props.match.params.id;
-            const enterprise = entContext.ent[0].id;
-            
-            let data = entContext.aentities.find(o => o.id === parseInt(aentityID));       
+            let data = entContext.aentities.find(o => o.id === aentityID);       
             let cas = [...state.cas];
+            for (let i in cas) {
+                cas[i].aentity = aentityID;
+                cas[i].schedule = cas[i].schedule ? cas[i].schedule : {};
+            }
+
             let workers = [...state.workers];
-            
             workers = workers.map(
                 worker => ({
                     aentity: aentityID,
@@ -70,8 +133,8 @@ export default function AEntities(props){
                 })
             )
 
-            data.cas = cas;
-            data.workers = workers;
+            data['cas_of_aentity'] = cas;
+            data['workers_of_aentity'] = workers;
 
             axios.put(
                 `${APIcontext.API}/a-entities/${aentityID}/`,

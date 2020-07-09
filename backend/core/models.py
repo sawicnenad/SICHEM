@@ -365,6 +365,7 @@ class CaOfAEntity(models.Model):
         AssessmentEntity,
         on_delete=models.CASCADE,
         related_name="cas_of_aentity")
+    use = models.ForeignKey(Use, on_delete=models.CASCADE)
     ca = models.ForeignKey(CA, on_delete=models.CASCADE)
     substance = models.ForeignKey(
         Substance, on_delete=models.CASCADE, null=True, blank=True)

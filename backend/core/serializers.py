@@ -99,11 +99,13 @@ class UseSerializer(serializers.ModelSerializer):
 
 
 class WorkerOfAEntitySerializer(serializers.ModelSerializer):
+    schedule = serializers.JSONField()
     class Meta:
         model = WorkerOfAEntity 
         fields = '__all__'
 
 class CaOfAEntitySerializer(serializers.ModelSerializer):
+    schedule = serializers.JSONField()
     class Meta:
         model = CaOfAEntity 
         fields = '__all__'
@@ -120,8 +122,8 @@ class AssessmentEntitySerialiizer(serializers.ModelSerializer):
 
     
     def update(self, instance, validated_data):
-        worker_data = validated_data.pop('workers')
-        ca_data = validated_data.pop('cas')
+        worker_data = validated_data.pop('workers_of_aentity')
+        ca_data = validated_data.pop('cas_of_aentity')
 
         if len(worker_data) > 0:
             for worker in worker_data:

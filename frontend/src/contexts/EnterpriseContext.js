@@ -47,7 +47,7 @@ function EnterpriseContextProvider(props) {
                     AEntity])
             .then(
                 res => setState({
-                    ent: res[0].data,
+                    ent: res[0].data[0],
                     substances: res[1].data,
                     suppliers: res[2].data,
                     compositions: res[3].data,
@@ -66,7 +66,7 @@ function EnterpriseContextProvider(props) {
                 }
             )
     }, [context])
-    console.log(state.aentities)
+
     /*
         Data in state refresh
         in order to not fetch again updated data from the server
