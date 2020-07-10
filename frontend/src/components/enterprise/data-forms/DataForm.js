@@ -94,17 +94,38 @@ export default function DataForm(props) {
                 );
             case "checkbox-list":
                 return(
-                    field.elements.map(
-                        item => (
-                            <Form.Check
-                                key={item.name}
-                                {...field.props}
-                                name={item.name}
-                                label={t(item.label)}
-                                checked={props.formik.values[item.name]}
-                                onChange={props.formik.handleChange}
-                            />)
-                    )
+                    field.label ?
+                    <Form.Group as={Row}>
+                        <Form.Label column {...props.scaling.label}>
+                            {t(field.label)}:
+                        </Form.Label>
+
+                        <Col xs={5} md={3}>{
+                            field.elements.map(
+                                item => (
+                                    <Form.Check
+                                        key={item.name}
+                                        {...field.props}
+                                        name={item.name}
+                                        label={field.noTranslate ? item.label : t(item.label)}
+                                        checked={props.formik.values[item.name]}
+                                        onChange={props.formik.handleChange}
+                                    />)
+                            )
+                        }</Col>
+                    </Form.Group>
+                    :
+                        field.elements.map(
+                            item => (
+                                <Form.Check
+                                    key={item.name}
+                                    {...field.props}
+                                    name={item.name}
+                                    label={t(item.label)}
+                                    checked={props.formik.values[item.name]}
+                                    onChange={props.formik.handleChange}
+                                />)
+                        )
                 );
             case "after-input-select": 
                 return(
@@ -576,6 +597,20 @@ export default function DataForm(props) {
     // fields are split into different cards/collapse/accordions
     // two level nested accordions are supported (should be enough)
 
+    const delButton = (
+        
+        props.noDeleteButton ?
+        <span />
+        : <Button 
+            variant="secondary"
+            className="ml-1"
+            onClick={props.handleDelete}
+        >
+            <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
+        </Button>
+        
+    )
+
     const funButtons = (
         data.noFunButtons ?
         <div />
@@ -593,17 +628,7 @@ export default function DataForm(props) {
                     </Button>
                 </Link>
 
-                {
-                    props.noDeleteButton ?
-                    <span />
-                    : <Button 
-                        variant="secondary"
-                        className="ml-1"
-                        onClick={props.handleDelete}
-                    >
-                        <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
-                    </Button>
-                }
+                { delButton }
 
                 <Button
                     variant="danger"

@@ -55,6 +55,7 @@
         "substance-added": "New substance created",
         "substance-updated": "Substance updated",
         "workplace-added": "New workplace created",
+        "component-added": "New component created",
         "workplace-updated": "Workplace updated",
         "worker-updated": "Worker updated",
         "aentity-updated": "Assessment entities updated",
@@ -107,7 +108,10 @@
         "home": {
             "ent-name": "My enterprise:",
             "ent-uid": "UID:",
-            "data-entry": "Data entry"
+            "data-entry": "Data entry",
+            "exposure-assessment": "Exposure | Risk assessment",
+            "aentities": "Assessment entities",
+            "exposure": "Exposure assessment"
         },
         "my-enterprise": {
             "alert-no-enterprise-header": "No enterprise identified",
@@ -1187,6 +1191,7 @@
                 "authorization": "Authorization",
                 "auth-1": "Substance of Very High Concern (SVHC) - Listed in Annex 3 ChemO",
                 "auth-2": "Substance of Very High Concern (SVHC) - Listed in Annex 1.17 ORRChem",
+                "auth-svhc-annex-3": "",
                 "restriction": "Restriction",
                 "restriction-1": "Substance is listed in ORRChem",
                 "harmonized-classification": "Hazrmonized classification - Annex VI CLP",

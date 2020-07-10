@@ -684,25 +684,25 @@ export default function Substance(props) {
                                 </optgroup>
 
                                 <optgroup label={t('data.substance.reg-status-ch.restriction')}>
-                                    <option value="auth-svhc-annex-3">
+                                    <option value="restriction-1">
                                         { t('data.substance.reg-status-ch.restriction-1') }
                                     </option>
                                 </optgroup>
 
                                 <optgroup label={t('data.substance.reg-status-ch.harmonized-classification')}>
-                                    <option value="auth-svhc-annex-3">
+                                    <option value="harmonized-classification-1">
                                         { t('data.substance.reg-status-ch.harmonized-classification-1') }
                                     </option>
                                 </optgroup>
 
                                 <optgroup label={t('data.substance.reg-status-ch.protection-young-people')}>
-                                    <option value="auth-svhc-annex-3">
+                                    <option value="protection-young-people-1">
                                         { t('data.substance.reg-status-ch.protection-young-people-1') }
                                     </option>
                                 </optgroup>
 
                                 <optgroup label={t('data.substance.reg-status-ch.maternety-protection')}>
-                                    <option value="auth-svhc-annex-3">
+                                    <option value="maternety-protection-1">
                                         { t('data.substance.reg-status-ch.maternety-protection-1') }
                                     </option>
                                 </optgroup>
@@ -921,6 +921,7 @@ export default function Substance(props) {
                                 value={regEUformik.values.status}
                                 onChange={regEUformik.handleChange}
                             >
+                                <option value="" disabled selected></option>
                                 <optgroup label={ t('data.substance.reg-status-eu.evaluation') }>
                                     <option value="eval-1">
                                         {t('data.substance.reg-status-eu.eval-1')}
@@ -979,6 +980,7 @@ export default function Substance(props) {
                                 value={regEUformik.values.clp}
                                 onChange={regEUformik.handleChange}
                             >
+                                <option value="" disabled selected></option>
                                 <option value="clp-1">
                                     { t('data.substance.reg-status-eu.clp-1') }
                                 </option>
@@ -1016,6 +1018,7 @@ export default function Substance(props) {
                                 value={regEUformik.values.other_directive}
                                 onChange={regEUformik.handleChange}
                             >   
+                                <option value="" disabled selected></option>
                                 <option value="directive-1">
                                     { t('data.substance.reg-status-eu.directive-1') }
                                 </option>
@@ -1059,6 +1062,22 @@ export default function Substance(props) {
         </div>
     )
 
+
+    // change labels of notations to support 
+    let notation = data.fields.notation.elements;
+
+    for (let i in notation) {
+        if (notation[i].label.length === 2) {
+            notation[i].label = (
+                <span>
+                    {notation[i].label[0]}
+                    <sub>
+                        {notation[i].label[1]}
+                    </sub>
+                </span>
+            )
+        }
+    }
 
     /*
         RETURN

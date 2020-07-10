@@ -85,7 +85,7 @@ export default function Workers(props) {
             axios({
                 method: method,
                 url: url,
-                data: {...values, enterprise: entContext.ent[0].id},
+                data: {...values, enterprise: entContext.ent.id},
                 headers: {
                     Pragma: "no-cache",
                     Authorization: 'Bearer ' + localStorage.getItem('token-access')

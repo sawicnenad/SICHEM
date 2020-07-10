@@ -100,6 +100,33 @@ export default function Home(props) {
                     </Col>
                 </Row>
             </div>
+
+
+            {/* Exposure assessment */}
+            <div className="p-2 text-muted rounded mt-5 shadow">
+                <div className="text-center border-bottom mb-3 text-muted">
+                    <h4>{ t('enterprise.home.exposure-assessment') }</h4>
+                </div>
+                <Row>
+                    <Col>
+                        <Button 
+                            variant="outline-danger"
+                            onClick={() => props.history.push('/enterprise/a-entities')}
+                        >
+                            {t('enterprise.home.aentities')}
+                        </Button>
+                    </Col>
+
+                    <Col>
+                        <Button 
+                            variant="outline-danger"
+                            onClick={() => props.history.push('/enterprise/exposure')}
+                        >
+                            {t('enterprise.home.exposure')}
+                        </Button>
+                    </Col>
+                </Row>
+            </div>
         </div>
     )
 }

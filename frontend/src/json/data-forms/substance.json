@@ -1991,45 +1991,41 @@
             }
         },
         "notation": {
-            "fieldType": "select",
+            "fieldType": "checkbox-list",
             "label": "data.substance.notation",
-            "props": {
-                "as": "select",
-                "name": "notation",
-                "multiple": true
-            },
-            "options": [
+            "noTranslate": true,
+            "elements": [
                 {
-                    "value": "H",
+                    "name": "notation_h",
                     "label": "H"
-                 }, {
-                     "value": "S",
+                }, {
+                    "name": "notation_s",
                      "label": "S"
-                  }, {
-                     "value": "C",
+                }, {
+                    "name": "notation_c",
                      "label": "C"
-                  }, {
-                     "value": "M",
+                }, {
+                    "name": "notation_m",
                      "label": "M"
-                  }, {
-                     "value": "R0",
+                }, {
+                    "name": "notation_r0",
                      "label": "R0"
-                  }, {
-                    "value": "RF",
+                }, {
+                    "name": "notation_rf",
                     "label": "RF"
-                 }, {
-                    "value": "SS",
+                }, {
+                    "name": "notation_ss",
                     "label": "SS"
-                 }, {
-                    "value": "OL",
+                }, {
+                    "name": "notation_ol",
                     "label": "OL"
-                 }, {
-                    "value": "B",
+                }, {
+                    "name": "notation_b",
                     "label": "B"
-                 }, {
-                    "value": "P",
+                }, {
+                    "name": "notation_p",
                     "label": "P"
-                 }
+                }
             ]
         },
         "critical_toxicity": {

@@ -11,7 +11,7 @@ import {
 import DataForm from './DataForm.js';
 import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
-
+import RequestNotification from '../../notifications/RequestNotification';
 
 
 /*
@@ -25,6 +25,7 @@ export default function Component() {
 
     // Component form (within modal) visibility
     const [modal, setModal] = useState(false);
+    const [notif, setNotif] = useState(false);
 
 
     // Yup scheme and formik for component form
@@ -52,8 +53,17 @@ export default function Component() {
                 }};
             
             axios.post(`${APIcontext.API}/components/`, data, headers)
-                .then( res => console.log(res.data) )
-                .catch(e => console.log(e))
+                .then( res => {
+                    let comps = [...entContext.components];
+                    comps.push(res.data);
+                    entContext.refreshState('components', comps);
+                    setModal(false);
+                    setNotif('success');
+                } )
+                .catch(e => {
+                    console.log(e);
+                    setNotif('error');
+                })
         }
     })
 
@@ -92,6 +102,19 @@ export default function Component() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            {/* Notifications */}
+            <RequestNotification
+                success
+                show={notif === 'success'}
+                msgSuccess={t('messages.component-added')}
+                onClose={() => setNotif(false)}
+            />
+
+            <RequestNotification
+                show={notif === 'error'}
+                onClose={() => setNotif(false)}
+            />
         </div>
     )
 }

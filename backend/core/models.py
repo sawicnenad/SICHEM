@@ -198,9 +198,20 @@ class Substance(models.Model):
     suva_mak_wert_unit = models.CharField(max_length=10, blank=True)
     suva_kzgw = models.CharField(max_length=50, blank=True)
     suva_kzgw_unit = models.CharField(max_length=10, blank=True)
-    notation = models.CharField(max_length=2, blank=True)
     critical_toxicity = models.CharField(max_length=255, blank=True)
     tox_file = models.FileField(upload_to=upload_path, blank=True, null=True)
+
+    # notations
+    notation_h = models.BooleanField(default=False)
+    notation_s = models.BooleanField(default=False)
+    notation_c = models.BooleanField(default=False)
+    notation_m = models.BooleanField(default=False)
+    notation_r0 = models.BooleanField(default=False)
+    notation_rf = models.BooleanField(default=False)
+    notation_ss = models.BooleanField(default=False)
+    notation_ol = models.BooleanField(default=False)
+    notation_b = models.BooleanField(default=False)
+    notation_p = models.BooleanField(default=False)
 
     # Other reference values
     eu_ioelv = models.CharField(max_length=50, blank=True)
