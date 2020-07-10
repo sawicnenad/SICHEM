@@ -593,9 +593,17 @@ export default function DataForm(props) {
                     </Button>
                 </Link>
 
-                <Button variant="secondary" className="ml-1" onClick={props.handleDelete}>
-                    <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
-                </Button>
+                {
+                    props.noDeleteButton ?
+                    <span />
+                    : <Button 
+                        variant="secondary"
+                        className="ml-1"
+                        onClick={props.handleDelete}
+                    >
+                        <FontAwesomeIcon icon="trash-alt" /> { t('delete') }
+                    </Button>
+                }
 
                 <Button
                     variant="danger"

@@ -86,13 +86,17 @@ export default function DataList(props) {
                                 <span className="float-right">
 
                                     <ButtonToolbar ref={ref}>
-                                        <Button
-                                            variant="light"
-                                            size="sm"
-                                            onClick={handleDeleteBtnClick}
-                                        >
-                                            <FontAwesomeIcon icon="trash-alt" />
-                                        </Button>
+                                        {
+                                            props.noDeleteButton ?
+                                            <span />
+                                            : <Button
+                                                variant="light"
+                                                size="sm"
+                                                onClick={handleDeleteBtnClick}
+                                            >
+                                                <FontAwesomeIcon icon="trash-alt" />
+                                            </Button>
+                                        }
 
                                         <Overlay
                                             container={ref.current}

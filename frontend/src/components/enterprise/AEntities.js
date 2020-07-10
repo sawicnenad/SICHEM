@@ -11,6 +11,7 @@ import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Schedule from './aentity/Schedule';
 import axios from 'axios';
+import RequestNotification from '../notifications/RequestNotification';
 
 
 
@@ -31,6 +32,8 @@ export default function AEntities(props){
         activeWorkerTiming: false,          // timing modal open for worker id
         cas: [],                            // list of CAs added as assessment entities
         activeCATiming: false,              // timing modal open for CA
+        successMsg: false,
+        errorMsg: false
     })
 
     const {t} = useTranslation();
@@ -62,8 +65,8 @@ export default function AEntities(props){
 
         let workersOfAEntity = ae['workers_of_aentity'];
         let cas = ae['cas_of_aentity'];
-        let workers = [...state.workers];
-        let timings = {...state.timings};
+        let workers = [];
+        let timings = {};
 
         for (let i = 0; i < workersOfAEntity.length; i++) {
 
@@ -144,9 +147,25 @@ export default function AEntities(props){
                         Authorization: 'Bearer ' + localStorage.getItem('token-access')
                 }}
             ).then(
-                res => console.log(res)
+                res => {
+                    let data = res.data;
+                    let aentities = [...entContext.aentities];
+                    aentities = aentities.filter(o => o.id !== aentityID);
+                    aentities.push(data);
+                    entContext.refreshState('aentities', aentities);
+                    setState({
+                        ...state,
+                        successMsg: true
+                    })
+                }
             ).catch(
-                e => console.log(e)
+                e => {
+                    console.log(e);
+                    setState({
+                        ...state,
+                        errorMsg: true
+                    })
+                }
             )
         }
     })
@@ -759,7 +778,7 @@ export default function AEntities(props){
     // get corresponding values and pass them to Schedule
     const getTimingForSchedule = () => {
         let timing = null;
-        if (state.activeCATiming) {
+        if (state.activeCATiming !== false) {
             timing = [...state.cas][state.activeCATiming].schedule;
         }
         if (state.activeWorkerTiming) {
@@ -774,7 +793,12 @@ export default function AEntities(props){
 
             <Schedule 
                 visible={state.schedule}
-                onHide={() => setState({...state, schedule: false})}
+                onHide={() => setState({
+                    ...state,
+                    schedule: false,
+                    activeCATiming: false,
+                    activeWorkerTiming: false
+                })}
                 recordTiming={handleTiming}
                 timing={getTimingForSchedule()}
             />
@@ -789,6 +813,7 @@ export default function AEntities(props){
                     title={t('data.aentity.form-title')}
                     close='/enterprise/a-entities'
                     handleDelete={() => console.log("delete")}
+                    noDeleteButton
                     custom={{
                         workers: workers,
                         cas: cas
@@ -800,9 +825,24 @@ export default function AEntities(props){
                     api={`${APIcontext.API}/a-entities/`}
                     link='/enterprise/a-entities/'
                     delMsg={t('messages.aentity-delete-msg')}
+                    noDeleteButton
                     createButton={<div></div>}
                 />
             }
+
+            {/* request notifications */}
+            {/* Notifications */}
+            <RequestNotification
+                success
+                show={state.successMsg}
+                msgSuccess={t('messages.aentity-updated')}
+                onClose={() => setState({ ...state, successMsg: false })}
+            />
+
+            <RequestNotification
+                show={state.errorMsg}
+                onClose={() => setState({ ...state, errorMsg: false })}
+            />
         </div>
     )
 }

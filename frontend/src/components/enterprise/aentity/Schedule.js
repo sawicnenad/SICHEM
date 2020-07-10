@@ -29,11 +29,15 @@ export default function Schedule(props) {
         }
     })
     useEffect(() => {
-        console.log(props.timing)
+        
         if (props.timing) {
+            let timing = props.timing
+            if (!props.timing.mon) {
+                timing = {...state.timing};
+            }
             setState({
                 ...state,
-                timing: props.timing
+                timing: timing
             })
         }
     }, [props])
@@ -149,6 +153,7 @@ export default function Schedule(props) {
             <Modal.Footer>
                 <Button
                     variant="secondary"
+                    onClick={props.onHide}
                 >
                     {t('cancel')}
                 </Button>
