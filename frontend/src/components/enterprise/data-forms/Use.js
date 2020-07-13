@@ -51,10 +51,23 @@ export default function Use(props) {
         reference: Yup.string().required(t('messages.form.required'))
     })
 
+    // format useValues
+    try{
+        useValues.su = JSON.parse(useValues.su);
+        useValues.pc = JSON.parse(useValues.pc);
+        useValues.ac = JSON.parse(useValues.ac);
+    }catch(e){console.log(e)}
+
     const myformik = useFormik({
         validationSchema: Schema,
         initialValues: {...useValues},
+
         onSubmit: values => {
+            // pc, ac ... must be stringified
+            values.pc = JSON.stringify(values.pc);
+            values.ac = JSON.stringify(values.ac);
+            values.su = JSON.stringify(values.su);
+
             axios.put(
                 `${APIcontext.API}/uses/${useID}/`,
                 values,
