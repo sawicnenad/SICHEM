@@ -7,7 +7,6 @@ import MyEnterprise from '../components/enterprise/MyEnterprise';
 import withAuth from '../hoc/withAuth';
 import Chemicals from '../components/enterprise/Chemicals';
 import Substance from '../components/enterprise/data-forms/Substance';
-import DataForm from '../components/enterprise/data-forms/DataForm';
 import Supplier from '../components/enterprise/data-forms/Supplier';
 import Mixture from '../components/enterprise/data-forms/Mixture';
 import Workplaces from '../components/enterprise/Workplaces';

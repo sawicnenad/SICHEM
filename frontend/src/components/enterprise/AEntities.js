@@ -597,6 +597,13 @@ export default function AEntities(props){
             </tbody>
         </Table>
     )
+
+    // compositions for form below
+    let compositions = [];
+    if (caformik.values.substance) {
+        let substance = parseInt(caformik.values.substance);
+        compositions = entContext.compositions.filter(o => o.substance === substance);
+    }
     
     const cas = (
         <div>
@@ -722,30 +729,56 @@ export default function AEntities(props){
                                     }
                                 </Form.Control>
                             </Form.Group>
-                            :<Form.Group>
-                                <Form.Label>
-                                    { t('data.aentity.ca-modal.substance') }
-                                </Form.Label>
+                            :<div>
+                                <Form.Group>
+                                    <Form.Label>
+                                        { t('data.aentity.ca-modal.substance') }
+                                    </Form.Label>
 
-                                <Form.Control
-                                    name="substance"
-                                    as="select"
-                                    required={true}
-                                    value={caformik.values.substance}
-                                    onChange={caformik.handleChange}
-                                >
-                                    <option value=""></option>
-                                    {
-                                        entContext.substances.map(
-                                            sub => (
-                                                <option key={sub.id} value={sub.id}>
-                                                    {sub.reference}
-                                                </option>
+                                    <Form.Control
+                                        name="substance"
+                                        as="select"
+                                        required={true}
+                                        value={caformik.values.substance}
+                                        onChange={caformik.handleChange}
+                                    >
+                                        <option value=""></option>
+                                        {
+                                            entContext.substances.map(
+                                                sub => (
+                                                    <option key={sub.id} value={sub.id}>
+                                                        {sub.reference}
+                                                    </option>
+                                                )
                                             )
-                                        )
-                                    }
-                                </Form.Control>
-                            </Form.Group>
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>
+                                        { t('data.aentity.ca-modal.composition') }
+                                    </Form.Label>
+
+                                    <Form.Control
+                                        name="composition"
+                                        as="select"
+                                        required={true}
+                                        value={caformik.values.composition}
+                                        onChange={caformik.handleChange}
+                                    >
+                                        <option value=""></option>
+                                        {
+                                            compositions.map(
+                                                sub => (
+                                                    <option key={sub.id} value={sub.id}>
+                                                        {sub.reference}
+                                                    </option>
+                                                )
+                                            )
+                                        }
+                                    </Form.Control>
+                                </Form.Group>
+                            </div>
                         }
                     </Form>
                 </Modal.Body>
