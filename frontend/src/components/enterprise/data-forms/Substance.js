@@ -167,16 +167,16 @@ export default function Substance(props) {
         }
 
         // multi add fields
-        if ( 
-            ['multi', 'exact-or-range']
-                .indexOf(data.fields[field].fieldType) !== -1
-            ) {
-            initialValues[field] = '[""]';
+        if ([
+            'multi',
+            'exact-or-range'
+            ].indexOf(data.fields[field].fieldType) !== -1){
+                initialValues[field] = '[""]';
 
-            if ( substance[field] ) {
-                initialValues[field] = substance[field];
-            }
-            continue;
+                if ( substance[field] ) {
+                    initialValues[field] = substance[field];
+                }
+                continue;
         }
 
         // checkbox list
@@ -197,6 +197,18 @@ export default function Substance(props) {
             }
             continue;
         }
+
+        // after input select (e.g. solubility) 
+        if (data.fields[field].fieldType === 'after-input-select') {
+            let name = data.fields[field].props.name;
+            let afterInputName = data.fields[field].afterInput;
+            let afterSelectName = data.fields[field].afterSelect;
+
+            initialValues[name] = substance[name];
+            initialValues[afterInputName] = substance[afterInputName];
+            initialValues[afterSelectName] = substance[afterSelectName]; 
+        }
+
 
         if (data.fields[field].fieldType === 'custom') {
             if (field === 'hazard') {
@@ -238,6 +250,7 @@ export default function Substance(props) {
         let pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
         return !!pattern.test(str);
       }
+
 
     const myformik = useFormik({
         validationSchema: Schema,
@@ -359,7 +372,7 @@ export default function Substance(props) {
                         isInvalid={!!myformik.errors.supplier}
                         onChange={myformik.handleChange}
                     >
-                        <option value='' disabled></option>
+                        <option value='' disabled selected></option>
                         {
                             entContext.suppliers.map(
                                 item => (
