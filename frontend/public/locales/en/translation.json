@@ -62,8 +62,10 @@
         "worker-added": "New worker added",
         "mixture-updated": "Mixture updated",
         "supplier-added": "New supplier created",
+        "page-not-found": "Page not found!",
         "supplier-updated": "Supplier updated",
         "no-data-for-this-page": "No data to show.",
+        "no-data-selected": "Please select one or more options",
         "deleted": "Deleted successfully",
         "composition-help": "Add component by component with details on their concentrations to the composition using the plus button. To define a completely new component, which later can be used as constituent, additive or impurity, apply 'New' button placed next to the component field.",
         "no-worker-schedule": "No week schedule set",
@@ -147,9 +149,13 @@
     },
     "data": {
         "aentity": {
+            "list": {
+                "cas": "Established assessment entities",
+                "workers": "Exposed workers"
+            },
             "accordion": {
-                "cas": "Contributing activities / Substances / Mixtures",
-                "workers": "Workers"
+                "cas": "2. Assessment entities",
+                "workers": "1. Workers"
             },
             "form-title": "Assessment entities",
             "schedule": {

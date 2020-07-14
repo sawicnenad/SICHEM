@@ -14,6 +14,7 @@ import Uses from '../components/enterprise/Uses';
 import Use from '../components/enterprise/data-forms/Use';
 import Workers from '../components/enterprise/Workers';
 import AEntities from '../components/enterprise/AEntities';
+import AEntity from '../components/enterprise/aentity/AEntity';
 
 
 /*
@@ -63,7 +64,7 @@ function Enterprise() {
                     <Route exact path="/enterprise/supplier/:id" component={ Supplier } />
                     <Route exact path="/enterprise/mixture/:id" component={ Mixture } />
                     <Route exact path="/enterprise/a-entities/" component={ AEntities } />
-                    <Route exact path="/enterprise/a-entities/:id" component={ AEntities } />
+                    <Route exact path="/enterprise/a-entities/:id" component={ AEntity } />
                 </Switch>
             </div>
         </div>
