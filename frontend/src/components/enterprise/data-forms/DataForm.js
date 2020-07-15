@@ -633,7 +633,11 @@ export default function DataForm(props) {
                 <Button
                     variant="danger"
                     className="ml-1"
-                    onClick={props.formik.handleSubmit}
+                    onClick={
+                        props.formik ? 
+                        props.formik.handleSubmit 
+                        : props.handleSubmit
+                    }
                 >
                     <FontAwesomeIcon icon="save" /> { t('save') }
                 </Button>

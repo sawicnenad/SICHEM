@@ -12,6 +12,13 @@ const styling = {
     }
 }
 
+const days = [
+    'mon', 'tue',
+    'wed', 'thu', 
+    'fri', 'sat',
+    'sun'
+]
+
 /*
     Schedule of workers and contributing activities
     to know how much exposure is generated over 8-h twa
@@ -68,7 +75,6 @@ export default function Schedule(props) {
 
     const Week = (
         <Row>
-
             <Col md="1">
                 {times.map(
                     (time, inx) => (
@@ -90,12 +96,7 @@ export default function Schedule(props) {
                 )}
             </Col>
 
-            {[
-                'mon', 'tue',
-                'wed', 'thu', 
-                'fri', 'sat',
-                'sun'
-            ].map(
+            {days.map(
                 day => (
                     <Col key={day}>
                         <div onMouseLeave={() => setState({...state, selection: false})}>
@@ -107,7 +108,7 @@ export default function Schedule(props) {
                                         style={styling.timing}
                                         className={
                                             `pointer-on-hover-div timing ${state.timing[day][inx] ?
-                                                "bg-secondary border-0" : ""}`
+                                                "bg-danger border-0" : ""}`
                                             }
                                         onMouseDown={() => setState({...state, selection: true})}
                                         onMouseLeave={() => handleTimingSelection(day, inx)}
@@ -139,13 +140,16 @@ export default function Schedule(props) {
             <Modal.Body>
                 <Row style={{ marginBottom: 10 }}>
                     <Col md="1"></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="dark">{t('days.mon')}</Badge></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="dark">{t('days.tue')}</Badge></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="dark">{t('days.wed')}</Badge></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="dark">{t('days.thu')}</Badge></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="dark">{t('days.fri')}</Badge></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="warning">{t('days.sat')}</Badge></Col>
-                    <Col style={{ textAlign: 'center'}}><Badge variant="danger">{t('days.sun')}</Badge></Col>
+
+                    {days.map(
+                        day => (
+                            <Col style={{ textAlign: 'center'}} key={day}>
+                                <Badge variant={
+                                    ['sat', 'sun'].indexOf(day) > -1 ? 'warning' : 'light'
+                                }> {t(`days.${day}`)}
+                                </Badge>
+                            </Col>
+                        ))}
                 </Row>
                 { Week }
             </Modal.Body>
@@ -159,7 +163,7 @@ export default function Schedule(props) {
                 </Button>
                 <Button
                     variant="danger"
-                    onClick={() => props.recordTiming(state.timing)}
+                    onClick={() => props.updateSchedule(state.timing)}
                 >
                     {t('save')}
                 </Button>

@@ -30,7 +30,9 @@ import {
     faEdit,
     faCalendarAlt,
     faUserClock,
-    faBusinessTime
+    faBusinessTime,
+    faCog,
+    faCogs
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -57,7 +59,10 @@ library.add(
     faLock,
     faEdit,
     faUserClock,
-    faBusinessTime
+    faBusinessTime,
+    faCog,
+    faCogs,
+    faCalendarAlt
 );
 
 function App() {

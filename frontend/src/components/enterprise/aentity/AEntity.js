@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import DataForm from '../data-forms/DataForm';
 import aentityJSON from '../../../json/data-forms/aentity.json';
-import CATable from './CATable';
 import CAForm from './CAForm';
-import { Button, Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import RequestNotification from '../../notifications/RequestNotification';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
-import WorkersList from './WorkersList';
-import WorkerTable from './WorkerTable';
+import WorkerList from './WorkersList';
+import CAList from './CAList';
+import WorkersModal from './WorkersModal';
+import Schedule from './Schedule';
+import axios from 'axios';
+import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
 
 
 
@@ -31,6 +34,7 @@ export default function AEntity(props) {
     const { t } = useTranslation();
     const aentityID = parseInt(props.match.params.id);
     const context = useContext(EnterpriseContext);
+    const APIcontext = useContext(ApiRequestsContext);
 
     // use effect to set temprary data of assessment entities in state
     // following each change of the data in Workers and CA components
@@ -56,11 +60,111 @@ export default function AEntity(props) {
         setData(data);
         setState({ ...state, loaded: true });
     }, [ props ])
-    console.log(data)
 
 
 
 
+    // final submit to the server
+    const handleSubmit = () => {
+        axios.put(
+            `${APIcontext.API}/a-entities/${aentityID}/`,
+            data,
+            {
+                headers: {
+                    Pragma: "no-cache",
+                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }
+            }
+        ).then(
+            res => {
+                let updated = res.data;
+                let aentities = [...context.aentities];
+                aentities = aentities.filter(o => o.id !== aentityID);
+                aentities.push(updated);
+                setState({ ...state, successMsg: true });
+                context.refreshState('aentities', aentities);
+            }
+        ).catch(
+            e => {
+                console.log(e);
+                setState({ ...state, errorMsg: true });
+            }
+        )
+    }
+
+
+
+
+    /*
+        ******************** Schedule **********************
+        the same component instance for both workers and CAs
+        based on the received arguments, the function below
+        must set schedule data corresponding to the request
+    */
+    const handleSchedule = (isWorker, n) => {
+        // n -> id of worker
+        // or index of CA in the list
+        let scheduleValues = {};
+
+        if (isWorker) {
+            // if worker's schedule
+            let workers = [...data['workers_of_aentity']];
+            let worker = workers.find(o => o.worker === n);
+            scheduleValues = worker.schedule;
+        } else {
+            // if CA's schedule
+            let cas = [...data['cas_of_aentity']];
+            let ca = cas[n];
+            scheduleValues = ca.schedule;
+        }
+
+        // some formatting required in case of single quote
+        // also Python stores 'True' instead of 'true' required in JS
+        if (typeof(scheduleValues) !== 'object') {
+            scheduleValues = scheduleValues.replace(/'/g, '"');
+            scheduleValues = scheduleValues.replace(/True/g, 'true');
+            scheduleValues = JSON.parse(scheduleValues);
+        }
+        
+        setState({
+            ...state,
+            schedule: true,
+            isWorker: isWorker,
+            scheduleActive: n,
+            scheduleValues: scheduleValues
+        });
+    }
+
+
+    // handles 'Save' button event in schedule
+    // updates schedule values in state of this component
+    const updateSchedule = values => {
+        let updatedData = {...data};
+
+        if (state.isWorker) {
+            let workers = updatedData['workers_of_aentity']
+            let worker = workers.find(
+                o => o.worker === state.scheduleActive);
+            workers = workers.filter(o => o.worker !== state.scheduleActive);
+            worker.schedule = JSON.stringify(values);
+            workers.push(worker);
+            updatedData['workers_of_aentity'] = workers;
+            setData(updatedData);
+        } else {
+            let entities = updatedData['cas_of_aentity'];
+            entities[state.scheduleActive] = JSON.stringify(values);
+            updatedData['cas_of_aentity'] = entities;
+            setData(updatedData);
+        }
+
+        // update state - close schedule
+        setState({
+            ...state,
+            scheduleActive: false,
+            scheduleValues: {},
+            schedule: false
+        })
+    }
 
 
 
@@ -112,7 +216,7 @@ export default function AEntity(props) {
     // also allowing the end-user to specify their week schedule
     const Workers = (
         <div>
-            <WorkersList 
+            <WorkersModal 
                 workers={data['workers_of_aentity']}
                 aentityID={aentityID}
                 handleSubmit={updateWorkers}
@@ -123,8 +227,9 @@ export default function AEntity(props) {
                 <Alert
                     variant="warning"
                 >{t('messages.no-data-for-this-page')}</Alert>
-                : <WorkerTable 
+                : <WorkerList
                     workers={data['workers_of_aentity']}
+                    handleSchedule={handleSchedule}
                 />
             }
         </div>
@@ -143,7 +248,12 @@ export default function AEntity(props) {
     // * It is important to avoid assessment entities that include
     // the same CA/Substance or CA/Mixture combinations
     const updateCAs = values => {
-        console.log(values);
+        let updatedData = {...data};
+        let updatedCAs = updatedData['cas_of_aentity'];
+        values.aentity = aentityID;
+        updatedCAs.push(values);
+        updatedData['cas_of_aentity'] = updateCAs;
+        setData(updatedData);
     }
 
     // Custom field that includes form to add new assessment entity
@@ -151,7 +261,11 @@ export default function AEntity(props) {
     const CA = (
         <div>
             <CAForm handleSubmit={updateCAs}/>
-            <CATable aentityID={aentityID} />
+            <CAList 
+                aentityID={aentityID}
+                handleSchedule={handleSchedule} 
+                handleSchedule={handleSchedule}
+            />
         </div>
     )
 
@@ -165,6 +279,7 @@ export default function AEntity(props) {
                 data={aentityJSON}
                 scaling={{ label: { md: 3 }, field: { md: 7 } }}
                 formik={false}
+                handleSubmit={handleSubmit}                         // because formik is false
                 title={t('data.aentity.form-title')}
                 close='/enterprise/a-entities'
                 handleDelete={() => console.log("delete")}
@@ -175,7 +290,12 @@ export default function AEntity(props) {
                 }}
             />
 
-
+            <Schedule
+                visible={state.schedule}
+                onHide={() => setState({ ...state, schedule: false })}
+                timing={state.scheduleValues}
+                updateSchedule={updateSchedule}
+            />
 
             {/* Notifications */}
             <RequestNotification

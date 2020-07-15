@@ -149,6 +149,7 @@
     },
     "data": {
         "aentity": {
+            "aentity": "Assessment entity",
             "list": {
                 "cas": "Established assessment entities",
                 "workers": "Exposed workers"

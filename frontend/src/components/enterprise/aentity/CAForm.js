@@ -22,6 +22,7 @@ export default function CAForm(props) {
 
         onSubmit: values => {
             props.handleSubmit(values);
+            setState({ ...state, show: false });
         }
     })
 

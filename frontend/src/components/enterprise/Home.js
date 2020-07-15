@@ -81,7 +81,7 @@ export default function Home(props) {
                         <Statistics
                             icon="flask"
                             iconColor="silver"
-                            number={context.substances.length}
+                            number={context.substances.length + context.mixtures.length}
                             buttonTitle={t('chemicals')}
                             buttonColor={dataEntryButtonVariant}
                             link="/enterprise/chemicals/suppliers"
