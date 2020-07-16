@@ -13,11 +13,8 @@ export default function CAList (props) {
 
     const { t } = useTranslation();
     const context = useContext( EnterpriseContext );
-    const entities = context.aentities.find(
-                        o => o.id === props.aentityID
-                    )['cas_of_aentity'];
+    let entities = props.entities;
 
-    
     return (
         <div>
             {
@@ -28,6 +25,7 @@ export default function CAList (props) {
                                 <Button 
                                     variant="outline-danger" size="sm"
                                     className="border-0"
+                                    onClick={() => props.handleDelete(inx)}
                                 >
                                     <FontAwesomeIcon icon="trash-alt" />
                                 </Button> <span>

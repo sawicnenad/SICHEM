@@ -152,7 +152,7 @@ export default function AEntity(props) {
             setData(updatedData);
         } else {
             let entities = updatedData['cas_of_aentity'];
-            entities[state.scheduleActive] = JSON.stringify(values);
+            entities[state.scheduleActive].schedule = JSON.stringify(values);
             updatedData['cas_of_aentity'] = entities;
             setData(updatedData);
         }
@@ -248,11 +248,28 @@ export default function AEntity(props) {
     // * It is important to avoid assessment entities that include
     // the same CA/Substance or CA/Mixture combinations
     const updateCAs = values => {
+        // the function only adds a new CA to the list
         let updatedData = {...data};
         let updatedCAs = updatedData['cas_of_aentity'];
         values.aentity = aentityID;
+        values.schedule = {};
         updatedCAs.push(values);
-        updatedData['cas_of_aentity'] = updateCAs;
+        updatedData['cas_of_aentity'] = updatedCAs;
+        setData(updatedData);
+    }
+
+    // delete by index argument from the list
+    const handleDelete = n => {
+        let updatedData = {...data};
+        let entities = updatedData['cas_of_aentity'];
+
+        let entities2 = [];
+        for (let i = 0; i < entities.length; i++) {
+            if (i !== n) {
+                entities2.push(entities[i]);
+            }
+        }
+        updatedData['cas_of_aentity'] = entities2;
         setData(updatedData);
     }
 
@@ -262,9 +279,10 @@ export default function AEntity(props) {
         <div>
             <CAForm handleSubmit={updateCAs}/>
             <CAList 
-                aentityID={aentityID}
+                entities={data['cas_of_aentity']}
                 handleSchedule={handleSchedule} 
                 handleSchedule={handleSchedule}
+                handleDelete={handleDelete}
             />
         </div>
     )
