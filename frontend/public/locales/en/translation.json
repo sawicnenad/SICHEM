@@ -38,6 +38,7 @@
     "set": "Set",
     "select": "Select",
     "add": "Add",
+    "exposure-model": "Exposure model",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -88,6 +89,7 @@
         }
     },
 
+
     "login": {
         "login": "Login",
         "username": "Username",
@@ -103,6 +105,20 @@
             "email": "E-mail address",
             "submit": "Create account",
             "msg-success": "Please login to your account"
+        }
+    },
+
+    "exposure-models": {
+        "art": "Advanced REACH Tool (ART)",
+        "sm": "Stoffenmanager",
+        "tra": "ECETOC TRAv3",
+        "trexmop": "TREXMO+"
+    },
+
+    "exposure": {
+        "assessment": {
+            "same-model-all-cas": "Apply the same model(s) for all assessment entities established for this workplace",
+            "same-model-all-cas-info": "If unchecked, you must select exposure model(s) for each established assessment entity individually"
         }
     },
 

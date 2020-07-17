@@ -23,49 +23,39 @@ function EnterpriseContextProvider(props) {
                 Authorization: 'Bearer ' + localStorage.getItem('token-access')
             }};
 
-        const Ent = axios.get(`${context.API}/enterprise/enterprises/`, headers);
-        const Subs = axios.get(`${context.API}/substances/`, headers);
-        const Supps = axios.get(`${context.API}/suppliers/`, headers);
-        const Compositions = axios.get(`${context.API}/compositions/`, headers);
-        const Components = axios.get(`${context.API}/components/`, headers);
-        const Mix = axios.get(`${context.API}/mixtures/`, headers);
-        const Workplaces = axios.get(`${context.API}/workplaces/`, headers);
-        const Uses = axios.get(`${context.API}/uses/`, headers);
-        const Workers = axios.get(`${context.API}/workers/`, headers);
-        const AEntity = axios.get(`${context.API}/a-entities/`, headers);
 
         Promise.all([
-                    Ent,
-                    Subs,
-                    Supps,
-                    Compositions,
-                    Components,
-                    Mix,
-                    Workplaces,
-                    Workers,
-                    Uses,
-                    AEntity])
-            .then(
-                res => setState({
-                    ent: res[0].data[0],
-                    substances: res[1].data,
-                    suppliers: res[2].data,
-                    compositions: res[3].data,
-                    components: res[4].data,
-                    mixtures: res[5].data,
-                    workplaces: res[6].data,
-                    workers: res[7].data,
-                    uses: res[8].data,
-                    aentities: res[9].data,
-                    loaded: true
-                }) )
-            .catch(
-                e => {
-                    console.log(e);
-                    setState({ loaded: true })
-                }
-            )
-    }, [context])
+            axios.get(`${context.API}/enterprise/enterprises/`, headers),
+            axios.get(`${context.API}/substances/`, headers),
+            axios.get(`${context.API}/suppliers/`, headers),
+            axios.get(`${context.API}/compositions/`, headers),
+            axios.get(`${context.API}/components/`, headers),
+            axios.get(`${context.API}/mixtures/`, headers),
+            axios.get(`${context.API}/workplaces/`, headers),
+            axios.get(`${context.API}/uses/`, headers),
+            axios.get(`${context.API}/workers/`, headers),
+            axios.get(`${context.API}/a-entities/`, headers)
+        ])
+        .then(
+            res => setState({
+                ent: res[0].data[0],
+                substances: res[1].data,
+                suppliers: res[2].data,
+                compositions: res[3].data,
+                components: res[4].data,
+                mixtures: res[5].data,
+                workplaces: res[6].data,
+                workers: res[7].data,
+                uses: res[8].data,
+                aentities: res[9].data,
+                loaded: true
+            }) )
+        .catch(
+            e => {
+                console.log(e);
+                setState({ loaded: true })
+            })
+        }, [context])
 
     /*
         Data in state refresh

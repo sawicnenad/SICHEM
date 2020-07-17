@@ -1,10 +1,7 @@
 import React from 'react';
 import {
     Navbar,
-    Nav,
-    Form,
-    FormControl,
-    Button
+    Nav
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

@@ -9,7 +9,8 @@ from .models import (
     Workplace,
     Worker,
     Use,
-    AssessmentEntity
+    AssessmentEntity,
+    ExposureEntity
 )
 from .serializers import (
     SupplierSerializer,
@@ -21,7 +22,8 @@ from .serializers import (
     WorkplaceSerializer,
     UseSerializer,
     CASerializer,
-    AssessmentEntitySerialiizer
+    AssessmentEntitySerialiazer,
+    ExposureEntitySerializer
 )
 from rest_framework.parsers import MultiPartParser, JSONParser
 
@@ -73,4 +75,8 @@ class UseViewSet(EntDataViewSet):
 
 class AssessmentEntityViewSet(EntDataViewSet):
     queryset = AssessmentEntity.objects.all()
-    serializer_class = AssessmentEntitySerialiizer
+    serializer_class = AssessmentEntitySerialiazer
+
+class ExposureEntityViewSet(EntDataViewSet):
+    queryset = ExposureEntity.objects.all()
+    serializer_class = ExposureEntitySerializer

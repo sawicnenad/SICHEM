@@ -12,7 +12,8 @@ from .models import (
     CA,
     AssessmentEntity,
     WorkerOfAEntity,
-    CaOfAEntity
+    CaOfAEntity,
+    ExposureEntity
 )
 
 
@@ -111,7 +112,7 @@ class CaOfAEntitySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AssessmentEntitySerialiizer(serializers.ModelSerializer):
+class AssessmentEntitySerialiazer(serializers.ModelSerializer):
 
     workers_of_aentity = WorkerOfAEntitySerializer(many=True, required=False)
     cas_of_aentity = CaOfAEntitySerializer(many=True, required=False)
@@ -146,3 +147,8 @@ class AssessmentEntitySerialiizer(serializers.ModelSerializer):
         # update assessment entity
         return super().update(instance, validated_data)
 
+class ExposureEntitySerializer(serializers.ModelSerializer):
+    parameters = serializers.JSONField()
+    class Meta:
+        model = ExposureEntity
+        fields = '__all__'
