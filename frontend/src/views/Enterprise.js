@@ -49,7 +49,7 @@ function Enterprise() {
     // only if context.ent defined ->
 
     return(
-        <div>
+        <div className="wrapper">
             <Navigation />
             <div className="container-lg py-3">
                 <Switch>
@@ -66,7 +66,7 @@ function Enterprise() {
                     <Route exact path="/enterprise/mixture/:id" component={ Mixture } />
                     <Route exact path="/enterprise/a-entities/" component={ AEntities } />
                     <Route exact path="/enterprise/a-entities/:id" component={ AEntity } />
-                    <Route exact path="/enterprise/exposure" component={ Exposure } />
+                    <Route exact path="/enterprise/exposure/:view" component={ Exposure } />
                 </Switch>
             </div>
         </div>

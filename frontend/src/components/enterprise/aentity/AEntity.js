@@ -253,6 +253,7 @@ export default function AEntity(props) {
         let updatedCAs = updatedData['cas_of_aentity'];
         values.aentity = aentityID;
         values.schedule = {};
+        values['exposure_models'] = [];
         updatedCAs.push(values);
         updatedData['cas_of_aentity'] = updatedCAs;
         setData(updatedData);

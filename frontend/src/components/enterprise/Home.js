@@ -50,7 +50,7 @@ export default function Home(props) {
         <div>
 
             {/* Data entry */}
-            <div className="p-2 text-muted rounded mt-4 shadow">
+            <div className="p-2 text-muted rounded mt-4 shadow bg-light">
                 <div className="text-center border-bottom mb-3 text-muted">
                     <h4>{ t('enterprise.home.data-entry') }</h4>
                 </div>
@@ -103,7 +103,7 @@ export default function Home(props) {
 
 
             {/* Exposure assessment */}
-            <div className="p-2 text-muted rounded mt-5 shadow">
+            <div className="p-2 text-muted rounded mt-5 shadow bg-light">
                 <div className="text-center border-bottom mb-3 text-muted">
                     <h4>{ t('enterprise.home.exposure-assessment') }</h4>
                 </div>

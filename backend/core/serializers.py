@@ -107,6 +107,7 @@ class WorkerOfAEntitySerializer(serializers.ModelSerializer):
 
 class CaOfAEntitySerializer(serializers.ModelSerializer):
     schedule = serializers.JSONField()
+    exposure_models = serializers.JSONField()
     class Meta:
         model = CaOfAEntity 
         fields = '__all__'

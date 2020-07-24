@@ -109,16 +109,61 @@
     },
 
     "exposure-models": {
+        "singular": "Exposure model",
+        "plural": "Exposure models",
         "art": "Advanced REACH Tool (ART)",
         "sm": "Stoffenmanager",
         "tra": "ECETOC TRAv3",
-        "trexmop": "TREXMO+"
+        "trexmop": "TREXMO+",
+        "input-parameters": "Input parameters"
     },
 
     "exposure": {
+        "exposure": "Exposure",
+        "risk": "Risk",
         "assessment": {
             "same-model-all-cas": "Apply the same model(s) for all assessment entities established for this workplace",
-            "same-model-all-cas-info": "If unchecked, you must select exposure model(s) for each established assessment entity individually"
+            "same-model-all-cas-info": "If unchecked, you must select exposure model(s) for each established assessment entity separately",
+            "no-wp-alert": "No workplace selected!",
+            "status": {
+                "complete": "Complete",
+                "incomplete": "Incomplete"
+            }
+        }
+    },
+
+    "art": {
+        "accordion": {
+            "source": "1. Exposure source",
+            "activity": "2. Activity task",
+            "controls": "3. Control management measures"
+        },
+        "fields": {
+            "physical-form": "Phyisical form",
+            "physical-form-options": {
+                "liquid": "Liquids",
+                "solid": "Solid objects",
+                "powder": "Powders, granules or pelletized material",
+                "dissolved": "Powders dissolved in a liquid matrix",
+                "paste": "Paste, slurry or clearly wet powder"
+            },
+            "vp": "Vapour pressure (Pa)",
+            "conc": "Mole fraction (0-1)",
+            "ac": "Activity coefficient (0-40)",
+            "distance": "Source distance from the worker's breathing zone less than 1 metre",
+            "su": "Surface contamination",
+            "su-options": {
+                "default": "Default level",
+                "housekeeping": "General good housekeeping practices",
+                "effective-housekeeping": "Demonstrable and effective housekeeping practices",
+                "fully-enclosed": "Process fully enclosed"
+            },
+
+
+            "activity_class": "Activity class",
+            "activity_subclass": "Activity subclass",
+            "underlying_activity": "Situation that best represents activity",
+            "time": "Task duration (1-480 min)"
         }
     },
 

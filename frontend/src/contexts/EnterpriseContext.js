@@ -32,8 +32,8 @@ function EnterpriseContextProvider(props) {
             axios.get(`${context.API}/components/`, headers),
             axios.get(`${context.API}/mixtures/`, headers),
             axios.get(`${context.API}/workplaces/`, headers),
-            axios.get(`${context.API}/uses/`, headers),
             axios.get(`${context.API}/workers/`, headers),
+            axios.get(`${context.API}/uses/`, headers),
             axios.get(`${context.API}/a-entities/`, headers)
         ])
         .then(

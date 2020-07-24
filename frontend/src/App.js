@@ -34,7 +34,8 @@ import {
     faCog,
     faCogs,
     faInfoCircle,
-    faCalculator
+    faCalculator,
+    faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -66,7 +67,8 @@ library.add(
     faCogs,
     faCalendarAlt,
     faInfoCircle,
-    faCalculator
+    faCalculator,
+    faExclamationTriangle
 );
 
 function App() {

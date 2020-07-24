@@ -13,7 +13,7 @@ export default function WorkerList(props) {
 
     const { t } = useTranslation();
     const context = useContext(EnterpriseContext);
-
+    console.log(context.workers)
     return(
         <div>
             <CardColumns>{

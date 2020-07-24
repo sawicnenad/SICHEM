@@ -1,0 +1,196 @@
+{
+    "defaultActiveKey": "source",
+    "cards": [
+        {
+            "eventKey": "source",
+            "label": "art.accordion.source",
+            "fields": [
+                "physical_form",
+                "vp", 
+                "conc",
+                "ac",
+                "distance",
+                "su"
+            ]
+        }, {
+            "eventKey": "activity",
+            "label": "art.accordion.activity",
+            "fields": [
+                "activity_class"
+            ]
+        }
+    ],
+    "fields": {
+        "physical_form": {
+            "props": {
+                "required": true,
+                "name": "physical_form",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "liquid",
+                    "label": "art.fields.physical-form-options.liquid"
+                }, {
+                    "value": "powder",
+                    "label": "art.fields.physical-form-options.powder"
+                }, {
+                    "value": "solid",
+                    "label": "art.fields.physical-form-options.solid"
+                }, {
+                    "value": "dissolved",
+                    "label": "art.fields.physical-form-options.dissolved"
+                }, {
+                    "value": "paste",
+                    "label": "art.fields.physical-form-options.paste"
+                }
+            ],
+            "label": "art.fields.physical-form",
+            "formControlFeedback": true
+        },
+        "vp": {
+            "props": {
+                "required": true,
+                "name": "vp"
+            },
+            "scaling": {"md" : 3},
+            "label": "art.fields.vp",
+            "formControlFeedback": true
+        },
+        "conc": {
+            "props": {
+                "required": true,
+                "name": "conc"
+            },
+            "scaling": {"md" : 3},
+            "label": "art.fields.conc",
+            "formControlFeedback": true
+        },
+        "ac": {
+            "props": {
+                "required": true,
+                "name": "ac"
+            },
+            "scaling": {"md" : 3},
+            "label": "art.fields.ac",
+            "formControlFeedback": true
+        },
+        "distance": {
+            "props": {
+                "name": "distance"
+            },
+            "scaling": { "md" : {"offset" : 3} },
+            "fieldType": "checkbox",
+            "default": true,
+            "label": "art.fields.distance"
+        },
+        "su": {
+            "props": {
+                "required": true,
+                "name": "su",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "default",
+                    "label": "art.fields.su-options.default"
+                }, {
+                    "value": "housekeeping",
+                    "label": "art.fields.su-options.housekeeping"
+                }, {
+                    "value": "effective-housekeeping",
+                    "label": "art.fields.su-options.effective-housekeeping"
+                }, {
+                    "value": "fully-enclosed",
+                    "label": "art.fields.su-options.fully-enclosed"
+                }
+            ],
+            "label": "art.fields.su",
+            "formControlFeedback": true
+        },
+
+
+
+
+
+
+
+
+
+
+        "activity_class": {
+            "props": {
+                "required": true,
+                "name": "activity_class",
+                "as": "select"
+            },
+            "fieldType": "select-dependent",
+            "depends_on": "physical_form",
+            "options": [
+                {
+                    "solid": [
+                        {
+                            "value": "wood",
+                            "label": "data.art.activity-options.wood"
+                        }, {
+                            "value": "stone",
+                            "label": "data.art.activity-options.stone"
+                        }, {
+                            "value": "abrasive",
+                            "label": "data.art.activity-options.abrasive"
+                        }
+                    ],
+                    "powder": [
+                        {
+                            "value": "powder-1",
+                            "label": "data.art.activity-options.powder-1"
+                        }, {
+                            "value": "powder-2",
+                            "label": "data.art.activity-options.powder-2"
+                        }, {
+                            "value": "powder-3",
+                            "label": "data.art.activity-options.powder-3"
+                        }, {
+                            "value": "powder-4",
+                            "label": "data.art.activity-options.powder-4"
+                        }, {
+                            "value": "powder-5",
+                            "label": "data.art.activity-options.powder-5"
+                        }, {
+                            "value": "powder-6",
+                            "label": "data.art.activity-options.powder-1"
+                        }, {
+                            "value": "powder-7",
+                            "label": "data.art.activity-options.powder-7"
+                        }
+                    ],
+                    "liquid": [
+                        {
+                            "value": "liquid-1",
+                            "label": "data.art.activity-options.liquid-1"
+                        }, {
+                            "value": "liquid-2",
+                            "label": "data.art.activity-options.liquid-2"
+                        }, {
+                            "value": "liquid-3",
+                            "label": "data.art.activity-options.liquid-3"
+                        }, {
+                            "value": "liquid-4",
+                            "label": "data.art.activity-options.liquid-4"
+                        }, {
+                            "value": "liquid-5",
+                            "label": "data.art.activity-options.liquid-5"
+                        }, {
+                            "value": "liquid-6",
+                            "label": "data.art.activity-options.liquid-6"
+                        }
+                    ]
+                }
+            ],
+            "label": "art.fields.activity_class",
+            "formControlFeedback": true
+        }
+    }
+}

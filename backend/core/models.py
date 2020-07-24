@@ -385,6 +385,7 @@ class CaOfAEntity(models.Model):
     composition = models.ForeignKey(
         Composition, on_delete=models.CASCADE, null=True, blank=True)
     schedule = models.TextField(default="{}")
+    exposure_models = models.TextField(default="[]")
 
 
 # Exposure entity contains input parameters of a single model
