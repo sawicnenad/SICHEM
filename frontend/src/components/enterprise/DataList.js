@@ -32,7 +32,7 @@ export default function DataList(props) {
 
     if (data.length === 0) {
         return (
-            <div>
+            <div className="p-3 bg-light" style={{ minHeight: '100vh' }}>
                 <div>{ props.createButton }</div>
                 <Alert
                     className="mt-3"
@@ -71,7 +71,7 @@ export default function DataList(props) {
     }
 
     return (
-        <div>
+        <div className="pt-3">
             <div>
                 { props.createButton }
             </div>

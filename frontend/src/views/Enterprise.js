@@ -51,7 +51,7 @@ function Enterprise() {
     return(
         <div className="wrapper">
             <Navigation />
-            <div className="container-lg py-3">
+            <div className="container-lg">
                 <Switch>
                     <Route exact path="/enterprise" component={ Home } />
                     <Route exact path="/enterprise/workers" component={ Workers } />
