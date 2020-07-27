@@ -133,6 +133,7 @@
     },
 
     "art": {
+        "form-title": "Advanced REACH Tool",
         "accordion": {
             "source": "1. Exposure source",
             "activity": "2. Activity task",
@@ -148,9 +149,19 @@
                 "paste": "Paste, slurry or clearly wet powder"
             },
             "vp": "Vapour pressure (Pa)",
-            "conc": "Mole fraction (0-1)",
+            "dustiness": "Dustiness",
+            "dustiness-options": {
+                "efine": "Extremely fine dust",
+                "fine": "Fine dust",
+                "coarse": "Coarse dust",
+                "gran": "Granules, flakes or pellets",
+                "fgran": "Firm granules, flakes or pellets"
+            },
+            "mf": "Mole fraction (0-1)",
+            "wf": "Weight fraction (0-1)",
             "ac": "Activity coefficient (0-40)",
-            "distance": "Source distance from the worker's breathing zone less than 1 metre",
+            "nf": "Source distance from the worker's breathing zone less than 1 metre",
+            "ff": "Secondary sources present at workplace",
             "su": "Surface contamination",
             "su-options": {
                 "default": "Default level",
@@ -158,12 +169,116 @@
                 "effective-housekeeping": "Demonstrable and effective housekeeping practices",
                 "fully-enclosed": "Process fully enclosed"
             },
+            "moisture": "Moisture content",
+            "moisture-options": {
+                "dry": "Dry product (<5% moisture content)",
+                "medium": "5-10% moisuture content",
+                "wet": ">10% moisture content"
+            },
+
+            "activity": "Activity class/subclass",
+            "d1": "Situation that best represents activity",
+            "d2": "Situation that best represents activity",
+            "d3": "Situation that best represents activity",
+            "time": "Task duration (1-480 min)",
 
 
-            "activity_class": "Activity class",
-            "activity_subclass": "Activity subclass",
-            "underlying_activity": "Situation that best represents activity",
-            "time": "Task duration (1-480 min)"
+            "lc1": "Localized controls (LC) - primary",
+            "lc2": "Localized controls (LC) - secondary",
+            "lc-options": {
+                "no": "No localized controls",
+                "suppression": "Suppression techniques",
+                "containment": "Containment - no extraction",
+                "lev": "Local exhaust ventilation (LEV)",
+                "gb": "Glove boxes and glove bags",
+                "vrs": "Vapour recovery systems"
+            },
+            "lc-technique1": "LC primary - technique",
+            "lc-technique2": "LC secondary - technique",
+            "lc-technique-options": {
+                "supp-knockdown": "Knockdown suppression",
+                "supp-wetting": "Wetting at point of release",
+                "cont-low": "Low level containment",
+                "cont-medium": "Medium level containment",
+                "cont-high": "High level containment",
+                "lev-canopy": "Canopy hood",
+                "lev-receiving": "Other receiving hoods",
+                "lev-moving": "Moving capturing hoods",
+                "lev-fixed": "Fixed capturing hoods",
+                "lev-on-tool": "On-tool extraction",
+                "lev-cupboard": "Fume cupboard",
+                "lev-hd": "Horizontal / downward laminar flow booth",
+                "lev-enclosing": "Other enclosing hoods",
+                "lev-other": "Other LEV systems",
+                "gb-non-vent": "Glove bag (non-ventilation)",
+                "gb-vent": "Glove bags (ventilated or kept under negative pressure)",
+                "gb-low": "Low specification glove box",
+                "gb-medium": "Medium specification glove box",
+                "gb-high": "High specification glove box"
+            },
+            "exposure-site": "Exposure site",
+            "exposure-site-options": {
+                "indoors": "Indoors",
+                "outdoors": "Outdoors",
+                "spray-booth": "Spray booth",
+                "flow-booth": "Downward laminar flow booth"
+            },
+            "ventilation-rate": "Ventilation rate",
+            "workplace-volume": "Workplace volume",
+            "ventilation-rate-options": {
+                "no-restrictions": "No restrictions on general ventilation",
+                "natural": "Only good natural ventilation",
+                "mechanical": "Mechanical ventilation giving at least 1 ACH",
+                "specialized": "Specialized room ventilation with more than 10 ACH",
+                "ach-0-3": "0.3 ACH",
+                "ach-1": "1 ACH",
+                "ach-3": "3 ACH",
+                "ach-10": "10 ACH",
+                "ach-30": "30 ACH" 
+            },
+            "workplace-volume-options": {
+                "any": "Any size workroom",
+                "large": "Large workrooms only",
+                "small": "Small workrooms only",
+                "vol-30": "30 m3",
+                "vol-100": "100 m3",
+                "vol-300": "300 m3",
+                "vol-1000": "100 m3",
+                "vol-3000": "3000 m3"
+            },
+            "gv-outdoors": "Distance of exposure source from building",
+            "gv-outdoors-options": {
+                "close": "Close to buildings",
+                "far": "Far from buildings"
+            },
+            "spray-room": "Spray room",
+            "spray-room-options": {
+                "cross-flow": "Cross-flow spray room",
+                "down-flow": "Down-flow spray room"
+            },
+            "flow-booth": "Laminar flow booth",
+            "flow-booth-options": {
+                "no-screens": "No barriers or screens",
+                "partial": "Partial screen",
+                "partial-glove": "Partial screen fitted with glove ports",
+                "full": "Full screen fitted with glove ports"
+            },
+            "separation": "Separation of the worker",
+            "separation-options": {
+                "no": "No personal enclosure",
+                "partial": "Partial personal enclosure without ventilation",
+                "partial-vent": "Partial personal enclosure with ventilation",
+                "complete": "Complete personal enclosure without ventilation",
+                "complete-vent": "Complete personal enclosure with ventilation"
+            },
+            "segregation": "Segregation of the source",
+            "segregation-options": {
+                "no": "No segregation",
+                "partial": "Partial segregation without ventilation",
+                "partial-vent": "Partial segregation with ventilation",
+                "complete": "Complete segregation without ventilation",
+                "complete-vent": "Complete segregation with ventilation"
+            }
         }
     },
 

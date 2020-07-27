@@ -12,9 +12,8 @@ export default function ART(props) {
 
     const { t } = useTranslation();
 
-    const Schema = Yup.object().shape({
+    const Schema = Yup.object().shape({});
 
-    })
     const formik = useFormik({
         validationSchema: Schema,
         initialValues: {},
@@ -30,7 +29,7 @@ export default function ART(props) {
                 data={ARTForm}
                 scaling={{ label: { md: 3 }, field: { md: 7 } }}
                 formik={formik}
-                title={t('data.aentity.form-title')}
+                title={t('art.form-title')}
                 close='/enterprise/exposure/assessment'
                 handleDelete={() => console.log("delete")}
                 noDeleteButton

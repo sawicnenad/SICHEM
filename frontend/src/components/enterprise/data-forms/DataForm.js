@@ -363,16 +363,37 @@ export default function DataForm(props) {
                                 value={props.formik.values[field.props.name]}
                                 onChange={props.formik.handleChange}
                                 isInvalid={!!props.formik.errors[field.props.name]}
-                            >
-                                {
-                                    getOptionsForDependentSelect(field.props.name).map(
-                                        option => 
-                                            <option value={option.value} key={option.value}>
-                                                { option.label ? t(option.label): option.value }
+                            >{
+                                field.optgroups ?
+                                getOptionsForDependentSelect(field.props.name).map(
+                                    item => 
+                                        item.options ? 
+                                        <optgroup label={ t(item.label) } key={item.label}>
+                                            {
+                                                item.options.map(
+                                                    option => 
+                                                        <option value={option.value} key={option.value}>
+                                                            { option.label ? t(option.label): option.value }
+                                                        </option>
+                                                )
+                                            }
+                                        </optgroup>
+                                        : <option value={item.value} key={item.value}>
+                                            { t(item.label) }
+                                        </option>
+                                )
+                                : getOptionsForDependentSelect(field.props.name).map(
+                                    item => (
+                                        field.noTrans ?
+                                            <option value={item.value} key={item.value}>
+                                                {item.label}
                                             </option>
-                                    )
-                                }
-                            </Form.Control>
+                                            : <option value={item.value} key={item.value}>
+                                                { item.label ? t(item.label): item.value }
+                                            </option>
+                                    )     
+                                )
+                            }</Form.Control>
                         </Col>
                     </Form.Group>
                 )
