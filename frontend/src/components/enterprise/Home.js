@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     Row,
     Col,
-    Button
+    Button,
+    Card
 } from 'react-bootstrap';
 
 
@@ -44,16 +45,17 @@ export default function Home(props) {
         </div>
     )
     
-    const dataEntryButtonVariant = "outline-danger";
+    const dataEntryButtonVariant = "danger";
 
     return (
-        <div>
+        <div className="mt-4">
 
             {/* Data entry */}
-            <div className="p-2 text-muted rounded mt-4 shadow bg-light">
-                <div className="text-center border-bottom mb-3 text-muted">
-                    <h4>{ t('enterprise.home.data-entry') }</h4>
-                </div>
+            <Card>
+                <Card.Header style={{ fontSize: 18 }}>
+                    { t('enterprise.home.data-entry') }
+                </Card.Header>
+                <Card.Body>
                 <Row>
                     <Col xs={6} md={3} className="mt-2">
                         <Statistics
@@ -99,34 +101,37 @@ export default function Home(props) {
                         />
                     </Col>
                 </Row>
-            </div>
+                </Card.Body>
+            </Card>
 
 
             {/* Exposure assessment */}
-            <div className="p-2 text-muted rounded mt-5 shadow bg-light">
-                <div className="text-center border-bottom mb-3 text-muted">
-                    <h4>{ t('enterprise.home.exposure-assessment') }</h4>
-                </div>
-                <Row>
-                    <Col>
-                        <Button 
-                            variant="outline-danger"
-                            onClick={() => props.history.push('/enterprise/a-entities')}
-                        >
-                            {t('enterprise.home.aentities')}
-                        </Button>
-                    </Col>
+            <Card className="mt-5">
+                <Card.Header style={{ fontSize: 18 }}>
+                    { t('enterprise.home.exposure-assessment') }
+                </Card.Header>
+                <Card.Body>
+                    <Row>
+                        <Col>
+                            <Button 
+                                variant="danger"
+                                onClick={() => props.history.push('/enterprise/a-entities')}
+                            >
+                                {t('enterprise.home.aentities')}
+                            </Button>
+                        </Col>
 
-                    <Col>
-                        <Button 
-                            variant="outline-danger"
-                            onClick={() => props.history.push('/enterprise/exposure')}
-                        >
-                            {t('enterprise.home.exposure')}
-                        </Button>
-                    </Col>
-                </Row>
-            </div>
+                        <Col>
+                            <Button 
+                                variant="danger"
+                                onClick={() => props.history.push('/enterprise/assessment')}
+                            >
+                                {t('enterprise.home.exposure')}
+                            </Button>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
         </div>
     )
 }

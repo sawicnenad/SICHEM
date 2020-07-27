@@ -25,7 +25,6 @@ export default function ART(props) {
         }
     })
 
-    console.log(formik.values)
 
     return (
         <div>

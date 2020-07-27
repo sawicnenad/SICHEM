@@ -1,13 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
+import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     Form, Row, Col, Alert, Accordion, Card, FormCheck, Button
 } from 'react-bootstrap';
-import Calculation from './Calculation';
 
 
 
@@ -363,7 +362,7 @@ export default function Assessment() {
 
                     <Accordion.Collapse eventKey="3">
                         <Card.Body>
-                            <Calculation />
+                            
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>
