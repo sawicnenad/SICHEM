@@ -16,22 +16,26 @@ export default function ART(props) {
 
     const formik = useFormik({
         validationSchema: Schema,
-        initialValues: {},
+        initialValues: {
+            nf: true,
+            ff: false
+        },
         onSubmit: values => {
             console.log(values);
         }
     })
 
+    console.log(formik.values)
+
     return (
         <div>
             <DataForm
-                noZebraStyle={true}
                 data={ARTForm}
                 scaling={{ label: { md: 3 }, field: { md: 7 } }}
                 formik={formik}
                 title={t('art.form-title')}
                 close='/enterprise/exposure/assessment'
-                handleDelete={() => console.log("delete")}
+                handleDelete={() => null}
                 noDeleteButton
             />
         </div>

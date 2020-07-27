@@ -139,7 +139,7 @@ export default function Substance(props) {
     });
 
 
-
+    
 
     /*
         formik (see below) requires initial values 
@@ -295,7 +295,7 @@ export default function Substance(props) {
             ).catch(() => setState({ ...state, failedMsg: true }))
         }
     })
-
+    
     // SCALING
     const scaling = {
         label: {

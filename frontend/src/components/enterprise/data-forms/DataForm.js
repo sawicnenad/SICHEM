@@ -86,7 +86,7 @@ export default function DataForm(props) {
                             <Form.Check
                                 {...field.props}
                                 label={t(field.label)}
-                                checked={props.formik[field.name]}
+                                checked={props.formik.values[field.props.name]}
                                 onChange={props.formik.handleChange}
                             />
                         </Col>
@@ -313,7 +313,7 @@ export default function DataForm(props) {
                             >
                                 {
                                     field.props.multiple ?
-                                    "" : <option value="" selected></option>
+                                    "" : <option value=""></option>
                                 }
                                 {
                                     field.optgroups ?
@@ -363,8 +363,10 @@ export default function DataForm(props) {
                                 value={props.formik.values[field.props.name]}
                                 onChange={props.formik.handleChange}
                                 isInvalid={!!props.formik.errors[field.props.name]}
-                            >{
-                                field.optgroups ?
+                            >
+                                <option value="" key="x">
+                                </option>
+                                {field.optgroups ?
                                 getOptionsForDependentSelect(field.props.name).map(
                                     item => 
                                         item.options ? 
@@ -530,6 +532,21 @@ export default function DataForm(props) {
             let condValue = conditions[i].value;
 
             switch(conditions[i].type){
+                case 'not-empty':
+                    if (!props.formik.values[condField]) {
+                        isOK = false;
+                    }
+                    break;
+                case '!==':
+                    if (props.formik.values[condField] === condValue) {
+                        isOK = false;
+                    }
+                    break;
+                case 'in':
+                    if (condValue.indexOf(props.formik.values[condField]) === -1) {
+                        isOK = false;
+                    }
+                    break;
                 default:
                     if (props.formik.values[condField] !== condValue) {
                         isOK = false;

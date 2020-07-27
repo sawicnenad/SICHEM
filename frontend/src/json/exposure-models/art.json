@@ -33,7 +33,7 @@
                 "lc1_tech",
                 "lc2",
                 "lc2_tech",
-                "exposure-site",
+                "site",
                 "gv",
                 "volume",
                 "gv_outdoors",
@@ -80,7 +80,13 @@
             },
             "scaling": {"md" : 3},
             "label": "art.fields.vp",
-            "formControlFeedback": true
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                }
+            ]
         },
         "dustiness": {
             "props": {
@@ -108,7 +114,13 @@
                 }
             ],
             "label": "art.fields.dustiness",
-            "formControlFeedback": true
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "powder"
+                }
+            ]
         },
         "moisture": {
             "props": {
@@ -130,7 +142,14 @@
                 }
             ],
             "label": "art.fields.moisture",
-            "formControlFeedback": true
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "type": "in",
+                    "value": ["powder", "solid"]
+                }
+            ]
         },
         "mf": {
             "props": {
@@ -139,7 +158,13 @@
             },
             "scaling": {"md" : 3},
             "label": "art.fields.mf",
-            "formControlFeedback": true
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                }
+            ]
         },
         "wf": {
             "props": {
@@ -148,7 +173,14 @@
             },
             "scaling": {"md" : 3},
             "label": "art.fields.wf",
-            "formControlFeedback": true
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "type": "in",
+                    "value": ["powder", "solid"]
+                }
+            ]
         },
         "ac": {
             "props": {
@@ -157,7 +189,13 @@
             },
             "scaling": {"md" : 3},
             "label": "art.fields.ac",
-            "formControlFeedback": true
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                }
+            ]
         },
         "nf": {
             "props": {
@@ -165,7 +203,6 @@
             },
             "scaling": { "md" : {"offset" : 3} },
             "fieldType": "checkbox",
-            "default": true,
             "label": "art.fields.nf"
         },
         "ff": {
@@ -174,8 +211,13 @@
             },
             "scaling": { "md" : {"offset" : 3} },
             "fieldType": "checkbox",
-            "default": true,
-            "label": "art.fields.ff"
+            "label": "art.fields.ff",
+            "conditions": [
+                {
+                    "field": "nf",
+                    "value": true
+                }
+            ]
         },
         "su": {
             "props": {
@@ -223,6 +265,12 @@
             "depends_on": "physical_form",
             "label": "art.fields.activity",
             "optgroups": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "type": "not-empty"
+                }
+            ],
             "options": {
                 "solid": [
                     {
@@ -329,6 +377,12 @@
             "fieldType": "select-dependent",
             "label": "art.fields.d1",
             "depends_on": "activity",
+            "conditions": [
+                {
+                    "field": "activity",
+                    "type": "not-empty"
+                }
+            ],
             "options": {
                 "wood": [
                     {
@@ -704,6 +758,12 @@
             "label": "art.fields.d2",
             "fieldType": "select-dependent",
             "depends_on": "activity",
+            "conditions": [
+                {
+                    "field": "activity",
+                    "type": "not-empty"
+                }
+            ],
             "options": {
                 "wood": [
                     {
@@ -890,10 +950,10 @@
                     "value": "lev",
                     "label": "art.fields.lc-options.lev"
                 }, {
-                    "value": "no",
+                    "value": "gb",
                     "label": "art.fields.lc-options.gb"
                 }, {
-                    "value": "no",
+                    "value": "vrs",
                     "label": "art.fields.lc-options.vrs"
                 }
             ],
@@ -908,6 +968,16 @@
             },
             "fieldType": "select-dependent",
             "depends_on": "lc1",
+            "conditions": [
+                {
+                    "field": "lc1",
+                    "type": "!==",
+                    "value": "no"
+                }, {
+                    "field": "lc1",
+                    "type": "not-empty"
+                }
+            ],
             "options": {
                 "suppression": [
                     {
@@ -989,6 +1059,16 @@
                 "as": "select"
             },
             "fieldType": "select",
+            "conditions": [
+                {
+                    "field": "lc1",
+                    "type": "!==",
+                    "value": "no"
+                }, {
+                    "field": "lc1",
+                    "type": "not-empty"
+                }
+            ],
             "options": [
                 {
                     "value": "no",
@@ -1003,10 +1083,10 @@
                     "value": "lev",
                     "label": "art.fields.lc-options.lev"
                 }, {
-                    "value": "no",
+                    "value": "gb",
                     "label": "art.fields.lc-options.gb"
                 }, {
-                    "value": "no",
+                    "value": "vrs",
                     "label": "art.fields.lc-options.vrs"
                 }
             ],
@@ -1021,6 +1101,16 @@
             },
             "fieldType": "select-dependent",
             "depends_on": "lc2",
+            "conditions": [
+                {
+                    "field": "lc2",
+                    "type": "!==",
+                    "value": "no"
+                }, {
+                    "field": "lc2",
+                    "type": "not-empty"
+                }
+            ],
             "options": {
                 "suppression": [
                     {
@@ -1095,10 +1185,10 @@
             "label": "art.fields.lc-technique2",
             "formControlFeedback": true
         },
-        "exposure-site": {
+        "site": {
             "props": {
                 "required": true,
-                "name": "exposure-site",
+                "name": "site",
                 "as": "select"
             },
             "fieldType": "select",
@@ -1127,6 +1217,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.ventilation-rate",
+            "conditions": [
+                {
+                    "field": "site",
+                    "value": "indoors"
+                }
+            ],
             "options": [
                 {
                     "value": "no-restrictions",
@@ -1166,6 +1262,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.workplace-volume",
+            "conditions": [
+                {
+                    "field": "site",
+                    "value": "indoors"
+                }
+            ],
             "options": [
                 {
                     "value": "any",
@@ -1202,6 +1304,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.gv-outdoors",
+            "conditions": [
+                {
+                    "field": "site",
+                    "value": "outdoors"
+                }
+            ],
             "options": [
                 {
                     "value": "close",
@@ -1220,6 +1328,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.spray-room",
+            "conditions": [
+                {
+                    "field": "site",
+                    "value": "spray-room"
+                }
+            ],
             "options": [
                 {
                     "value": "cross-flow",
@@ -1238,6 +1352,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.flow-booth",
+            "conditions": [
+                {
+                    "field": "site",
+                    "value": "flow-booth"
+                }
+            ],
             "options": [
                 {
                     "value": "no-screens",
@@ -1262,6 +1382,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.separation",
+            "conditions": [ 
+                {
+                    "field": "nf",
+                    "value": false
+                }
+            ],
             "options": [
                 {
                     "value": "no",
@@ -1289,6 +1415,12 @@
             },
             "fieldType": "select",
             "label": "art.fields.segregation",
+            "conditions": [ 
+                {
+                    "field": "ff",
+                    "value": true
+                }
+            ],
             "options": [
                 {
                     "value": "no",
