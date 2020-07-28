@@ -67,7 +67,7 @@ export default function AEntity(props) {
     // final submit to the server
     const handleSubmit = () => {
         axios.put(
-            `${APIcontext.API}/a-entities/${aentityID}/`,
+            `${APIcontext.API}/assessment-entities/${aentityID}/`,
             data,
             {
                 headers: {

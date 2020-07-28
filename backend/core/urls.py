@@ -8,8 +8,7 @@ from .views import (
     WorkplaceViewSet,
     WorkerViewSet,
     UseViewSet,
-    AssessmentEntityViewSet,
-    ExposureWorkplaceViewSet
+    AssessmentEntityViewSet
 )
 
 
@@ -26,6 +25,5 @@ router.register(r'workplaces', WorkplaceViewSet)
 router.register(r'workers', WorkerViewSet)
 router.register(r'uses', UseViewSet)
 router.register(r'assessment-entities', AssessmentEntityViewSet)
-router.register(r'exposure-workplace', ExposureWorkplaceViewSet)
 
 urlpatterns = [] + router.urls

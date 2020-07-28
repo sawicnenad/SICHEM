@@ -383,32 +383,13 @@ class CaOfAEntity(models.Model):
     composition = models.ForeignKey(Composition, on_delete=models.CASCADE, null=True, blank=True)
     schedule = models.TextField(default="{}")
     
-
-
-# For each workplace an exposure workplace instance is created
-# It contains general settings for the exposure assessment
-# whether or not same models are applied for all required assessments
-class ExposureWorkplace(models.Model):
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    workplace = models.OneToOneField(Workplace, on_delete=models.CASCADE)
-    same_models = models.BooleanField(default=True)
-    exposure_models = models.TextField(default="[]")
-
-
-# Exposure entity contains input parameters of a single model
-# and CA and Worker details for which it applies
-# also it includes (if calculated) exposure values
-class ExposureEntity(models.Model):
-    exposure_workplace = models.ForeignKey(
-        ExposureWorkplace,
+class Exposure(models.Model):
+    aentity = models.ForeignKey(
+        AssessmentEntity,
         on_delete=models.CASCADE,
-        related_name="exposure_entity"
-    )
-    ca = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
-    worker = models.ForeignKey(WorkerOfAEntity,on_delete=models.CASCADE)
-    exposure_model = models.CharField(max_length=10)
-    parameters = models.TextField(default="{}")
-    complete = models.BooleanField(default=False)
-    exposure_reg = models.CharField(max_length=25, blank=True)
-    exposure = models.TextField(blank=True)
-    sub_in_mix = models.ForeignKey(Substance, on_delete=models.CASCADE, blank=True, null=True)
+        related_name="exposure")
+    cas_of_aentity = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
+    worker_of_aentity = models.ForeignKey(WorkerOfAEntity, on_delete=models.CASCADE)
+    model = models.CharField(max_length=10)
+    exposure = models.TextField()
+    exposure_reg = models.CharField(max_length=50)

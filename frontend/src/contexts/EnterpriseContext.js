@@ -34,8 +34,7 @@ function EnterpriseContextProvider(props) {
             axios.get(`${context.API}/workplaces/`, headers),
             axios.get(`${context.API}/workers/`, headers),
             axios.get(`${context.API}/uses/`, headers),
-            axios.get(`${context.API}/assessment-entities/`, headers),
-            axios.get(`${context.API}/exposure-workplace/`, headers)
+            axios.get(`${context.API}/assessment-entities/`, headers)
         ])
         .then(
             res => setState({
@@ -49,7 +48,6 @@ function EnterpriseContextProvider(props) {
                 workers: res[7].data,
                 uses: res[8].data,
                 aentities: res[9].data,
-                eworkplace: res[10].data,
                 loaded: true
             }) )
         .catch(
