@@ -48,7 +48,7 @@ export default function Home(props) {
     const dataEntryButtonVariant = "danger";
 
     return (
-        <div className="mt-4">
+        <div className="py-4">
 
             {/* Data entry */}
             <Card>
@@ -106,7 +106,7 @@ export default function Home(props) {
 
 
             {/* Exposure assessment */}
-            <Card className="mt-5">
+            <Card className="mt-4">
                 <Card.Header style={{ fontSize: 18 }}>
                     { t('enterprise.home.exposure-assessment') }
                 </Card.Header>
@@ -115,6 +115,7 @@ export default function Home(props) {
                         <Col>
                             <Button 
                                 variant="danger"
+                                className="w-100"
                                 onClick={() => props.history.push('/enterprise/a-entities')}
                             >
                                 {t('enterprise.home.aentities')}
@@ -124,9 +125,64 @@ export default function Home(props) {
                         <Col>
                             <Button 
                                 variant="danger"
+                                className="w-100"
                                 onClick={() => props.history.push('/enterprise/assessment')}
                             >
                                 {t('enterprise.home.exposure')}
+                            </Button>
+                        </Col>
+                    </Row>
+
+
+                    
+                </Card.Body>
+            </Card>
+
+            {/* exposure models */}
+            <Card className="mt-4" style={{ fontSize: 18 }}>
+                <Card.Header>
+                    { t('exposure-models.plural') }
+                </Card.Header>
+
+                <Card.Body>
+                    <Row>
+                        <Col>
+                            <Button
+                                variant="danger"
+                                className="w-100"
+                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
+                            >
+                                {t('exposure-models.art')}
+                            </Button>
+                        </Col>
+
+                        <Col>
+                            <Button
+                                variant="danger"
+                                className="w-100"
+                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
+                            >
+                                {t('exposure-models.sm')}
+                            </Button>
+                        </Col>
+
+                        <Col>
+                            <Button
+                                variant="danger"
+                                className="w-100"
+                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
+                            >
+                                {t('exposure-models.tra')}
+                            </Button>
+                        </Col>
+
+                        <Col>
+                            <Button
+                                variant="danger"
+                                className="w-100"
+                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
+                            >
+                                {t('exposure-models.trexmop')}
                             </Button>
                         </Col>
                     </Row>
