@@ -326,6 +326,7 @@
     "data": {
         "aentity": {
             "aentity": "Assessment entity",
+            "plural": "Assessment entities",
             "list": {
                 "cas": "Established assessment entities",
                 "workers": "Exposed workers"
