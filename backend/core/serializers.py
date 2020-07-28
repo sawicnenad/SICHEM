@@ -114,6 +114,7 @@ class CaOfAEntitySerializer(serializers.ModelSerializer):
 
 class ExposureSerializer(serializers.ModelSerializer):
     exposure = serializers.JSONField()
+    parameters = serializers.JSONField()
     class Meta:
         model = Exposure
         fields = '__all__'

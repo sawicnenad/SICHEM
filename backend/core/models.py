@@ -396,5 +396,6 @@ class Exposure(models.Model):
     cas_of_aentity = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
     worker_of_aentity = models.ForeignKey(WorkerOfAEntity, on_delete=models.CASCADE)
     exposure_model = models.CharField(max_length=10)
-    exposure = models.TextField()
-    exposure_reg = models.CharField(max_length=50)
+    parameters = models.TextField(default="{}")
+    exposure = models.TextField(default="{}")
+    exposure_reg = models.CharField(max_length=50, blank=True)
