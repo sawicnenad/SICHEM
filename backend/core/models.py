@@ -399,7 +399,11 @@ class ExposureWorkplace(models.Model):
 # and CA and Worker details for which it applies
 # also it includes (if calculated) exposure values
 class ExposureEntity(models.Model):
-    exposure_workplace = models.ForeignKey(ExposureWorkplace, on_delete=models.CASCADE)
+    exposure_workplace = models.ForeignKey(
+        ExposureWorkplace,
+        on_delete=models.CASCADE,
+        related_name="exposure_entity"
+    )
     ca = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
     worker = models.ForeignKey(WorkerOfAEntity,on_delete=models.CASCADE)
     exposure_model = models.CharField(max_length=10)
