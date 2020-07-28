@@ -13,7 +13,8 @@ from .models import (
     AssessmentEntity,
     WorkerOfAEntity,
     CaOfAEntity,
-    ExposureWorkplace
+    ExposureWorkplace,
+    ExposureEntity
 )
 
 
@@ -52,7 +53,14 @@ class WorkplaceSerializer(serializers.ModelSerializer):
         # each workplace must have an assessment entity (one-to-one relation)
         wp = super().create(validated_data)
         aentity = AssessmentEntity.objects.create(
-            workplace=wp, enterprise=wp.enterprise)
+            workplace=wp, enterprise=wp.enterprise
+        )
+        
+        # create also exposure workplace instance
+        # this will contain exposure information
+        exposure_wp = ExposureWorkplace.objects.create(
+            workplace=wp, enterprise=wp.enterprise
+        )
         return wp
 
 class WorkerSerializer(serializers.ModelSerializer):
@@ -148,8 +156,17 @@ class AssessmentEntitySerialiazer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
+
+class ExposureEntitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExposureEntity
+        fields = '__all__'
+
+
+
 class ExposureWorkplaceSerializer(serializers.ModelSerializer):
     exposure_models = serializers.JSONField()
+    entities = ExposureEntitySerializer(many=True, required=False)
     class Meta:
         model = ExposureWorkplace
         fields = '__all__'
