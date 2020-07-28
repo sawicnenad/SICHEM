@@ -26,12 +26,16 @@ export default function CAForm(props) {
         }
     })
 
+    // if substance includes defined compositions 
+    // display the list of compositions below the substance field
     let compositions = [];
     if (formik.values.substance) {
         let substance = parseInt(formik.values.substance);
         compositions = context.compositions.filter(
                             o => o.substance === substance);
     }
+
+    
 
     return(
         <div>
@@ -197,6 +201,24 @@ export default function CAForm(props) {
                                     </Form.Group>
                                 : <div />
                             }
+
+                            {/* exposure models */}
+                            <Form.Group>
+                                <Form.Label>{t('exposure-models.plural')}:</Form.Label>
+                                {
+                                    ['art', 'sm', 'tra', 'trexmop'].map(
+                                        model => (
+                                            <Form.Check
+                                                name={model}
+                                                key={model}
+                                                label={t(`exposure-models.${model}`)}
+                                                onChange={formik.handleChange}
+                                                value={formik.values[model]}
+                                            />
+                                        )
+                                    )
+                                }
+                            </Form.Group>
                         </Form>
                 </Modal.Body>
                 <Modal.Footer>

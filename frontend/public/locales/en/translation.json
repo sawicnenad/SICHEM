@@ -341,7 +341,7 @@
             },
             "select-workers": "Select workers",
             "ca-modal": {
-                "title": "Set new CA",
+                "title": "New assessment entity",
                 "use-map": "Use map",
                 "ca": "Contributing activity",
                 "substance": "Substance",

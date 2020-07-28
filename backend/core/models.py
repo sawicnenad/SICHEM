@@ -382,6 +382,11 @@ class CaOfAEntity(models.Model):
     mixture = models.ForeignKey(Mixture, on_delete=models.CASCADE, null=True, blank=True)
     composition = models.ForeignKey(Composition, on_delete=models.CASCADE, null=True, blank=True)
     schedule = models.TextField(default="{}")
+    art = models.BooleanField(default=False)
+    sm = models.BooleanField(default=False)
+    tra = models.BooleanField(default=False)
+    trexmop = models.BooleanField(default=False)
+
     
 class Exposure(models.Model):
     aentity = models.ForeignKey(
@@ -390,6 +395,6 @@ class Exposure(models.Model):
         related_name="exposure")
     cas_of_aentity = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
     worker_of_aentity = models.ForeignKey(WorkerOfAEntity, on_delete=models.CASCADE)
-    model = models.CharField(max_length=10)
+    exposure_model = models.CharField(max_length=10)
     exposure = models.TextField()
     exposure_reg = models.CharField(max_length=50)

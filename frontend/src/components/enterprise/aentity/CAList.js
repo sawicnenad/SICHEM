@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import { Card, Row, Col, Button, CardColumns } from 'react-bootstrap';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,7 +16,7 @@ export default function CAList (props) {
     let entities = props.entities;
 
     return (
-        <div>
+        <CardColumns>
             {
                 entities.map(
                     (entity, inx) => (
@@ -33,16 +33,15 @@ export default function CAList (props) {
                                 </span>
                             </Card.Header>
                             <Card.Body>
-                                <Row>
-                                    <Col className="pt-1">
-                                        <FontAwesomeIcon icon="cogs" 
-                                        /> <span>
-                                            {context.uses.find(
-                                                o => o.id === parseInt(entity.use))
-                                                .reference}
-                                        </span>
-                                    </Col>
-                                    <Col className="pt-1">
+                                <div className="pt-1">
+                                    <FontAwesomeIcon icon="cogs" 
+                                    /> <span>
+                                        {context.uses.find(
+                                            o => o.id === parseInt(entity.use))
+                                            .reference}
+                                    </span>
+                                </div>
+                                    <div className="pt-1">
                                         <FontAwesomeIcon icon="cog" 
                                         /> <span>
                                             {context.uses
@@ -50,8 +49,8 @@ export default function CAList (props) {
                                                 .cas.find(o => o.id === parseInt(entity.ca))
                                                 .reference}
                                         </span>
-                                    </Col>
-                                    <Col className="pt-1">
+                                    </div>
+                                    <div className="pt-1">
                                         <FontAwesomeIcon icon="flask" 
                                         /> <span>
                                             {
@@ -64,24 +63,45 @@ export default function CAList (props) {
                                                     .reference
                                             }
                                         </span>
-                                    </Col>
-                                    <Col>
-                                        <Button 
-                                            variant="outline-danger"
+                                    </div>
+                                    <div>
+                                        <div 
+                                            className="text-danger pointer-on-hover-div mt-1"
                                             onClick={() => props.handleSchedule(false, inx)}
                                         > <FontAwesomeIcon 
                                                 icon="calendar-alt"
                                             /> <span>
                                                 { t('data.aentity.schedule.title') }
                                             </span>
-                                        </Button>
-                                    </Col>
-                                </Row>
+                                        </div>
+                                    </div>
+
+                                    <div className="border-bottom mt-3 ">
+                                        {t('exposure-models.plural')}:
+                                    </div>
+
+                                    {['art', 'sm', 'tra', 'trexmop'].map(
+                                        model => (
+                                            <div key={ model }>
+                                                {
+                                                    entity[model] ?
+                                                    <FontAwesomeIcon
+                                                        icon="check-square"
+                                                        className="text-success"
+                                                    />: 
+                                                    <FontAwesomeIcon
+                                                        icon="times"
+                                                        className="text-danger"
+                                                    />
+                                                } {t(`exposure-models.${model}`)}
+                                            </div>
+                                        )
+                                    )}
                             </Card.Body>
                         </Card>
                     )
                 )
             }
-        </div>
+        </CardColumns>
     )
 }
