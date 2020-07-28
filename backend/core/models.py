@@ -378,13 +378,20 @@ class CaOfAEntity(models.Model):
         related_name="cas_of_aentity")
     use = models.ForeignKey(Use, on_delete=models.CASCADE)
     ca = models.ForeignKey(CA, on_delete=models.CASCADE)
-    substance = models.ForeignKey(
-        Substance, on_delete=models.CASCADE, null=True, blank=True)
-    mixture = models.ForeignKey(
-        Mixture, on_delete=models.CASCADE, null=True, blank=True)
-    composition = models.ForeignKey(
-        Composition, on_delete=models.CASCADE, null=True, blank=True)
+    substance = models.ForeignKey(Substance, on_delete=models.CASCADE, null=True, blank=True)
+    mixture = models.ForeignKey(Mixture, on_delete=models.CASCADE, null=True, blank=True)
+    composition = models.ForeignKey(Composition, on_delete=models.CASCADE, null=True, blank=True)
     schedule = models.TextField(default="{}")
+    
+
+
+# For each workplace an exposure workplace instance is created
+# It contains general settings for the exposure assessment
+# whether or not same models are applied for all required assessments
+class ExposureWorkplace(models.Model):
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    workplace = models.OneToOneField(Workplace, on_delete=models.CASCADE)
+    same_models = models.BooleanField(default=True)
     exposure_models = models.TextField(default="[]")
 
 
@@ -392,8 +399,7 @@ class CaOfAEntity(models.Model):
 # and CA and Worker details for which it applies
 # also it includes (if calculated) exposure values
 class ExposureEntity(models.Model):
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-    aentity = models.ForeignKey(AssessmentEntity, on_delete=models.CASCADE)
+    exposure_workplace = models.ForeignKey(ExposureWorkplace, on_delete=models.CASCADE)
     ca = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
     worker = models.ForeignKey(WorkerOfAEntity,on_delete=models.CASCADE)
     exposure_model = models.CharField(max_length=10)
@@ -401,5 +407,4 @@ class ExposureEntity(models.Model):
     complete = models.BooleanField(default=False)
     exposure_reg = models.CharField(max_length=25, blank=True)
     exposure = models.TextField(blank=True)
-    sub_in_mix = models.ForeignKey(                                     # only for mixtures
-        Substance, on_delete=models.CASCADE, blank=True, null=True)
+    sub_in_mix = models.ForeignKey(Substance, on_delete=models.CASCADE, blank=True, null=True)

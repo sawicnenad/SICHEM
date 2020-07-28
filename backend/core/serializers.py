@@ -13,6 +13,7 @@ from .models import (
     AssessmentEntity,
     WorkerOfAEntity,
     CaOfAEntity,
+    ExposureWorkplace,
     ExposureEntity
 )
 
@@ -107,7 +108,6 @@ class WorkerOfAEntitySerializer(serializers.ModelSerializer):
 
 class CaOfAEntitySerializer(serializers.ModelSerializer):
     schedule = serializers.JSONField()
-    exposure_models = serializers.JSONField()
     class Meta:
         model = CaOfAEntity 
         fields = '__all__'
@@ -147,6 +147,13 @@ class AssessmentEntitySerialiazer(serializers.ModelSerializer):
     
         # update assessment entity
         return super().update(instance, validated_data)
+
+
+class ExposureWorkplaceSerializer(serializers.ModelSerializer):
+    exposure_models = serializers.JSONField()
+    class Meta:
+        model = ExposureEntity
+        fields = '__all__'
 
 class ExposureEntitySerializer(serializers.ModelSerializer):
     parameters = serializers.JSONField()
