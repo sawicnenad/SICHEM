@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'enterprise',
-    'core'
+    'core',
+    'exposure'
 ]
 
 MIDDLEWARE = [

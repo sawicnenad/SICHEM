@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { useTranslation } from 'react-i18next';
 import {
-    Accordion, Card, Form, Row, Col
+    Accordion, Card, Form, Row, Col, Button, Alert
 } from 'react-bootstrap';
+import AEntityTitle from './aentity/AEntityTitle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /*
     Assess exposure for a workplace's asssment entities
@@ -17,13 +19,22 @@ export default function Assessment() {
 
 
 
+    // on effect is executed whenever workplace changes
+    // this calls a function on the backend that 
+    // * verifies whether input parameters are complete
+    // * in this case it calculates the exposure applying the selected exposure models
+    // * return exposure results that are later formated
+    useEffect(() => {
+        
+    })
 
 
 
 
 
 
-    // Components in return
+
+    // Components in return ------------------------------------------------
 
     // fiel scaling
     const scaling = {
@@ -69,11 +80,48 @@ export default function Assessment() {
         let wpEntity = context.aentities.find(o => o.workplace === state.workplace);
         Entities = (
             <div>
+                <div className="mt-5 h6 text-danger">
+                    {t('data.aentity.plural')}
+                </div>
                 {wpEntity['cas_of_aentity'].map(
-                    entity => (
-                        <div key={entity.id}>
-                            { entity.ca }
-                        </div>
+                    (entity, inx) => (
+                        <Card key={entity.id}>
+                            <Card.Header>
+                                <AEntityTitle entity={entity} />
+                            </Card.Header>
+                            <Card.Body>
+                                {['art', 'sm', 'tra', 'trexmop'].map(
+                                    model => (
+                                        entity[model] ?
+                                        <Row key={model} className="my-1">
+                                            <Col>
+                                                 <FontAwesomeIcon 
+                                                    icon="check-square"
+                                                    className="text-success" 
+                                                 /> {t(`exposure-models.${model}`)}
+                                            </Col>
+
+                                            <Col className="text-center">
+                                                <Button variant="outline-danger" size="sm">
+                                                    {t('exposure-models.input-parameters')}
+                                                </Button>
+                                            </Col>
+
+                                            <Col className="text-right">
+                                                <FontAwesomeIcon 
+                                                    icon="check-square"
+                                                    className="text-success" 
+                                                 /> {t('exposure.assessment.status.complete')}
+                                            </Col>
+                                        </Row>
+                                        : <div key={model} className="text-muted my-1">
+                                                <FontAwesomeIcon icon="times" 
+                                                /> {t(`exposure-models.${model}`)}
+                                        </div>
+                                    )
+                                )}
+                            </Card.Body>
+                        </Card>
                     )
                 )}
             </div>
@@ -83,22 +131,24 @@ export default function Assessment() {
     
 
 
-    return(
-        <div className="mt-3">
-             <Accordion>
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0">
-                        1. {t('workplace')} & {t('data.aentity.plural')}
-                    </Accordion.Toggle>
 
-                    <Accordion.Collapse eventKey="0">
-                        <Card.Body>
-                            { Workplace }
-                            { Entities }
-                        </Card.Body>
-                    </Accordion.Collapse>
-                </Card>
-             </Accordion>
+
+
+    // ................................................................................
+    return(
+        <div className="p-5 bg-light h-100 wrapper">
+            {
+                state.workplace ?
+                "":
+                <Alert
+                    variant="info"
+                >
+                    <FontAwesomeIcon icon="info-circle"
+                    /> <span>{t('exposure.assessment.alert.select-workplace')}</span>
+                </Alert>
+            }
+            { Workplace }
+            { Entities }
         </div>
     )
 }

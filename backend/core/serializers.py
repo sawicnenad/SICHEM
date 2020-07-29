@@ -12,9 +12,10 @@ from .models import (
     CA,
     AssessmentEntity,
     WorkerOfAEntity,
-    CaOfAEntity,
-    Exposure
+    CaOfAEntity
 )
+from exposure.models import Exposure
+from exposure.serializers import ExposureSerializer
 
 
 class SupplierSerializer(serializers.ModelSerializer):
@@ -110,13 +111,6 @@ class CaOfAEntitySerializer(serializers.ModelSerializer):
     schedule = serializers.JSONField()
     class Meta:
         model = CaOfAEntity 
-        fields = '__all__'
-
-class ExposureSerializer(serializers.ModelSerializer):
-    exposure = serializers.JSONField()
-    parameters = serializers.JSONField()
-    class Meta:
-        model = Exposure
         fields = '__all__'
 
 

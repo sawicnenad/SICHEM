@@ -1,0 +1,56 @@
+{
+    "physical_form": {
+        "from": "physical_state",
+        "type": "default",
+        "result": {
+            "liquid": "liquid",
+            "solid": "solid",
+            "powder": "powder"
+        }
+    },
+    "vp"       : {
+        "from": "vp",
+        "type": "copy",
+        "result": {}
+    },
+    "dustiness": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "mf"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "wf"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "ac"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "moisture" : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "nf"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "ff"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "su"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    }
+}

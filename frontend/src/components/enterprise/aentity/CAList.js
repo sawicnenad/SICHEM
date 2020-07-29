@@ -49,54 +49,53 @@ export default function CAList (props) {
                                                 .cas.find(o => o.id === parseInt(entity.ca))
                                                 .reference}
                                         </span>
-                                    </div>
-                                    <div className="pt-1">
-                                        <FontAwesomeIcon icon="flask" 
+                                </div>
+                                <div className="pt-1">
+                                    <FontAwesomeIcon icon="flask" 
+                                    /> <span>
+                                        {
+                                            entity.substance ?
+                                            context.substances
+                                                .find(o => o.id === parseInt(entity.substance))
+                                                .reference
+                                            : context.mixtures
+                                                .find(o => o.id === parseInt(entity.mixture))
+                                                .reference
+                                        }
+                                    </span>
+                                </div>
+                                <div>
+                                    <div 
+                                        className="text-danger pointer-on-hover-div mt-1"
+                                        onClick={() => props.handleSchedule(false, inx)}
+                                    > <FontAwesomeIcon 
+                                            icon="calendar-alt"
                                         /> <span>
-                                            {
-                                                entity.substance ?
-                                                context.substances
-                                                    .find(o => o.id === parseInt(entity.substance))
-                                                    .reference
-                                                : context.mixtures
-                                                    .find(o => o.id === parseInt(entity.mixture))
-                                                    .reference
-                                            }
+                                            { t('data.aentity.schedule.title') }
                                         </span>
                                     </div>
-                                    <div>
-                                        <div 
-                                            className="text-danger pointer-on-hover-div mt-1"
-                                            onClick={() => props.handleSchedule(false, inx)}
-                                        > <FontAwesomeIcon 
-                                                icon="calendar-alt"
-                                            /> <span>
-                                                { t('data.aentity.schedule.title') }
-                                            </span>
+                                </div>
+
+                                <div className="border-bottom mt-3 ">
+                                    {t('exposure-models.plural')}:
+                                </div>
+                                {['art', 'sm', 'tra', 'trexmop'].map(
+                                    model => (
+                                        <div key={ model }>
+                                            {
+                                                entity[model] ?
+                                                <FontAwesomeIcon
+                                                    icon="check-square"
+                                                    className="text-success"
+                                                />: 
+                                                <FontAwesomeIcon
+                                                    icon="times"
+                                                    className="text-danger"
+                                                />
+                                            } {t(`exposure-models.${model}`)}
                                         </div>
-                                    </div>
-
-                                    <div className="border-bottom mt-3 ">
-                                        {t('exposure-models.plural')}:
-                                    </div>
-
-                                    {['art', 'sm', 'tra', 'trexmop'].map(
-                                        model => (
-                                            <div key={ model }>
-                                                {
-                                                    entity[model] ?
-                                                    <FontAwesomeIcon
-                                                        icon="check-square"
-                                                        className="text-success"
-                                                    />: 
-                                                    <FontAwesomeIcon
-                                                        icon="times"
-                                                        className="text-danger"
-                                                    />
-                                                } {t(`exposure-models.${model}`)}
-                                            </div>
-                                        )
-                                    )}
+                                    )
+                                )}
                             </Card.Body>
                         </Card>
                     )

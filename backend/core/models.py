@@ -387,15 +387,3 @@ class CaOfAEntity(models.Model):
     tra = models.BooleanField(default=False)
     trexmop = models.BooleanField(default=False)
 
-    
-class Exposure(models.Model):
-    aentity = models.ForeignKey(
-        AssessmentEntity,
-        on_delete=models.CASCADE,
-        related_name="exposure")
-    cas_of_aentity = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
-    worker_of_aentity = models.ForeignKey(WorkerOfAEntity, on_delete=models.CASCADE)
-    exposure_model = models.CharField(max_length=10)
-    parameters = models.TextField(default="{}")
-    exposure = models.TextField(default="{}")
-    exposure_reg = models.CharField(max_length=50, blank=True)
