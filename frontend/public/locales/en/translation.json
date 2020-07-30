@@ -127,11 +127,16 @@
             "no-wp-alert": "No workplace selected!",
             "status": {
                 "complete": "Complete",
-                "incomplete": "Incomplete"
+                "incomplete": "Incomplete",
+                "untested": "Untested",
+                "modified": "Modified",
+                "finished": "Finished"
             },
             "alert": {
-                "select-workplace": "Select workplace for which you want to run exposure assessment"
-            }
+                "select-workplace": "Select workplace for which you want to run exposure assessment",
+                "untested-all": "No exposure values found for this workplace. Please run exposure assessment by applying button 'Calculate' below. This will evaluate exposure using the specified exposure models for all established assessment entities."
+            },
+            "calculate-exposure": "Calculate"
         }
     },
 
@@ -163,6 +168,11 @@
             "mf": "Mole fraction (0-1)",
             "wf": "Weight fraction (0-1)",
             "ac": "Activity coefficient (0-40)",
+            "viscosity": "Viscosity of substance",
+            "viscosity-options": {
+                "water": "Liquids with low viscosity (like water)",
+                "oil": "Liquids with high viscosity (like oil)"
+            },
             "nf": "Source distance from the worker's breathing zone less than 1 metre",
             "ff": "Secondary sources present at workplace",
             "su": "Surface contamination",

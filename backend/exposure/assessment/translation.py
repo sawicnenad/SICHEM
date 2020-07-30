@@ -76,7 +76,6 @@ def translate_from_core(worker, entity, substance=None):
     # * worker    - instance of worker_of_aentity
 
     # obtain original instances that include required data
-    worker = WorkerOfAEntity.objects.get(pk=worker)
     entity = CaOfAEntity.objects.get(pk=entity)
     wp = entity.aentity.workplace
     
@@ -102,6 +101,5 @@ def translate_from_core(worker, entity, substance=None):
     # substance, contributin activities, workplace ...)
     path = 'data/translations/data_to_art.json'
     parameters = translate_from_json(path, data)
-    print(parameters)
 
     return parameters

@@ -11,6 +11,7 @@
                 "mf",
                 "wf",
                 "ac",
+                "viscosity",
                 "moisture",
                 "nf",
                 "ff",
@@ -194,6 +195,36 @@
                 {
                     "field": "physical_form",
                     "value": "liquid"
+                }
+            ]
+        },
+        "viscosity": {
+            "props": {
+                "required": true,
+                "name": "viscosity",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "water",
+                    "label": "art.fields.viscosity-options.water"
+                }, {
+                    "value": "oil",
+                    "label": "art.fields.viscosity-options.oil"
+                }
+            ],
+            "label": "art.fields.viscosity",
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                },
+                {
+                    "field": "vp",
+                    "type": "less-equal",
+                    "value": 10
                 }
             ]
         },

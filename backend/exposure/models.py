@@ -17,14 +17,16 @@ class Exposure(models.Model):
     # * complete      - set of input parameters is complete but no exposure calculated
     # * finished      - as previous but exposure calculation is done
 
-    aentity = models.ForeignKey(
-        AssessmentEntity,
-        on_delete=models.CASCADE,
-        related_name="exposure")
-    cas_of_aentity = models.ForeignKey(CaOfAEntity, on_delete=models.CASCADE)
-    worker_of_aentity = models.ForeignKey(WorkerOfAEntity, on_delete=models.CASCADE)
+    # missing field contains fields that has no value assigned
+    # but they must have it before conducting exposure assessment
+    cas_of_aentity = models.ForeignKey(
+            CaOfAEntity,
+            on_delete=models.CASCADE,
+            related_name="exposure"
+        )
     exposure_model = models.CharField(max_length=10)
     parameters = models.TextField(default="{}")
+    missing = models.TextField(default="[]")
     status = models.CharField(max_length=25)                   
     exposure = models.TextField(default="{}")
     exposure_reg = models.CharField(max_length=50, blank=True)

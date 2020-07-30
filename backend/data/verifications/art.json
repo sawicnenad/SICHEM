@@ -1,0 +1,61 @@
+{
+    "mandatory": [
+        "physical_form",
+        "su",
+        "activity",
+        "time",
+        "lc1",
+        "site"
+    ],
+    "conditions": [
+        {
+            "if": ["parameters['physical_form'] == 'liquid'"],
+            "fields": [ "vp" ]
+        }, {
+            "if": [
+                "parameters['physical_form'] == 'liquid'",
+                "int(parameters['vp']) <= 10"
+            ],
+            "fields": [ "wf", "viscosity" ]
+        }, {
+            "if": [
+                "parameters['physical_form'] == 'liquid'",
+                "int(parameters['vp']) > 10"
+            ],
+            "fields": [ "mf", "ac" ]
+        }, {
+            "if": ["parameters['physical_form'] == 'powder'"],
+            "fields": [ "dustiness", "moisture", "wf" ]
+        }, {
+            "if": ["parameters['physical_form'] == 'solid'"],
+            "fields": [ "moisture", "wf" ]
+        }, {
+            "if": ["parameters['activity'] != False"],
+            "fields": [ "d1" ]
+        }, {
+            "if": ["parameters['lc1'] != 'no'"],
+            "fields": [ "lc1_tech", "lc2" ]
+        }, {
+            "if": ["parameters['lc2'] != 'no'"],
+            "fields": [ "lc2_tech" ]
+        }, {
+            "if": ["parameters['site'] == 'indoors'"],
+            "fields": [ "gv", "volume" ]
+        }, {
+            "if": ["parameters['site'] == 'outdoors'"],
+            "fields": [ "gv_outdoors" ]
+        }, {
+            "if": ["parameters['site'] == 'spray-room'"],
+            "fields": [ "spray_room" ]
+        }, {
+            "if": ["parameters['site'] == 'flow-booth'"],
+            "fields": [ "flow_booth" ]
+        }, {
+            "if": ["parameters['nf'] == False"],
+            "fields": [ "segregation", "separation" ]
+        }, {
+            "if": ["parameters['ff'] == False", "parameters['nf'] == True"],
+            "fields": [ "segregation" ]
+        }
+    ]
+}

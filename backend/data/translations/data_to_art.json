@@ -38,6 +38,11 @@
         "type": "default",
         "result": {}
     },
+    "viscosity" : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
     "nf"       : {
         "from": "",
         "type": "default",
@@ -49,6 +54,86 @@
         "result": {}
     },
     "su"       : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "activity"      : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "d1"            : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "d2"            : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "time"          : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "lc1"           : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "lc1_tech"      : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "lc2"           : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "lc2_tech"      : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "site"          : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "gv"            : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "volume"        : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "gv_outdoors"   : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "spray_room"    : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "flow_booth"    : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "segregation"   : {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "separation"    : {
         "from": "",
         "type": "default",
         "result": {}
