@@ -134,9 +134,9 @@
             },
             "alert": {
                 "select-workplace": "Select workplace for which you want to run exposure assessment",
-                "untested-all": "No exposure values found for this workplace. Please run exposure assessment by applying button 'Calculate' below. This will evaluate exposure using the specified exposure models for all established assessment entities."
+                "untested-all": "No exposure evaluated for the established assessment entities of the selected workplace"
             },
-            "calculate-exposure": "Calculate"
+            "calculate": "Calculate"
         }
     },
 

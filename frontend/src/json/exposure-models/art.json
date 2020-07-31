@@ -195,6 +195,10 @@
                 {
                     "field": "physical_form",
                     "value": "liquid"
+                }, {
+                    "field": "vp",
+                    "type": "greater-than",
+                    "value": 10
                 }
             ]
         },

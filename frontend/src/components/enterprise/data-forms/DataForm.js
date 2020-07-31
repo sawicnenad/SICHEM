@@ -547,6 +547,16 @@ export default function DataForm(props) {
                         isOK = false;
                     }
                     break;
+                case 'less-equal':
+                    if (props.formik.values[condField] > parseFloat(condValue)) {
+                        isOK = false
+                    }
+                    break;
+                case 'greater-than':
+                    if (props.formik.values[condField] <= parseFloat(condValue)) {
+                        isOK = false
+                    }
+                    break;
                 default:
                     if (props.formik.values[condField] !== condValue) {
                         isOK = false;

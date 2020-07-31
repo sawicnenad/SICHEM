@@ -2,10 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { useTranslation } from 'react-i18next';
 import {
-    Accordion, Card, Form, Row, Col, Button, Alert
+    Card, Form, Row, Col, Button, Alert
 } from 'react-bootstrap';
 import AEntityTitle from './aentity/AEntityTitle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
+import axios from 'axios';
+import ART from './exposure/ART';
 
 /*
     Assess exposure for a workplace's asssment entities
@@ -14,19 +17,14 @@ export default function Assessment() {
 
     const {t} = useTranslation();
     const context = useContext(EnterpriseContext);
+    const APIcontext = useContext(ApiRequestsContext);
     const [state, setState] = useState({});
 
-
-
-
-    // on effect is executed whenever workplace changes
-    // this calls a function on the backend that 
-    // * verifies whether input parameters are complete
-    // * in this case it calculates the exposure applying the selected exposure models
-    // * return exposure results that are later formated
-    useEffect(() => {
-        
-    })
+    const headers = {
+        headers: {
+            Pragma: "no-cache",
+            Authorization: 'Bearer ' + localStorage.getItem('token-access')
+        }};
 
 
 
@@ -84,8 +82,9 @@ export default function Assessment() {
             </Alert>
         </div>);
 
+    let wpEntity;
     if (state.workplace) {
-        let wpEntity = context.aentities.find(o => o.workplace === state.workplace);
+        wpEntity = context.aentities.find(o => o.workplace === state.workplace);
         let entities = wpEntity['cas_of_aentity'];
         let exposure = [];
         let message = false; // later if any other value assigned message appears
@@ -94,7 +93,7 @@ export default function Assessment() {
         // later is any has state of incomplete or another we
         // display a corresponding message to the end-user
         for (let i in entities) {
-            exposure.concat(entities.exposure)
+            exposure.concat(entities[i].exposure)
         }
 
         // so if lenght is zero, it means that no previous
@@ -116,16 +115,42 @@ export default function Assessment() {
         }        
     }
 
+
+
+
+    // handles onClick events of the buttons in component Actions
+    const handleCalculateEvent = () => {
+        let url = `${APIcontext.API}/exposure/calculator/${wpEntity.id}/`;
+        axios.get(
+            url,
+            headers
+        ).then(
+            res => {
+                let entities = [...context.aentities.filter(
+                    o => o.workplace !== state.workplace)];
+                entities.push(res.data);
+                context.refreshState('aentities', entities);
+            }
+        ).catch(
+            e => console.log(e)
+        )
+    }
+
+
+
+
+
     const Actions = (
         <div className="mt-4 mb-2">
             <div className="text-right">
                 <Button 
                     variant="danger"
+                    onClick={handleCalculateEvent}
                 >
                     <FontAwesomeIcon
                         icon="calculator"
                     /> <span>
-                        {t('exposure.assessment.calculate-exposure')}
+                        {t('exposure.assessment.calculate')}
                     </span>
                 </Button>
             </div>
@@ -201,7 +226,15 @@ export default function Assessment() {
                                             </Col>
 
                                             <Col className="text-center">
-                                                <Button variant="outline-danger" size="sm">
+                                                <Button 
+                                                    variant="outline-danger"
+                                                    size="sm"
+                                                    onClick={() => setState({
+                                                        ...state,
+                                                        exposureModelView: model,
+                                                        exposureData: entity.exposure
+                                                    })}
+                                                >
                                                     {t('exposure-models.input-parameters')}
                                                 </Button>
                                             </Col>
@@ -227,15 +260,27 @@ export default function Assessment() {
     
 
 
+    // Exposure models that are rendered when supplying additional data
+    const ExposureModels = {
+        'art': <ART exposureData={state.exposureData} />
+    }
 
 
 
     // ................................................................................
     return(
         <div className="p-5 bg-light h-100 wrapper">
-            { Workplace }
-            { Information }
-            { Entities }
+            {
+                state.exposureModelView ?
+                <div>
+                    { ExposureModels[state.exposureModelView] }
+                </div>
+                : <div>
+                    { Workplace }
+                    { Information }
+                    { Entities }
+                </div>
+            }
         </div>
     )
 }
