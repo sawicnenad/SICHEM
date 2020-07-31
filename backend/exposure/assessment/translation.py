@@ -64,7 +64,7 @@ def join_data(*args):
     return total_data
 
 
-def translate_from_core(worker, entity, substance=None): 
+def translate_from_core(entity, substance=None): 
   
     # Translates raw data from core models 
     # into input parameters corresponding

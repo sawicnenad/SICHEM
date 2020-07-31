@@ -43,29 +43,46 @@ class CalculatorView(APIView):
 
         for ca in cas:
             # art -> translate - verify - calculate
+            # here it is importatant to identify the status of Exposure instance (if existing)
+            # untested | incomplete | complete | modified | finished
+            # untested must follow 1. translation 2. verification and 3. calculation
+            # incomplete does not require translation from raw data as this would overwrite the data 
+            # obtained from the end-user additional selections in an exposure model
+            # complete only requires calculation in order to reach state 'finished'
+            # modified must be also verified before the calculation (however it may downgrade to incomplete)
             if ca.art == True:
-                art_parameters = translate_from_core(ca.id, 39)
-                art_missing = verify_art(art_parameters)
-                art_status = 'incomplete' if len(art_missing) > 0 else 'complete'
+                try:
+                    exposure = Exposure.objects.get(cas_of_aentity=ca, exposure_model='art')
+                    status = exposure.status
+                    parameters = json.loads(exposure.parameters)
+                except:
+                    status = 'untested'
+                    exposure = Exposure(cas_of_aentity=ca, exposure_model='art')
+                
+                # only if untested it is required to run translation from core
+                # if raw data is modified then also it is required to run translation
+                # this is not done here - elsewhere following modification request
+                if status == 'untested':
+                    parameters = translate_from_core(ca.id)
+
+                if status in ['untested', 'incomplete']:
+                    missing = verify_art(parameters)
+                    status = 'incomplete' if len(missing) > 0 else 'complete'
         
                 # exposure is calculated only if art_status is complete
-                art_exposure = ''
-                if art_status == 'complete':
-                    art_exposure = art_calculator(art_parameters)
-                    art_status = 'finished'
+                exposure_values = ''
+                if status == 'complete':
+                    exposure_values = art_calculator(parameters)
+                    status = 'finished'
                 
                 # store to db
-                Exposure.objects.create(
-                    cas_of_aentity = ca,
-                    exposure_model = 'art',
-                    parameters = json.dumps(art_parameters),
-                    status = status,
-                    exposure = json.dumps(art_exposure),
-                    exposure_reg = '',
-                    missing = json.dumps(art_missing)
-                )
+                exposure.parameters = json.dumps(parameters)
+                exposure.status = status 
+                exposure.exposure_reg = ''
+                exposure.missing = json.dumps(missing)
+                exposure.exposure = json.dumps(exposure_values)
+                exposure.save()
         
-
         return Response("OK", status=status.HTTP_200_OK)
 
     
