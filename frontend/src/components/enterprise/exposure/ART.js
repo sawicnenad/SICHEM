@@ -34,7 +34,8 @@ export default function ART(props) {
     useEffect(() => {
         if (props.exposureData) {
             let data = props.exposureData.find(o => o['exposure_model'] === 'art');
-            let values = JSON.parse(data.parameters);
+            let parameters = data.parameters;
+            let values = JSON.parse(parameters);
 
             for (let key in values) {
                 if (values[key] === false && ['nf', 'ff'].indexOf(key) === -1) {
@@ -53,12 +54,13 @@ export default function ART(props) {
         initialValues: { nf: true, ff: false },
         onSubmit: values => {
             // id of exposure instance needed to make post request
-            const id = props.exposureData.find(
-                o => o['exposure_model'] === 'art').id;
+            let data = {...props.exposureData.find(
+                o => o['exposure_model'] === 'art')}; 
+            data.parameters = values;
 
-            axios.post(
-                `${APIcontext.API}/exposure/update-parameters/${id}`,
-                values,
+            axios.put(
+                `${APIcontext.API}/exposure/exposures/${data.id}/`,
+                data,
                 headers
             ).then(
                 res => (
