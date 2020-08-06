@@ -48,7 +48,7 @@ def verify(path_to_json, parameters):
         # otherwise the given field is appended
         if do_eval == True:
             for field in c['fields']:
-                if parameters[field] == False:
+                if parameters[field] in ['', False] or field not in parameters:
                     missing.append(field)
 
     return missing

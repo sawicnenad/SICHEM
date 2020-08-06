@@ -36,7 +36,7 @@
             "if": ["parameters['lc1'] != 'no'"],
             "fields": [ "lc1_tech", "lc2" ]
         }, {
-            "if": ["parameters['lc2'] != 'no'"],
+            "if": ["parameters['lc2'] not in ['', 'no']"],
             "fields": [ "lc2_tech" ]
         }, {
             "if": ["parameters['site'] == 'indoors'"],
@@ -54,7 +54,7 @@
             "if": ["parameters['nf'] == False"],
             "fields": [ "segregation", "separation" ]
         }, {
-            "if": ["parameters['ff'] == False", "parameters['nf'] == True"],
+            "if": ["parameters['ff'] == True", "parameters['nf'] == False"],
             "fields": [ "segregation" ]
         }
     ]

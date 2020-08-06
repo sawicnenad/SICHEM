@@ -187,7 +187,7 @@ export default function Assessment() {
                 <FontAwesomeIcon 
                     icon="check-square"
                     className="text-success" 
-                /> { t('exposure.assessment.status.untested') }
+                /> { t('exposure.assessment.status.complete') }
             </div>)
         }
 

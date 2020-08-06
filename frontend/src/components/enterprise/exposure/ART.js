@@ -56,11 +56,10 @@ export default function ART(props) {
             // id of exposure instance needed to make post request
             let data = {...props.exposureData.find(
                 o => o['exposure_model'] === 'art')}; 
-            data.parameters = values;
 
             axios.put(
                 `${APIcontext.API}/exposure/exposures/${data.id}/`,
-                data,
+                values,
                 headers
             ).then(
                 res => (

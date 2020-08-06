@@ -88,18 +88,6 @@ def calculator(request, pk):
 
 
 
-@api_view(["POST"])
-def update_exposure(request, pk):
-    # when end-user opens an exposure situation established
-    # by translating from core data - some input parameters
-    # may have no value assigned or require update/modification
-    # that corresponds better to the actual conditions
-    # for this scenario, it is needed to store the updates in db
-    # the function is applicable to all three exposure models
-    # as they include different pk
-
-    return 0
-
 
 
 
@@ -114,3 +102,20 @@ class ExposureViewSet(viewsets.ModelViewSet):
     # as they include different pk
     serializer_class = ExposureSerializer
     queryset = Exposure.objects.all()
+
+    def update(self, request, pk):
+        exposure = Exposure.objects.get(pk=pk)
+        parameters = request.data
+        missing = verify_art(parameters)
+        status = 'incomplete' if len(missing) > 0 else 'complete'
+
+        # stringify, update object and save to db
+        exposure.parameters = json.dumps(parameters)
+        exposure.missing = json.dumps(missing)
+        exposure.status = status
+        exposure.save()
+
+        # serialize and return
+        ser_data = ExposureSerializer(exposure)
+        return Response(ser_data.data, status=HTTP_200_OK)
+        
