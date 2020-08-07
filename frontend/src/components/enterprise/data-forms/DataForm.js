@@ -670,11 +670,20 @@ export default function DataForm(props) {
             </Col>
 
             <Col className="text-right">
-                <Link to={props.close}>
-                    <Button variant="secondary" className="ml-1">
+                {
+                    props.close ?
+                    <Link to={props.close}>
+                        <Button variant="secondary" className="ml-1">
+                            <FontAwesomeIcon icon="times" /> { t('close') }
+                        </Button>
+                    </Link>
+                    : <Button 
+                        variant="secondary" className="ml-1"
+                        onClick={props.closeFun}
+                      >
                         <FontAwesomeIcon icon="times" /> { t('close') }
                     </Button>
-                </Link>
+                }
 
                 { delButton }
 

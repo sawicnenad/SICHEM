@@ -9,6 +9,7 @@ import {
     Button, Modal, Form
 } from 'react-bootstrap';
 import axios from 'axios';
+import SubNav from './SubNav';
 
 
 
@@ -145,6 +146,7 @@ export default function Uses(props) {
 
     return (
         <div>
+            <SubNav active="uses" />
             <DataList 
                 name="uses"
                 data={ listOfUses() }

@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ARTForm from '../../../json/exposure-models/art.json';
 import DataForm from '../data-forms/DataForm';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { EnterpriseContext } from '../../../contexts/EnterpriseContext.js';
 import axios from 'axios';
 import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext.js';
+import { Button, Alert } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /*
     Advanced REACH Tool (ART)
@@ -17,8 +18,12 @@ import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext.js';
 export default function ART(props) {
 
     const { t } = useTranslation();
-    const context = useContext(EnterpriseContext);
     const APIcontext = useContext(ApiRequestsContext);
+    const [state, setState] = useState({
+        exposure: {},
+        missing: [],
+        status: false
+    });
 
     const headers = {
         headers: {
@@ -43,6 +48,17 @@ export default function ART(props) {
                 }
             }
             formik.setValues(values);
+
+            // update state
+            // needed to settle exposure data
+            // exposure results and missing parameters
+            let exposure = JSON.parse(data.exposure);
+            let missing = JSON.parse(data.missing);
+            setState({
+                exposure: exposure,
+                missing: missing,
+                status: data.status
+            });
         }
     }, [props])
 
@@ -62,14 +78,70 @@ export default function ART(props) {
                 values,
                 headers
             ).then(
-                res => (
-                    console.log(res.data)
-                )
+                res => {
+                    // update state
+                    // needed to settle exposure data
+                    // exposure results and missing parameters
+                    let exposure = JSON.parse(data.exposure);
+                    let missing = JSON.parse(data.missing);
+                    setState({
+                        exposure: exposure,
+                        missing: missing,
+                        status: data.status
+                    });
+                }
             ).catch(
                 e => console.log(e)
             )
         },
     })
+
+
+
+
+    // Results of exposure assessment
+    // this component is integral part of the last accordion card
+    const Results = (
+        <div>
+            <div>
+                <Button
+                    variant="outline-danger"
+                    className="w-100"
+                    onClick={formik.handleSubmit}
+                ><FontAwesomeIcon 
+                    icon="calculator"
+                /> <span>
+                        {t('exposure.assessment.calculate')}
+                    </span>
+                </Button>
+            </div>
+
+
+            <div>
+                <div style={{ 
+                        marginTop: 25,
+                        fontSize: 22,
+                        textAlign: "center" 
+                    }}
+                >
+                    <span>
+                        { t('exposure.exposure') } = 
+                    </span> <span>
+                        { state.exposure.p95 } mg/m<sup>3</sup>
+                    </span>
+                </div>
+
+                <div className="mt-2">
+                    <Alert variant="info">
+                        <FontAwesomeIcon icon="info-circle"
+                        /> <span>
+                            {t('exposure.assessment.rec-exposure-value')}
+                        </span>
+                    </Alert>
+                </div>
+            </div>
+        </div>
+    )
 
 
 
@@ -83,9 +155,10 @@ export default function ART(props) {
                 scaling={{ label: { md: 3 }, field: { md: 7 } }}
                 formik={formik}
                 title={t('art.form-title')}
-                close='/enterprise/exposure/assessment'
+                closeFun={props.handleARTcloseButton}
                 handleDelete={() => null}
                 noDeleteButton
+                custom={{ results: Results }}
             />
         </div>
     )

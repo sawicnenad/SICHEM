@@ -7,6 +7,7 @@ import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import SubNav from './SubNav';
 
 
 export default function Chemicals(props) {
@@ -334,7 +335,10 @@ export default function Chemicals(props) {
 
     return (
         <div>
-            
+            <div className="mb-2">
+                <SubNav active="chemicals" />
+            </div>
+          
             <Tabs
                 fill 
                 defaultActiveKey={props.match.params.view} 

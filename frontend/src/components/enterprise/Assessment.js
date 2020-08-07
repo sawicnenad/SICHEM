@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import axios from 'axios';
 import ART from './exposure/ART';
+import SubNav from './SubNav';
 
 /*
     Assess exposure for a workplace's asssment entities
@@ -191,6 +192,13 @@ export default function Assessment() {
             </div>)
         }
 
+        // finished - show calculation result
+        if (exposure.status === 'finished') {
+            return(<div>
+                {exposure.exposure_reg} mg/m<sup>3</sup>
+            </div>)
+        }
+
         // otherwise
         return(<div>
             <FontAwesomeIcon 
@@ -262,15 +270,25 @@ export default function Assessment() {
 
     // Exposure models that are rendered when supplying additional data
     const ExposureModels = {
-        'art': <ART exposureData={state.exposureData} />
+        'art': <ART 
+                    exposureData={state.exposureData} 
+                    handleARTcloseButton={
+                        () => (
+                            setState({
+                                ...state,
+                                exposureModelView: false
+                            }))
+                        }
+                />
     }
 
 
 
     // ................................................................................
     return(
-        <div className="p-5 bg-light h-100 wrapper">
-            {
+        <div className="bg-light h-100 wrapper">
+            <SubNav active="assessment" />
+            <div className="p-5">{
                 state.exposureModelView ?
                 <div>
                     { ExposureModels[state.exposureModelView] }
@@ -280,7 +298,7 @@ export default function Assessment() {
                     { Information }
                     { Entities }
                 </div>
-            }
+            }</div>
         </div>
     )
 }

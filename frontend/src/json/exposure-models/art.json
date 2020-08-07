@@ -43,6 +43,10 @@
                 "segregation",
                 "separation"
             ]
+        }, {
+            "eventKey": "results",
+            "label": "art.accordion.results",
+            "fields": ["results"]
         }
     ],
     "fields": {
@@ -1474,6 +1478,11 @@
                     "label": "art.fields.segregation-options.complete-vent"
                 }
             ]
+        },
+        "results": {
+            "fieldType": "custom",
+            "component": "results",
+            "noBackground": true
         }
     }
 }

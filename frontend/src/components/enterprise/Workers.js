@@ -12,6 +12,7 @@ import RequestNotification from '../notifications/RequestNotification';
 import {
     Button, Modal, Form, Row, Col
 } from 'react-bootstrap';
+import SubNav from './SubNav';
 
 
 const scaling = { label: { md: 3 }, field: { md: 7 } }
@@ -173,6 +174,7 @@ export default function Workers(props) {
 
     return (
         <div>
+            <SubNav active="workers" />
             {
                 props.match.params.id ?
                 <DataForm

@@ -60,6 +60,7 @@ def calculator(request, pk):
             # only if untested it is required to run translation from core
             # if raw data is modified then also it is required to run translation
             # this is not done here - elsewhere following modification request
+            missing = []
             if status == 'untested':
                 parameters = translate_from_core(ca.id)
             if status in ['untested', 'incomplete']:
@@ -67,15 +68,15 @@ def calculator(request, pk):
                 status = 'incomplete' if len(missing) > 0 else 'complete'
     
             # exposure is calculated only if art_status is complete
-            exposure_values = ''
-            if status == 'complete':
+            exposure_values = {}
+            if ['complete', 'finished'].index(status) > -1:
                 exposure_values = art_calculator(parameters)
                 status = 'finished'
             
             # store to db
             exposure.parameters = json.dumps(parameters)
             exposure.status = status 
-            exposure.exposure_reg = ''
+            exposure.exposure_reg = exposure_values['p95'] if 'p95' in exposure_values else ""
             exposure.missing = json.dumps(missing)
             exposure.exposure = json.dumps(exposure_values)
             exposure.save()
@@ -109,10 +110,17 @@ class ExposureViewSet(viewsets.ModelViewSet):
         missing = verify_art(parameters)
         status = 'incomplete' if len(missing) > 0 else 'complete'
 
+        # if all parameters are there, we calculate exposure
+        exposure_values = {}
+        if ['complete', 'finished'].index(status) > -1:
+            exposure_values = art_calculator(parameters)
+            status = 'finished'
+
         # stringify, update object and save to db
         exposure.parameters = json.dumps(parameters)
         exposure.missing = json.dumps(missing)
         exposure.status = status
+        exposure.exposure = json.dumps(exposure_values)
         exposure.save()
 
         # serialize and return

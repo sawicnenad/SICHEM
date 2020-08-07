@@ -39,6 +39,8 @@
     "select": "Select",
     "add": "Add",
     "exposure-model": "Exposure model",
+    "assessment": "Assesssment",
+    "aentities": "Assessment entities",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -136,7 +138,8 @@
                 "select-workplace": "Select workplace for which you want to run exposure assessment",
                 "untested-all": "No exposure evaluated for the established assessment entities of the selected workplace"
             },
-            "calculate": "Calculate"
+            "calculate": "Calculate",
+            "rec-exposure-value": "This value is recommended to be used for the risk assessment in Switzerland. The value presents exposure at the 95th percentile of the exposure distribution meaning that there is only 5% probability that the assessed exposure value may be exceeded for the established exposure situation."
         }
     },
 
@@ -145,7 +148,8 @@
         "accordion": {
             "source": "1. Exposure source",
             "activity": "2. Activity task",
-            "controls": "3. Control management measures"
+            "controls": "3. Control management measures",
+            "results": "4. Estimated exposure results"
         },
         "fields": {
             "physical-form": "Phyisical form",

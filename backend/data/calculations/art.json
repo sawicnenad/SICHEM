@@ -1,0 +1,9 @@
+{
+    "dustiness": {
+        "fgran": 0.01,
+        "gran": 0.03,
+        "coarse": 0.1,
+        "fine": 0.3,
+        "efine": 1.0
+    }
+}

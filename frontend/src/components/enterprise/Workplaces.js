@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import DataForm from './data-forms/DataForm';
 import RequestNotification from '../notifications/RequestNotification';
+import SubNav from './SubNav';
 
 
 export default function Workplaces(props) {
@@ -163,6 +164,7 @@ export default function Workplaces(props) {
     )
     return (
         <div>
+            <SubNav active="workplaces" />
             {
                 props.match.params.id ?
                 <DataForm

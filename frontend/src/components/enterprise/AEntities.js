@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import DataList from './DataList';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
+import SubNav from './SubNav';
 
 
 
@@ -47,14 +48,17 @@ export default function AEntities(props){
 
 
     return(
-        <DataList
-            name="aentities"
-            data={ aentitiesList() }
-            api={`${APIcontext.API}/a-entities/`}
-            link='/enterprise/a-entities/'
-            delMsg={t('messages.aentity-delete-msg')}
-            noDeleteButton
-            createButton={<div></div>}
-        />
+        <div>
+            <SubNav active="aentities" />
+            <DataList
+                name="aentities"
+                data={ aentitiesList() }
+                api={`${APIcontext.API}/a-entities/`}
+                link='/enterprise/a-entities/'
+                delMsg={t('messages.aentity-delete-msg')}
+                noDeleteButton
+                createButton={<div></div>}
+            />
+        </div>
     )
 }
