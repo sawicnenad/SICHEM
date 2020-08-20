@@ -827,7 +827,7 @@
                         "value": "dry-abrasive",
                         "label": "data.art.d2-options.dry-abrasive"
                     }, {
-                        "value": "web-abrasive",
+                        "value": "wet-abrasive",
                         "label": "data.art.d2-options.wet-abrasive"
                     }
                 ],
@@ -869,7 +869,7 @@
                         "value": "compressed-air",
                         "label": "data.art.d2-options.compressed-air"
                     }, {
-                        "value": "low-agitation",
+                        "value": "high-agitation",
                         "label": "data.art.d2-options.high-agitation"
                     }, {
                         "value": "low-agitation",

@@ -160,7 +160,7 @@ export default function Home(props) {
                             <Button
                                 variant="danger"
                                 className="w-100"
-                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
+                                onClick={() => props.history.push('/enterprise/exposure-model/stoffenmanager')}
                             >
                                 {t('exposure-models.sm')}
                             </Button>

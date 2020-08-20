@@ -299,6 +299,104 @@
         }
     },
 
+    "sm": {
+        "form-title": "Stoffenmanager",
+        "fields": {
+            "physical-form": "Phyisical state",
+            "abrasion": "Situation concerns shaping by removing or cutting",
+            "dustiness":"Dustiness",
+            "vp": "Vapour pressure (Pa)",
+            "conc": "Concentration (1-100 %)",
+            "bg1": "Workroom cleaned daily",
+            "bg2": "Regular insections and maintainance (at least monthly) of machines and equipment",
+            "nf": "Distance of the source from employee's breathing zone less than 1 metre",
+            "ff1": "More than one employee carrying out the same task",
+            "ff2": "Task is followed by evaporation",
+            "handling": "Type of handling",
+            "time": "Task duration (1-480 min)",
+            "volume":"Workplace volume",
+            "gv": "Type of general ventilation",
+            "lc": "Available control measures",
+            "rpe": "Personal protective equipment",
+            "dustiness-options":{
+                "efine":"Extremely fine dust",
+                "fine":"Fine dust",
+                "coarse":"Coarse dust",
+                "gran": "Granules or flakes",
+                "fgran": "Firm granules or flakes",
+                "solid": "Solid objects"
+            },
+            "handling-options": {
+                "powder-1": "Handling of very large amounts of product",
+                "powder-2": "Handling of products or treatment of objects, where due to high pressure, speed or high force, large quantities of dust are generated and dispersed",
+                "powder-3": "Handling of products or treatment of objects with a relatively high speed/force which may lead to some dispersion of dust",
+                "powder-4": "Handling of products with low speed or with little force in medium quantities",
+                "powder-5": "Handling of products in small amounts or in situations where only low quantities of product are likely to be released",
+                "powder-6": "Handling of products in very small amounts or in situations where release is highly unlikely",
+                "powder-7": "Handling of products in negligible amounts",
+                "powder-8": "Handling of products in closed containers",
+                "liquid-1": "Handling of liquids at high pressure resulting in substantial generation of mist or spray/haze",
+                "liquid-2": "Handling of liquids (using low pressure but high speed) without creating a mist or spray/haze",
+                "liquid-3": "Handling of liquids on large surfaces or large work pieces",
+                "liquid-4": "Handling of liquids using low pressure, low speed and on medium-sized surfaces",
+                "liquid-5": "Handling of liquids at small surfaces or incidental handling of liquids",
+                "liquid-6": "Handling of liquids where onyl small amounts of product may be released",
+                "liquid-7": "Handling negligible amounts of product",
+                "liquid-8": "Handling of liquids in tightly closed containers",
+                "wood-1": "Mechanical sanding of wood",
+                "wood-2": "Mechanical handling of wood resulting in fine dust",
+                "wood-3": "Mechanical handling of wood resulting in coarse dust or chips",
+                "wood-4": "Manual sanding of wood",
+                "wood-5": "Low energy mechanical handling of wood resulting in less dust",
+                "wood-6": "Other manual handling of wood",
+                "stone-1": "Mechanical sawing and sanding of stone",
+                "stone-2": "Mechanical handling and demolition of stone resulting in fine dust",
+                "stone-3": "Low energy mechanical handling of stone",
+                "stone-4": "Low energy mechanical handling of stone resulting in less dust"
+            },
+            "volume-options": {
+                "volume-small": "Volume under 100 m3",
+                "volume-medium": "Volume 100-1000 m3",
+                "volume-large": "Volume over 1000 m3",
+                "outdoors": "Handing outdoors"
+            },
+            "gv-options": {
+                "no": "No general ventilation",
+                "natural": "General ventilation (open windows and doors)",
+                "mechanical": "General ventilation (mechanical)",
+                "spraying-booth": "Spraying booth"
+            },
+            "lc-options": {
+                "no": "No control measures at the source",
+                "suppression": "Use of a product that reduces the emission",
+                "lev": "Local exhaust ventilation (LEV)",
+                "containment": "Containment",
+                "containment-lev": "Containment of the source with LEV"
+            },
+            "rpe-options": {
+                "no": "No protection",
+                "p2": "Filter mask P2 (FFP2)",
+                "p3": "Filter mask P3 (FFP3)",
+                "p2l": "Half mask respirator with filter, type P2L",
+                "p3l": "Half mask respirator with filter, type P3L",
+                "full-p2l": "Full face respirator with filter, type P2L",
+                "full-p3l": "Full face respirator with filter, type P3L",
+                "tm1": "Half/full face powered respirator TM1 (part. catridge)",
+                "tm2": "Half/full face powered respirator TM2 (part. catridge)",
+                "tm3": "Half/full face powered respirator TM3 (part. catridge)",
+                "full-tmp3": "Full face powered air respirator TMP3 (part. catridge)",
+                "th1": "Hood or helmet with supplied air system TH1",
+                "th2": "Hood or helmet with supplied air system TH2",
+                "th3": "Hood or helmet with supplied air system TH3",
+
+                "half-mask-liquid": "Half mask respirator with filter/catridge (gas catridge)",
+                "full-face-liquid": "Full face respirator with filter/catridge (gas catridge)",
+                "tm1-liquid": "Half/full face powered respirator TM1 (gas catridge)",
+                "tm2-3-liquid": "Half/full face powered respirator TM2 or 3 (gas catridge)"
+            }
+        }
+    },
+
     "enterprise": {
         "home": {
             "ent-name": "My enterprise:",

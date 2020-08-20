@@ -35,10 +35,70 @@ def art_calculator(parameters):
             E = scores['viscosity'][parameters['viscosity']]
 
 
+    # activity class - subclass - underlying determinants
+    d1 = 1
+    d2 = 1
+    d3 = 1
+    d4 = 1
+
+    if 'd1' in parameters:
+        if parameters['d1'] != False:
+            d1 = scores['d1'][ parameters['d1'] ]
+    
+    if 'd2' in parameters:
+        if parameters['d2'] != False:
+            d2 = scores['d2'][ parameters['d2'] ]
+
+    if 'd3' in parameters:
+        if parameters['d3'] != False:
+            d3 = scores['d3'][ parameters['d3'] ]
+
+    if 'd4' in parameters:
+        if parameters['d4'] != False:
+            d4 = scores['d4'][ parameters['d4'] ]
+
+    H = d1 * d2 * d3 * d4
+
+    # Local controls
+    Lc1 = 1
+    Lc2 = 1
+    if 'lc1' in parameters:
+        if parameters['lc1'] == 'vrs':
+            Lc1 = 0.2
+        elif parameters['lc1'] != 'no':
+            Lc1 = scores['lc'][ parameters['lc1_tech'] ]
+        
+        # secondary LC
+        if parameters['lc1'] != 'no':
+            if parameters['lc2'] == 'vrs':
+                Lc2 = 0.2
+            else:
+                Lc2 = scores['lc'][ parameters['lc2_tech'] ]
+
+    Lc = Lc1 * Lc2
+
     # calculated MF above used to evalueate Score
     # and score is quantified to calculate exposure
-    score = E
-    gm = math.exp(E + 10.5)
+    score = E * H * Lc
+
+    
+    # set input quantification parameter - alpha
+    alpha = 10.56
+    if form == 'liquid':
+        if vp <= 10:
+            apha = 10.23
+    
+    elif form == 'powder':
+        alpha = 3.01
+    elif form == 'solid':
+        alpha = 0.48
+    elif form == 'dissolved':
+        apha = 10.23
+    elif form == 'paste':
+        apha = 3.01
+
+
+    gm = math.exp(math.log(score) + alpha)
     gm = round(gm)
 
     exposure = {

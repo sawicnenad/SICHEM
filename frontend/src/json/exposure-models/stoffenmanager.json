@@ -1,0 +1,34 @@
+{
+    "defaultActiveKey": "source",
+    "cards": [
+        {
+            "eventKey": "source",
+            "label": "art.accordion.source",
+            "fields": [
+                "physical_form"
+            ]
+        }
+    ],
+
+    "fields": {
+        "physical_form": {
+            "props": {
+                "required": true,
+                "name": "physical_form",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "liquid",
+                    "label": "art.fields.physical-form-options.liquid"
+                }, {
+                    "value": "solid",
+                    "label": "art.fields.physical-form-options.solid"
+                }
+            ],
+            "label": "sm.fields.physical-form",
+            "formControlFeedback": true
+        }
+    }
+}
