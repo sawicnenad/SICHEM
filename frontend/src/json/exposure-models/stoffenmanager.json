@@ -5,7 +5,37 @@
             "eventKey": "source",
             "label": "art.accordion.source",
             "fields": [
-                "physical_form"
+                "physical_form",
+                "vp",
+                "dustiness",
+                "conc",
+                "bg1",
+                "bg2"
+            ]
+        }, {
+            "eventKey": "activity",
+            "label": "art.accordion.activity",
+            "fields": [
+                "nf",
+                "ff1",
+                "ff2",
+                "handling",
+                "time"
+            ]
+        }, {
+            "eventKey": "controls",
+            "label": "art.accordion.controls",
+            "fields": [
+                "volume",
+                "gv",
+                "lc",
+                "rpe"
+            ]
+        }, {
+            "eventKey": "results",
+            "label": "art.accordion.results",
+            "fields": [
+                "results"
             ]
         }
     ],
@@ -21,14 +51,487 @@
             "options": [
                 {
                     "value": "liquid",
-                    "label": "art.fields.physical-form-options.liquid"
+                    "label": "sm.fields.physical-form-options.liquid"
                 }, {
-                    "value": "solid",
-                    "label": "art.fields.physical-form-options.solid"
+                    "value": "powder",
+                    "label": "sm.fields.physical-form-options.powder"
+                }, {
+                    "value": "wood",
+                    "label": "sm.fields.physical-form-options.wood"
+                }, {
+                    "value": "stone",
+                    "label": "sm.fields.physical-form-options.stone"
                 }
             ],
             "label": "sm.fields.physical-form",
             "formControlFeedback": true
+        },
+        "vp": {
+            "props": {
+                "required": true,
+                "name": "vp"
+            },
+            "scaling": {"md" : 3},
+            "label": "sm.fields.vp",
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                }
+            ]
+        },
+        "dustiness": {
+            "props": {
+                "required": true,
+                "name": "dustiness",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "efine",
+                    "label": "sm.fields.dustiness-options.efine"
+                }, {
+                    "value": "fine",
+                    "label": "sm.fields.dustiness-options.fine"
+                }, {
+                    "value": "coarse",
+                    "label": "sm.fields.dustiness-options.coarse"
+                }, {
+                    "value": "gran",
+                    "label": "sm.fields.dustiness-options.gran"
+                }, {
+                    "value": "fgran",
+                    "label": "sm.fields.dustiness-options.fgran"
+                }, {
+                    "value": "solids",
+                    "label": "sm.fields.dustiness-options.solids"
+                }
+            ],
+            "label": "sm.fields.dustiness",
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "solid"
+                }
+            ]
+        },
+        "conc": {
+            "props": {
+                "required": true,
+                "name": "conc"
+            },
+            "scaling": {"md" : 3},
+            "label": "sm.fields.conc",
+            "formControlFeedback": true
+        },
+        "bg1": {
+            "props": {
+                "name": "bg1"
+            },
+            "scaling": { "md" : {"offset" : 3} },
+            "fieldType": "checkbox",
+            "label": "sm.fields.bg1"
+        },
+        "bg2": {
+            "props": {
+                "name": "bg2"
+            },
+            "scaling": { "md" : {"offset" : 3} },
+            "fieldType": "checkbox",
+            "label": "sm.fields.bg2"
+        },
+        "nf": {
+            "props": {
+                "name": "nf"
+            },
+            "scaling": { "md" : {"offset" : 3} },
+            "fieldType": "checkbox",
+            "label": "sm.fields.nf"
+        },
+        "ff1": {
+            "props": {
+                "name": "ff1"
+            },
+            "scaling": { "md" : {"offset" : 3} },
+            "fieldType": "checkbox",
+            "label": "sm.fields.ff1"
+        },
+        "ff2": {
+            "props": {
+                "name": "ff2"
+            },
+            "scaling": { "md" : {"offset" : 3} },
+            "fieldType": "checkbox",
+            "label": "sm.fields.ff2"
+        },
+        "handling": {
+            "props": {
+                "required": true,
+                "name": "handling",
+                "as": "select"
+            },
+            "formControlFeedback": true,
+            "fieldType": "select-dependent",
+            "label": "art.fields.d1",
+            "depends_on": "physical_form",
+            "options": {
+                "wood": [
+                    {
+                        "value": "wood-1",
+                        "label": "sm.fields.handling-options.wood-1"
+                    }, {
+                        "value": "wood-2",
+                        "label": "sm.fields.handling-options.wood-2"
+                    }, {
+                        "value": "wood-3",
+                        "label": "sm.fields.handling-options.wood-2"
+                    }, {
+                        "value": "wood-4",
+                        "label": "sm.fields.handling-options.wood-4"
+                    }, {
+                        "value": "wood-5",
+                        "label": "sm.fields.handling-options.wood-5"
+                    }, {
+                        "value": "wood-6",
+                        "label": "sm.fields.handling-options.wood-6"
+                    }
+                ],
+                "stone": [
+                    {
+                        "value": "stone-1",
+                        "label": "sm.fields.handling-options.stone-1"
+                    }, {
+                        "value": "stone-2",
+                        "label": "sm.fields.handling-options.stone-2"
+                    }, {
+                        "value": "stone-3",
+                        "label": "sm.fields.handling-options.stone-3"
+                    }, {
+                        "value": "stone-4",
+                        "label": "sm.fields.handling-options.stone-4"
+                    }
+                ],
+                "powder": [
+                    {
+                        "value": "powder-1",
+                        "label": "sm.fields.handling-options.powder-1"
+                    }, {
+                        "value": "powder-2",
+                        "label": "sm.fields.handling-options.powder-2"
+                    }, {
+                        "value": "powder-3",
+                        "label": "sm.fields.handling-options.powder-3"
+                    }, {
+                        "value": "powder-4",
+                        "label": "sm.fields.handling-options.powder-4"
+                    }, {
+                        "value": "powder-5",
+                        "label": "sm.fields.handling-options.powder-5"
+                    }, {
+                        "value": "powder-6",
+                        "label": "sm.fields.handling-options.powder-6"
+                    }, {
+                        "value": "powder-7",
+                        "label": "sm.fields.handling-options.powder-7"
+                    }, {
+                        "value": "powder-8",
+                        "label": "sm.fields.handling-options.powder-8"
+                    }
+                ],
+                "liquid": [
+                    {
+                        "value": "liquid-1",
+                        "label": "sm.fields.handling-options.liquid-1"
+                    }, {
+                        "value": "liquid-2",
+                        "label": "sm.fields.handling-options.liquid-2"
+                    }, {
+                        "value": "liquid-3",
+                        "label": "sm.fields.handling-options.liquid-3"
+                    }, {
+                        "value": "liquid-4",
+                        "label": "sm.fields.handling-options.liquid-4"
+                    }, {
+                        "value": "liquid-5",
+                        "label": "sm.fields.handling-options.liquid-5"
+                    }, {
+                        "value": "liquid-6",
+                        "label": "sm.fields.handling-options.liquid-6"
+                    }, {
+                        "value": "liquid-7",
+                        "label": "sm.fields.handling-options.liquid-7"
+                    }, {
+                        "value": "liquid-8",
+                        "label": "sm.fields.handling-options.liquid-8"
+                    }
+                ]
+            }
+        },
+        "time": {
+            "props": {
+                "required": true,
+                "name": "time"
+            },
+            "scaling": {"md" : 3},
+            "label": "sm.fields.time",
+            "formControlFeedback": true
+        },
+        "volume": {
+            "props": {
+                "required": true,
+                "name": "volume",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "sm.fields.volume",
+            "options": [
+                {
+                    "value": "volume-small",
+                    "label": "sm.fields.volume-options.volume-small"
+                }, {
+                    "value": "volume-medium",
+                    "label": "sm.fields.volume-options.volume-medium"
+                }, {
+                    "value": "volume-large",
+                    "label": "sm.fields.volume-options.volume-large"
+                }, {
+                    "value": "outdoors",
+                    "label": "sm.fields.volume-options.outdoors"
+                }
+            ]
+        },
+        "gv": {
+            "props": {
+                "required": true,
+                "name": "gv",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "sm.fields.gv",
+            "options": [
+                {
+                    "value": "no",
+                    "label": "sm.fields.gv-options.no"
+                }, {
+                    "value": "natural",
+                    "label": "sm.fields.gv-options.natural"
+                }, {
+                    "value": "mechanical",
+                    "label": "sm.fields.gv-options.mechanical"
+                }, {
+                    "value": "booth",
+                    "label": "sm.fields.gv-options.booth"
+                }
+            ]
+        },
+        "lc": {
+            "props": {
+                "required": true,
+                "name": "lc",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "sm.fields.lc",
+            "options": [
+                {
+                    "value": "no",
+                    "label": "sm.fields.lc-options.no"
+                }, {
+                    "value": "suppression",
+                    "label": "sm.fields.lc-options.suppression"
+                }, {
+                    "value": "lev",
+                    "label": "sm.fields.lc-options.lev"
+                }, {
+                    "value": "containment",
+                    "label": "sm.fields.lc-options.containment"
+                }, {
+                    "value": "containment-lev",
+                    "label": "sm.fields.lc-options.containment-lev"
+                }
+            ]
+        },
+        "rpe": {
+            "props": {
+                "required": true,
+                "name": "rpe",
+                "as": "select"
+            },
+            "fieldType": "select-dependent",
+            "depends_on": "physical_form",
+            "label": "sm.fields.rpe",
+            "options": {
+                "liquid": [
+                    {
+                        "value": "no",
+                        "label": "sm.fields.rpe-options.no"
+                    }, {
+                        "value": "half-mask-liquid",
+                        "label": "sm.fields.rpe-options.half-mask-liquid"
+                    }, {
+                        "value": "full-face-liquid",
+                        "label": "sm.fields.rpe-options.full-face-liquid"
+                    }, {
+                        "value": "tm1-liquid",
+                        "label": "sm.fields.rpe-options.tm1-liquid"
+                    }, {
+                        "value": "tm2-3-liquid",
+                        "label": "sm.fields.rpe-options.tm2-3-liquid"
+                    }, {
+                        "value": "th1",
+                        "label": "sm.fields.rpe-options.th1"
+                    }, {
+                        "value": "th2",
+                        "label": "sm.fields.rpe-options.th2"
+                    }, {
+                        "value": "th3",
+                        "label": "sm.fields.rpe-options.th3"
+                    }
+                ],
+                "wood": [
+                    {
+                        "value": "no",
+                        "label": "sm.fields.rpe-options.no"
+                    }, {
+                        "value": "p2",
+                        "label": "sm.fields.rpe-options.p2"
+                    }, {
+                        "value": "p3",
+                        "label": "sm.fields.rpe-options.p3"
+                    }, {
+                        "value": "p2l",
+                        "label": "sm.fields.rpe-options.p2l"
+                    }, {
+                        "value": "p3l",
+                        "label": "sm.fields.rpe-options.p3l"
+                    }, {
+                        "value": "full-p2l",
+                        "label": "sm.fields.rpe-options.full-p2l"
+                    }, {
+                        "value": "full-p3l",
+                        "label": "sm.fields.rpe-options.full-p3l"
+                    }, {
+                        "value": "tm1",
+                        "label": "sm.fields.rpe-options.tm1"
+                    }, {
+                        "value": "tm2",
+                        "label": "sm.fields.rpe-options.tm2"
+                    }, {
+                        "value": "tm3",
+                        "label": "sm.fields.rpe-options.tm3"
+                    }, {
+                        "value": "full-tmp3",
+                        "label": "sm.fields.rpe-options.full-tmp3"
+                    }, {
+                        "value": "th1",
+                        "label": "sm.fields.rpe-options.th1"
+                    }, {
+                        "value": "th2",
+                        "label": "sm.fields.rpe-options.th2"
+                    }, {
+                        "value": "th3",
+                        "label": "sm.fields.rpe-options.th3"
+                    }
+                ],
+                "stone": [
+                    {
+                        "value": "no",
+                        "label": "sm.fields.rpe-options.no"
+                    }, {
+                        "value": "p2",
+                        "label": "sm.fields.rpe-options.p2"
+                    }, {
+                        "value": "p3",
+                        "label": "sm.fields.rpe-options.p3"
+                    }, {
+                        "value": "p2l",
+                        "label": "sm.fields.rpe-options.p2l"
+                    }, {
+                        "value": "p3l",
+                        "label": "sm.fields.rpe-options.p3l"
+                    }, {
+                        "value": "full-p2l",
+                        "label": "sm.fields.rpe-options.full-p2l"
+                    }, {
+                        "value": "full-p3l",
+                        "label": "sm.fields.rpe-options.full-p3l"
+                    }, {
+                        "value": "tm1",
+                        "label": "sm.fields.rpe-options.tm1"
+                    }, {
+                        "value": "tm2",
+                        "label": "sm.fields.rpe-options.tm2"
+                    }, {
+                        "value": "tm3",
+                        "label": "sm.fields.rpe-options.tm3"
+                    }, {
+                        "value": "full-tmp3",
+                        "label": "sm.fields.rpe-options.full-tmp3"
+                    }, {
+                        "value": "th1",
+                        "label": "sm.fields.rpe-options.th1"
+                    }, {
+                        "value": "th2",
+                        "label": "sm.fields.rpe-options.th2"
+                    }, {
+                        "value": "th3",
+                        "label": "sm.fields.rpe-options.th3"
+                    }
+                ],
+                "powder": [
+                    {
+                        "value": "no",
+                        "label": "sm.fields.rpe-options.no"
+                    }, {
+                        "value": "p2",
+                        "label": "sm.fields.rpe-options.p2"
+                    }, {
+                        "value": "p3",
+                        "label": "sm.fields.rpe-options.p3"
+                    }, {
+                        "value": "p2l",
+                        "label": "sm.fields.rpe-options.p2l"
+                    }, {
+                        "value": "p3l",
+                        "label": "sm.fields.rpe-options.p3l"
+                    }, {
+                        "value": "full-p2l",
+                        "label": "sm.fields.rpe-options.full-p2l"
+                    }, {
+                        "value": "full-p3l",
+                        "label": "sm.fields.rpe-options.full-p3l"
+                    }, {
+                        "value": "tm1",
+                        "label": "sm.fields.rpe-options.tm1"
+                    }, {
+                        "value": "tm2",
+                        "label": "sm.fields.rpe-options.tm2"
+                    }, {
+                        "value": "tm3",
+                        "label": "sm.fields.rpe-options.tm3"
+                    }, {
+                        "value": "full-tmp3",
+                        "label": "sm.fields.rpe-options.full-tmp3"
+                    }, {
+                        "value": "th1",
+                        "label": "sm.fields.rpe-options.th1"
+                    }, {
+                        "value": "th2",
+                        "label": "sm.fields.rpe-options.th2"
+                    }, {
+                        "value": "th3",
+                        "label": "sm.fields.rpe-options.th3"
+                    }
+                ]
+            }
+        },
+        "results": {
+            "fieldType": "custom",
+            "component": "results",
+            "noBackground": true
         }
     }
 }

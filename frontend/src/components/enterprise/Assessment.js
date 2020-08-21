@@ -10,6 +10,7 @@ import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import axios from 'axios';
 import ART from './exposure/ART';
 import SubNav from './SubNav';
+import Stoffenmanager from './exposure/Stoffenmanager';
 
 /*
     Assess exposure for a workplace's asssment entities
@@ -217,7 +218,7 @@ export default function Assessment() {
                 </div>
                 {wpEntity['cas_of_aentity'].map(
                     (entity, inx) => (
-                        <Card key={inx}>
+                        <Card key={inx} className="mt-2">
                             <Card.Header>
                                 <AEntityTitle entity={entity} />
                             </Card.Header>
@@ -279,7 +280,17 @@ export default function Assessment() {
                                 exposureModelView: false
                             }))
                         }
-                />
+                />,
+        'sm': <Stoffenmanager
+                exposureData={state.exposureData} 
+                handleCloseButton={
+                    () => (
+                        setState({
+                            ...state,
+                            exposureModelView: false
+                        }))
+                    }
+            />
     }
 
 

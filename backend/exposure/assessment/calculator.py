@@ -129,3 +129,15 @@ def art_calculator(parameters):
         "p99_ci95": [0.05, 0.15]
     }
     return exposure
+
+
+
+def art_calculator(parameters):
+    gm = 3
+    exposure = {
+        "p50": gm,
+        "p75": gm*1.5,
+        "p90": gm*2,
+        "p95": gm*3
+    }
+    return exposure

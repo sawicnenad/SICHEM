@@ -1,0 +1,23 @@
+{
+    "mandatory": [
+        "physical_form",
+        "conc",
+        "handling",
+        "time",
+        "volume",
+        "lc",
+        "rpe"
+    ],
+    "conditions": [
+        {
+            "if": ["parameters['physical_form'] == 'liquid'"],
+            "fields": [ "vp" ]
+        }, {
+            "if": ["parameters['physical_form'] == 'powder'"],
+            "fields": [ "dustiness" ]
+        }, {
+            "if": ["parameters['volume'] != 'outdoors'"],
+            "fields": [ "gv" ]
+        }
+    ]
+}

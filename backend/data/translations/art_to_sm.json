@@ -1,0 +1,81 @@
+{
+    
+    "physical_form": {
+        "from": "physical_form",
+        "type": "default",
+        "result": {
+            "liquid": "liquid",
+            "powder": "powder"
+        }
+    },
+    "vp"       : {
+        "from": "vp",
+        "type": "copy",
+        "result": {}
+    },
+    "dustiness": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "conc": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "bg1": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "bg2": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "nf": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "ff1": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "ff2": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "handling": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "time": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "volume": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "gv": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "lc": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    },
+    "rpe": {
+        "from": "",
+        "type": "default",
+        "result": {}
+    }
+}

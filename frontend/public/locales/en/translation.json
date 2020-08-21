@@ -303,7 +303,6 @@
         "form-title": "Stoffenmanager",
         "fields": {
             "physical-form": "Phyisical state",
-            "abrasion": "Situation concerns shaping by removing or cutting",
             "dustiness":"Dustiness",
             "vp": "Vapour pressure (Pa)",
             "conc": "Concentration (1-100 %)",
@@ -318,6 +317,12 @@
             "gv": "Type of general ventilation",
             "lc": "Available control measures",
             "rpe": "Personal protective equipment",
+            "physical-form-options": {
+                "powder": "Solid (no abrasive techniques applied)",
+                "wood": "Solid (abrasive technique applied on wood material)",
+                "stone": "Solid (abrasive technique applied on stone material)",
+                "liquid": "Liquid"
+            },
             "dustiness-options":{
                 "efine":"Extremely fine dust",
                 "fine":"Fine dust",
@@ -364,7 +369,7 @@
                 "no": "No general ventilation",
                 "natural": "General ventilation (open windows and doors)",
                 "mechanical": "General ventilation (mechanical)",
-                "spraying-booth": "Spraying booth"
+                "booth": "Spraying booth"
             },
             "lc-options": {
                 "no": "No control measures at the source",

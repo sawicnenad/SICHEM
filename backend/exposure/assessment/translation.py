@@ -103,3 +103,12 @@ def translate_from_core(entity, substance=None):
     parameters = translate_from_json(path, data)
 
     return parameters
+
+
+
+def translate_from_art_to_sm(entity, substance=None):
+    art_parameters = translate_from_core(entity)
+
+    path = 'data/translations/art_to_sm.json'
+    sm_parameters = translate_from_json(path, art_parameters)
+    return sm_parameters
