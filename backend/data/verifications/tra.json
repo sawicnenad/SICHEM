@@ -1,0 +1,20 @@
+{
+    "mandatory": [
+        "physical_form",
+        "conc",
+        "proc",
+        "time",
+        "su",
+        "ventilation",
+        "rpe"
+    ],
+    "conditions": [
+        {
+            "if": ["parameters['physical_form'] == 'liquid'"],
+            "fields": [ "vp", "mw" ]
+        }, {
+            "if": ["parameters['physical_form'] == 'solid'"],
+            "fields": [ "dustiness" ]
+        }
+    ]
+}

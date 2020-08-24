@@ -419,6 +419,56 @@
         }
     },
 
+    "tra": {
+        "form-title": "ECETOC TRAv3",
+        "fields": {
+            "physical-form": "Physical state",
+            "conc": "Concentration",
+            "vp": "Vapour pressure (Pa)",
+            "mw": "Molecular weight, g/mol",
+            "dustiness": "Dustiness",
+            "proc": "Process category (PROC)",
+            "time": "Task duration",
+            "su": "Type of settings",
+            "ventilation": "Ventilation",
+            "rpe": "Respiratory protective equipment (RPE)",
+            "physical-form-options": {
+                "solid": "Solid",
+                "liquid": "Liquid"
+            }, 
+            "conc-options": {
+                "very-low": "< 1%",
+                "low": "1-5 %",
+                "medium": "5-25 %",
+                "high": "> 25 %"
+            },
+            "time-options": {
+                "very-short": "< 15min",
+                "short": "15min - 1h",
+                "medium": "1-4h",
+                "long": "> 4h"
+            },
+            "su-options": {
+                "industrial": "Industrial",
+                "professional": "Professional"
+            },
+            "ventilation-options": {
+                "outdoors": "Outdoors",
+                "indoors": "Indoors",
+                "indoors-lev": "Indoors with LEV",
+                "indoors-gv": "Indoors with good GV",
+                "indoors-gv-lev": "Indoors with good GV and LEV",
+                "indoors-egv": "Indoors with enhanced GV",
+                "indoors-egv-lev": "Indoors with enhanced GV and LEV"
+            },
+            "rpe-options": {
+                "no": "No RPE",
+                "rpe90": "90% efficient RPE",
+                "rpe95": "95% efficient RPE"
+            }
+        }
+    },
+
     "enterprise": {
         "home": {
             "ent-name": "My enterprise:",

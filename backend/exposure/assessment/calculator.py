@@ -141,3 +141,8 @@ def art_calculator(parameters):
         "p95": gm*3
     }
     return exposure
+
+
+def tra_calculator(parameters):
+    exposure = {"p75": 2}
+    return exposure

@@ -255,7 +255,7 @@ export default function Home(props) {
                                 link: '/enterprise/exposure-model/sm',
                                 label: 'exposure-models.sm'
                             }, {
-                                link: '/enterprise/exposure-model/art',
+                                link: '/enterprise/exposure-model/tra',
                                 label: 'exposure-models.tra'
                             }, {
                                 link: '/enterprise/exposure-model/art',

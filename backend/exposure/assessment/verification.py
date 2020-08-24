@@ -70,3 +70,10 @@ def verify_sm(parameters):
     path_to_json = 'data/verifications/sm.json'
     missing = verify(path_to_json, parameters)
     return missing
+
+def verify_tra(parameters):
+    # Rules on which input parameters must be entered
+    # are defined for each exposure model in a JSON file
+    path_to_json = 'data/verifications/tra.json'
+    missing = verify(path_to_json, parameters)
+    return missing

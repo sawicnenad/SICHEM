@@ -117,6 +117,43 @@ def calculator(request, pk):
             exposure.missing = json.dumps(missing)
             exposure.exposure = json.dumps(exposure_values)
             exposure.save()
+        
+        # ECETOC TRAv3
+        # this model requires translations from ART
+        # if, however, ART is not selected, the translations will have to be first
+        # executed from core to ART and then from ART to ECETOC TRA
+        if ca.sm == True:
+            try:
+                exposure = Exposure.objects.get(cas_of_aentity=ca, exposure_model='sm')
+                status = exposure.status
+                parameters = json.loads(exposure.parameters)
+            except:
+                status = 'untested'
+                exposure = Exposure(cas_of_aentity=ca, exposure_model='sm')
+            
+            # only if untested it is required to run translation from core
+            # if raw data is modified then also it is required to run translation
+            # this is not done here - elsewhere following modification request
+            missing = []
+            if status == 'untested':
+                parameters = translate_from_art_to_tra(ca.id)
+            if status in ['untested', 'incomplete']:
+                missing = verify_tra(parameters)
+                status = 'incomplete' if len(missing) > 0 else 'complete'
+   
+            # exposure is calculated only if art_status is complete
+            exposure_values = {}
+            if status in ['complete', 'finished']:
+                exposure_values = tra_calculator(parameters)
+                status = 'finished'
+            
+            # store to db
+            exposure.parameters = json.dumps(parameters)
+            exposure.status = status 
+            exposure.exposure_reg = exposure_values['p75'] if 'p75' in exposure_values else ""
+            exposure.missing = json.dumps(missing)
+            exposure.exposure = json.dumps(exposure_values)
+            exposure.save()
     
     # the function returns updated aentity
     data = AssessmentEntity.objects.get(pk=pk)

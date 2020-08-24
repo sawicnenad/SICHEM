@@ -18,6 +18,7 @@ import AEntity from '../components/enterprise/aentity/AEntity';
 import Assessment from '../components/enterprise/Assessment';
 import ART from '../components/enterprise/exposure/ART';
 import Stoffenmanager from '../components/enterprise/exposure/Stoffenmanager';
+import TRA from '../components/enterprise/exposure/TRA';
 
 
 /*
@@ -71,6 +72,7 @@ function Enterprise() {
                     <Route exact path="/enterprise/assessment" component={ Assessment } />
                     <Route exact path="/enterprise/exposure-model/art" component={ ART } />
                     <Route exact path="/enterprise/exposure-model/stoffenmanager" component={ Stoffenmanager } />
+                    <Route exact path="/enterprise/exposure-model/tra" component={ TRA } />
                 </Switch>
             </div>
         </div>

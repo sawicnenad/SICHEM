@@ -1,0 +1,407 @@
+{
+    "defaultActiveKey": "source",
+    "cards": [
+        {
+            "eventKey": "source",
+            "label": "art.accordion.source",
+            "fields": [
+                "physical_form",
+                "vp",
+                "dustiness",
+                "conc",
+                "mw"
+            ]
+        }, {
+            "eventKey": "activity",
+            "label": "art.accordion.activity",
+            "fields": [
+               "proc",
+               "time",
+               "su"
+            ]
+        }, {
+            "eventKey": "controls",
+            "label": "art.accordion.controls",
+            "fields": [
+               "ventilation",
+               "rpe"
+            ]
+        }, {
+            "eventKey": "results",
+            "label": "art.accordion.results",
+            "fields": [
+                "results"
+            ]
+        }
+    ],
+
+    "fields": {
+        "physical_form": {
+            "props": {
+                "required": true,
+                "name": "physical_form",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "liquid",
+                    "label": "tra.fields.physical-form-options.liquid"
+                }, {
+                    "value": "solid",
+                    "label": "tra.fields.physical-form-options.solid"
+                }
+            ],
+            "label": "tra.fields.physical-form",
+            "formControlFeedback": true
+        },
+        "vp": {
+            "props": {
+                "required": true,
+                "name": "vp"
+            },
+            "scaling": {"md" : 3},
+            "label": "tra.fields.vp",
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                }
+            ]
+        },
+        "dustiness": {
+            "props": {
+                "required": true,
+                "name": "dustiness",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "options": [
+                {
+                    "value": "high",
+                    "label": "tra.fields.dustiness-options.high"
+                }, {
+                    "value": "medium",
+                    "label": "tra.fields.dustiness-options.medium"
+                }, {
+                    "value": "low",
+                    "label": "tra.fields.dustiness-options.low"
+                }
+            ],
+            "label": "tra.fields.dustiness",
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "solid"
+                }
+            ]
+        },
+        "conc": {
+            "props": {
+                "required": true,
+                "name": "conc",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "tra.fields.conc",
+            "formControlFeedback": true,
+            "options": [
+                {
+                    "value": "very-low",
+                    "label": "tra.fields.conc-options.very-low"
+                }, {
+                    "value": "low",
+                    "label": "tra.fields.conc-options.low"
+                }, {
+                    "value": "medium",
+                    "label": "tra.fields.conc-options.medium"
+                }, {
+                    "value": "high",
+                    "label": "tra.fields.conc-options.high"
+                }
+            ]
+        },
+        "mw": {
+            "props": {
+                "required": true,
+                "name": "mw"
+            },
+            "scaling": {"md" : 3},
+            "label": "tra.fields.mw",
+            "formControlFeedback": true,
+            "conditions": [
+                {
+                    "field": "physical_form",
+                    "value": "liquid"
+                }
+            ]
+        },
+        "proc": {
+            "props": {
+                "required": true,
+                "name": "proc",
+                "as": "select"
+            },
+            "fieldType": "select-dependent",
+            "depends_on": "physical_form",
+            "options": {
+                "solid": [
+                    {
+                        "value": "proc-1",
+                        "label": "data.use.proc-options.proc-1"
+                    }, {
+                        "value": "proc-2",
+                        "label": "data.use.proc-options.proc-2"
+                    }, {
+                        "value": "proc-3",
+                        "label": "data.use.proc-options.proc-3"
+                    }, {
+                        "value": "proc-4",
+                        "label": "data.use.proc-options.proc-4"
+                    }, {
+                        "value": "proc-5",
+                        "label": "data.use.proc-options.proc-5"
+                    }, {
+                        "value": "proc-6",
+                        "label": "data.use.proc-options.proc-6"
+                    }, {
+                        "value": "proc-7",
+                        "label": "data.use.proc-options.proc-7"
+                    }, {
+                        "value": "proc-8a",
+                        "label": "data.use.proc-options.proc-8a"
+                    }, {
+                        "value": "proc-8b",
+                        "label": "data.use.proc-options.proc-8b"
+                    }, {
+                        "value": "proc-9",
+                        "label": "data.use.proc-options.proc-9"
+                    }, {
+                        "value": "proc-10",
+                        "label": "data.use.proc-options.proc-10"
+                    }, {
+                        "value": "proc-11",
+                        "label": "data.use.proc-options.proc-11"
+                    }, {
+                        "value": "proc-12",
+                        "label": "data.use.proc-options.proc-12"
+                    }, {
+                        "value": "proc-13",
+                        "label": "data.use.proc-options.proc-13"
+                    }, {
+                        "value": "proc-14",
+                        "label": "data.use.proc-options.proc-14"
+                    }, {
+                        "value": "proc-15",
+                        "label": "data.use.proc-options.proc-15"
+                    }, {
+                        "value": "proc-16",
+                        "label": "data.use.proc-options.proc-16"
+                    }, {
+                        "value": "proc-17",
+                        "label": "data.use.proc-options.proc-17"
+                    }, {
+                        "value": "proc-18",
+                        "label": "data.use.proc-options.proc-18"
+                    }, {
+                        "value": "proc-19",
+                        "label": "data.use.proc-options.proc-19"
+                    }, {
+                        "value": "proc-20",
+                        "label": "data.use.proc-options.proc-20"
+                    }, {
+                        "value": "proc-21",
+                        "label": "data.use.proc-options.proc-21"
+                    }, {
+                        "value": "proc-22",
+                        "label": "data.use.proc-options.proc-22"
+                    }, {
+                        "value": "proc-23",
+                        "label": "data.use.proc-options.proc-23"
+                    }, {
+                        "value": "proc-24",
+                        "label": "data.use.proc-options.proc-24"
+                    }, {
+                        "value": "proc-25",
+                        "label": "data.use.proc-options.proc-25"
+                    }
+                ],
+                "liquid": [
+                    {
+                        "value": "proc-1",
+                        "label": "data.use.proc-options.proc-1"
+                    }, {
+                        "value": "proc-2",
+                        "label": "data.use.proc-options.proc-2"
+                    }, {
+                        "value": "proc-3",
+                        "label": "data.use.proc-options.proc-3"
+                    }, {
+                        "value": "proc-4",
+                        "label": "data.use.proc-options.proc-4"
+                    }, {
+                        "value": "proc-5",
+                        "label": "data.use.proc-options.proc-5"
+                    }, {
+                        "value": "proc-6",
+                        "label": "data.use.proc-options.proc-6"
+                    }, {
+                        "value": "proc-7",
+                        "label": "data.use.proc-options.proc-7"
+                    }, {
+                        "value": "proc-8a",
+                        "label": "data.use.proc-options.proc-8a"
+                    }, {
+                        "value": "proc-8b",
+                        "label": "data.use.proc-options.proc-8b"
+                    }, {
+                        "value": "proc-9",
+                        "label": "data.use.proc-options.proc-9"
+                    }, {
+                        "value": "proc-10",
+                        "label": "data.use.proc-options.proc-10"
+                    }, {
+                        "value": "proc-11",
+                        "label": "data.use.proc-options.proc-11"
+                    }, {
+                        "value": "proc-12",
+                        "label": "data.use.proc-options.proc-12"
+                    }, {
+                        "value": "proc-13",
+                        "label": "data.use.proc-options.proc-13"
+                    }, {
+                        "value": "proc-14",
+                        "label": "data.use.proc-options.proc-14"
+                    }, {
+                        "value": "proc-15",
+                        "label": "data.use.proc-options.proc-15"
+                    }, {
+                        "value": "proc-16",
+                        "label": "data.use.proc-options.proc-16"
+                    }, {
+                        "value": "proc-17",
+                        "label": "data.use.proc-options.proc-17"
+                    }, {
+                        "value": "proc-18",
+                        "label": "data.use.proc-options.proc-18"
+                    }, {
+                        "value": "proc-19",
+                        "label": "data.use.proc-options.proc-19"
+                    }, {
+                        "value": "proc-20",
+                        "label": "data.use.proc-options.proc-20"
+                    }
+                ]
+            },
+            "label": "tra.fields.proc",
+            "formControlFeedback": true
+        },
+        "time": {
+            "props": {
+                "required": true,
+                "name": "time",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "tra.fields.time",
+            "formControlFeedback": true,
+            "options": [
+                {
+                    "value": "very-short",
+                    "label": "tra.fields.time-options.very-short"
+                }, {
+                    "value": "short",
+                    "label": "tra.fields.time-options.short"
+                }, {
+                    "value": "medium",
+                    "label": "tra.fields.time-options.medium"
+                }, {
+                    "value": "long",
+                    "label": "tra.fields.time-options.long"
+                }
+            ]
+        },
+        "su": {
+            "props": {
+                "required": true,
+                "name": "su",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "tra.fields.su",
+            "formControlFeedback": true,
+            "options": [
+                {
+                    "value": "industrial",
+                    "label": "tra.fields.su-options.industrial"
+                }, {
+                    "value": "professional",
+                    "label": "tra.fields.su-options.professional"
+                }
+            ]
+        },
+        "ventilation": {
+            "props": {
+                "required": true,
+                "name": "ventilation",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "tra.fields.ventilation",
+            "formControlFeedback": true,
+            "options": [
+                {
+                    "value": "outdoors",
+                    "label": "tra.fields.ventilation-options.outdoors"
+                }, {
+                    "value": "indoors",
+                    "label": "tra.fields.ventilation-options.indoors"
+                }, {
+                    "value": "indoors-lev",
+                    "label": "tra.fields.ventilation-options.indoors-lev"
+                }, {
+                    "value": "indoors-gv",
+                    "label": "tra.fields.ventilation-options.indoors-gv"
+                }, {
+                    "value": "indoors-gv-lev",
+                    "label": "tra.fields.ventilation-options.indoors-gv-lev"
+                }, {
+                    "value": "indoors-egv",
+                    "label": "tra.fields.ventilation-options.indoors-egv"
+                }, {
+                    "value": "indoors-egv-lev",
+                    "label": "tra.fields.ventilation-options.indoors-egv-lev"
+                }
+            ]
+        },
+        "rpe": {
+            "props": {
+                "required": true,
+                "name": "rpe",
+                "as": "select"
+            },
+            "fieldType": "select",
+            "label": "tra.fields.rpe",
+            "formControlFeedback": true,
+            "options": [
+                {
+                    "value": "no",
+                    "label": "tra.fields.rpe-options.no"
+                }, {
+                    "value": "90%",
+                    "label": "tra.fields.rpe-options.rpe90"
+                }, {
+                    "value": "95%",
+                    "label": "tra.fields.rpe-options.rpe95"
+                }
+            ]
+        },
+        "results": {
+            "fieldType": "custom",
+            "component": "results",
+            "noBackground": true
+        }
+    }
+}

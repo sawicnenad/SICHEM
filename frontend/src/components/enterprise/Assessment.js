@@ -11,6 +11,7 @@ import axios from 'axios';
 import ART from './exposure/ART';
 import SubNav from './SubNav';
 import Stoffenmanager from './exposure/Stoffenmanager';
+import TRA from './exposure/TRA';
 
 /*
     Assess exposure for a workplace's asssment entities
@@ -282,6 +283,16 @@ export default function Assessment() {
                         }
                 />,
         'sm': <Stoffenmanager
+                exposureData={state.exposureData} 
+                handleCloseButton={
+                    () => (
+                        setState({
+                            ...state,
+                            exposureModelView: false
+                        }))
+                    }
+            />,
+        'tra': <TRA
                 exposureData={state.exposureData} 
                 handleCloseButton={
                     () => (
