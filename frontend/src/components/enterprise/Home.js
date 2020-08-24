@@ -8,6 +8,11 @@ import {
     Button,
     Card
 } from 'react-bootstrap';
+import MyChart from './MyChart';
+
+
+
+
 
 
 
@@ -19,6 +24,8 @@ export default function Home(props) {
     const { t } = useTranslation();
 
 
+    // Statistics showing numbers of workplaces, workers, substances, uses
+    // appears in the first card labeled "Data entry"
     const Statistics = values => (
         <div className="text-center">
             <div>
@@ -47,9 +54,83 @@ export default function Home(props) {
     
     const dataEntryButtonVariant = "danger";
 
+
+
+    console.log(context)
+
+    // Exposure models is the last card
+    // we need a common appearance
+    const ExposureModel = item => (
+        <Col>
+            <Button
+                variant="outline-secondary"
+                className="w-100"
+                onClick={() => props.history.push(item.link)}
+            >
+                <div style={{ fontSize: 55 }}>
+                    <FontAwesomeIcon icon="calculator" />
+                </div>
+                <div>{ t(item.label) }</div>
+            </Button>
+        </Col>
+    )
+        
+
+    // Data for charts illustrating different statistics
+    // based on exposure evaluations in SICHEM
+    const chartData1 = [
+        {
+            label: t('enterprise-home.charts.chart-1.not-working'),
+            value: 4
+        }, {
+            label: t('enterprise-home.charts.chart-1.low-risk'),
+            value: 10
+        }, {
+            label: t('enterprise-home.charts.chart-1.medium-risk'),
+            value: 1
+        }, {
+            label: t('enterprise-home.charts.chart-1.high-risk'),
+            value: 1
+        }
+    ]
+
+    const chartData2 = [
+        {
+            label: t('enterprise-home.charts.chart-2.not-assessed'),
+            value: 1
+        }, {
+            label: t('enterprise-home.charts.chart-2.low-risk'),
+            value: 3
+        }, {
+            label: t('enterprise-home.charts.chart-2.medium-risk'),
+            value: 1
+        }, {
+            label: t('enterprise-home.charts.chart-2.high-risk'),
+            value: 0
+        }
+    ]
+
+    const chartData3 = [
+        {
+            label: t('enterprise-home.charts.chart-2.not-assessed'),
+            value: 0
+        }, {
+            label: t('enterprise-home.charts.chart-2.low-risk'),
+            value: 1
+        }, {
+            label: t('enterprise-home.charts.chart-2.medium-risk'),
+            value: 1
+        }, {
+            label: t('enterprise-home.charts.chart-2.high-risk'),
+            value: 0
+        }
+    ]
+    
+
+
     return (
         <div className="py-4">
-
+            
             {/* Data entry */}
             <Card>
                 <Card.Header style={{ fontSize: 18 }}>
@@ -111,10 +192,30 @@ export default function Home(props) {
                     { t('enterprise.home.exposure-assessment') }
                 </Card.Header>
                 <Card.Body>
+                    <Row className="mb-5">
+                        <Col>
+                            <MyChart 
+                                data={chartData1}
+                                colors={['#f7f7f7', '#5cb85c', '#f0ad4e', '#d9534f']}
+                            />
+                        </Col>
+                        <Col>
+                            <MyChart 
+                                data={chartData2}
+                                colors={['#f7f7f7', '#5cb85c', '#f0ad4e', '#d9534f']}
+                            />
+                        </Col>
+                        <Col>
+                            <MyChart 
+                                data={chartData3}
+                                colors={['#f7f7f7', '#5cb85c', '#f0ad4e', '#d9534f']}
+                            />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col>
                             <Button 
-                                variant="danger"
+                                variant="outline-danger"
                                 className="w-100"
                                 onClick={() => props.history.push('/enterprise/a-entities')}
                             >
@@ -124,7 +225,7 @@ export default function Home(props) {
 
                         <Col>
                             <Button 
-                                variant="danger"
+                                variant="outline-danger"
                                 className="w-100"
                                 onClick={() => props.history.push('/enterprise/assessment')}
                             >
@@ -146,45 +247,23 @@ export default function Home(props) {
 
                 <Card.Body>
                     <Row>
-                        <Col>
-                            <Button
-                                variant="danger"
-                                className="w-100"
-                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
-                            >
-                                {t('exposure-models.art')}
-                            </Button>
-                        </Col>
-
-                        <Col>
-                            <Button
-                                variant="danger"
-                                className="w-100"
-                                onClick={() => props.history.push('/enterprise/exposure-model/stoffenmanager')}
-                            >
-                                {t('exposure-models.sm')}
-                            </Button>
-                        </Col>
-
-                        <Col>
-                            <Button
-                                variant="danger"
-                                className="w-100"
-                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
-                            >
-                                {t('exposure-models.tra')}
-                            </Button>
-                        </Col>
-
-                        <Col>
-                            <Button
-                                variant="danger"
-                                className="w-100"
-                                onClick={() => props.history.push('/enterprise/exposure-model/art')}
-                            >
-                                {t('exposure-models.trexmop')}
-                            </Button>
-                        </Col>
+                        {[
+                            {
+                                link: '/enterprise/exposure-model/art',
+                                label: 'exposure-models.art'
+                            }, {
+                                link: '/enterprise/exposure-model/sm',
+                                label: 'exposure-models.sm'
+                            }, {
+                                link: '/enterprise/exposure-model/art',
+                                label: 'exposure-models.tra'
+                            }, {
+                                link: '/enterprise/exposure-model/art',
+                                label: 'exposure-models.trexmop'
+                            }
+                        ].map(
+                            item => ExposureModel(item)
+                        )}
                     </Row>
                 </Card.Body>
             </Card>

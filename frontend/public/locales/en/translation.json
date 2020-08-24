@@ -110,6 +110,23 @@
         }
     },
 
+    "enterprise-home": {
+        "charts": {
+            "chart-1": {
+                "not-working": "Not working",
+                "low-risk": "Low risk",
+                "medium-risk": "Medium risk",
+                "high-risk": "High risk"
+            }, 
+            "chart-2": {
+                "not-assessed": "Not assessed",
+                "low-risk": "Low risk",
+                "medium-risk": "Medium risk",
+                "high-risk": "High risk"
+            }
+        }
+    },
+
     "exposure-models": {
         "singular": "Exposure model",
         "plural": "Exposure models",

@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-icons": "^1.0.0-alpha2",
+    "chart.js": "^2.9.3",
     "formik": "^2.1.2",
     "i18next": "^19.0.3",
     "i18next-browser-languagedetector": "^4.0.1",
