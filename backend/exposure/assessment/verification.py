@@ -22,7 +22,6 @@ def verify(path_to_json, parameters):
     # 2. conditions - an array of conditions that must be fulfilled for defined conditions
     missing = []
     json_file = json.loads(json_file)
-
     # verify mandatory
     mandatory = json_file['mandatory']
     for field in mandatory:

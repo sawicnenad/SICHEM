@@ -71,7 +71,7 @@ function Enterprise() {
                     <Route exact path="/enterprise/a-entities/:id" component={ AEntity } />
                     <Route exact path="/enterprise/assessment" component={ Assessment } />
                     <Route exact path="/enterprise/exposure-model/art" component={ ART } />
-                    <Route exact path="/enterprise/exposure-model/stoffenmanager" component={ Stoffenmanager } />
+                    <Route exact path="/enterprise/exposure-model/sm" component={ Stoffenmanager } />
                     <Route exact path="/enterprise/exposure-model/tra" component={ TRA } />
                 </Switch>
             </div>

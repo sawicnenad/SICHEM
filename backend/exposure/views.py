@@ -76,6 +76,7 @@ def calculator(request, pk):
             # store to db
             exposure.parameters = json.dumps(parameters)
             exposure.status = status 
+            print(exposure_values)
             exposure.exposure_reg = exposure_values['p95'] if 'p95' in exposure_values else ""
             exposure.missing = json.dumps(missing)
             exposure.exposure = json.dumps(exposure_values)
@@ -122,14 +123,14 @@ def calculator(request, pk):
         # this model requires translations from ART
         # if, however, ART is not selected, the translations will have to be first
         # executed from core to ART and then from ART to ECETOC TRA
-        if ca.sm == True:
+        if ca.tra == True:
             try:
-                exposure = Exposure.objects.get(cas_of_aentity=ca, exposure_model='sm')
+                exposure = Exposure.objects.get(cas_of_aentity=ca, exposure_model='tra')
                 status = exposure.status
                 parameters = json.loads(exposure.parameters)
             except:
                 status = 'untested'
-                exposure = Exposure(cas_of_aentity=ca, exposure_model='sm')
+                exposure = Exposure(cas_of_aentity=ca, exposure_model='tra')
             
             # only if untested it is required to run translation from core
             # if raw data is modified then also it is required to run translation
@@ -180,14 +181,32 @@ class ExposureViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk):
         exposure = Exposure.objects.get(pk=pk)
+        exposure_model = exposure.exposure_model
         parameters = request.data
-        missing = verify_art(parameters)
+
+        if exposure_model == 'art':
+            missing = verify_art(parameters)
+        elif exposure_model == 'sm':
+            missing = verify_sm(parameters)
+        elif exposure_model == 'tra':
+            missing = verify_tra(parameters)
+        else:
+            return Response(status=HTTP_404_NOT_FOUND)
+
         status = 'incomplete' if len(missing) > 0 else 'complete'
 
         # if all parameters are there, we calculate exposure
         exposure_values = {}
-        if ['complete', 'finished'].index(status) > -1:
-            exposure_values = art_calculator(parameters)
+        if status in ['complete', 'finished']:
+            if exposure_model == 'art':
+                exposure_values = art_calculator(parameters)
+            elif exposure_model == 'sm':
+                exposure_values = sm_calculator(parameters)
+            elif exposure_model == 'tra':
+                exposure_values = tra_calculator(parameters)
+            else:
+                return Response(status=HTTP_404_NOT_FOUND)
+                
             status = 'finished'
 
         # stringify, update object and save to db

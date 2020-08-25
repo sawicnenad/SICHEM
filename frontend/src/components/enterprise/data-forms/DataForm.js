@@ -687,7 +687,9 @@ export default function DataForm(props) {
 
                 { delButton }
 
-                <Button
+                {
+                    props.noSaveButton ?
+                    "" : <Button
                     variant="danger"
                     className="ml-1"
                     onClick={
@@ -696,8 +698,9 @@ export default function DataForm(props) {
                         : props.handleSubmit
                     }
                 >
-                    <FontAwesomeIcon icon="save" /> { t('save') }
-                </Button>
+                        <FontAwesomeIcon icon="save" /> { t('save') }
+                    </Button>
+                }
             </Col>
         </Row>);
 

@@ -82,12 +82,12 @@ export default function ART(props) {
                     // update state
                     // needed to settle exposure data
                     // exposure results and missing parameters
-                    let exposure = JSON.parse(data.exposure);
-                    let missing = JSON.parse(data.missing);
+                    let exposure = JSON.parse(res.data.exposure);
+                    let missing = JSON.parse(res.data.missing);
                     setState({
                         exposure: exposure,
                         missing: missing,
-                        status: data.status
+                        status: res.data.status
                     });
                 }
             ).catch(
@@ -155,9 +155,13 @@ export default function ART(props) {
                 scaling={{ label: { md: 3 }, field: { md: 7 } }}
                 formik={formik}
                 title={t('art.form-title')}
-                closeFun={props.handleARTcloseButton}
+                closeFun={props.handleARTcloseButton ? 
+                    props.handleARTcloseButton
+                    : () => props.history.push('/enterprise')
+                }
                 handleDelete={() => null}
                 noDeleteButton
+                noSaveButton={props.match ? true : false}
                 custom={{ results: Results }}
             />
         </div>

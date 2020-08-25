@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { ApiRequestsContext } from '../../../contexts/ApiRequestsContext';
 import { Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import axios from 'axios';
 
 
 /*
@@ -68,8 +68,31 @@ export default function TRA(props) {
         validationSchema: Schema,
         initialValues: {},
         onSubmit: values => {
-            console.log(values)
-        }
+            // id of exposure instance needed to make post request
+            let data = {...props.exposureData.find(
+                o => o['exposure_model'] === 'tra')}; 
+
+            axios.put(
+                `${APIcontext.API}/exposure/exposures/${data.id}/`,
+                values,
+                headers
+            ).then(
+                res => {
+                    // update state
+                    // needed to settle exposure data
+                    // exposure results and missing parameters
+                    let exposure = JSON.parse(res.data.exposure);
+                    let missing = JSON.parse(res.data.missing);
+                    setState({
+                        exposure: exposure,
+                        missing: missing,
+                        status: res.data.status
+                    });
+                }
+            ).catch(
+                e => console.log(e)
+            )
+        },
     })
 
 
@@ -122,8 +145,12 @@ export default function TRA(props) {
                 scaling={{ label: { md: 3 }, field: { md: 7 } }}
                 formik={formik}
                 title={t('tra.form-title')}
-                closeFun={props.handleCloseButton}
+                closeFun={props.handleCloseButton ? 
+                    props.handleCloseButton
+                    : () => props.history.push('/enterprise')
+                }
                 handleDelete={() => null}
+                noSaveButton={props.match ? true : false}
                 noDeleteButton
                 noZebraStyle
                 custom={{

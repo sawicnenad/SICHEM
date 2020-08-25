@@ -272,15 +272,15 @@ export default function Assessment() {
 
     // Exposure models that are rendered when supplying additional data
     const ExposureModels = {
-        'art': <ART 
-                    exposureData={state.exposureData} 
-                    handleARTcloseButton={
-                        () => (
-                            setState({
-                                ...state,
-                                exposureModelView: false
-                            }))
-                        }
+        'art': <ART
+                exposureData={state.exposureData} 
+                handleARTcloseButton={
+                    () => (
+                        setState({
+                            ...state,
+                            exposureModelView: false
+                        }))
+                    }
                 />,
         'sm': <Stoffenmanager
                 exposureData={state.exposureData} 

@@ -132,7 +132,7 @@ def art_calculator(parameters):
 
 
 
-def art_calculator(parameters):
+def sm_calculator(parameters):
     gm = 3
     exposure = {
         "p50": gm,
