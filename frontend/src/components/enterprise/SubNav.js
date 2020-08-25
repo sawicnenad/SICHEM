@@ -41,6 +41,9 @@ export default function SubNav(props) {
                             }, {
                                 label: "assessment",
                                 href: "/enterprise/assessment"
+                            }, {
+                                label: "worker-risk",
+                                href: "/enterprise/risk"
                             }
                         ].map(
                             item => (

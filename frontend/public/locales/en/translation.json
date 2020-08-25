@@ -41,6 +41,7 @@
     "exposure-model": "Exposure model",
     "assessment": "Assesssment",
     "aentities": "Assessment entities",
+    "worker-risk": "Risk",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
