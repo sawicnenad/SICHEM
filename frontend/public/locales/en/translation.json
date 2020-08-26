@@ -42,6 +42,8 @@
     "assessment": "Assesssment",
     "aentities": "Assessment entities",
     "worker-risk": "Risk",
+    "not-working": "Not working",
+    "risk": "Risk",
 
     "messages": {
         "new-ent-created": "New enterprise created!",

@@ -213,6 +213,7 @@ export default function Home(props) {
                         </Col>
                     </Row>
                     <Row>
+                        
                         <Col>
                             <Button 
                                 variant="outline-danger"
@@ -230,6 +231,16 @@ export default function Home(props) {
                                 onClick={() => props.history.push('/enterprise/assessment')}
                             >
                                 {t('enterprise.home.exposure')}
+                            </Button>
+                        </Col>
+
+                        <Col>
+                            <Button 
+                                variant="outline-danger"
+                                className="w-100"
+                                onClick={() => props.history.push('/enterprise/risk')}
+                            >
+                                {t('worker-risk')}
                             </Button>
                         </Col>
                     </Row>
