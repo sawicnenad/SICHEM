@@ -1,271 +1,221 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import SubNav from './SubNav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Card, Row, Col, Badge } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Card, Row, Col, Badge } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
 
 
-
+// this component presents risk for each worker per day and per substance
+// for each worker a Card component is used to display calculated risk
+// a card contains seven days of a week
+// within a day we show how much a worker spends working on each activity
+// what exposure was calculated using a model and what risk was found
+// for risks we have three categories, low, medium and high
+// every category has a representative fontawesome icon (check, warning and error)
 export default function WorkerRisk(props) {
 
  
-    const context = useContext(EnterpriseContext);
-    const { t } = useTranslation();
-
     
-
-
-
-    // for every assessment entity (one defined per workplace)
-    // we create an object containing information about
-    // worker, workplace, substance, day and calculated exposure and risk
-    const aentities = context.aentities;
-    let risk = [];
+    const { t } = useTranslation();
+    const context = useContext(EnterpriseContext);
+    const workers = context.workers;
     const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-    for (let i in aentities) {
-        let casOfAEntity = aentities[i]['cas_of_aentity'];
-        let workersOfAEntity = aentities[i]['workers_of_aentity'];
 
+
+
+    // arrow function that generates HTML component
+    // showing the risk and exposure for a worker
+    // carring out different tasks with different substances
+    // on a given day of the week
+    // arguments are:
+    // * worker id
+    // * day
+    const WorkerRiskThisDay = (id, day) => {
+
+        // first check if any work activity is carried out the given day
+        // this information is contained in worker-of-aentity - which are part of aentity
+        let workersOfAEntity = [];
+        for (let i in context.aentities) {
+            workersOfAEntity = workersOfAEntity.concat(
+                context.aentities[i]['workers_of_aentity']
+            );
+        }
+        workersOfAEntity = workersOfAEntity.filter(o => o.worker === id);
+        // will include those instances that carry out an activity on this day
+        let workersOnThisDay = []; 
+
+        // now check schedule
         for (let w in workersOfAEntity) {
             let schedule = JSON.parse(workersOfAEntity[w].schedule);
-
-            // if worker has no schedule set
-            if (Object.keys(schedule).length === 0) {
-                risk.push({
-                    worker: workersOfAEntity[w].worker,
-                    notWorking: true,
-                    workplace: aentities[i].workplace
-                });
-                continue;
-            } 
-
-            // otherwise we calculate exposure and risk per day
-            for (let c in casOfAEntity) {
-                // evary ca has an array called exposure
-                // it holds calculated exposure values using different exposure models
-                // what is important here to figure out which model was used
-                let schedule2 = JSON.parse(casOfAEntity[c].schedule);
-
-                // now per day
-                let substanceID = casOfAEntity[c].substance;
-                let toxValue = context.substances.find(o => o.id === substanceID)['reg_dnel_lt_i_sys'];
-                if (toxValue) { toxValue = parseFloat(toxValue) }
-
-                let newRisk = {
-                    worker: workersOfAEntity[w].worker,
-                    exposure: {mon: {}, tue: {}, wed: {}, thu: {}, fri: {}, sat: {}, sun: {}},
-                    notWorking: true,
-                    workplace: aentities[i].workplace,
-                    substance: substanceID,
-                    tox: toxValue ? toxValue : false
-                }
-
-                for (let d in days) {
-                    // also possible that a given worker not working a given day
-                    let day = days[d];
-
-                    if (Object.keys(schedule[day]).length === 0) {
-                        newRisk.exposure[day] = false;
-                        continue;
-                    }
-
-                    // else - if working on a given day
-                    let workerDay = schedule[day];
-                    let activityDay = schedule2[day];
-                    
-                    // get all keys of the schedule
-                    // when both are true - then it means that the worker
-                    // is present at the workplace while an activity takes place
-                    let totalTime = 0;
-                    let keys = Object.keys(workerDay);
-
-                    for (let key in keys) {
-                        if (workerDay[key] === true && activityDay[key] === true) {
-                            totalTime += 30;
-                        }
-                    }
-
-                    // now calculate exposure and risk depending on the selected exposure model
-                    // that was used to evaluate the exposure in /assessment
-                    newRisk.time = totalTime;
-                    
-                    if (casOfAEntity[c].art) {
-                        // exposure must include status finished
-                        // in order to have included exposure value
-                        let exposure = casOfAEntity[c].exposure.filter(
-                            o => o['exposure_model'] === 'art');
-
-                        if (exposure.length === 1) {
-                            exposure = exposure[0];
-                            if (exposure.status === 'finished') {
-                                newRisk.exposure[day].art = parseFloat(
-                                    exposure['exposure_reg']) * totalTime/480;
-                                
-                                // calc risk on this day
-                                if (newRisk.tox) {
-                                    newRisk.exposure[day].artRisk = Math.round(
-                                        newRisk.exposure[day].art / newRisk.tox *100) / 100;
-                                } else {
-                                    newRisk.exposure[day].artRisk = false;
-                                }
-                            }
-                        }
-                    } 
-                    
-                    if (casOfAEntity[c].sm) {
-                        // exposure must include status finished
-                        // in order to have included exposure value
-                        let exposure = casOfAEntity[c].exposure.filter(
-                            o => o['exposure_model'] === 'sm');
-
-                        if (exposure.length === 1) {
-                            exposure = exposure[0];
-                            if (exposure.status === 'finished') {
-                                newRisk.exposure[day].sm = parseFloat(
-                                    exposure['exposure_reg']) * totalTime/480;
-
-                                // calc risk on this day
-                                if (newRisk.tox) {
-                                    newRisk.exposure[day].smRisk = Math.round(
-                                        newRisk.exposure[day].sm / newRisk.tox *100) / 100;
-                                } else {
-                                    newRisk.exposure[day].smRisk = false;
-                                }
-                            }
-                        }
-                    }
-
-                    if (casOfAEntity[c].tra) {
-                        // exposure must include status finished
-                        // in order to have included exposure value
-                        let exposure = casOfAEntity[c].exposure.filter(
-                            o => o['exposure_model'] === 'tra');
-
-                        if (exposure.length === 1) {
-                            exposure = exposure[0];
-                            if (exposure.status === 'finished') {
-                                newRisk.exposure[day].tra = parseFloat(
-                                    exposure['exposure_reg']) * totalTime/480;
-                                
-                                // calc risk on this day
-                                if (newRisk.tox) {
-                                    newRisk.exposure[day].traRisk = Math.round(
-                                        newRisk.exposure[day].tra / newRisk.tox *100) / 100;
-                                } else {
-                                    newRisk.exposure[day].traRisk = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                risk.push(newRisk);
-            }
+            let onThisDay = schedule[day];
+            let keys = Object.keys(onThisDay)
+            let isEmpty = keys.length === 0;
+            let works = false;
+            for (let key in keys) { if(onThisDay[ keys[key] ] === true) { works=true }}
+            
+            // also check if the worker executes any activity this day
+            if (!isEmpty && works) { workersOnThisDay.push(workersOfAEntity[w]) }
         }
-    }
 
-
-    // returns icon and risk info
-    const getRiskDiv = arg => {
-        if (arg) {
-
-            // risk value
-            let risk = "";
-            let exposure = "";
-            if (arg.artRisk) {
-                risk = arg.artRisk;
-                exposure = arg.art;
-            } else if (arg.smRisk) {
-                risk = arg.smRisk;
-                exposure = arg.sm;
-            } else if (arg.traRisk) {
-                risk = arg.traRisk;
-                exposure = arg.tra;
-            }
-
-            let icon = <FontAwesomeIcon 
-                            className="text-danger"
-                            icon="times-circle"
-                            style={{ fontSize: 40 }}
-                        />;
-            // risk icon
-            if (risk < 1 && risk >= 0.9) {
-                icon = <FontAwesomeIcon 
-                        className="text-warning"
-                        icon="exclamation-triangle"
-                        style={{ fontSize: 40 }}
-                    />;
-            } else if (risk < 0.9) {
-                icon = <FontAwesomeIcon 
-                        className="text-success"
-                        icon="check-square" 
-                        style={{ fontSize: 40 }}
-                    />;
-            }
-
-
-            return (
-                <div style={{ fontSize: 12 }}>
-                    <div className="pt-2">{icon}</div>
-                    <br/>
-                    <div>
-                        <span>{t('risk')}:</span> <span>{risk}</span>
-                    </div>
-                    <div>
-                        <span>{t('exposure.exposure')}:</span> <span>
-                            {exposure} mg/m<sup>3</sup>
-                        </span>
-                    </div>
-                </div>
+        // if no instance added to workersOnThisDay
+        // then the worker not carrying out a task this day
+        if (workersOnThisDay.length === 0) {
+            return(
+                <div>{t('risk.not-working')}</div>
             )
         }
 
-        return(<div style={{ fontSize: 10, marginTop: 5 }}>
-            {t('not-working')}
-        </div>)
-    }
+        // if worker carries out a task on this day
+        // the function continues its execution from this point on
+        // and now we must check which cas-of-aentities overlap 
+        // with the worker's schedule on this day
+        
+        // find out which cas-of-aentities correspond workers are involved in
+        let casOnThisDay = [];
+        for (let w in workersOnThisDay) {
+            let aentityID = workersOnThisDay[w].aentity;
+            let casOfAEntity = context.aentities.find(
+                    o => o.id === aentityID
+                )['cas_of_aentity'];
 
-    const RiskPerWorker = risk.map(
-        (item, inx) => (
-            <Card 
-                key={inx}
-                className="mt-3"
-            >
-                <Card.Header>{
-                    context.workers.find(o => o.id === item.worker).reference
-                }</Card.Header>
-                <Card.Body>
-                {
-                    risk.map(
-                        item => (
-                            <Row key={item.worker}>
-                            {
-                                days.map(day => (
-                                    <Col key={day} style={{ textAlign: "center" }}>
-                                        <div>
-                                            <Badge variant="light">
-                                                { t(`days.${day}`) }
-                                            </Badge>
+            for (let c in casOfAEntity) {
+                let schedule = JSON.parse(casOfAEntity[c].schedule);
+                let onThisDay = schedule[day];
+                let keys = Object.keys(onThisDay)
+                let isEmpty = keys.length === 0;
+                let works = false;
+                for (let key in keys) { if(onThisDay[ keys[key] ] === true) { works=true }}
 
-                                            <div>
-                                                { getRiskDiv(item.exposure[day]) }
-                                            </div>
-                                        </div>
-                                    </Col>
-                                ))
-                            }
-                            </Row>
+                // also check if the worker executes any activity this day
+                if (!isEmpty && works) { casOnThisDay.push(casOfAEntity[c]) }
+            }            
+        }
+        
+        // if no instance added to casOnThisDay
+        // then no activity carried out on the given day
+        if (casOnThisDay.length === 0) {
+            return(
+                <div>{t('risk.no-task')}</div>
+            )
+        }
+
+
+        // now we have CAs that are performed on the given day
+        // however we don't know yet if they overlap with workers schedule
+        let risks = []; // this will include HTML components
+
+        for (let w in workersOfAEntity) {
+            let workerSchedule = JSON.parse(workersOfAEntity[w].schedule)[day];
+            
+            for (let c in casOnThisDay) {
+                let exposureTime = 0;
+                let caSchedule = JSON.parse(casOnThisDay[c].schedule)[day];
+                let keys = Object.keys(caSchedule);
+
+                for (let k in keys) {
+                    if (caSchedule[ keys[k] ] && workerSchedule[ keys[k] ]) {
+                        exposureTime += 30;
+                    }
+                }
+
+                if (exposureTime > 0) {
+                    let aentity = context.aentities.find(o => o.id === casOnThisDay[c].aentity);
+                    let workplace = context.workplaces.find(o => o.id === aentity.workplace).reference;
+                    let exposure = 0;
+                    let risk = 0;
+                    
+
+                    // get exposure value
+                    // priority is ART - SM - TRA
+                    if (casOnThisDay[c].art) {
+                        let art = casOnThisDay[c].exposure.find(o => o['exposure_model'] === 'art');
+                        if (art.status === 'finished') {
+                            exposure = parseFloat(art['exposure_reg']);
+                        }
+                    } else if (casOnThisDay[c].sm) {
+                        let sm = casOnThisDay[c].exposure.find(o => o['exposure_model'] === 'sm');
+                        if (sm.status === 'finished') {
+                            exposure = parseFloat(sm['exposure_reg']);
+                        }
+                    } else if (casOnThisDay[c].tra) {
+                        let tra = casOnThisDay[c].exposure.find(o => o['exposure_model'] === 'tra');
+                        if (tra.status === 'finished') {
+                            exposure = parseFloat(tra['exposure_reg']);
+                        }
+                    }
+
+                    // Using exposure value and substance tox value
+                    // calculate risk
+                    let substanceID = casOnThisDay[c].substance;
+                    let substance = context.substances.find(o => o.id === substanceID);
+
+                    risk = exposure / substance['reg_dnel_lt_i_sys'];
+                    risk = Math.round(risk * 100) / 100;
+
+                    let icon = (
+                        <FontAwesomeIcon
+                            icon="check-square" 
+                            className="text-success"
+                            style={{ fontSize: 45 }}
+                        />
+                    )
+
+                    if (risk >= 1) {
+                        icon = (
+                            <FontAwesomeIcon
+                                icon="times-circle" 
+                                className="text-danger"
+                                style={{ fontSize: 45 }}
+                            />
                         )
+                    }
+
+                    if (risk >= 0.9 && risk < 1) {
+                        icon = (
+                            <FontAwesomeIcon
+                                icon="exclamation-triangle"
+                                className="text-warning"
+                                style={{ fontSize: 45 }}
+                            />
+                        )
+                    }
+                    
+                    risks.push(
+                        <div className="border p-2 text-center">
+                            <div>{workplace}</div>
+                            <div>{substance.reference}</div>
+                            <div className="my-2">{icon}</div>
+                            <div>
+                                {t('risk.risk')}:
+                                <Badge variant="light" style={{ fontSize: 12}}>
+                                    {risk}
+                                </Badge>
+                            </div>
+                            <div>{exposureTime} min</div>
+                            <div>{exposure} mg/m<sup>3</sup></div>
+                        </div>
                     )
                 }
-                </Card.Body>
-            </Card>
+            }
+        }
+
+
+        return(
+            <div>
+                {risks.map((risk, inx) => <div key={inx}>{risk}</div>)}
+            </div>
         )
-    )
+    }
+
+
+
+
+
 
 
     return(
@@ -275,8 +225,32 @@ export default function WorkerRisk(props) {
             </div>
             <div className="py-3">
             {
-                RiskPerWorker.map(
-                    item => item
+                workers.map(
+                    worker => (
+                        <Card key={worker.id} className="mb-3">
+                            <Card.Header>
+                                {worker.reference} {worker.name ? <span>({worker.name})</span> : ""}
+                            </Card.Header>
+                            <Card.Body>
+                                <Row>
+                                {
+                                    days.map(
+                                        day => (
+                                            <Col key={day} style={{ fontSize: 12 }}>
+                                                <div className="text-center">
+                                                    <Badge variant="light" style={{ fontSize: 12 }}>
+                                                        {t(`days.${day}`)}
+                                                    </Badge>
+                                                    <div>{WorkerRiskThisDay(worker.id, day)}</div>
+                                                </div>
+                                            </Col>
+                                        )
+                                    )
+                                }
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    )
                 )
             }
             </div>
