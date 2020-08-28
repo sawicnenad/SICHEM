@@ -7,31 +7,49 @@ import branches from '../../json/branches.json';
 import axios from 'axios';
 import { ApiRequestsContext } from '../../contexts/ApiRequestsContext';
 import RequestNotification from '../notifications/RequestNotification.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { EnterpriseContext } from '../../contexts/EnterpriseContext.js';
+
+
+
+
+
+
 
 
 function MyEnterprise() {
+
+
     const { t } = useTranslation();
     const [state, setState] = useState({
         modalNewUser: false,
         modalNewEnt: false
     })
 
+
+
+
+
+
     // two cards: new member of existing or create new enterprise
     const cards = [
         {
-            border: "primary",
-            icon: require('../../media/icons/people.svg'),
+            border: "info",
+            icon: "users",
             title: t('enterprise.my-enterprise.card-new-member-title'),
             text: t('enterprise.my-enterprise.card-new-member-text'),
             action: () => setState({...state, invitationForm: true})
         }, {
             border: "danger",
-            icon: require('../../media/icons/building.svg'),
+            icon: "building",
             title: t('enterprise.my-enterprise.card-new-ent-title'),
             text: t('enterprise.my-enterprise.card-new-ent-text'),
             action: () => setState({...state, modalNewEnt: true})
         }
     ];
+
+
+
 
     return(
         <div>
@@ -52,7 +70,7 @@ function MyEnterprise() {
             </Alert>
 
             <div className="my-5">
-                <h3 className="text-muted mb-4">
+                <h3 className="mb-4">
                     { t('enterprise.my-enterprise.options-header') }
                 </h3>
 
@@ -60,31 +78,36 @@ function MyEnterprise() {
                     {cards.map( (item, inx) => (
                         <Col xs={6} lg={4} key={inx}>
                             <Card border={item.border}>
-                                <Card.Img
-                                    style={{ height: 125 }}
-                                    src={item.icon}
-                                    variant="top"
-                                />
-
-                                <Card.Body>
+                                <Card.Header>
                                     <Card.Title>
                                         { item.title }
                                     </Card.Title>
+                                </Card.Header>
 
+                                <Card.Body>
+                                    <div style={{ fontSize: 75, textAlign: "center" }}>
+                                        <FontAwesomeIcon 
+                                            icon={item.icon}
+                                            className={`text-${item.border}`}
+                                        />
+                                    </div>
                                     <Card.Text
                                         className="text-muted text-justify"
-                                        style={{ height: 80 }}
+                                        style={{ height: 75 }}
                                     >
                                         { item.text }
                                     </Card.Text>
                                 </Card.Body>
 
-                                <Button
-                                    variant={item.border}
-                                    onClick={item.action}
-                                >
-                                    { t('confirm') }
-                                </Button>
+                                <Card.Footer>
+                                    <Button
+                                        variant={item.border}
+                                        onClick={item.action}
+                                        className="w-100"
+                                    >
+                                        { t('confirm') }
+                                    </Button>
+                                </Card.Footer>
                             </Card>
                         </Col>
                     ))}
@@ -103,8 +126,7 @@ function MyEnterprise() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <NewEntForm
-                        onClose={() => setState({ ...state, modalNewEnt: false }) }/>
+                    <NewEntForm onClose={() => setState({...state, modalNewEnt: false})}/>
                 </Modal.Body>
             </Modal>
 
@@ -121,8 +143,7 @@ function MyEnterprise() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <InvitationForm
-                        onClose={() => setState({...state, invitationForm: false }) }
+                    <InvitationForm onClose={() => setState({...state, invitationForm: false }) }
                     />
                 </Modal.Body>
             </Modal>
@@ -258,6 +279,7 @@ function InvitationForm(props) {
 function NewEntForm(props) {
     const { t } = useTranslation();
     const context = useContext(ApiRequestsContext);
+    const entContext = useContext(EnterpriseContext);
     const [state, setState] = useState({
         notification: false
     });
@@ -312,8 +334,8 @@ function NewEntForm(props) {
                         }
                     ).then(
                         res => {
-                            console.log(res);
                             props.onClose();
+                            entContext.refreshState('ent', res.data);
                             setState({ ...state, notification: true });
                         }
                     ).catch(

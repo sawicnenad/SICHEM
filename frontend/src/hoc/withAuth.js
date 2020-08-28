@@ -2,16 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import { ApiRequestsContext } from '../contexts/ApiRequestsContext';
 import Login from '../views/Login';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 // 1. VERIFY TOKEN
 // 2. REFRESH TOKEN
 function withAuth(WrappedComponent) {
+
     return class extends React.Component {
 
         constructor(props) {
             super(props);
-            this.state = {isAuth: false};
+            this.state = {isAuth: false, loading: true};
         }
 
         // get API URL
@@ -24,12 +26,9 @@ function withAuth(WrappedComponent) {
                 `${ this.context.API }/token-verify/`,
                 { token: token }
             ).then(
-                () => this.setState({ isAuth: true })
+                () => this.setState({ isAuth: true, loading: false })
             ).catch(
-                e => {
-                    console.log(e);
-                    this.setState({ isAuth: false })
-
+                () => {
                     // refresh token
                     const tokenRefresh = localStorage.getItem('token-refresh');
                     axios.post(
@@ -38,16 +37,30 @@ function withAuth(WrappedComponent) {
                     ).then(
                         res => {
                             localStorage.setItem('token-access', res.data.access);
-                            this.setState({ isAuth: true })
+                            this.setState({ isAuth: true, loading: false })
                         }
                     ).catch(
-                        () => this.setState({ isAuth: false })
+                        () => this.setState({ isAuth: false, loading: false })
                     )
                 }
             )
         }
+
         
         render() {
+            // if waiting for response
+            if (this.state.loading) {
+                return(
+                    <div
+                        className="text-center text-danger"
+                        style={{ marginTop: 150, fontSize: 35 }}
+                    >
+                        <FontAwesomeIcon icon="spinner" className="fa-pulse" />
+                    </div>
+                )
+            }
+
+
             // if no valid token -> login page
             return (
                 this.state.isAuth ? 

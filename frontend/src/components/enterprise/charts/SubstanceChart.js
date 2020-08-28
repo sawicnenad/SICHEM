@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
 import MyChart from './MyChart';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -16,6 +17,19 @@ export default function SubstanceChart() {
     const substances = context.substances;
     const aentities = context.aentities;
     let cas = [];
+
+
+    // well if no substances then no need to proceed
+    if (substances.length === 0) {
+        return(
+            <div className="text-muted text-center p-5 bg-light">
+                <FontAwesomeIcon icon="ban" style={{ fontSize: 75 }} />
+                <div className="mt-3">
+                    {t('enterprise-home.charts.no-data')}
+                </div>
+            </div>
+        )
+    }
 
     // gets all cas from aentities
     for (let i in aentities) {

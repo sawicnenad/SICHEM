@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import MyChart from './MyChart';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -14,6 +15,18 @@ export default function WorkerChart() {
     const context = useContext(EnterpriseContext);
     const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
     const { t } = useTranslation();
+
+    // well if no workerss then no need to proceed
+    if (context.workers.length === 0) {
+        return(
+            <div className="text-muted text-center p-5 bg-light">
+                <FontAwesomeIcon icon="ban" style={{ fontSize: 75 }} />
+                <div className="mt-3">
+                    {t('enterprise-home.charts.no-workers')}
+                </div>
+            </div>
+        )
+    }
 
 
     let time = [];

@@ -130,7 +130,10 @@
             },
             "chart3": {
                 "title": "Substances"
-            }
+            },
+            "no-data": "No substances created yet",
+            "no-workers": "No workers added",
+            "no-cas": "No assessment entities defined"
         }
     },
     
@@ -498,7 +501,7 @@
             "alert-no-enterprise-text": "Before you can use SICHEM, you must finish the registration process.",
             "alert-info-header": "Next step!",
             "alert-info-text": "Every user must be an employee of an enterprise. The enterprise identification data must exist in our database. To complete your profile, you should either specify these details by creating a new enterprise in SICHEM or join an existing one in our database. Important (!): for an existing enterprise, you must already have an invitation token received from the administrator (the user who registered the given enterprise to SICHEM). In case of creating a new enterprise in our system, you become its administrator and later you can invite other employees who may manage the enterprise data.",
-            "options-header": "Please specify the registration pathway:",
+            "options-header": "Select a registration type",
             "card-new-member-title": "Join existing enterprise",
             "card-new-member-text": "I confirm that I have received the invitation token from the administrator of my enterprise.",
             "card-new-ent-title": "New enterprise",

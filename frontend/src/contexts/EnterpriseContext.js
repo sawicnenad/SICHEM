@@ -12,6 +12,7 @@ function EnterpriseContextProvider(props) {
     const [state, setState] = useState({
         loaded: false
     });
+    const [update, setUpdate] = useState(0);
 
     useEffect(() => {
         // check if user is member of an enterprise
@@ -37,25 +38,30 @@ function EnterpriseContextProvider(props) {
             axios.get(`${context.API}/assessment-entities/`, headers)
         ])
         .then(
-            res => setState({
-                ent: res[0].data[0],
-                substances: res[1].data,
-                suppliers: res[2].data,
-                compositions: res[3].data,
-                components: res[4].data,
-                mixtures: res[5].data,
-                workplaces: res[6].data,
-                workers: res[7].data,
-                uses: res[8].data,
-                aentities: res[9].data,
-                loaded: true
-            }) )
+            res => {
+                setState({
+                    ent: res[0].data,
+                    substances: res[1].data,
+                    suppliers: res[2].data,
+                    compositions: res[3].data,
+                    components: res[4].data,
+                    mixtures: res[5].data,
+                    workplaces: res[6].data,
+                    workers: res[7].data,
+                    uses: res[8].data,
+                    aentities: res[9].data,
+                    loaded: true
+            }) })
         .catch(
             e => {
-                console.log(e);
-                setState({ loaded: true })
+                if (update < 5) {
+                    setUpdate(update+1)
+                }
+                if (update === 5) {
+                    setState({ loaded: true });
+                }
             })
-        }, [context])
+        }, [context, update])
 
     /*
         Data in state refresh
@@ -70,11 +76,13 @@ function EnterpriseContextProvider(props) {
         setState(newState);
     }
 
+
     return (
         <EnterpriseContext.Provider
             value={{
                 ...state,
-                refreshState: refreshState
+                refreshState: refreshState,
+                update: update
             }}>
             { props.children }
         </EnterpriseContext.Provider>

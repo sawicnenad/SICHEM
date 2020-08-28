@@ -37,7 +37,9 @@ import {
     faCalculator,
     faExclamationTriangle,
     faSpinner,
-    faTimesCircle
+    faTimesCircle,
+    faUsers,
+    faBan
 } from '@fortawesome/free-solid-svg-icons';
  
 library.add(
@@ -72,7 +74,9 @@ library.add(
     faCalculator,
     faExclamationTriangle,
     faSpinner,
-    faTimesCircle
+    faTimesCircle,
+    faUsers,
+    faBan
 );
 
 function App() {
@@ -88,20 +92,6 @@ function App() {
                     
                 </Switch>
             </BrowserRouter>
-
-            <footer className="p-5 bg-light text-secondary text-center border-top">
-                <div className="font-weight-bold">
-                    SICHEM 2020 (version 0.3)
-                </div>
-                <div>
-                    Nenad Savić
-                </div>
-                <div>
-                    <a href="mailto: nenad.savic@unisante.ch">
-                        nenad.savic@unisante.ch
-                    </a>
-                </div>
-            </footer>
         </div>
     );
 }

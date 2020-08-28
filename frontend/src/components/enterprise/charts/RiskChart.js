@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import MyChart from './MyChart';
 import { EnterpriseContext } from '../../../contexts/EnterpriseContext';
 import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -25,6 +26,19 @@ export default function RiskChart() {
 
     for (let i in aentities) {
         cas = cas.concat(aentities[i]['cas_of_aentity']);
+    }
+
+
+    // well if no CAs then no need to proceed
+    if (cas.length === 0) {
+        return(
+            <div className="text-muted text-center p-5 bg-light">
+                <FontAwesomeIcon icon="ban" style={{ fontSize: 75 }} />
+                <div className="mt-3">
+                    {t('enterprise-home.charts.no-cas')}
+                </div>
+            </div>
+        )
     }
     
     // for each CA of aentity calculate risk

@@ -20,6 +20,7 @@ import ART from '../components/enterprise/exposure/ART';
 import Stoffenmanager from '../components/enterprise/exposure/Stoffenmanager';
 import TRA from '../components/enterprise/exposure/TRA';
 import WorkerRisk from '../components/enterprise/WorkerRisk';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 /*
@@ -35,13 +36,19 @@ import WorkerRisk from '../components/enterprise/WorkerRisk';
 function Enterprise() {
     const context = useContext(EnterpriseContext);
 
-    if (!context.loaded){
+    if (!context.loaded && context.update < 5) {
         return (
-            <div>loading...</div>
+            <div
+                className="text-center text-danger"
+                style={{ marginTop: 150, fontSize: 35 }}
+            >
+                <FontAwesomeIcon icon="spinner" className="fa-pulse" />
+            </div>
         )
     }
 
-    if (context.ent === undefined) {
+
+    if (!context.ent) {
         return (
             <div className="container pt-5">
                 <MyEnterprise />
@@ -77,6 +84,20 @@ function Enterprise() {
                     <Route exact path="/enterprise/risk" component={ WorkerRisk } />
                 </Switch>
             </div>
+
+            <footer className="p-5 bg-light text-secondary text-center border-top">
+                <div className="font-weight-bold">
+                    SICHEM 2020 (version 0.3)
+                </div>
+                <div>
+                    Nenad Savić
+                </div>
+                <div>
+                    <a href="mailto: nenad.savic@unisante.ch">
+                        nenad.savic@unisante.ch
+                    </a>
+                </div>
+            </footer>
         </div>
     )
 }
