@@ -42,6 +42,7 @@
     "assessment": "Assesssment",
     "aentities": "Assessment entities",
     "worker-risk": "Risk",
+    "learn-more": "Learn more",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -126,7 +127,8 @@
                 "short": "< 60 min",
                 "medium": "60 - 480 min",
                 "long": "> 480 min",
-                "title-time": "Worker exposure time"
+                "title-time": "Worker exposure time",
+                "non-working": "No activity"
             },
             "chart3": {
                 "title": "Substances"
@@ -494,7 +496,11 @@
             "data-entry": "Data entry",
             "exposure-assessment": "Exposure & risk assessment",
             "aentities": "Assessment entities",
-            "exposure": "Exposure assessment"
+            "exposure": "Exposure assessment",
+            "tutorial-header": "You are new to SICHEM?",
+            "tutorial-text": "To learn about the features and how to use SICHEM, it is highly advisible to take a short tutorial. You will learn different elements of SICHEM, how to enter data, perform exposure assessment and interpret obtained results...",
+            "start-tutorial": "Start tutorial",
+            "dont-show-again": "Don't show again!"
         },
         "my-enterprise": {
             "alert-no-enterprise-header": "No enterprise identified",

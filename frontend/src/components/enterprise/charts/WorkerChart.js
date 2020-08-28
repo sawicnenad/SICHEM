@@ -30,9 +30,11 @@ export default function WorkerChart() {
 
 
     let time = [];
+    let workersInCA = [];
     // for each worker and each day extract exposure duration
     for (let i in context.aentities) {
         let workers = context.aentities[i]['workers_of_aentity'];
+        workersInCA = workersInCA.concat(workers);
 
         for (let w in workers) {
             let schedule = JSON.parse(workers[w].schedule);
@@ -53,9 +55,23 @@ export default function WorkerChart() {
         }
     }
 
+    // Check which workers not assigned anywhere
+    let nonWorking = 0;
+    const onlyWorkers = context.workers;
+    for (let w in onlyWorkers) {
+        let id = onlyWorkers[w].id;
+        let workerInThisCA = workersInCA.filter(o => o.worker === id);
+        if (workerInThisCA.length === 0) {
+            nonWorking++;
+        }
+    }
+
     // chart data
     const data = [
         {
+            label: t('enterprise-home.charts.chart2.non-working'),
+            value: nonWorking
+        }, {
             label: t('enterprise-home.charts.chart2.short'),
             value: time.filter( e => e < 60 ).length
         }, {
@@ -71,7 +87,7 @@ export default function WorkerChart() {
         <div>
             <MyChart
                 data={data}
-                colors={['#5cb85c', '#f0ad4e', '#d9534f']} 
+                colors={['#f5f5f5', '#5cb85c', '#f0ad4e', '#d9534f']} 
             />
             <p className="text-muted mt-3 text-center">
                 {t('enterprise-home.charts.chart2.title-time')}

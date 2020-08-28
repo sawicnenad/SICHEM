@@ -340,7 +340,6 @@ export default function Chemicals(props) {
             </div>
           
             <Tabs
-                fill 
                 defaultActiveKey={props.match.params.view} 
                 className="tabs-customized"
             >
@@ -386,7 +385,7 @@ export default function Chemicals(props) {
                             eventKey={item.eventKey}
                             title={item.title}
                         >
-                            <div className="mt-4">
+                            <div>
                                 {item.component}
                             </div>
                         </Tab>

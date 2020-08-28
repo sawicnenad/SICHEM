@@ -6,9 +6,9 @@ import {
     Row,
     Col,
     Button,
-    Card
+    Card,
+    Alert
 } from 'react-bootstrap';
-import MyChart from './charts/MyChart';
 import RiskChart from './charts/RiskChart';
 import WorkerChart from './charts/WorkerChart';
 import SubstanceChart from './charts/SubstanceChart';
@@ -60,18 +60,16 @@ export default function Home(props) {
     // Exposure models is the last card
     // we need a common appearance
     const ExposureModel = item => (
-        <Col>
-            <Button
-                variant="outline-secondary"
-                className="w-100"
-                onClick={() => props.history.push(item.link)}
-            >
-                <div style={{ fontSize: 55 }}>
-                    <FontAwesomeIcon icon="calculator" />
-                </div>
-                <div>{ t(item.label) }</div>
-            </Button>
-        </Col>
+        <Button
+            variant="outline-secondary"
+            className="w-100"
+            onClick={() => props.history.push(item.link)}
+        >
+            <div style={{ fontSize: 55 }}>
+                <FontAwesomeIcon icon="calculator" />
+            </div>
+            <div>{ t(item.label) }</div>
+        </Button>
     )
 
     
@@ -79,6 +77,24 @@ export default function Home(props) {
 
     return (
         <div className="py-4">
+
+            <Alert variant="info">
+                <Alert.Heading>
+                    {t('enterprise.home.tutorial-header')}
+                </Alert.Heading>
+
+                <p>
+                    {t('enterprise.home.tutorial-text')}
+                </p>
+
+                <Button variant="success">
+                    {t('enterprise.home.start-tutorial')}
+                </Button>
+
+                <Button variant="outline-secondary" className="ml-2">
+                    {t('enterprise.home.dont-show-again')}
+                </Button>
+            </Alert>
             
             {/* Data entry */}
             <Card>
@@ -86,6 +102,8 @@ export default function Home(props) {
                     { t('enterprise.home.data-entry') }
                 </Card.Header>
                 <Card.Body>
+                    
+
                 <Row>
                     <Col xs={6} md={3} className="mt-2">
                         <Statistics
@@ -207,7 +225,11 @@ export default function Home(props) {
                                 label: 'exposure-models.trexmop'
                             }
                         ].map(
-                            item => ExposureModel(item)
+                            item => (
+                                <Col key={item.label}>
+                                    {ExposureModel(item)}
+                                </Col>
+                            )
                         )}
                     </Row>
                 </Card.Body>
