@@ -113,17 +113,23 @@
 
     "enterprise-home": {
         "charts": {
-            "chart-1": {
-                "not-working": "Not working",
-                "low-risk": "Low risk",
-                "medium-risk": "Medium risk",
-                "high-risk": "High risk"
-            }, 
-            "chart-2": {
+            "chart": {
                 "not-assessed": "Not assessed",
                 "low-risk": "Low risk",
                 "medium-risk": "Medium risk",
-                "high-risk": "High risk"
+                "high-risk": "High risk",
+                "title-ae": "Assessment entities",
+                "no-tox": "No tox.value",
+                "no-ca-assigned": "No activity"
+            },
+            "chart2": {
+                "short": "< 60 min",
+                "medium": "60 - 480 min",
+                "long": "> 480 min",
+                "title-time": "Worker exposure time"
+            },
+            "chart3": {
+                "title": "Substances"
             }
         }
     },

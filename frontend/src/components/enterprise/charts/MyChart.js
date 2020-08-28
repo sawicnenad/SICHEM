@@ -25,6 +25,11 @@ export default class MyChart extends React.Component {
             data: this.props.data.map(d => d.value),
             backgroundColor: this.props.colors
           }]
+        },
+        options: {
+          legend: {
+            position: "right"
+          }
         }
       });
     }

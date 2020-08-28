@@ -8,8 +8,10 @@ import {
     Button,
     Card
 } from 'react-bootstrap';
-import MyChart from './MyChart';
-
+import MyChart from './charts/MyChart';
+import RiskChart from './charts/RiskChart';
+import WorkerChart from './charts/WorkerChart';
+import SubstanceChart from './charts/SubstanceChart';
 
 
 
@@ -55,9 +57,6 @@ export default function Home(props) {
     const dataEntryButtonVariant = "danger";
 
 
-
-    console.log(context)
-
     // Exposure models is the last card
     // we need a common appearance
     const ExposureModel = item => (
@@ -74,57 +73,7 @@ export default function Home(props) {
             </Button>
         </Col>
     )
-        
 
-    // Data for charts illustrating different statistics
-    // based on exposure evaluations in SICHEM
-    const chartData1 = [
-        {
-            label: t('enterprise-home.charts.chart-1.not-working'),
-            value: 4
-        }, {
-            label: t('enterprise-home.charts.chart-1.low-risk'),
-            value: 10
-        }, {
-            label: t('enterprise-home.charts.chart-1.medium-risk'),
-            value: 1
-        }, {
-            label: t('enterprise-home.charts.chart-1.high-risk'),
-            value: 1
-        }
-    ]
-
-    const chartData2 = [
-        {
-            label: t('enterprise-home.charts.chart-2.not-assessed'),
-            value: 1
-        }, {
-            label: t('enterprise-home.charts.chart-2.low-risk'),
-            value: 3
-        }, {
-            label: t('enterprise-home.charts.chart-2.medium-risk'),
-            value: 1
-        }, {
-            label: t('enterprise-home.charts.chart-2.high-risk'),
-            value: 0
-        }
-    ]
-
-    const chartData3 = [
-        {
-            label: t('enterprise-home.charts.chart-2.not-assessed'),
-            value: 0
-        }, {
-            label: t('enterprise-home.charts.chart-2.low-risk'),
-            value: 1
-        }, {
-            label: t('enterprise-home.charts.chart-2.medium-risk'),
-            value: 1
-        }, {
-            label: t('enterprise-home.charts.chart-2.high-risk'),
-            value: 0
-        }
-    ]
     
 
 
@@ -194,33 +143,23 @@ export default function Home(props) {
                 <Card.Body>
                     <Row className="mb-5">
                         <Col>
-                            <MyChart 
-                                data={chartData1}
-                                colors={['#f7f7f7', '#5cb85c', '#f0ad4e', '#d9534f']}
-                            />
+                            <WorkerChart />
                         </Col>
                         <Col>
-                            <MyChart 
-                                data={chartData2}
-                                colors={['#f7f7f7', '#5cb85c', '#f0ad4e', '#d9534f']}
-                            />
+                            <SubstanceChart />
                         </Col>
                         <Col>
-                            <MyChart 
-                                data={chartData3}
-                                colors={['#f7f7f7', '#5cb85c', '#f0ad4e', '#d9534f']}
-                            />
+                            <RiskChart />
                         </Col>
                     </Row>
+
                     <Row>
-                        
                         <Col>
                             <Button 
                                 variant="outline-danger"
                                 className="w-100"
                                 onClick={() => props.history.push('/enterprise/a-entities')}
-                            >
-                                {t('enterprise.home.aentities')}
+                            >{t('enterprise.home.aentities')}
                             </Button>
                         </Col>
 
@@ -229,8 +168,7 @@ export default function Home(props) {
                                 variant="outline-danger"
                                 className="w-100"
                                 onClick={() => props.history.push('/enterprise/assessment')}
-                            >
-                                {t('enterprise.home.exposure')}
+                            >{t('enterprise.home.exposure')}
                             </Button>
                         </Col>
 
@@ -239,14 +177,10 @@ export default function Home(props) {
                                 variant="outline-danger"
                                 className="w-100"
                                 onClick={() => props.history.push('/enterprise/risk')}
-                            >
-                                {t('worker-risk')}
+                            >{t('worker-risk')}
                             </Button>
                         </Col>
                     </Row>
-
-
-                    
                 </Card.Body>
             </Card>
 
