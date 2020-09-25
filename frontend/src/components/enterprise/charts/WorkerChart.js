@@ -17,7 +17,7 @@ export default function WorkerChart() {
     const { t } = useTranslation();
 
     // well if no workerss then no need to proceed
-    if (context.workers.length === 0) {
+    if (!context.workers || context.workers.length === 0) {
         return(
             <div className="text-muted text-center p-5 bg-light">
                 <FontAwesomeIcon icon="ban" style={{ fontSize: 75 }} />

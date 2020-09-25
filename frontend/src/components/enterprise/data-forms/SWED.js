@@ -40,12 +40,8 @@ export default function SWED(props) {
     }
 
     return (
-        <Row>
-            <Col {...props.scaling.label}>
-                {t('data.use.swed.label')}:
-            </Col>
-
-            <Col {...props.scaling.field}>
+        <div>
+            <div>
                 {
                     props.cas.length === 0
                     ?
@@ -91,7 +87,7 @@ export default function SWED(props) {
                         }</tbody>
                     </Table>
                 }
-            </Col>
+            </div>
 
             <Modal
                 show={state.modal}
@@ -126,6 +122,6 @@ export default function SWED(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </Row>
+        </div>
     )
 }

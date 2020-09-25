@@ -63,10 +63,10 @@ export default function ContributingActivity(props) {
                     <Table striped>
                         <thead>
                             <tr>
-                                <th>
+                                <th style={{ minWidth: 100 }}>
                                     .
                                 </th>
-                                <th>
+                                <th style={{ minWidth: 100 }}>
                                     { t('data.use.ca.reference') }
                                 </th>
                                 <th>
@@ -78,7 +78,7 @@ export default function ContributingActivity(props) {
                             props.cas.map(
                                 (item, inx) => (
                                     <tr key={inx}>
-                                        <td >
+                                        <td>
                                             <Button
                                                 size="sm"
                                                 variant="outline-secondary"
@@ -116,55 +116,46 @@ export default function ContributingActivity(props) {
 
     return(
         <div>
-            <Row>
-                <Col {...props.scaling.label}>
-                    { t('data.use.ca.label') }:
-                </Col>
+            <div>
+                <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => setState({...state, modal: true})}
+                >
+                    {t('add-new')}
+                </Button>
+                <Modal
+                    show={state.modal}
+                    onHide={() => setState({...state, modal: false})}
+                    size="lg"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{ t('data.use.ca.modal-title') }</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <DataForm
+                            data={caJSON}
+                            formik={myformik}
+                            noZebraStyle={true}
+                            scaling={{ label: { md: 4 }, field: { md: 8 } }}
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button 
+                            variant="secondary"
+                            onClick={() => setState({...state, modal: false})}
+                        >{t('close')}</Button>
+                        <Button 
+                            variant="danger"
+                            onClick={myformik.handleSubmit}
+                        >{t('save')}</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
 
-                <Col {...props.scaling.field}>
-                    <Button
-                        variant="outline-danger"
-                        size="sm"
-                        onClick={() => setState({...state, modal: true})}
-                    >
-                        {t('add-new')}
-                    </Button>
-
-                    <Modal
-                        show={state.modal}
-                        onHide={() => setState({...state, modal: false})}
-                        size="lg"
-                    >
-                        <Modal.Header closeButton>
-                            <Modal.Title>{ t('data.use.ca.modal-title') }</Modal.Title>
-                        </Modal.Header>
-
-                        <Modal.Body>
-                            <DataForm
-                                data={caJSON}
-                                formik={myformik}
-                                noZebraStyle={true}
-                                scaling={{ label: { md: 4 }, field: { md: 8 } }}
-                            />
-                        </Modal.Body>
-
-                        <Modal.Footer>
-                            <Button 
-                                variant="secondary"
-                                onClick={() => setState({...state, modal: false})}
-                            >{t('close')}</Button>
-                            <Button 
-                                variant="danger"
-                                onClick={myformik.handleSubmit}
-                            >{t('save')}</Button>
-                        </Modal.Footer>
-                    </Modal>
-
-                    <div>
-                        { listOfCAs }
-                    </div>
-                </Col>
-            </Row>
+            <div>
+                { listOfCAs }
+            </div>
         </div>
     )
 }

@@ -109,7 +109,7 @@ export default function Home(props) {
                         <Statistics
                             icon="th"
                             iconColor="silver"
-                            number={context.workplaces.length}
+                            number={context.workplaces ? context.workplaces.length : 0}
                             buttonTitle={t('workplaces')}
                             buttonColor={dataEntryButtonVariant}
                             link="/enterprise/workplaces"
@@ -120,7 +120,7 @@ export default function Home(props) {
                         <Statistics
                             icon="user"
                             iconColor="silver"
-                            number={context.workers.length}
+                            number={context.workers ? context.workers.length : 0}
                             buttonTitle={t('workers')}
                             link="/enterprise/workers"
                             buttonColor={dataEntryButtonVariant}
@@ -131,7 +131,7 @@ export default function Home(props) {
                         <Statistics
                             icon="flask"
                             iconColor="silver"
-                            number={context.substances.length + context.mixtures.length}
+                            number={context.substances ? context.substances.length + context.mixtures.length : 0}
                             buttonTitle={t('chemicals')}
                             buttonColor={dataEntryButtonVariant}
                             link="/enterprise/chemicals/suppliers"
@@ -142,7 +142,7 @@ export default function Home(props) {
                         <Statistics
                             icon="fire"
                             iconColor="silver"
-                            number={context.uses.length}
+                            number={context.uses ? context.uses.length : 0}
                             buttonTitle={t('uses')}
                             buttonColor={dataEntryButtonVariant}
                             link="/enterprise/uses"
