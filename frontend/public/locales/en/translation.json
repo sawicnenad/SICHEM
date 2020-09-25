@@ -93,6 +93,16 @@
         }
     },
 
+    "management": {
+        "page-title": "My enterprise management",
+        "subtitle-1": "General information",
+        "company-name": "Enterprise name",
+        "uid": "UID",
+        "address": "Address",
+        "city": "City",
+        "state": "State"
+    },
+
 
     "login": {
         "login": "Login",

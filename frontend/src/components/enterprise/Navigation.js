@@ -26,7 +26,7 @@ export default function Navigation(props) {
                         <FontAwesomeIcon icon="user" />
                     </Nav.Link>
 
-                    <Nav.Link className="ml-3">
+                    <Nav.Link className="ml-3" href="/enterprise/management">
                         <FontAwesomeIcon icon="building" />
                     </Nav.Link>
 

@@ -21,7 +21,7 @@ import Stoffenmanager from '../components/enterprise/exposure/Stoffenmanager';
 import TRA from '../components/enterprise/exposure/TRA';
 import WorkerRisk from '../components/enterprise/WorkerRisk';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import Management from '../components/enterprise/Management';
 
 /*
     view specific for enterprises
@@ -82,6 +82,7 @@ function Enterprise() {
                     <Route exact path="/enterprise/exposure-model/sm" component={ Stoffenmanager } />
                     <Route exact path="/enterprise/exposure-model/tra" component={ TRA } />
                     <Route exact path="/enterprise/risk" component={ WorkerRisk } />
+                    <Route exact path="/enterprise/management" component={ Management } />
                 </Switch>
             </div>
         </div>
