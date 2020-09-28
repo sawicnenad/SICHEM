@@ -8,7 +8,7 @@ from .models import Enterprise, Invitation
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from rest_framework.decorators import permission_classes
-from rest_framework import permissions
+from rest_framework import permissions, generics
 
 
 class EnterpriseViewSet(viewsets.ModelViewSet):
@@ -49,6 +49,20 @@ class EnterpriseViewSet(viewsets.ModelViewSet):
 class InvitationViewSet(viewsets.ModelViewSet):
     serializer_class = InvitationSerializer
     queryset = Invitation.objects.all()
+
+
+# get all users of a single enterprise
+class EntUsersList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    # override list method
+    # must only return users of this enterprise
+    def get_queryset(self):
+        user = self.request.user.id
+        ent = Enterprise.objects.get(users__id=user)
+        return ent.users.all()
+
 
 
 # user sign up

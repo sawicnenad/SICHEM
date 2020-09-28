@@ -4,12 +4,15 @@ from .views import *
 
 
 
+
 router = DefaultRouter()
 
 router.register(r'enterprises', EnterpriseViewSet)
 router.register(r'invitations', InvitationViewSet)
 
+
 urlpatterns = [
     path('user-sign-up/', user_sign_up),
-    path('add-user-to-ent/', add_user_to_ent)
+    path('add-user-to-ent/', add_user_to_ent),
+    path('users/', EntUsersList.as_view())
 ] + router.urls

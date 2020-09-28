@@ -43,6 +43,7 @@
     "aentities": "Assessment entities",
     "worker-risk": "Risk",
     "learn-more": "Learn more",
+    "update": "Update",
 
     "messages": {
         "new-ent-created": "New enterprise created!",
@@ -100,7 +101,16 @@
         "uid": "UID",
         "address": "Address",
         "city": "City",
-        "state": "State"
+        "state": "State",
+        "subtitle-2": "SICHEM users",
+        "invite-new": "Invite new",
+        "new-user-alert": "By inviting a new user, you're willing to grant the access, and the read-write rights for all data generated in SICHEM to the new user. The new user will have these rights only after a successful registration.",
+        "table": {
+            "name": "Name",
+            "email": "e-mail",
+            "username": "Username",
+            "admin": "Admin"
+        }
     },
 
 
