@@ -110,7 +110,13 @@
             "email": "e-mail",
             "username": "Username",
             "admin": "Admin"
-        }
+        },
+        "modal": {
+            "title": "Invitation for new user",
+            "alert": "All is needed is the email address of the person that you want to invite. The invited person will receive an email with the registration token. You can also forward the generated token directly to this person."
+        },
+        "recently-invited-user": "Recently invited user:",
+        "token": "Token"
     },
 
 

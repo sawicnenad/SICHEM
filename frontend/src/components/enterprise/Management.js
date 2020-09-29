@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
-import { Form, Row, Col, Button, Table, Alert } from 'react-bootstrap';
+import { Form, Row, Col, Button, Table, Alert, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Management() {
 
     const [ users, setUsers ] = useState([]);
+    const [ invitation, showInvitation ] = useState(false); // invitation for new user modal
+    const [ invitedUser, setInvitedUser ] = useState(false); // recently invited user
     const context = useContext(EnterpriseContext);
     const APIcontext = useContext(ApiRequestsContext);
     const { t } = useTranslation();
@@ -141,11 +143,41 @@ export default function Management() {
         admin = users.find(o => o.id === context.ent.admin);
     }
 
+    // Invitation form validation - yup, formik
+    const invSchema = Yup.object().shape({
+        email: Yup.string().email().required(t('messages.form.required'))
+    });
+    const invFormik = useFormik({
+        validationSchema: invSchema,
+        initialValues: {email: ''},
+        onSubmit: values => {
+            const data = {
+                email: values.email,
+                enterprise: context.ent.id
+            }
+            axios.post(
+                `${APIcontext.API}/enterprise/invitations/`,
+                data,
+                {headers: {
+                    Pragma: "no-cache",
+                    Authorization: 'Bearer ' + localStorage.getItem('token-access')
+                }}
+            ).then(
+                res => {
+                    setInvitedUser(res.data);
+                    showInvitation(false);
+                }
+            ).catch(
+                e => console.log(e)
+            )
+        }
+    })
+
+  
     return(
         <div style={{
             background: "#ffffff",
             minHeight: 700,
-            height: "95vh",
             padding: 25
         }}>
             <div className="bg-light p-3 border border-danger">
@@ -167,12 +199,22 @@ export default function Management() {
                 <Button
                     variant="danger"
                     className="my-2"
+                    onClick={() => showInvitation(true)}
                 > { t('management.invite-new') }
                 </Button>
 
                 <Alert variant="info">
                     { t('management.new-user-alert') }
                 </Alert>
+
+                {
+                    invitedUser ?
+                        <Alert variant="success" dismissible onClose={() => setInvitedUser(false)}>
+                            { t('management.recently-invited-user') }
+                            <p><strong>{invitedUser.email}</strong></p>
+                            <p><span>{t('management.token')}</span>: <strong>{invitedUser.token}</strong></p>
+                        </Alert> : <div />
+                }
 
                 <Table>
                     <thead>
@@ -184,26 +226,69 @@ export default function Management() {
                         </tr>
                     </thead>
 
-                    {
+                    <tbody>{
                         users.map(
-                            item => (
-                                <tr key={item.id}>
-                                    <td>{admin.first_name} {admin.last_name}</td>
-                                    <td>{admin.email}</td>
-                                    <td>{admin.username}</td>
+                            user => (
+                                <tr key={user.id}>
+                                    <td>{user.first_name} {user.last_name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.username}</td>
                                     <td>
                                         {
-                                            admin.id === item.id ?
+                                            admin.id === user.id ?
                                             <FontAwesomeIcon className="text-success" icon="check-square" />
-                                            : <FontAwesomeIcon className="text-danger" icon="close" />
+                                            : <FontAwesomeIcon className="text-danger" icon="times" />
                                         }
                                     </td>
                                 </tr>
                             )
                         )
-                    }
+                    }</tbody>
                 </Table>
             </div>
+
+            <Modal
+                show={invitation}
+                onHide={() => showInvitation(false)}
+            >
+               
+                <Modal.Header closeButton>
+                    <Modal.Title>{t('management.modal.title')}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Alert
+                        variant="info"
+                    >{t('management.modal.alert')}</Alert>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>
+                                {t('management.table.email')}
+                            </Form.Label>
+                            <Form.Control
+                                name="email"
+                                type="email"
+                                required
+                                value={invFormik.values.email}
+                                onChange={invFormik.handleChange}
+                                isInvalid={!!invFormik.errors.email}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {invFormik.errors.email}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => showInvitation(false)}
+                    > {t('cancel')}
+                    </Button>
+                    <Button variant="danger" onClick={invFormik.handleSubmit}>
+                        {t('submit')}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
