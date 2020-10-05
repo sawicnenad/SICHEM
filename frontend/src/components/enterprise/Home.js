@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { EnterpriseContext } from '../../contexts/EnterpriseContext';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,6 +12,7 @@ import {
 import RiskChart from './charts/RiskChart';
 import WorkerChart from './charts/WorkerChart';
 import SubstanceChart from './charts/SubstanceChart';
+import Tutorial from './Tutorial';
 
 
 
@@ -24,6 +25,9 @@ import SubstanceChart from './charts/SubstanceChart';
 export default function Home(props) {
     const context = useContext(EnterpriseContext);
     const { t } = useTranslation();
+    const [ state, setState ] = useState({
+        tutorialVisible: true
+    })
 
 
     // Statistics showing numbers of workplaces, workers, substances, uses
@@ -78,7 +82,7 @@ export default function Home(props) {
     return (
         <div className="py-4">
 
-            <Alert variant="info">
+            <Alert variant="info" show={state.tutorialVisible}>
                 <Alert.Heading>
                     {t('enterprise.home.tutorial-header')}
                 </Alert.Heading>
@@ -87,14 +91,26 @@ export default function Home(props) {
                     {t('enterprise.home.tutorial-text')}
                 </p>
 
-                <Button variant="success">
+                <Button 
+                    variant="success"
+                    onClick={ () => setState({ ...state, tutorialModalVisible: true }) }
+                >
                     {t('enterprise.home.start-tutorial')}
                 </Button>
 
-                <Button variant="outline-secondary" className="ml-2">
+                <Button 
+                    variant="outline-secondary" className="ml-2"
+                    onClick={ () => setState({ ...state, tutorialVisible: false }) }
+                >
                     {t('enterprise.home.dont-show-again')}
                 </Button>
             </Alert>
+
+            {/*  Tutorial Modal */}
+            <Tutorial
+                show={ state.tutorialModalVisible }
+                onHide={ () => setState({ ...state, tutorialModalVisible: false }) }
+            />
             
             {/* Data entry */}
             <Card>

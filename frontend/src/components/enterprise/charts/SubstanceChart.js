@@ -20,7 +20,7 @@ export default function SubstanceChart() {
 
 
     // well if no substances then no need to proceed
-    if (!substances || substances.length === 0) {
+    if (!substances || substances.length < 3) {
         return(
             <div className="text-muted text-center p-5 bg-light">
                 <FontAwesomeIcon icon="ban" style={{ fontSize: 75 }} />

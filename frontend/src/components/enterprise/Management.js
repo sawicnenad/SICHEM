@@ -95,6 +95,7 @@ export default function Management() {
                 <Col {...scaling.field}>
                     <Form.Control
                         type="text"
+                        readOnly
                         value={myformik.values.address}
                         onChange={myformik.handleChange}
                     />
@@ -107,6 +108,7 @@ export default function Management() {
                 <Col {...scaling.field}>
                     <Form.Control
                         type="text"
+                        readOnly
                         value={myformik.values.city}
                         onChange={myformik.handleChange}
                     />
@@ -119,6 +121,7 @@ export default function Management() {
                 <Col {...scaling.field}>
                     <Form.Control
                         type="text"
+                        readOnly
                         value={myformik.values.state}
                         onChange={myformik.handleChange}
                     />
@@ -180,7 +183,7 @@ export default function Management() {
             minHeight: 700,
             padding: 25
         }}>
-            <div className="bg-light p-3 border border-danger">
+            <div className="bg-light p-3">
                 <h3>{t('management.page-title')}</h3>
             </div>
             <br />

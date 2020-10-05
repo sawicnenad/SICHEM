@@ -30,7 +30,7 @@ export default function RiskChart() {
 
 
     // well if no CAs then no need to proceed
-    if (cas.length === 0) {
+    if (cas.length < 3) {
         return(
             <div className="text-muted text-center p-5 bg-light">
                 <FontAwesomeIcon icon="ban" style={{ fontSize: 75 }} />

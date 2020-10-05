@@ -87,6 +87,7 @@ function App() {
                     <Route path="/login" component={ Login } />
 
                     <EnterpriseContextProvider>
+                        <Route path="/" exact component={ Enterprise } />
                         <Route path="/enterprise" component={ Enterprise } />
                     </EnterpriseContextProvider>
                     

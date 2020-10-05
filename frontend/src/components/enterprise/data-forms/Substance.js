@@ -43,7 +43,7 @@ export default function Substance(props) {
     */
     const APIcontext = useContext(ApiRequestsContext);
     const entContext = useContext(EnterpriseContext);
-    const subID = props.match.params.id ;
+    const subID = props.match.params.id;
 
     const headers = {
         headers: {
@@ -291,7 +291,14 @@ export default function Substance(props) {
                     Pragma: "no-cache",
                     Authorization: 'Bearer ' + localStorage.getItem('token-access')
                 }}
-            ).then(() => setState({ ...state, updatedMsg: true })
+            ).then(
+                res => {
+                    let sub = res.data;
+                    let substances = entContext.substances.filter(o => o.id !== sub.id);
+                    substances.push(sub);
+                    entContext.refreshState('substances', substances);
+                    setState({ ...state, updatedMsg: true });
+                }
             ).catch(() => setState({ ...state, failedMsg: true }))
         }
     })

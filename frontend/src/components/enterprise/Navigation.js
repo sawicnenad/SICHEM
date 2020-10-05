@@ -22,15 +22,12 @@ export default function Navigation(props) {
                 </Navbar.Brand>
             
                 <Nav className="ml-auto">
-                    <Nav.Link className="ml-3">
-                        <FontAwesomeIcon icon="user" />
-                    </Nav.Link>
 
                     <Nav.Link className="ml-3" href="/enterprise/management">
                         <FontAwesomeIcon icon="building" />
                     </Nav.Link>
 
-                    <Nav.Link className="ml-3">
+                    <Nav.Link className="ml-3" href="/enterprise/security">
                         <FontAwesomeIcon icon="lock" />
                     </Nav.Link>
 

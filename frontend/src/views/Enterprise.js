@@ -22,6 +22,7 @@ import TRA from '../components/enterprise/exposure/TRA';
 import WorkerRisk from '../components/enterprise/WorkerRisk';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Management from '../components/enterprise/Management';
+import Password from '../components/enterprise/Password';
 
 /*
     view specific for enterprises
@@ -64,6 +65,7 @@ function Enterprise() {
             <Navigation />
             <div className="container-lg">
                 <Switch>
+                    <Route exact path="/" component={ Home } />
                     <Route exact path="/enterprise" component={ Home } />
                     <Route exact path="/enterprise/workers" component={ Workers } />
                     <Route exact path="/enterprise/workers/:id" component={ Workers } />
@@ -83,6 +85,7 @@ function Enterprise() {
                     <Route exact path="/enterprise/exposure-model/tra" component={ TRA } />
                     <Route exact path="/enterprise/risk" component={ WorkerRisk } />
                     <Route exact path="/enterprise/management" component={ Management } />
+                    <Route exact path="/enterprise/security" component={ Password } />
                 </Switch>
             </div>
         </div>

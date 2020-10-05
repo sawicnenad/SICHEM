@@ -94,6 +94,27 @@
         }
     },
 
+    "tutorial": {
+        "modal-title": "Tutorial",
+        "page-1-title": "Why SICHEM?",
+        "page-1-text": "The tool lets you keep and manage all your workplace and chemical data at one place. You can, for example, combine different substances in mixtures and perform exposure assessment using different exposure models.",
+        "page-2-title": "Workplaces and workers",
+        "page-2-text": "First, you must define workplaces and workers who are involved in any activity that involves chemical exposure. It is important to use different reference names for different workplaces. For workers, you don't have to specify their actual names, but just reference names that should be used in later communication.",
+        "page-3-title": "Substances and mixtures",
+        "page-3-text": "All substances, their compositions and mixtures that your workers are exposed to, must be specified. The same substances can be used to define several mixtures with different compositions. The following exposure assessment can be perfored either on all components of a given mixture or on a single substance.",
+        "page-4-title": "Uses",
+        "page-4-text": "Their purpose comes from the definition of 'Use maps' and 'SWEDs' established under the REACH framework. You must supply data regarding how different substances are used and how their exposure is controlled. Please make sure that every chemical (substane or mixture) is considered in, at lease, one use."
+    },
+
+
+    "security": {
+        "title": "Password change",
+        "old-pw": "Old password",
+        "new-pw": "New password",
+        "new-pw-2": "New password (confirmation)"
+    },
+
+
     "management": {
         "page-title": "My enterprise management",
         "subtitle-1": "General information",
@@ -159,9 +180,9 @@
             "chart3": {
                 "title": "Substances"
             },
-            "no-data": "No substances created yet",
-            "no-workers": "No workers added",
-            "no-cas": "No assessment entities defined"
+            "no-data": "No enough data",
+            "no-workers": "No enough data",
+            "no-cas": "No enough data"
         }
     },
     
