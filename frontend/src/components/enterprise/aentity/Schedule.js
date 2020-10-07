@@ -36,11 +36,14 @@ export default function Schedule(props) {
         }
     })
     useEffect(() => {
-        
+        const emptyTiming = {
+            mon: {}, tue: {}, wed: {}, thu: {}, fri: {}, sat: {}, sun: {}
+        }
+
         if (props.timing) {
             let timing = props.timing
             if (!props.timing.mon) {
-                timing = {...state.timing};
+                timing = emptyTiming
             }
             setState({
                 ...state,
@@ -48,6 +51,7 @@ export default function Schedule(props) {
             })
         }
     }, [props])
+
 
     const handleTimingSelection = (day, n, click) => {
 
