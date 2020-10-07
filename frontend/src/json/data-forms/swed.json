@@ -101,7 +101,68 @@
             "fieldType": "select",
             "label": "data.use.swed.lc",
             "options": [
-
+                {
+                    "label": "data.use.swed.lc-options.no",
+                    "value": "no"
+                }, 
+                {
+                    "label": "data.use.swed.lc-options.supp-knockdown",
+                    "value":"supp-knockdown"     
+                }, {
+                    "label": "data.use.swed.lc-options.supp-wetting",
+                    "value":"supp-wetting"      
+                }, {
+                    "label": "data.use.swed.lc-options.cont-low",
+                    "value":"cont-low"          
+                }, {
+                    "label": "data.use.swed.lc-options.cont-medium",
+                    "value":"cont-medium"    
+                }, {
+                    "label": "data.use.swed.lc-options.cont-high",
+                    "value":"cont-high"    
+                }, {
+                    "label": "data.use.swed.lc-options.lev-canopy",
+                    "value":"lev-canopy"  
+                }, {
+                    "label": "data.use.swed.lc-options.lev-receiving",
+                    "value":"lev-receiving"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-moving",
+                    "value":"lev-moving"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-fixed",
+                    "value":"lev-fixed"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-on-tool",
+                    "value":"lev-on-tool"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-cupboard",
+                    "value":"lev-cupboard"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-hd",
+                    "value":"lev-hd"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-enclosing",
+                    "value":"lev-enclosing"
+                }, {
+                    "label": "data.use.swed.lc-options.lev-other",
+                    "value":"lev-other"
+                }, {
+                    "label": "data.use.swed.lc-options.gb-non-vent",
+                    "value":"gb-non-vent"
+                }, {
+                    "label": "data.use.swed.lc-options.gb-vent",
+                    "value":"gb-vent"
+                }, {
+                    "label": "data.use.swed.lc-options.gb-low",
+                    "value":"gb-low"
+                }, {
+                    "label": "data.use.swed.lc-options.gb-medium",
+                    "value":"gb-medium"
+                }, {
+                    "label": "data.use.swed.lc-options.gb-high",
+                    "value":"gb-high"
+                }
             ]
         },
         "lc_e": {

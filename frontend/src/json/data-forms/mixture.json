@@ -106,6 +106,12 @@
                     "label": "data.mixture.dustiness-options.very-high",
                     "value": "very-high"
                 }
+            ],
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid-object"
+                }
             ]
         },
         "dustiness_measured": {
@@ -114,7 +120,13 @@
                 "name": "dustiness_measured"
             },
             "scaling": {"md": 3},
-            "label": "data.mixture.dustiness-measured"
+            "label": "data.mixture.dustiness-measured",
+            "conditions": [
+                {
+                    "field": "physical_state",
+                    "value": "solid-object"
+                }
+            ]
         },
         "pc": {
             "props": {
