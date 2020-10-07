@@ -39,6 +39,8 @@ export default function ART(props) {
     useEffect(() => {
         if (props.exposureData) {
             let data = props.exposureData.find(o => o['exposure_model'] === 'art');
+            if (!data) return;
+            console.log(data)
             let parameters = data.parameters;
             let values = JSON.parse(parameters);
 

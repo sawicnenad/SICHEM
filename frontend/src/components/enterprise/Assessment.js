@@ -239,6 +239,10 @@ export default function Assessment() {
                                                 <Button 
                                                     variant="outline-danger"
                                                     size="sm"
+                                                    disabled={
+                                                        !entity.exposure.find(o => o['exposure_model'] === model) 
+                                                        ? true : false
+                                                    }
                                                     onClick={() => setState({
                                                         ...state,
                                                         exposureModelView: model,

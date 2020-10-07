@@ -76,7 +76,6 @@ def calculator(request, pk):
             # store to db
             exposure.parameters = json.dumps(parameters)
             exposure.status = status 
-            print(exposure_values)
             exposure.exposure_reg = exposure_values['p95'] if 'p95' in exposure_values else ""
             exposure.missing = json.dumps(missing)
             exposure.exposure = json.dumps(exposure_values)

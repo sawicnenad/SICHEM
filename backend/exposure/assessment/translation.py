@@ -10,7 +10,7 @@ def translate_from_json(path_to_json, data_for_trans):
     # the corresponding .json file for which we
     # provide path in argument 'path_to_json'
     # --------------------------------------------
-    f = open(os.path.join(BASE_DIR, path_to_json))
+    f = open(os.path.join(BASE_DIR, path_to_json)) 
     json_file = f.read()
     f.close()
     rules = json.loads(json_file)
@@ -30,15 +30,20 @@ def translate_from_json(path_to_json, data_for_trans):
         # sometimes it is simple one to one (i.e.) translation
         # in some cases, however, additional operations are required
         try:
+            
             rule = rules[key]
             trans_type = rules[key]['type']
-            from_value = data_for_trans[rule['from']]
-
+    
             if trans_type == 'default':
+                from_value = data_for_trans[rule['from']]
                 result[key] = rule['result'][from_value]
 
             elif trans_type == 'copy':
+                from_value = data_for_trans[rule['from']]
                 result[key] = from_value
+
+            elif trans_type == 'always':
+                result[key] = rule['result']
 
             else:
                 rules[key] = False

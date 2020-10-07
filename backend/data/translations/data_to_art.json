@@ -14,39 +14,45 @@
         "result": {}
     },
     "dustiness": {
-        "from": "",
+        "from": "dustiness",
         "type": "default",
-        "result": {}
+        "result": {
+            "very-low": "fgran",
+            "low": "gran",
+            "medium": "coarse",
+            "high": "fine",
+            "very-high": "efine"
+        }
     },
     "mf"       : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "1"
     },
     "wf"       : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "1"
     },
     "ac"       : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "1"
     },
     "moisture" : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "dry"
     },
     "viscosity" : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "water"
     },
     "nf"       : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "true"
     },
     "ff"       : {
         "from": "",
@@ -55,8 +61,8 @@
     },
     "su"       : {
         "from": "",
-        "type": "default",
-        "result": {}
+        "type": "always",
+        "result": "default"
     },
     "activity"      : {
         "from": "",
