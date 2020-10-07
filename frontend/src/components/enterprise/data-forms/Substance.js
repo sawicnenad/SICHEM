@@ -206,7 +206,7 @@ export default function Substance(props) {
 
             initialValues[name] = substance[name];
             initialValues[afterInputName] = substance[afterInputName];
-            initialValues[afterSelectName] = substance[afterSelectName]; 
+            initialValues[afterSelectName] = substance[afterSelectName];
         }
 
 

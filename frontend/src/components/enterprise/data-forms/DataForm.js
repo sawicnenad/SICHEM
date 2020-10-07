@@ -164,9 +164,9 @@ export default function DataForm(props) {
                             <Form.Control
                                 name={field.afterSelect}
                                 as="select"
-                                value={props.formik.values[field.after]}
+                                value={props.formik.values[field.afterSelect]}
                                 onChange={props.formik.handleChange}
-                                isInvalid={!!props.formik.errors[field.after]}
+                                isInvalid={!!props.formik.errors[field.afterSelect]}
                             >
                                 {
                                     field.afterOptions.map(

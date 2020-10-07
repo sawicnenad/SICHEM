@@ -240,7 +240,8 @@
         "cas_nr": {
             "props": {
                 "type": "text",
-                "name": "cas_nr"
+                "name": "cas_nr",
+                "placeholder": "XXXXX-XXX-XX"
             },
             "scaling": {"md" : 3},
             "label": "data.substance.cas_nr"
